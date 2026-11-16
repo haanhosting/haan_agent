@@ -1,0 +1,150 @@
+{
+  "name": "Haan Hosting",
+  "legalName": "HAAN HOSTING",
+  "url": "https://haanhosting.store",
+  "bioLinkText": "haanhosting.store",
+  "tagline": "Windows RDP & NVMe VPS Hosting Built for Speed and Uptime",
+  "description": "Buy Windows RDP and NVMe Cloud VPS with full admin access, 10 Gbps port and DDoS protection in USA, UK & Singapore. Plus cPanel web hosting with 24/7 support.",
+  "colors": {
+    "primary": "#2563eb",
+    "primaryDark": "#1d4ed8",
+    "secondary": "#00bb7f",
+    "background": "#0a0f1e",
+    "cardBackground": "#0f172a",
+    "surface": "#1e293b",
+    "ink": "#0a0f1e",
+    "inkLight": "#ffffff",
+    "muted": "#64748b",
+    "whatsapp": "#25d366"
+  },
+  "fonts": {
+    "display": "Outfit, Inter, sans-serif",
+    "body": "Inter, sans-serif",
+    "code": "Space Grotesk, monospace"
+  },
+  "contact": {
+    "phone": "+92 317 7109812",
+    "whatsapp": "https://wa.me/923177109812?text=Hello%20HAAN%20HOSTING%2C%20I%20am%20interested%20in%20your%20services.",
+    "location": "Lahore, Pakistan",
+    "email": "TODO: support@haanhosting.store (Not listed directly on homepage)",
+    "supportHours": "24/7"
+  },
+  "datacenters": [
+    { "name": "USA", "city": "New York", "flag": "🇺🇸" },
+    { "name": "UK", "city": "London", "flag": "🇬🇧" },
+    { "name": "Singapore", "city": "Singapore", "flag": "🇸🇬" }
+  ],
+  "products": {
+    "vps": [
+      {
+        "name": "Starter Cloud VPS",
+        "price": "$11.99/mo",
+        "specs": ["4 Cores CPU", "8 GB RAM", "50 GB NVMe Storage", "10 Gbps Port Speed", "Multiple OS Options", "DDoS Protection"]
+      },
+      {
+        "name": "Business Cloud VPS",
+        "price": "$16.99/mo",
+        "specs": ["6 Cores CPU", "16 GB RAM", "100 GB NVMe Storage", "10 Gbps Port Speed", "Dedicated IPv4 + IPv6", "Priority Support"]
+      },
+      {
+        "name": "Professional Cloud VPS",
+        "price": "$21.99/mo",
+        "specs": ["8 Cores CPU", "32 GB RAM", "200 GB NVMe Storage", "10 Gbps Port Speed", "Full Root Access", "99.9% SLA Uptime"]
+      }
+    ],
+    "rdp": [
+      {
+        "name": "Starter Windows RDP",
+        "price": "$11.99/mo",
+        "specs": ["4 Cores CPU", "8 GB RAM", "50 GB NVMe SSD", "Full Admin Access", "Dedicated IPv4", "USA / UK / Singapore"]
+      },
+      {
+        "name": "Business Windows RDP",
+        "price": "$16.99/mo",
+        "specs": ["6 Cores CPU", "16 GB RAM", "100 GB NVMe SSD", "Full Admin Access", "Dedicated IPv4", "USA / UK / Singapore"]
+      },
+      {
+        "name": "Professional Windows RDP",
+        "price": "$21.99/mo",
+        "specs": ["8 Cores CPU", "32 GB RAM", "200 GB NVMe SSD", "Full Admin Access", "Dedicated IPv4", "USA / UK / Singapore"]
+      }
+    ],
+    "webHosting": [
+      {
+        "name": "Starter Web Hosting",
+        "price": "$3.99/mo",
+        "specs": ["1 Website", "10 GB SSD Storage", "Free SSL Certificate", "1-Click WordPress", "cPanel Access", "24/7 Support"]
+      },
+      {
+        "name": "Business Web Hosting",
+        "price": "$7.99/mo",
+        "specs": ["10 Websites", "Unlimited SSD Storage", "Free SSL Certificate", "Business Email", "Daily Backups", "Unlimited Bandwidth"]
+      },
+      {
+        "name": "Premium Web Hosting",
+        "price": "$14.99/mo",
+        "specs": ["Unlimited Websites", "Unlimited SSD Storage", "Priority Support", "Daily Backups", "Free Migration", "CDN Included"]
+      }
+    ],
+    "forexVps": {
+      "features": ["MT4/MT5 Optimized", "Low Latency to Brokers", "London LD4, NY4 & Singapore", "24/5 Non-stop Trading"]
+    },
+    "domains": "TODO: Domain registration pricing not available on homepage"
+  },
+  "offers": [
+    {
+      "id": "starter-vps-1199",
+      "title": "High-Speed NVMe Cloud VPS",
+      "plan": "Starter Cloud VPS",
+      "price": "$11.99/mo",
+      "specs": "4 Cores CPU, 8 GB RAM, 50 GB NVMe, 10 Gbps Port",
+      "badge": "From $11.99/mo",
+      "cta": "haanhosting.store",
+      "active": true
+    },
+    {
+      "id": "starter-rdp-1199",
+      "title": "Dedicated Windows Admin RDP",
+      "plan": "Starter Windows RDP",
+      "price": "$11.99/mo",
+      "specs": "4 Cores, 8 GB RAM, 50 GB NVMe, Dedicated Clean IP",
+      "badge": "From $11.99/mo",
+      "cta": "haanhosting.store",
+      "active": true
+    },
+    {
+      "id": "starter-webhosting-399",
+      "title": "cPanel Web Hosting with Free SSL",
+      "plan": "Starter Web Hosting",
+      "price": "$3.99/mo",
+      "specs": "1 Website, 10 GB SSD, Free SSL, 1-Click WordPress",
+      "badge": "From $3.99/mo",
+      "cta": "haanhosting.store",
+      "active": true
+    },
+    {
+      "id": "business-rdp-1699",
+      "title": "Business Windows RDP (16 GB RAM)",
+      "plan": "Business Windows RDP",
+      "price": "$16.99/mo",
+      "specs": "6 Cores CPU, 16 GB RAM, 100 GB NVMe SSD, Dedicated IP",
+      "badge": "Best Value RDP",
+      "cta": "haanhosting.store",
+      "active": true
+    }
+  ],
+  "voice": {
+    "tone": "helpful, confident, clear, straightforward",
+    "languageMix": {
+      "english": 85,
+      "romanUrdu": 15
+    },
+    "bannedPhrases": [
+      "100% uptime",
+      "best in the world",
+      "unbeatable guaranteed sales",
+      "free forever",
+      "instant riches"
+    ]
+  }
+}

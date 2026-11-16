@@ -1,0 +1,48 @@
+{
+  "timezone": "Asia/Karachi",
+  "utcOffsetHours": 5,
+  "postsPerDay": 5,
+  "requireApproval": false,
+  "slots": [
+    {
+      "id": 1,
+      "timePkt": "09:30",
+      "cronUtc": "30 4 * * *",
+      "suggestedPillar": "tips",
+      "format": "single",
+      "label": "Morning Tip"
+    },
+    {
+      "id": 2,
+      "timePkt": "12:30",
+      "cronUtc": "30 7 * * *",
+      "suggestedPillar": "engagement",
+      "format": "single",
+      "label": "Midday Engagement"
+    },
+    {
+      "id": 3,
+      "timePkt": "16:00",
+      "cronUtc": "0 11 * * *",
+      "suggestedPillar": "growth",
+      "format": "single",
+      "label": "Afternoon Growth"
+    },
+    {
+      "id": 4,
+      "timePkt": "19:30",
+      "cronUtc": "30 14 * * *",
+      "suggestedPillar": "offers",
+      "format": "single",
+      "label": "Evening Offer"
+    },
+    {
+      "id": 5,
+      "timePkt": "21:30",
+      "cronUtc": "30 16 * * *",
+      "suggestedPillar": "educational",
+      "format": "carousel",
+      "label": "Night Carousel Deep-Dive"
+    }
+  ]
+}

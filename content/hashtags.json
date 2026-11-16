@@ -1,0 +1,97 @@
+{
+  "brand": [
+    "#HaanHosting",
+    "#HaanHostingPK",
+    "#HaanServers"
+  ],
+  "common": [
+    "#webhosting",
+    "#cloudhosting",
+    "#webdeveloper",
+    "#pakistantech",
+    "#onlinebusiness"
+  ],
+  "poolsByPillar": {
+    "tips": [
+      "#webdevelopment",
+      "#wordpresstips",
+      "#webdesign",
+      "#techtricks",
+      "#webspeed",
+      "#seoexpert",
+      "#cpanelhosting",
+      "#learntocode",
+      "#developerslife",
+      "#servermanagement",
+      "#websecurity",
+      "#sslcertificate"
+    ],
+    "educational": [
+      "#techfacts",
+      "#cloudcomputing",
+      "#vpshosting",
+      "#linuxserver",
+      "#dnsmanagement",
+      "#cybersecurity",
+      "#serverspeed",
+      "#sysadmin",
+      "#devopscommunity",
+      "#techlearning",
+      "#hardwarefacts"
+    ],
+    "growth": [
+      "#smallbusinesspakistan",
+      "#ecommercepakistan",
+      "#startuptips",
+      "#digitalpakistan",
+      "#entrepreneurship",
+      "#businessonline",
+      "#growyourbusiness",
+      "#freelancepakistan",
+      "#digitalmarketing",
+      "#localseo"
+    ],
+    "offers": [
+      "#webhostingpakistan",
+      "#vpsdeal",
+      "#cheaphosting",
+      "#rdpserver",
+      "#nvmehosting",
+      "#serverdeal",
+      "#budgethosting",
+      "#windowsrdp",
+      "#forexvps",
+      "#hostingoffer"
+    ],
+    "engagement": [
+      "#techpoll",
+      "#codingquiz",
+      "#developerhumor",
+      "#programmerlife",
+      "#techcommunity",
+      "#askdevelopers",
+      "#webdevcommunity",
+      "#opinionpoll"
+    ],
+    "trust": [
+      "#lahoretech",
+      "#trustedhosting",
+      "#pakistanientrepreneurs",
+      "#customersupport",
+      "#reliablehosting",
+      "#localbusinesspakistan",
+      "#qualityservers",
+      "#cloudinfrastructure"
+    ],
+    "quotes": [
+      "#buildinpublic",
+      "#hustlemode",
+      "#codingmotivation",
+      "#founderlife",
+      "#entrepreneurquotes",
+      "#stayfocused",
+      "#techmindset",
+      "#digitalcreators"
+    ]
+  }
+}
