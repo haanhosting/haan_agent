@@ -1,0 +1,1233 @@
+import fs from 'fs';
+import path from 'path';
+
+interface BankSlide {
+  headline: string;
+  body?: string;
+  badge?: string;
+  category?: string;
+  cta?: string;
+  highlight?: string;
+  items?: string[];
+  statNumber?: string;
+  statLabel?: string;
+  planName?: string;
+  price?: string;
+  specs?: string[];
+  ctaButtonText?: string;
+  myth?: string;
+  fact?: string;
+  urlDomain?: string;
+  statusText?: string;
+  contentTitle?: string;
+  terminalTitle?: string;
+  command?: string;
+  output?: string;
+  successLine?: string;
+  options?: Array<{ letter: string; text: string }>;
+  promptText?: string;
+  author?: string;
+  role?: string;
+  slideIndex?: number;
+  totalSlides?: number;
+  isCover?: boolean;
+  bullets?: string[];
+  editorialTag?: string;
+}
+
+interface BankPost {
+  id: string;
+  pillar: string;
+  format: 'single' | 'carousel';
+  template: string;
+  offerId?: string;
+  slides: BankSlide[];
+  caption: string;
+  hashtags: string[];
+  altText: string;
+}
+
+const posts: BankPost[] = [];
+let idCounter = 1;
+
+function add(
+  pillar: string,
+  format: 'single' | 'carousel',
+  template: string,
+  slides: BankSlide[],
+  caption: string,
+  hashtags: string[],
+  altText: string,
+  offerId?: string
+) {
+  posts.push({
+    id: `bank-${String(idCounter++).padStart(3, '0')}`,
+    pillar,
+    format,
+    template,
+    offerId,
+    slides,
+    caption,
+    hashtags,
+    altText
+  });
+}
+
+// -------------------------------------------------------------
+// 1. TIPS & HOW-TO (18 posts)
+// -------------------------------------------------------------
+add(
+  'tips', 'single', 'T02-split-card',
+  [{
+    badge: 'WordPress Speed', category: 'Optimization',
+    headline: 'Why Your WordPress Site Is Dragging Today',
+    body: 'Most slow sites suffer from uncompressed PNGs and CPU throttling on shared hosting. Moving your database to an isolated NVMe VPS gives dedicated RAM and IOPS.',
+    highlight: '⚡ Quick fix: Convert images to WebP and enable Redis cache.',
+    cta: 'haanhosting.store'
+  }],
+  'Is your website taking more than 3 seconds to load? ⏳\n\nEvery extra second of load time costs you 7% in customer conversions. Here is what is usually slowing it down:\n\n• Uncompressed image files choking bandwidth\n• No object caching (Redis / Memcached)\n• Noisy neighbors stealing CPU on oversold shared hosting\n\nUpgrade your site to high-speed NVMe storage with dedicated resources.\n\n👉 Visit haanhosting.store (link in bio) to upgrade today.\n\n#HaanHosting #WordPressHosting #WebSpeed #VPSHosting #WebDeveloper #PakistanTech #TechTips',
+  ['#HaanHosting', '#WordPressHosting', '#WebSpeed', '#VPSHosting', '#WebDeveloper', '#PakistanTech', '#TechTips', '#Optimization'],
+  'Graphic breaking down why WordPress websites load slowly and how NVMe VPS hosting resolves CPU throttling.'
+);
+
+add(
+  'tips', 'single', 'T03-checklist',
+  [{
+    badge: 'Launch Checklist', category: 'Security',
+    headline: '3 Things to Check Before Launching Your Website',
+    items: [
+      'Free SSL installed & HTTPS redirection forced',
+      'Automated daily backup schedule configured',
+      'PHP version updated to 8.2+ in cPanel'
+    ],
+    cta: 'haanhosting.store'
+  }],
+  'Launching a new client site this week? Don’t skip these 3 essentials! 🚀\n\n1️⃣ Always force HTTPS with an SSL certificate so visitors don’t see browser warnings.\n2️⃣ Set up automated backups BEFORE launching so you can restore in one click.\n3️⃣ Run modern PHP (8.2+) for up to 30% faster execution.\n\nEvery HAAN Web Hosting plan includes free SSL and 1-click cPanel management.\n\n👉 Save this checklist for your next launch! Link in bio.\n\n#HaanHosting #WebDevTips #cPanel #WebHostingPakistan #CyberSecurity #WordPressPakistan #DevOps',
+  ['#HaanHosting', '#WebDevTips', '#cPanel', '#WebHostingPakistan', '#CyberSecurity', '#WordPressPakistan', '#DevOps', '#SecurityChecklist'],
+  'Checklist graphic outlining three essential security and performance steps before launching any website.'
+);
+
+add(
+  'tips', 'single', 'T09-terminal',
+  [{
+    badge: 'DevOps Tip', category: 'Terminal',
+    headline: 'How to Check Real Latency to Your Server',
+    terminalTitle: 'haan@admin:~# ping -c 4 haanhosting.store',
+    command: 'ping -c 4 haanhosting.store',
+    output: '64 bytes from 104.21.32.1: icmp_seq=1 ttl=58 time=12.4 ms',
+    successLine: '4 packets transmitted, 0% packet loss (avg 12ms)',
+    body: 'Always pick a data center closest to your audience: USA for global traffic, London for LD4 Forex brokers, or Singapore for low ping across Pakistan & Asia.',
+    cta: 'haanhosting.store'
+  }],
+  'Ping matters more than you think. ⚡\n\nWhen choosing a server location:\n\n• For Forex EA robots: Choose London LD4 or New York to stay within 1ms of brokers.\n• For Pakistani audience: Choose Singapore data centers for lowest latency.\n• For USA/European clients: Choose New York or London.\n\nHAAN HOSTING lets you choose between USA, UK, and Singapore data centers with a 10 Gbps network port.\n\n👉 Link in bio to test your server speed!\n\n#HaanHosting #DevOpsLife #LinuxServer #PingSpeed #CloudVPS #ForexVPS #SysAdmin',
+  ['#HaanHosting', '#DevOpsLife', '#LinuxServer', '#PingSpeed', '#CloudVPS', '#ForexVPS', '#SysAdmin', '#TechTricks'],
+  'Terminal window showing a live ping command with 12ms response time and advice on selecting data center locations.'
+);
+
+add(
+  'tips', 'single', 'T02-split-card',
+  [{
+    badge: 'Database Tip', category: 'Performance',
+    headline: 'The Secret to Instant MySQL Database Queries',
+    body: 'Traditional HDDs choke on database read/write queries. NVMe storage delivers up to 6x faster read/write speeds, cutting query execution times down to milliseconds.',
+    highlight: '💡 Result: Faster shopping carts and instant checkout pages.',
+    cta: 'haanhosting.store'
+  }],
+  'Is your WooCommerce or Magento store slowing down during sales? 🛒\n\nThe bottleneck is almost always database I/O. Switching to an NVMe Cloud VPS ensures your server handles thousands of concurrent queries without breaking a sweat.\n\nGet dedicated NVMe storage starting at $11.99/mo.\n\n👉 Visit haanhosting.store to learn more!\n\n#HaanHosting #EcommerceTips #MySQL #NVMeHosting #WebHosting #PakistanBusiness #WooCommerce',
+  ['#HaanHosting', '#EcommerceTips', '#MySQL', '#NVMeHosting', '#WebHosting', '#PakistanBusiness', '#WooCommerce', '#ServerSpeed'],
+  'Graphic illustrating the speed difference between traditional HDDs and NVMe SSD storage for database performance.'
+);
+
+add(
+  'tips', 'single', 'T03-checklist',
+  [{
+    badge: 'cPanel Hacks', category: 'Control Panel',
+    headline: '4 cPanel Tools Every Site Owner Must Know',
+    items: [
+      'File Manager: Quick code edits & unzipping archives',
+      'PHP Selector: Switch versions & enable extensions',
+      'Cron Jobs: Automate background maintenance scripts',
+      'ModSecurity: Built-in web application firewall'
+    ],
+    cta: 'haanhosting.store'
+  }],
+  'Managing your website shouldn’t require a computer science degree. 💻\n\nWith cPanel on HAAN HOSTING, you have full control over your files, emails, security, and databases in one clean visual dashboard.\n\nPlans start at just $3.99/mo with 24/7 support in Lahore.\n\n👉 Link in bio to get started!\n\n#HaanHosting #cPanelHosting #WebMaster #WebDevelopment #PakistaniDevs #ServerManagement',
+  ['#HaanHosting', '#cPanelHosting', '#WebMaster', '#WebDevelopment', '#PakistaniDevs', '#ServerManagement', '#WebDesign'],
+  'Checklist detailing four critical cPanel features for website owners and developers.'
+);
+
+add(
+  'tips', 'single', 'T04-big-number',
+  [{
+    badge: 'SSL Security', category: 'Safety',
+    statNumber: '100%',
+    statLabel: 'Free SSL Included',
+    headline: 'Never Pay Extra for an SSL Certificate',
+    body: 'Some hosting companies charge $20 to $50 yearly just for an SSL. HAAN HOSTING provides automatic free SSL certificates on all plans.',
+    cta: 'haanhosting.store'
+  }],
+  'Did you know some hosts still charge $30+/year for an SSL certificate? 🛑\n\nAt HAAN HOSTING, every domain hosted with us gets an automatic, renewable SSL certificate for free. Keep your visitors safe and protect your Google SEO rankings without paying a dime extra.\n\n👉 Launch your secure site at haanhosting.store today!\n\n#HaanHosting #SSLCertificate #CyberSecurity #WebHostingPakistan #TechNews #FreeSSL #SEO',
+  ['#HaanHosting', '#SSLCertificate', '#CyberSecurity', '#WebHostingPakistan', '#TechNews', '#FreeSSL', '#SEO', '#OnlineSafety'],
+  'Bold graphic highlighting free SSL certificates included automatically with all Haan Hosting plans.'
+);
+
+add(
+  'tips', 'carousel', 'T11-carousel',
+  [
+    {
+      slideIndex: 1, totalSlides: 4, isCover: true,
+      badge: 'Speed Guide', category: 'WordPress',
+      headline: 'How to Speed Up Your WordPress Site in 3 Simple Steps',
+      body: 'A slow site ruins your conversion rate and hurts Google search rankings. Follow this simple guide to fix it today.',
+      bullets: ['Step 1: Image compression', 'Step 2: Caching setup', 'Step 3: Fast server hosting'],
+      cta: 'haanhosting.store'
+    },
+    {
+      slideIndex: 2, totalSlides: 4,
+      badge: 'Step 1 of 4', category: 'Images',
+      headline: 'Convert All Images to WebP Format',
+      body: 'Standard JPEGs and PNGs are heavy. Using modern WebP format reduces file weight by 40-70% with zero visible loss in quality.',
+      bullets: ['Use free plugins like Converter for Media', 'Set max image dimensions to 1920px', 'Clean up unattached media uploads'],
+      cta: 'haanhosting.store'
+    },
+    {
+      slideIndex: 3, totalSlides: 4,
+      badge: 'Step 2 of 4', category: 'Caching',
+      headline: 'Enable Server-Level Object Caching',
+      body: 'Instead of querying MySQL every time a visitor opens a page, cache queries in RAM using Redis or LiteSpeed cache.',
+      bullets: ['Reduces server response time to under 100ms', 'Handles traffic spikes smoothly', 'Available on all HAAN NVMe VPS plans'],
+      cta: 'haanhosting.store'
+    },
+    {
+      slideIndex: 4, totalSlides: 4,
+      badge: 'Step 3 of 4', category: 'Hosting',
+      headline: 'Host on High-Speed NVMe Storage',
+      body: 'No optimization plugin can save a website that is hosted on slow mechanical drives. Choose NVMe cloud storage with dedicated CPU cores.',
+      bullets: ['Starter Cloud VPS from $11.99/mo', '10 Gbps port speed included', 'Visit haanhosting.store to deploy'],
+      cta: 'haanhosting.store'
+    }
+  ],
+  'Is your WordPress website struggling to load quickly? ⚡\n\nSwipe through our 3-step blueprint to cut your page load time in half:\n\n1️⃣ Modern WebP image optimization\n2️⃣ Server-level object caching with Redis\n3️⃣ High-performance NVMe cloud hosting\n\n📌 Save this carousel so you have it ready for your next project!\n\n👉 Link in bio to deploy high-speed hosting today.\n\n#HaanHosting #WordPressPakistan #WebOptimization #WebDesign #SpeedUpWordPress #VPSHosting #PakistanTech',
+  ['#HaanHosting', '#WordPressPakistan', '#WebOptimization', '#WebDesign', '#SpeedUpWordPress', '#VPSHosting', '#PakistanTech', '#CarouselTips'],
+  '4-slide carousel guide demonstrating image compression, Redis caching, and NVMe hosting for WordPress acceleration.'
+);
+
+add(
+  'tips', 'single', 'T09-terminal',
+  [{
+    badge: 'Linux Command', category: 'SysAdmin',
+    headline: 'Check Server RAM & CPU Usage in One Second',
+    terminalTitle: 'haan@vps:~# htop',
+    command: 'htop',
+    output: 'Tasks: 34, 114 thr; 1 running\nMem: 2.1G / 8.0G [|||||...........]\nCPU: [||.. 8.4%]',
+    successLine: 'Server healthy: 5.9 GB RAM available',
+    body: 'With full root access on HAAN NVMe VPS, you have total visibility into your server resources and process performance.',
+    cta: 'haanhosting.store'
+  }],
+  'Monitoring your server health should be quick and easy. 📊\n\nRun htop on your Linux VPS to get real-time visualization of CPU core loads, memory allocation, and running threads.\n\nEvery HAAN Cloud VPS gives you full root access and 10 Gbps networking.\n\n👉 Deploy your Linux server at haanhosting.store!\n\n#HaanHosting #LinuxTips #SysAdmin #ServerAdmin #Htop #CloudVPS #PakistanDevelopers',
+  ['#HaanHosting', '#LinuxTips', '#SysAdmin', '#ServerAdmin', '#Htop', '#CloudVPS', '#PakistanDevelopers', '#DevOps'],
+  'Terminal screen demonstrating htop command showing real-time CPU and RAM metrics on a Linux VPS.'
+);
+
+add(
+  'tips', 'single', 'T02-split-card',
+  [{
+    badge: 'Email Deliverability', category: 'Domain Setup',
+    headline: 'Stop Your Business Emails Landing in Spam',
+    body: 'Sending emails without SPF, DKIM, and DMARC DNS records flags your messages as suspicious to Gmail and Outlook.',
+    highlight: '🛡️ Fix: Configure SPF & DKIM records in your cPanel Zone Editor.',
+    cta: 'haanhosting.store'
+  }],
+  'Are your important client emails going straight into their spam folder? 📧\n\nHere are the 3 DNS records you must configure:\n\n• SPF: Declares which mail servers can send on your behalf\n• DKIM: Cryptographically signs your outgoing emails\n• DMARC: Tells receiving servers how to handle failed auth\n\nHAAN Web Hosting includes built-in cPanel tools to set these up in 2 clicks.\n\n👉 Link in bio to learn more at haanhosting.store.\n\n#HaanHosting #EmailMarketing #Deliverability #cPanel #SmallBusinessPK #FreelancerPakistan',
+  ['#HaanHosting', '#EmailMarketing', '#Deliverability', '#cPanel', '#SmallBusinessPK', '#FreelancerPakistan', '#BusinessTips'],
+  'Infographic card explaining how SPF, DKIM, and DMARC DNS records prevent business emails from going to spam.'
+);
+
+add(
+  'tips', 'single', 'T03-checklist',
+  [{
+    badge: 'Backup Rules', category: 'Disaster Recovery',
+    headline: 'The 3-2-1 Backup Rule Every Developer Should Follow',
+    items: [
+      '3 Copies of your website & database files',
+      '2 Different storage media types (SSD & Cloud)',
+      '1 Off-site copy in an isolated remote location'
+    ],
+    cta: 'haanhosting.store'
+  }],
+  'Hardware can fail. Hackers exist. The 3-2-1 backup rule saves your business from disaster. 💾\n\nNever rely solely on a local backup folder on the same server. Keep an automated off-site backup so you can recover in minutes.\n\nOur HAAN Web Hosting plans include automated daily backup options.\n\n👉 Save this post for your disaster recovery checklist!\n\n#HaanHosting #DataBackup #CyberSecurity #WebDev #SysAdmin #DevOpsTips #BusinessSafety',
+  ['#HaanHosting', '#DataBackup', '#CyberSecurity', '#WebDev', '#SysAdmin', '#DevOpsTips', '#BusinessSafety', '#BackupRule'],
+  'Checklist detailing the industry standard 3-2-1 data backup rule for website and database safety.'
+);
+
+add(
+  'tips', 'single', 'T04-big-number',
+  [{
+    badge: 'DNS Propagation', category: 'Networking',
+    statNumber: '300s',
+    statLabel: 'Recommended TTL',
+    headline: 'Speed Up DNS Changes Before Migrating Servers',
+    body: 'Lower your DNS record TTL to 300 seconds (5 minutes) 24 hours before migration. This prevents prolonged downtime when you change server IPs.',
+    cta: 'haanhosting.store'
+  }],
+  'Planning to switch hosting providers soon? 🔄\n\nDon’t let your visitors get stuck on cached old IPs for days. Reduce your DNS TTL (Time To Live) to 300 seconds one day prior to moving your website.\n\nNeed free migration? Our team in Lahore handles seamless migrations with zero downtime.\n\n👉 Visit haanhosting.store to get started.\n\n#HaanHosting #DNSManagement #WebMigration #WebHosting #ServerMigration #PakistanTech',
+  ['#HaanHosting', '#DNSManagement', '#WebMigration', '#WebHosting', '#ServerMigration', '#PakistanTech', '#NetworkingTips'],
+  'Graphic highlighting the 300-second TTL rule to prevent downtime during server migrations.'
+);
+
+add(
+  'tips', 'carousel', 'T11-carousel',
+  [
+    {
+      slideIndex: 1, totalSlides: 3, isCover: true,
+      badge: 'RDP Guide', category: 'Remote Desktop',
+      headline: '3 Things You Can Do With a Dedicated Windows RDP',
+      body: 'A Windows Remote Desktop gives you a cloud computer online 24/7 that you can access from your laptop, Mac, or phone.',
+      bullets: ['Run Forex EA automated trading 24/5', 'Keep SEO and crawler tools active non-stop', 'Work remotely with dedicated clean USA/UK IPs'],
+      cta: 'haanhosting.store'
+    },
+    {
+      slideIndex: 2, totalSlides: 3,
+      badge: 'Feature Breakdown', category: 'Trading & SEO',
+      headline: 'Forex MT4/MT5 & Heavy Automation',
+      body: 'Running automation tools on your home PC ties up your system and risks power cuts. An RDP server stays connected with 10 Gbps speeds.',
+      bullets: ['Low latency to London LD4 & NY4 brokers', 'Clean dedicated IP addresses', 'No home internet disconnects'],
+      cta: 'haanhosting.store'
+    },
+    {
+      slideIndex: 3, totalSlides: 3,
+      badge: 'Deployment', category: 'Get Started',
+      headline: 'Ready in Minutes with Full Admin Access',
+      body: 'Unlike shared desktop sellers on social media, HAAN HOSTING provides fresh, isolated Windows Server installations with full administrator rights.',
+      bullets: ['Starting from $11.99/mo', 'USA, UK & Singapore datacenters', 'Order at haanhosting.store'],
+      cta: 'haanhosting.store'
+    }
+  ],
+  'What is a Windows RDP and why does every online business need one? 🖥️\n\nSwipe to explore how a cloud Windows server allows you to run Forex robots, automated SEO suites, and remote workloads without tying up your personal PC.\n\nPlans start at $11.99/mo with full admin access.\n\n📌 Save this guide & visit haanhosting.store (link in bio)!\n\n#HaanHosting #WindowsRDP #ForexVPS #RemoteWork #AutomationTools #MT4Trading #PakistanTech',
+  ['#HaanHosting', '#WindowsRDP', '#ForexVPS', '#RemoteWork', '#AutomationTools', '#MT4Trading', '#PakistanTech', '#RDPGuide'],
+  '3-slide carousel explaining Windows Remote Desktop capabilities for Forex trading, SEO automation, and remote work.'
+);
+
+add(
+  'tips', 'single', 'T02-split-card',
+  [{
+    badge: 'Security Tip', category: 'CyberSecurity',
+    headline: 'Protect Your Server From Brute Force Attacks',
+    body: 'Automated bots scan port 22 (SSH) and port 3389 (RDP) constantly. Changing default ports and disabling password logins protects your infrastructure.',
+    highlight: '🔒 Action: Use SSH key authentication and enable Fail2Ban.',
+    cta: 'haanhosting.store'
+  }],
+  'Did you know thousands of bots probe port 22 and 3389 every single minute? 🛡️\n\nProtect your server with these two simple adjustments:\n\n• Switch default SSH/RDP ports to a custom high port\n• Enforce SSH key-based authentication\n• Enable Fail2Ban to ban IPs after 3 failed attempts\n\nAll HAAN servers include hardware DDoS protection.\n\n👉 Learn more at haanhosting.store!\n\n#HaanHosting #ServerSecurity #SSHKey #CyberSecurityTips #DevOps #LinuxAdmin #InfoSec',
+  ['#HaanHosting', '#ServerSecurity', '#SSHKey', '#CyberSecurityTips', '#DevOps', '#LinuxAdmin', '#InfoSec', '#WebSecurity'],
+  'Security advisory card detailing SSH key authentication and port customization to block brute-force attacks.'
+);
+
+add(
+  'tips', 'single', 'T03-checklist',
+  [{
+    badge: 'SEO Checklist', category: 'Search Rankings',
+    headline: 'Technical SEO Audit: 3 Server Factors Google Ranks',
+    items: [
+      'Time to First Byte (TTFB): Keep under 200ms',
+      'Consistent Uptime: Zero dropouts during Google crawls',
+      'Valid HTTPS Encryption: Secure green padlock'
+    ],
+    cta: 'haanhosting.store'
+  }],
+  'Great content won’t rank if your server takes 2 seconds to respond. 📈\n\nGoogle’s Core Web Vitals prioritize fast Time to First Byte (TTFB) and high reliability. A fast NVMe VPS in a local datacenter gives your website the speed foundation it needs.\n\n👉 Test your site speed today at haanhosting.store!\n\n#HaanHosting #TechnicalSEO #CoreWebVitals #TTFB #GoogleRankings #WebMaster #PakistanBusiness',
+  ['#HaanHosting', '#TechnicalSEO', '#CoreWebVitals', '#TTFB', '#GoogleRankings', '#WebMaster', '#PakistanBusiness', '#SEOTips'],
+  'Checklist highlighting Time to First Byte (TTFB), uptime, and HTTPS as critical technical SEO ranking factors.'
+);
+
+add(
+  'tips', 'single', 'T09-terminal',
+  [{
+    badge: 'Quick Fix', category: 'WordPress',
+    headline: 'How to Fix the 500 Internal Server Error',
+    terminalTitle: 'haan@admin:~# tail -n 20 error_log',
+    command: 'tail -n 20 error_log',
+    output: 'PHP Fatal error: Allowed memory size exhausted in /wp-includes/functions.php',
+    successLine: 'Solution: Increase memory_limit to 512M in cPanel PHP Selector',
+    body: 'The infamous white screen of death in WordPress is almost always caused by PHP memory exhaustion or a corrupted .htaccess file.',
+    cta: 'haanhosting.store'
+  }],
+  'Seeing a 500 Internal Server Error on your WordPress site? Don’t panic! 🛠️\n\n9 times out of 10, it is simply PHP running out of memory. Log into your cPanel, navigate to Select PHP Version, and raise memory_limit to 256M or 512M.\n\nNeed help? Our 24/7 technical team is always online to assist.\n\n👉 Link in bio to explore cPanel hosting at haanhosting.store.\n\n#HaanHosting #WordPressError #500Error #WebDevTroubleshooting #cPanel #PHP #WebMaster',
+  ['#HaanHosting', '#WordPressError', '#500Error', '#WebDevTroubleshooting', '#cPanel', '#PHP', '#WebMaster', '#TechHelp'],
+  'Terminal view illustrating error_log inspection and resolving WordPress 500 internal server memory errors.'
+);
+
+add(
+  'tips', 'single', 'T02-split-card',
+  [{
+    badge: 'Caching Secret', category: 'Performance',
+    headline: 'Static Cache vs Dynamic Cache: The Difference',
+    body: 'Static caching serves HTML and images instantly from disk. Dynamic object caching (Redis) stores database query results directly in server RAM.',
+    highlight: '🚀 Combining both drops page rendering times to sub-200ms.',
+    cta: 'haanhosting.store'
+  }],
+  'Why do some websites feel instant while others take seconds to load? ⚡\n\nThe secret is combining static browser caching with server-side Redis object caching. Your database queries run once and are stored in RAM for instant subsequent retrieval.\n\nDeploy NVMe hosting with Redis support at haanhosting.store.\n\n👉 Link in bio!\n\n#HaanHosting #WebSpeed #Caching #Redis #WebDevLife #CloudHosting #FullStack',
+  ['#HaanHosting', '#WebSpeed', '#Caching', '#Redis', '#WebDevLife', '#CloudHosting', '#FullStack', '#Optimization'],
+  'Educational card contrasting static page caching with dynamic in-memory Redis database caching.'
+);
+
+add(
+  'tips', 'single', 'T04-big-number',
+  [{
+    badge: 'Port Speed', category: 'Bandwidth',
+    statNumber: '10 Gbps',
+    statLabel: 'Dedicated Network Uplink',
+    headline: 'Download & Upload at True Data Center Speed',
+    body: 'Transferring large backup files, running scrapers, or hosting media-rich apps requires serious pipe. Every HAAN VPS is connected to a 10 Gbps port.',
+    cta: 'haanhosting.store'
+  }],
+  'Tired of throttled 100 Mbps or 1 Gbps server connections? 🏎️\n\nAt HAAN HOSTING, our cloud infrastructure is built on ultra-wide 10 Gbps ports in New York, London, and Singapore data centers. Move data faster with zero bottlenecking.\n\nPlans start at $11.99/mo.\n\n👉 Deploy your server at haanhosting.store!\n\n#HaanHosting #10Gbps #ServerBandwidth #CloudVPS #HighSpeedHosting #DataCenter #PakistanTech',
+  ['#HaanHosting', '#10Gbps', '#ServerBandwidth', '#CloudVPS', '#HighSpeedHosting', '#DataCenter', '#PakistanTech', '#NetworkSpeed'],
+  'Graphic demonstrating 10 Gbps network uplinks available across all Haan Hosting VPS and RDP servers.'
+);
+
+add(
+  'tips', 'single', 'T03-checklist',
+  [{
+    badge: 'Domain Tips', category: 'Branding',
+    headline: '3 Golden Rules for Picking a Winning Domain Name',
+    items: [
+      'Keep it under 15 characters & easy to pronounce',
+      'Avoid hyphens, numbers, and double letters',
+      'Stick to credible extensions like .com, .store, .pk'
+    ],
+    cta: 'haanhosting.store'
+  }],
+  'Your domain name is your brand’s permanent digital address. 🌐\n\nChoose a name that is memorable, easy to spell over the phone, and free of confusing hyphens. When you are ready to launch, host it on high-performance servers.\n\nWeb hosting plans start at just $3.99/mo.\n\n👉 Visit haanhosting.store (link in bio)!\n\n#HaanHosting #DomainName #BrandingTips #SmallBusinessPakistan #Ecommerce #StartUpPK',
+  ['#HaanHosting', '#DomainName', '#BrandingTips', '#SmallBusinessPakistan', '#Ecommerce', '#StartUpPK', '#WebDesignTips'],
+  'Checklist outlining 3 essential criteria for choosing memorable, brandable domain names.'
+);
+
+// -------------------------------------------------------------
+// 2. EDUCATIONAL MYTH/FACT & EXPLAINERS (12 posts)
+// -------------------------------------------------------------
+add(
+  'educational', 'single', 'T07-myth-fact',
+  [{
+    badge: 'Hosting Truth', category: 'Education',
+    headline: 'Shared Hosting vs NVMe Cloud VPS',
+    myth: 'Shared hosting is just as fast as a VPS because both use the same cloud data centers.',
+    fact: 'On shared hosting, hundreds of websites fight for the same CPU & RAM. A VPS gives you dedicated virtual cores and guaranteed resources.',
+    cta: 'haanhosting.store'
+  }],
+  'Shared hosting vs Cloud VPS: what is the actual difference? 🤔\n\nThink of shared hosting like living in a crowded hostel: if one resident throws a party (traffic spike), everyone’s internet slows down.\n\nA Cloud VPS is your private apartment: your CPU, RAM, and storage are 100% yours alone.\n\nUpgrade to your private NVMe Cloud VPS for just $11.99/mo.\n\n👉 Learn more at haanhosting.store (link in bio)!\n\n#HaanHosting #SharedVsVPS #CloudVPS #WebHostingExplained #TechEducation #PakistanDevelopers',
+  ['#HaanHosting', '#SharedVsVPS', '#CloudVPS', '#WebHostingExplained', '#TechEducation', '#PakistanDevelopers', '#HostingFacts'],
+  'Comparison panel contrasting shared hosting resource contention with guaranteed isolated Cloud VPS resources.'
+);
+
+add(
+  'educational', 'single', 'T07-myth-fact',
+  [{
+    badge: 'Security Alert', category: 'RDP Facts',
+    headline: 'The Truth About Cheap Social Media RDPs',
+    myth: 'Buying cheap $3 RDPs from anonymous sellers on WhatsApp groups is totally safe for business.',
+    fact: 'Most cheap social media RDPs are compromised machines that disappear overnight. Always buy from a registered hosting company with invoicing.',
+    cta: 'haanhosting.store'
+  }],
+  'Warning for remote workers and traders! ⚠️\n\nNever risk your banking passwords, business files, or trading accounts on unauthorized RDPs sold in Telegram or WhatsApp groups.\n\nWith HAAN HOSTING, every Windows RDP is a freshly deployed server. You set your own administrator password, receive a proper invoice, and get 24/7 technical support.\n\n👉 Order verified Windows RDP at haanhosting.store!\n\n#HaanHosting #WindowsRDP #CyberSecurity #ForexTrader #RDPScam #TechSafety #OnlineSecurity',
+  ['#HaanHosting', '#WindowsRDP', '#CyberSecurity', '#ForexTrader', '#RDPScam', '#TechSafety', '#OnlineSecurity', '#SafeHosting'],
+  'Myth vs Fact panel warning against hacked social media RDPs and explaining the security of dedicated verified servers.'
+);
+
+add(
+  'educational', 'single', 'T08-browser-mockup',
+  [{
+    badge: 'Tech Explainer', category: 'Networking',
+    headline: 'What Exactly Happens When You Type a URL?',
+    urlDomain: 'haanhosting.store',
+    statusText: 'DNS Resolved in 14ms',
+    contentTitle: 'The 4-Step DNS Lookup Journey',
+    body: '1. Browser asks DNS Resolver → 2. Root server directs to TLD (.store) → 3. Authoritative nameserver returns server IP → 4. Browser connects via HTTPS.',
+    cta: 'haanhosting.store'
+  }],
+  'Ever wondered what happens in the 50 milliseconds after hitting Enter? 🌐\n\nYour browser navigates a global network of DNS servers to resolve the domain name into an IP address before fetching website content.\n\nHaving authoritative nameservers hosted on high-availability cloud infrastructure keeps lookup times under 20ms.\n\n👉 Host with high-speed DNS at haanhosting.store!\n\n#HaanHosting #HowTheInternetWorks #DNSLookup #WebArchitecture #Networking #WebDevEducation',
+  ['#HaanHosting', '#HowTheInternetWorks', '#DNSLookup', '#WebArchitecture', '#Networking', '#WebDevEducation', '#TechExplainers'],
+  'Browser mockup diagram showing the 4 steps of a DNS lookup process from domain name to server IP.'
+);
+
+add(
+  'educational', 'single', 'T07-myth-fact',
+  [{
+    badge: 'Storage Tech', category: 'Hardware',
+    headline: 'SATA SSD vs Gen4 NVMe Storage',
+    myth: 'All SSD storage drives perform identically when hosting websites.',
+    fact: 'NVMe drives communicate directly over PCIe lanes, offering up to 3,500+ MB/s speeds compared to SATA SSD limits of 550 MB/s.',
+    cta: 'haanhosting.store'
+  }],
+  'Not all SSD hosting is created equal! ⚡\n\nTraditional SATA SSDs are limited by older cables to ~550 MB/s transfer rates. Gen4 NVMe storage connects directly to PCIe lanes, achieving over 3,500 MB/s read/write speeds.\n\nThat means databases respond in an instant and pages render seamlessly.\n\nExperience genuine NVMe performance starting at $11.99/mo.\n\n👉 Visit haanhosting.store to deploy!\n\n#HaanHosting #NVMeStorage #HardwareFacts #ServerHardware #CloudVPS #TechNerds #SpeedMatters',
+  ['#HaanHosting', '#NVMeStorage', '#HardwareFacts', '#ServerHardware', '#CloudVPS', '#TechNerds', '#SpeedMatters', '#StorageTech'],
+  'Hardware comparison showing PCIe-connected NVMe speeds outperforming legacy SATA SSD drives by over 600%.'
+);
+
+add(
+  'educational', 'single', 'T07-myth-fact',
+  [{
+    badge: 'Reliability', category: 'Uptime',
+    headline: 'Can Any Hosting Provider Guarantee Zero Downtime?',
+    myth: 'Providers advertising zero downtime never experience any hardware or network interruptions.',
+    fact: 'All real infrastructure requires maintenance. Honest enterprise providers offer 99.9% SLA guarantees to account for scheduled kernel & security patches.',
+    cta: 'haanhosting.store'
+  }],
+  'Why you should be skeptical of anyone advertising zero downtime. 🔎\n\nReal servers need operating system kernel updates, security patches, and network maintenance. That is why genuine providers offer realistic 99.9% SLAs.\n\nAt HAAN HOSTING, we believe in radical transparency and enterprise hardware with 99.9% SLA uptime.\n\n👉 Learn more about our infrastructure at haanhosting.store!\n\n#HaanHosting #UptimeTruth #ServerTransparency #SLA #WebHosting #HonestTech #CloudInfrastructure',
+  ['#HaanHosting', '#UptimeTruth', '#ServerTransparency', '#SLA', '#WebHosting', '#HonestTech', '#CloudInfrastructure', '#TechEthics'],
+  'Reality check explaining why 99.9% SLA represents genuine enterprise transparency.'
+);
+
+add(
+  'educational', 'carousel', 'T11-carousel',
+  [
+    {
+      slideIndex: 1, totalSlides: 3, isCover: true,
+      badge: 'Trading Guide', category: 'Forex VPS',
+      headline: 'Why Dedicated Forex VPS Gives You an Unfair Edge',
+      body: 'Forex markets move in milliseconds. If your automated Expert Advisor is running on a residential connection, you are losing money to slippage.',
+      bullets: ['Sub-millisecond broker execution', 'Zero home power cut risks', 'Continuous 24/5 uptime'],
+      cta: 'haanhosting.store'
+    },
+    {
+      slideIndex: 2, totalSlides: 3,
+      badge: 'Slippage Facts', category: 'Trading Tech',
+      headline: 'What is Slippage and How Latency Causes It',
+      body: 'When your order takes 150ms to reach London, the market price can shift by several pips before filling. Placing your RDP in London LD4 eliminates this gap.',
+      bullets: ['Under 1ms ping to major brokers', 'Equinix LD4 & NY4 datacenters', 'Clean dedicated IP addresses'],
+      cta: 'haanhosting.store'
+    },
+    {
+      slideIndex: 3, totalSlides: 3,
+      badge: 'Get Started', category: 'Windows RDP',
+      headline: 'Deploy Your Trading Server in 5 Minutes',
+      body: 'Get full admin access on Windows Server with pre-optimized configurations for MT4, MT5, and cTrader starting at $11.99/mo.',
+      bullets: ['USA, UK & Singapore locations', '24/7 support in Pakistan', 'Visit haanhosting.store'],
+      cta: 'haanhosting.store'
+    }
+  ],
+  'Are you running Forex Expert Advisors from home? 📈\n\nHome internet drops, load shedding, and latency slippage kill trading profitability. Swipe to see why professional traders run on dedicated Windows RDP in London and New York.\n\nPlans start at $11.99/mo.\n\n👉 Link in bio to deploy your Forex server at haanhosting.store!\n\n#HaanHosting #ForexPakistan #MT4Trading #ForexVPS #TradingBot #ExpertAdvisor #AlgoTrading',
+  ['#HaanHosting', '#ForexPakistan', '#MT4Trading', '#ForexVPS', '#TradingBot', '#ExpertAdvisor', '#AlgoTrading', '#TradingTips'],
+  'Carousel presentation breaking down order latency, trading slippage, and why traders locate servers in London and New York.'
+);
+
+add(
+  'educational', 'single', 'T07-myth-fact',
+  [{
+    badge: 'WordPress Reality', category: 'CMS Facts',
+    headline: 'Do More WordPress Plugins Always Slow Down Your Site?',
+    myth: 'Having more than 20 plugins automatically makes your website slow and unresponsive.',
+    fact: 'Plugin count doesn’t determine speed—plugin quality and database query efficiency do. One poorly coded plugin can cause more lag than 40 lightweight ones.',
+    cta: 'haanhosting.store'
+  }],
+  'Myth busted: It’s not about the number of plugins! 🧩\n\nA website with 15 lightweight plugins can load in 600ms, while a site with 3 unoptimized plugins running heavy database loops can take 5 seconds.\n\nAudit your plugins using Query Monitor and host your site on high-speed NVMe storage.\n\n👉 Learn more at haanhosting.store!\n\n#HaanHosting #WordPressMyths #WebDeveloper #PluginAudit #CMSHosting #TechFacts #PakistanTech',
+  ['#HaanHosting', '#WordPressMyths', '#WebDeveloper', '#PluginAudit', '#CMSHosting', '#TechFacts', '#PakistanTech', '#WordPressEducation'],
+  'Myth vs Fact graphic clarifying that plugin code quality and database efficiency matter far more than total plugin count.'
+);
+
+add(
+  'educational', 'single', 'T08-browser-mockup',
+  [{
+    badge: 'Security Tech', category: 'DDoS Defense',
+    headline: 'How Always-On DDoS Protection Keeps You Online',
+    urlDomain: 'haanhosting.store/security',
+    statusText: '10 Gbps Scrubbing Active',
+    contentTitle: 'Multi-Layered DDoS Mitigation',
+    body: 'Volumetric attacks are detected within milliseconds and filtered through global scrubbing centers, allowing genuine visitors uninterrupted access.',
+    cta: 'haanhosting.store'
+  }],
+  'What happens when bad actors target your server with millions of fake requests? 🛡️\n\nWithout DDoS mitigation, your bandwidth saturates and your website goes offline. Every HAAN HOSTING server is protected by automated DDoS filters that scrub malicious traffic in real time.\n\nKeep your business online 24/7.\n\n👉 Visit haanhosting.store to learn more!\n\n#HaanHosting #DDoSProtection #CyberDefense #ServerSecurity #UptimeProtection #PakistanTech',
+  ['#HaanHosting', '#DDoSProtection', '#CyberDefense', '#ServerSecurity', '#UptimeProtection', '#PakistanTech', '#SecurityExplainer'],
+  'Browser mockup detailing multi-layer DDoS traffic filtering that keeps web servers online during attacks.'
+);
+
+add(
+  'educational', 'single', 'T07-myth-fact',
+  [{
+    badge: 'Domain Education', category: 'Domains',
+    headline: 'Does Domain Extension (.com vs .store) Affect SEO?',
+    myth: 'Google gives automatic ranking priority to .com domains over newer domain extensions like .store or .tech.',
+    fact: 'Google officially treats all top-level domains (gTLDs) equally in search algorithms. High-quality content, backlinks, and fast hosting determine rankings.',
+    cta: 'haanhosting.store'
+  }],
+  'Does your domain extension hurt your search rankings? 🔎\n\nGoogle has officially confirmed that new gTLDs like .store, .tech, and .online are evaluated exactly like .com. Pick a domain name that matches your brand identity and host it on fast servers.\n\nWeb hosting plans from $3.99/mo.\n\n👉 Link in bio to explore haanhosting.store!\n\n#HaanHosting #DomainMyths #SEOFacts #GoogleSEO #DomainName #TechEducation #StartUpPakistan',
+  ['#HaanHosting', '#DomainMyths', '#SEOFacts', '#GoogleSEO', '#DomainName', '#TechEducation', '#StartUpPakistan', '#DomainTips'],
+  'Comparison explaining that Google search algorithms treat all domain extensions equally for search ranking.'
+);
+
+add(
+  'educational', 'single', 'T08-browser-mockup',
+  [{
+    badge: 'Protocol Guide', category: 'Networking',
+    headline: 'Why HTTP/2 and HTTP/3 Are Faster Than HTTP/1.1',
+    urlDomain: 'haanhosting.store/benchmarks',
+    statusText: 'Multiplexing Enabled',
+    contentTitle: 'Simultaneous Asset Streaming',
+    body: 'Older HTTP/1.1 loaded CSS, JS, and images sequentially. HTTP/2 and HTTP/3 stream multiple assets over a single TCP/QUIC connection simultaneously.',
+    cta: 'haanhosting.store'
+  }],
+  'Why modern hosting feels noticeably faster to your visitors. 🚀\n\nWith HTTP/2 and HTTP/3 multiplexing enabled on our LiteSpeed and cPanel servers, browsers download stylesheets, scripts, and media files simultaneously rather than waiting in line.\n\nBoost your user experience at haanhosting.store.\n\n👉 Link in bio!\n\n#HaanHosting #HTTP3 #WebPerformance #ModernWeb #Networking #WebSpeed #DeveloperTips',
+  ['#HaanHosting', '#HTTP3', '#WebPerformance', '#ModernWeb', '#Networking', '#WebSpeed', '#DeveloperTips', '#TechExplainers'],
+  'Diagram illustrating how HTTP/2 and HTTP/3 multiplexing streams website assets simultaneously.'
+);
+
+add(
+  'educational', 'single', 'T07-myth-fact',
+  [{
+    badge: 'Backup Truth', category: 'Disaster Plan',
+    headline: 'RAID Storage vs Real Backups',
+    myth: 'Having RAID-10 storage on your server means you don’t need to configure website backups.',
+    fact: 'RAID protects against physical drive failure, not accidental file deletion, database corruption, or malicious ransomware. You always need separate backups.',
+    cta: 'haanhosting.store'
+  }],
+  'A common server mistake that costs businesses dearly! 🛑\n\nRAID storage mirrors your data across multiple hard drives so the server stays on if one disk dies. But if a file is deleted or hacked, it is deleted across all disks instantly.\n\nAlways maintain independent off-site backups. HAAN Web Hosting offers automated backup management.\n\n👉 Visit haanhosting.store!\n\n#HaanHosting #RAIDvsBackup #SysAdminFacts #DataProtection #TechWisdom #CyberSecurity',
+  ['#HaanHosting', '#RAIDvsBackup', '#SysAdminFacts', '#DataProtection', '#TechWisdom', '#CyberSecurity', '#DevOpsFacts'],
+  'Fact sheet explaining the difference between hardware RAID fault-tolerance and independent off-site backups.'
+);
+
+add(
+  'educational', 'single', 'T08-browser-mockup',
+  [{
+    badge: 'Operating Systems', category: 'Server OS',
+    headline: 'Ubuntu vs AlmaLinux for Web Hosting',
+    urlDomain: 'haanhosting.store/vps',
+    statusText: 'Multiple OS Available',
+    contentTitle: 'Choose the Right OS for Your Project',
+    body: 'Ubuntu Server offers vast community packages and cutting-edge software. AlmaLinux provides enterprise-grade RedHat stability with 10-year support cycles.',
+    cta: 'haanhosting.store'
+  }],
+  'Which Linux operating system should you deploy on your Cloud VPS? 🐧\n\n• Ubuntu Server: Ideal for Docker, Node.js, Python APIs, and rapid prototyping.\n• AlmaLinux / Rocky: Perfect for enterprise cPanel, production databases, and long-term stability.\n\nWith HAAN Cloud VPS, deploy any OS in 1-click.\n\n👉 Plans from $11.99/mo at haanhosting.store!\n\n#HaanHosting #Ubuntu #AlmaLinux #LinuxServer #CloudVPS #SysAdmin #PakistanDevelopers',
+  ['#HaanHosting', '#Ubuntu', '#AlmaLinux', '#LinuxServer', '#CloudVPS', '#SysAdmin', '#PakistanDevelopers', '#OpenSource'],
+  'Browser view comparing Ubuntu Server and AlmaLinux strengths for development and production hosting.'
+);
+
+// -------------------------------------------------------------
+// 3. BUSINESS / WEBSITE GROWTH (10 posts)
+// -------------------------------------------------------------
+add(
+  'growth', 'single', 'T01-bold-statement',
+  [{
+    badge: 'Digital Ownership', category: 'Business',
+    headline: 'Social media algorithms change. Your website is the only asset you truly own.',
+    body: 'Don’t build your entire business on rented land. A professional domain and fast hosting give you permanent customer relationships.',
+    cta: 'haanhosting.store'
+  }],
+  'What happens if your Instagram or Facebook account gets restricted tomorrow? 🛑\n\nRelying 100% on social media algorithms means your business is at someone else’s mercy. A dedicated website with your own domain gives you permanent control over your brand, products, and customer data.\n\nLaunch your professional business site for just $3.99/mo.\n\n👉 Link in bio to get started at haanhosting.store!\n\n#HaanHosting #DigitalOwnership #SmallBusinessPK #EcommercePakistan #Entrepreneurs #BuildYourBrand',
+  ['#HaanHosting', '#DigitalOwnership', '#SmallBusinessPK', '#EcommercePakistan', '#Entrepreneurs', '#BuildYourBrand', '#OnlineBusiness'],
+  'Bold editorial statement highlighting the importance of website ownership versus relying on social media algorithms.'
+);
+
+add(
+  'growth', 'single', 'T02-split-card',
+  [{
+    badge: 'Trust Signals', category: 'Conversions',
+    headline: '3 Small Signals That Make Visitors Trust Your Online Shop',
+    body: 'Visitors decide whether to buy within 5 seconds. Having a custom domain email, valid SSL padlock, and sub-second load speed turns browsers into buyers.',
+    highlight: '💼 Pro tip: Use support@yourbrand.com instead of generic free emails.',
+    cta: 'haanhosting.store'
+  }],
+  'Are visitors abandoning your store before checking out? 🛒\n\nHere are 3 trust signals that boost conversion rates:\n\n1. Professional custom email (sales@yourdomain.com)\n2. Secure HTTPS encryption with zero browser warnings\n3. Instant page transitions that demonstrate quality\n\nAll HAAN Web Hosting plans include free SSL and business email accounts.\n\n👉 Get started at haanhosting.store!\n\n#HaanHosting #EcommerceTips #ConversionRate #SmallBusiness #PakistanTech #ShopifyPK',
+  ['#HaanHosting', '#EcommerceTips', '#ConversionRate', '#SmallBusiness', '#PakistanTech', '#ShopifyPK', '#OnlineShop'],
+  'Business advice card explaining 3 essential trust signals that boost online store conversions.'
+);
+
+add(
+  'growth', 'single', 'T08-browser-mockup',
+  [{
+    badge: 'Local Business', category: 'Growth',
+    headline: 'Why Every Local Shop in Pakistan Needs a Website in 2026',
+    urlDomain: 'haanhosting.store',
+    statusText: 'Ranked on Google Maps',
+    contentTitle: 'Customers Search Google Before Visiting',
+    body: 'Over 82% of smartphone users search for local products before making an in-person purchase. A fast business website captures high-intent local buyers.',
+    cta: 'haanhosting.store'
+  }],
+  'Think your local physical shop doesn’t need a website? Think again. 📍\n\nWhen customers in Lahore, Karachi, or Islamabad look for services, they search Google first. Having a verified website linked to your Google Business Profile puts you at the top of local search results.\n\nLaunch your website with free SSL starting at $3.99/mo.\n\n👉 Visit haanhosting.store (link in bio)!\n\n#HaanHosting #LocalBusinessPK #PakistanEntrepreneurs #LahoreBusiness #KarachiStartups #LocalSEO',
+  ['#HaanHosting', '#LocalBusinessPK', '#PakistanEntrepreneurs', '#LahoreBusiness', '#KarachiStartups', '#LocalSEO', '#DigitalPakistan'],
+  'Browser mockup showcasing local SEO benefits for brick-and-mortar stores with verified websites.'
+);
+
+add(
+  'growth', 'single', 'T12-minimal-editorial',
+  [{
+    badge: 'Architecture', category: 'Perspective',
+    headline: 'Reliable infrastructure should be invisible. It simply works.',
+    editorialTag: 'Enterprise Principle',
+    body: 'When your server never crashes, your customers never complain. Invest in hardware with ECC RAM, RAID-10 NVMe storage, and real human support.',
+    cta: 'haanhosting.store'
+  }],
+  'The best technology is the kind you never have to think about. 🏛️\n\nWhen your hosting is rock-solid, your mind is free to focus on sales, marketing, and client satisfaction. That is why HAAN HOSTING invests in enterprise-grade infrastructure and 24/7 technical support.\n\nHost your business with peace of mind.\n\n👉 Discover our plans at haanhosting.store!\n\n#HaanHosting #BusinessMindset #Reliability #CloudInfrastructure #TechFounders #Entrepreneurs',
+  ['#HaanHosting', '#BusinessMindset', '#Reliability', '#CloudInfrastructure', '#TechFounders', '#Entrepreneurs', '#QualityFirst'],
+  'Minimalist editorial card expressing the philosophy that reliable hosting infrastructure should be invisible.'
+);
+
+add(
+  'growth', 'single', 'T01-bold-statement',
+  [{
+    badge: 'Speed & Revenue', category: 'Ecommerce',
+    headline: 'A 1-second delay in page load costs online retailers 7% in sales.',
+    body: 'Fast hosting isn’t an expense—it is a direct revenue driver that pays for itself with higher checkout conversion rates.',
+    cta: 'haanhosting.store'
+  }],
+  'Speed equals sales. It really is that simple. 🏎️💨\n\nIf your website takes 4 seconds to load, over 40% of potential buyers abandon the cart before the checkout page even appears. Upgrading to high-speed NVMe storage pays for itself with your very next customer.\n\nCheck out our high-speed Cloud VPS plans from $11.99/mo.\n\n👉 Link in bio to speed up your store!\n\n#HaanHosting #EcommerceGrowth #ConversionOptimization #PageSpeed #PakistanEcommerce #ShopOnline',
+  ['#HaanHosting', '#EcommerceGrowth', '#ConversionOptimization', '#PageSpeed', '#PakistanEcommerce', '#ShopOnline', '#BusinessTips'],
+  'Statistical graphic highlighting how every single second of page load latency impacts e-commerce revenue.'
+);
+
+add(
+  'growth', 'single', 'T02-split-card',
+  [{
+    badge: 'Freelancer Guide', category: 'Career Growth',
+    headline: 'How Freelance Developers Make Recurring Monthly Revenue',
+    body: 'Don’t just build client websites and walk away. Offer monthly hosting, backups, and maintenance packages to build predictable recurring income.',
+    highlight: '💼 Strategy: Host client sites on a high-speed HAAN VPS.',
+    cta: 'haanhosting.store'
+  }],
+  'Calling all freelance web developers and agencies! 💡\n\nStop relying only on one-off project fees. When you build a client website, bundle ongoing hosting, daily backups, and security updates into a monthly retainer.\n\nA single HAAN Cloud VPS ($11.99/mo) can host multiple client websites with dedicated performance.\n\n👉 Start scaling your agency at haanhosting.store!\n\n#HaanHosting #FreelancerTips #WebAgency #RecurringRevenue #PakistaniFreelancers #UpworkPakistan',
+  ['#HaanHosting', '#FreelancerTips', '#WebAgency', '#RecurringRevenue', '#PakistaniFreelancers', '#UpworkPakistan', '#AgencyGrowth'],
+  'Business guide for freelance developers on bundling monthly hosting and maintenance retainers.'
+);
+
+add(
+  'growth', 'single', 'T08-browser-mockup',
+  [{
+    badge: 'Client Retention', category: 'Portfolio',
+    headline: 'Your Portfolio Website Is Your Most Valuable Resume',
+    urlDomain: 'yourname.store',
+    statusText: 'Portfolio Live',
+    contentTitle: 'Stand Out From Thousands of Applicants',
+    body: 'Sending a PDF resume looks ordinary. Sharing a custom domain with live demo projects and APIs proves your skills instantly.',
+    cta: 'haanhosting.store'
+  }],
+  'Ready to land higher-paying international clients? 🌟\n\nA custom domain portfolio running live deployed projects demonstrates technical competence that no PDF resume can match.\n\nDeploy your portfolio with free SSL for just $3.99/mo.\n\n👉 Link in bio to start building at haanhosting.store!\n\n#HaanHosting #DeveloperPortfolio #CareerTips #SoftwareEngineer #PakistaniTech #RemoteJobs',
+  ['#HaanHosting', '#DeveloperPortfolio', '#CareerTips', '#SoftwareEngineer', '#PakistaniTech', '#RemoteJobs', '#PortfolioTips'],
+  'Browser mockup highlighting the competitive advantage of hosting a personal portfolio website.'
+);
+
+add(
+  'growth', 'single', 'T01-bold-statement',
+  [{
+    badge: 'Scaling Strategy', category: 'Infrastructure',
+    headline: 'Scale your server resources in minutes without migrating data.',
+    body: 'When your marketing campaign goes viral, upgrade your CPU cores and RAM instantly with HAAN Cloud VPS elasticity.',
+    cta: 'haanhosting.store'
+  }],
+  'Preparing for Black Friday, Eid sales, or a major marketing launch? 🚀\n\nDon’t let your server crash under peak traffic. With HAAN NVMe Cloud VPS, you can scale CPU cores and RAM seamlessly as your audience grows.\n\nDeploy high-speed hosting today from $11.99/mo.\n\n👉 Link in bio to learn more!\n\n#HaanHosting #CloudScaling #TrafficSpikes #EcommerceScaling #PakistanBusiness #ServerPerformance',
+  ['#HaanHosting', '#CloudScaling', '#TrafficSpikes', '#EcommerceScaling', '#PakistanBusiness', '#ServerPerformance', '#ScaleUp'],
+  'Bold statement card highlighting instant server resource scalability during high-traffic marketing events.'
+);
+
+add(
+  'growth', 'single', 'T12-minimal-editorial',
+  [{
+    badge: 'Brand Identity', category: 'Professionalism',
+    headline: 'A custom domain email turns first-time visitors into long-term clients.',
+    editorialTag: 'Trust Benchmark',
+    body: 'Prospective clients hesitate when sending sensitive project details to free generic email addresses. Build credibility with branded business email.',
+    cta: 'haanhosting.store'
+  }],
+  'Would you trust a business operating from a generic free email address? ✉️\n\nA branded business email address signals that you are an established, legitimate operation. HAAN Web Hosting includes custom domain email accounts at no extra charge.\n\nPlans start at just $3.99/mo.\n\n👉 Elevate your business brand at haanhosting.store!\n\n#HaanHosting #BusinessEmail #BrandCredibility #ProfessionalLook #PakistanBusiness #Entrepreneurs',
+  ['#HaanHosting', '#BusinessEmail', '#BrandCredibility', '#ProfessionalLook', '#PakistanBusiness', '#Entrepreneurs', '#SmallBizTips'],
+  'Editorial card emphasizing the customer credibility created by professional custom domain email addresses.'
+);
+
+add(
+  'growth', 'single', 'T02-split-card',
+  [{
+    badge: 'SEO Growth', category: 'Organic Reach',
+    headline: 'How Server Downtime Destroys Months of Google SEO Effort',
+    body: 'When Google spiders encounter server timeouts or 503 errors repeatedly, they drop your crawl budget and lower keyword rankings.',
+    highlight: '🛡️ Solution: 99.9% SLA uptime on enterprise infrastructure.',
+    cta: 'haanhosting.store'
+  }],
+  'You spend months writing articles and optimizing keywords—don’t lose it to bad hosting! 📉\n\nIf search engine crawlers encounter downtime, your crawl rate drops and rankings plummet. Keep your website online with 99.9% SLA uptime on HAAN HOSTING.\n\n👉 Protect your SEO at haanhosting.store!\n\n#HaanHosting #SEOTips #WebsiteDowntime #GoogleRankings #OrganicTraffic #PakistanTech',
+  ['#HaanHosting', '#SEOTips', '#WebsiteDowntime', '#GoogleRankings', '#OrganicTraffic', '#PakistanTech', '#SEOStrategy'],
+  'Strategic card explaining how server downtime degrades search engine crawl budgets and rankings.'
+);
+
+// -------------------------------------------------------------
+// 4. OFFERS & SERVICES (10 posts - REAL OFFERS ONLY)
+// -------------------------------------------------------------
+add(
+  'offers', 'single', 'T05-offer-poster',
+  [{
+    badge: 'Verified Deal', category: 'Cloud VPS',
+    headline: 'High-Performance NVMe Cloud VPS from $11.99',
+    planName: 'Starter Cloud VPS',
+    price: '$11.99/mo',
+    specs: [
+      '4 Cores CPU',
+      '8 GB RAM',
+      '50 GB NVMe Storage',
+      '10 Gbps Port Speed',
+      'DDoS Protection',
+      'USA / UK / Singapore'
+    ],
+    ctaButtonText: 'Order at haanhosting.store',
+    cta: 'haanhosting.store'
+  }],
+  'Looking for genuine high-performance cloud hosting? 🚀\n\nGet the HAAN Starter Cloud VPS for just $11.99/mo:\n\n✔ 4 Cores CPU\n✔ 8 GB RAM\n✔ 50 GB NVMe Storage\n✔ 10 Gbps Port Speed\n✔ DDoS Protection\n✔ Choose from USA, UK, or Singapore\n\nNo hidden fees. Full root access included.\n\n👉 Visit haanhosting.store (link in bio) to deploy yours now!\n\n#HaanHosting #CloudVPS #NVMeHosting #VPSDeal #ServerDeal #PakistanTech #DevelopersLife',
+  ['#HaanHosting', '#CloudVPS', '#NVMeHosting', '#VPSDeal', '#ServerDeal', '#PakistanTech', '#DevelopersLife', '#HostingOffers'],
+  'Promotional offer poster for the Starter Cloud VPS featuring 4 Cores, 8GB RAM, and 50GB NVMe storage for $11.99/mo.',
+  'starter-vps-1199'
+);
+
+add(
+  'offers', 'single', 'T05-offer-poster',
+  [{
+    badge: 'Best Value', category: 'Windows RDP',
+    headline: 'Dedicated Windows RDP with Full Admin Access',
+    planName: 'Starter Windows RDP',
+    price: '$11.99/mo',
+    specs: [
+      '4 Cores CPU',
+      '8 GB RAM',
+      '50 GB NVMe SSD',
+      'Full Admin Access',
+      'Dedicated Clean IPv4',
+      'USA / UK / Singapore'
+    ],
+    ctaButtonText: 'Order at haanhosting.store',
+    cta: 'haanhosting.store'
+  }],
+  'Need a fast, reliable Windows cloud desktop? 🖥️\n\nOur Starter Windows RDP is built for Forex trading, SEO tools, and remote work:\n\n✔ 4 Cores CPU & 8 GB RAM\n✔ 50 GB NVMe SSD\n✔ Full Administrator Rights\n✔ Dedicated Clean IP (Never shared)\n✔ 10 Gbps Network Port\n\nStarting at just $11.99/mo with 24/7 support in Lahore.\n\n👉 Order today at haanhosting.store (link in bio)!\n\n#HaanHosting #WindowsRDP #ForexVPS #RemoteDesktop #RDPDeal #PakistanTrading #OnlineJobs',
+  ['#HaanHosting', '#WindowsRDP', '#ForexVPS', '#RemoteDesktop', '#RDPDeal', '#PakistanTrading', '#OnlineJobs', '#BestValueRDP'],
+  'Product poster highlighting the Starter Windows RDP with full admin rights and dedicated clean IP for $11.99/mo.',
+  'starter-rdp-1199'
+);
+
+add(
+  'offers', 'single', 'T05-offer-poster',
+  [{
+    badge: 'Budget Friendly', category: 'Web Hosting',
+    headline: 'Reliable cPanel Web Hosting from $3.99/mo',
+    planName: 'Starter Web Hosting',
+    price: '$3.99/mo',
+    specs: [
+      '1 Website Hosted',
+      '10 GB SSD Storage',
+      'Free SSL Certificate',
+      '1-Click WordPress',
+      'Full cPanel Access',
+      '24/7 Expert Support'
+    ],
+    ctaButtonText: 'Launch at haanhosting.store',
+    cta: 'haanhosting.store'
+  }],
+  'Get your website online in minutes with zero hassle! 🌐\n\nOur Starter Web Hosting plan has everything you need:\n\n✔ 1 Website\n✔ 10 GB SSD Storage\n✔ Free SSL Certificate\n✔ 1-Click WordPress Installer\n✔ Full cPanel Control\n✔ 24/7 WhatsApp Support\n\nOnly $3.99/mo. 7-day money-back guarantee!\n\n👉 Launch your website today at haanhosting.store (link in bio)!\n\n#HaanHosting #WebHostingPakistan #CheapHosting #WordPressHosting #cPanelHosting #SmallBusinessPK',
+  ['#HaanHosting', '#WebHostingPakistan', '#CheapHosting', '#WordPressHosting', '#cPanelHosting', '#SmallBusinessPK', '#HostingDeals'],
+  'Starter Web Hosting promotional poster showing $3.99/mo price with free SSL, WordPress installer, and cPanel.',
+  'starter-webhosting-399'
+);
+
+add(
+  'offers', 'single', 'T04-big-number',
+  [{
+    badge: 'Powerhouse Deal', category: 'Business VPS',
+    statNumber: '16 GB',
+    statLabel: 'Enterprise DDR4 RAM',
+    headline: 'Business Cloud VPS for Heavy Production Workloads',
+    body: 'Equipped with 6 Cores CPU, 16 GB RAM, 100 GB NVMe storage, and dedicated IPv4 + IPv6 for just $16.99/mo.',
+    cta: 'haanhosting.store'
+  }],
+  'Need serious computing power for your APIs, databases, or trading bots? ⚡\n\nUpgrade to our Business Cloud VPS:\n\n• 6 Cores CPU\n• 16 GB RAM\n• 100 GB NVMe Storage\n• 10 Gbps Port Speed\n• Dedicated IPv4 & IPv6\n\nOnly $16.99/mo. Instant provisioning.\n\n👉 Deploy your Business server at haanhosting.store!\n\n#HaanHosting #BusinessVPS #CloudHosting #16GBRAM #NVMeVPS #ServerDeal #TechPakistan',
+  ['#HaanHosting', '#BusinessVPS', '#CloudHosting', '#16GBRAM', '#NVMeVPS', '#ServerDeal', '#TechPakistan', '#PowerHosting'],
+  'Big number graphic highlighting 16GB RAM on the Business Cloud VPS plan for $16.99/mo.',
+  'business-rdp-1699'
+);
+
+add(
+  'offers', 'single', 'T05-offer-poster',
+  [{
+    badge: 'Heavy Duty', category: 'Windows RDP',
+    headline: 'Business Windows RDP - 16 GB RAM for Multitasking',
+    planName: 'Business Windows RDP',
+    price: '$16.99/mo',
+    specs: [
+      '6 Cores CPU',
+      '16 GB RAM',
+      '100 GB NVMe SSD',
+      'Full Administrator Rights',
+      'Dedicated Clean IPv4',
+      'USA / UK / Singapore'
+    ],
+    ctaButtonText: 'Order at haanhosting.store',
+    cta: 'haanhosting.store'
+  }],
+  'Run multiple browsers, SEO tools, and MetaTrader terminals effortlessly! 🚀\n\nOur Business Windows RDP gives you 16 GB of memory and 6 CPU cores so your remote machine never lags.\n\n✔ 16 GB RAM & 6 Cores\n✔ 100 GB NVMe SSD\n✔ Clean Dedicated IP in USA, UK, or Singapore\n✔ 10 Gbps Port\n\nOnly $16.99/mo.\n\n👉 Order at haanhosting.store (link in bio)!\n\n#HaanHosting #WindowsRDP #ForexVPS #16GBRDP #RemoteWork #PakistanTrading #TechTools',
+  ['#HaanHosting', '#WindowsRDP', '#ForexVPS', '#16GBRDP', '#RemoteWork', '#PakistanTrading', '#TechTools', '#BusinessDeals'],
+  'Offer poster presenting the Business Windows RDP with 16GB RAM and 100GB NVMe SSD for $16.99/mo.',
+  'business-rdp-1699'
+);
+
+add(
+  'offers', 'single', 'T04-big-number',
+  [{
+    badge: 'Starter Pricing', category: 'Affordable Tech',
+    statNumber: '$3.99',
+    statLabel: 'Monthly Starting Price',
+    headline: 'Everything You Need to Host Your First Website',
+    body: 'Includes free SSL, cPanel management, business email, and 24/7 customer support from a real team based in Lahore.',
+    cta: 'haanhosting.store'
+  }],
+  'Launch your online presence today for less than the cost of a coffee! ☕\n\nAt HAAN HOSTING, our Starter Web Hosting plan is only $3.99/mo. No hidden contract traps, no sudden renewals.\n\n✔ Free SSL certificate\n✔ 1-Click WordPress install\n✔ 24/7 WhatsApp help\n\n👉 Visit haanhosting.store to launch your site!\n\n#HaanHosting #CheapWebHosting #AffordableHosting #SmallBizPK #WebHostingDeal #WordPressPK',
+  ['#HaanHosting', '#CheapWebHosting', '#AffordableHosting', '#SmallBizPK', '#WebHostingDeal', '#WordPressPK', '#BudgetHost'],
+  'Graphic featuring the $3.99/mo starting price for reliable cPanel web hosting.',
+  'starter-webhosting-399'
+);
+
+add(
+  'offers', 'single', 'T05-offer-poster',
+  [{
+    badge: 'Pro Grade', category: 'Cloud VPS',
+    headline: 'Professional Cloud VPS - 32 GB RAM Powerhouse',
+    planName: 'Professional Cloud VPS',
+    price: '$21.99/mo',
+    specs: [
+      '8 Cores CPU',
+      '32 GB RAM',
+      '200 GB NVMe Storage',
+      '10 Gbps Port Speed',
+      'Full Root Access',
+      '99.9% SLA Uptime'
+    ],
+    ctaButtonText: 'Order at haanhosting.store',
+    cta: 'haanhosting.store'
+  }],
+  'Need top-tier enterprise power at an affordable monthly price? 🔥\n\nCheck out the HAAN Professional Cloud VPS for $21.99/mo:\n\n✔ 8 Cores CPU\n✔ 32 GB RAM\n✔ 200 GB NVMe Storage\n✔ 10 Gbps Port Speed\n✔ Full Root Access\n✔ 99.9% SLA Uptime Guarantee\n\nIdeal for busy ecommerce stores, development teams, and heavy SaaS backends.\n\n👉 Deploy at haanhosting.store (link in bio)!\n\n#HaanHosting #EnterpriseVPS #CloudHosting #32GBRAM #ServerDeal #FullRootAccess #TechPakistan',
+  ['#HaanHosting', '#EnterpriseVPS', '#CloudHosting', '#32GBRAM', '#ServerDeal', '#FullRootAccess', '#TechPakistan', '#ProHosting'],
+  'Poster for the Professional Cloud VPS featuring 8 Cores, 32GB RAM, and 200GB NVMe storage for $21.99/mo.',
+  'starter-vps-1199'
+);
+
+add(
+  'offers', 'single', 'T04-big-number',
+  [{
+    badge: 'Verified Feature', category: 'Network',
+    statNumber: '10 Gbps',
+    statLabel: 'Standard Port On All VPS & RDP',
+    headline: 'Blazing Fast Network Connectivity Included Free',
+    body: 'While other providers charge extra for high bandwidth ports, every HAAN server comes pre-connected to a 10 Gbps uplink.',
+    cta: 'haanhosting.store'
+  }],
+  'Don’t settle for slow network speeds. 🏎️\n\nEvery HAAN Windows RDP and NVMe Cloud VPS features a 10 Gbps data center network port as standard. Download files, sync databases, and trade without delay.\n\nPlans start at $11.99/mo.\n\n👉 Learn more at haanhosting.store!\n\n#HaanHosting #10GbpsPort #FastHosting #CloudVPS #WindowsRDP #DataSpeed #PakistanTech',
+  ['#HaanHosting', '#10GbpsPort', '#FastHosting', '#CloudVPS', '#WindowsRDP', '#DataSpeed', '#PakistanTech', '#HighSpeed'],
+  'Callout highlighting the 10 Gbps port speed standard on all Haan Hosting servers.',
+  'starter-vps-1199'
+);
+
+add(
+  'offers', 'single', 'T05-offer-poster',
+  [{
+    badge: 'Agency Choice', category: 'Web Hosting',
+    headline: 'Host Up to 10 Websites with Business Hosting',
+    planName: 'Business Web Hosting',
+    price: '$7.99/mo',
+    specs: [
+      '10 Websites Hosted',
+      'Unlimited SSD Storage',
+      'Free SSL Certificates',
+      'Business Email Accounts',
+      'Daily Automated Backups',
+      'Unlimited Bandwidth'
+    ],
+    ctaButtonText: 'Get Started at haanhosting.store',
+    cta: 'haanhosting.store'
+  }],
+  'Manage all your client websites under one affordable cPanel account! 💻\n\nOur Business Web Hosting plan gives you:\n\n✔ Host up to 10 Websites\n✔ Unlimited SSD Storage\n✔ Free SSL on all domains\n✔ Business Email Accounts\n✔ Automated Daily Backups\n✔ Unlimited Monthly Bandwidth\n\nOnly $7.99/mo. 7-day money-back guarantee.\n\n👉 Visit haanhosting.store to launch!\n\n#HaanHosting #BusinessHosting #MultiSiteHosting #cPanelHosting #WebAgencyPK #PakistanWebsites',
+  ['#HaanHosting', '#BusinessHosting', '#MultiSiteHosting', '#cPanelHosting', '#WebAgencyPK', '#PakistanWebsites', '#HostingDeals'],
+  'Promotional poster for Business Web Hosting featuring 10 websites and unlimited SSD storage for $7.99/mo.',
+  'starter-webhosting-399'
+);
+
+add(
+  'offers', 'single', 'T08-browser-mockup',
+  [{
+    badge: 'Global Infrastructure', category: 'Datacenters',
+    headline: 'Deploy in New York, London, or Singapore Today',
+    urlDomain: 'haanhosting.store/locations',
+    statusText: 'All Datacenters Online',
+    contentTitle: '3 Strategic Global Datacenter Hubs',
+    body: 'USA (New York): North America\nUK (London): LD4 Forex trading\nSingapore: Lowest ping for Pakistan & Asia',
+    cta: 'haanhosting.store'
+  }],
+  'Choose the exact datacenter location that matches your project needs! 🌍\n\nDeploy your Cloud VPS or Windows RDP in New York, London, or Singapore with instant provisioning and 10 Gbps port speeds.\n\nStarting at $11.99/mo.\n\n👉 Order your server at haanhosting.store (link in bio)!\n\n#HaanHosting #GlobalDatacenters #NewYorkVPS #LondonRDP #SingaporeVPS #ForexHosting #PakistanTech',
+  ['#HaanHosting', '#GlobalDatacenters', '#NewYorkVPS', '#LondonRDP', '#SingaporeVPS', '#ForexHosting', '#PakistanTech', '#ServerLocations'],
+  'Browser mockup illustrating the 3 global datacenter regions available with Haan Hosting.',
+  'starter-vps-1199'
+);
+
+// -------------------------------------------------------------
+// 5. COMMUNITY & POLLS (6 posts)
+// -------------------------------------------------------------
+add(
+  'engagement', 'single', 'T10-question-poll',
+  [{
+    badge: 'Community Poll', category: 'Discussion',
+    headline: 'Which OS do you prefer for your production server?',
+    options: [
+      { letter: 'A', text: 'Ubuntu Server (LTS)' },
+      { letter: 'B', text: 'Debian Minimal' },
+      { letter: 'C', text: 'Windows Server 2022' },
+      { letter: 'D', text: 'AlmaLinux / Rocky' }
+    ],
+    promptText: 'Comment your answer A, B, C or D below!',
+    cta: 'haanhosting.store'
+  }],
+  'Developer debate time! 💬\n\nWhen setting up a new production server, which operating system is your go-to choice?\n\nA) Ubuntu Server (LTS)\nB) Debian Minimal\nC) Windows Server 2022\nD) AlmaLinux / Rocky\n\nDrop your vote in the comments below! 👇\n\n#HaanHosting #DevCommunity #LinuxPoll #UbuntuServer #Debian #WindowsServer #PakistaniDevelopers',
+  ['#HaanHosting', '#DevCommunity', '#LinuxPoll', '#UbuntuServer', '#Debian', '#WindowsServer', '#PakistaniDevelopers', '#TechPoll'],
+  'Poll asking developers which operating system they prefer for production server deployments.'
+);
+
+add(
+  'engagement', 'single', 'T10-question-poll',
+  [{
+    badge: 'WebDev Poll', category: 'Tech Stack',
+    headline: 'Which CMS or framework powers your main website?',
+    options: [
+      { letter: 'A', text: 'WordPress / WooCommerce' },
+      { letter: 'B', text: 'Next.js / React' },
+      { letter: 'C', text: 'Laravel / PHP' },
+      { letter: 'D', text: 'Shopify / Custom' }
+    ],
+    promptText: 'Comment your choice A, B, C or D below!',
+    cta: 'haanhosting.store'
+  }],
+  'What powers your current web projects? ⚡\n\nAre you in team WordPress, building modern React/Next.js frontends, or writing clean Laravel backends?\n\nTell us your stack in the comments! 👇\n\n#HaanHosting #TechStack #WebDevPakistan #WordPressPK #Laravel #NextJS #CodingCommunity',
+  ['#HaanHosting', '#TechStack', '#WebDevPakistan', '#WordPressPK', '#Laravel', '#NextJS', '#CodingCommunity', '#PollOfTheDay'],
+  'Interactive poll asking whether users build on WordPress, Next.js, Laravel, or Shopify.'
+);
+
+add(
+  'engagement', 'single', 'T10-question-poll',
+  [{
+    badge: 'Trading Poll', category: 'Forex',
+    headline: 'Which trading platform do you use most for automated trading?',
+    options: [
+      { letter: 'A', text: 'MetaTrader 4 (MT4)' },
+      { letter: 'B', text: 'MetaTrader 5 (MT5)' },
+      { letter: 'C', text: 'cTrader' },
+      { letter: 'D', text: 'TradingView Webhooks' }
+    ],
+    promptText: 'Comment A, B, C or D below!',
+    cta: 'haanhosting.store'
+  }],
+  'Forex and crypto traders, we want to hear from you! 📊\n\nWhich terminal runs your Expert Advisors most reliably?\n\nComment below with your favorite platform! 👇\n\n#HaanHosting #ForexPoll #MT4 #MT5 #cTrader #TradingCommunity #PakistanTraders',
+  ['#HaanHosting', '#ForexPoll', '#MT4', '#MT5', '#cTrader', '#TradingCommunity', '#PakistanTraders', '#ForexLife'],
+  'Poll surveying the community on their preferred automated trading terminal between MT4, MT5, and cTrader.'
+);
+
+add(
+  'engagement', 'single', 'T10-question-poll',
+  [{
+    badge: 'Developer Life', category: 'Debate',
+    headline: 'CLI Terminal vs Visual GUI: How do you manage your server?',
+    options: [
+      { letter: 'A', text: 'Pure SSH & Bash Terminal' },
+      { letter: 'B', text: 'cPanel / DirectAdmin GUI' },
+      { letter: 'C', text: 'Windows Remote Desktop (RDP)' },
+      { letter: 'D', text: 'Portainer / Webmin' }
+    ],
+    promptText: 'Vote A, B, C or D in the comments!',
+    cta: 'haanhosting.store'
+  }],
+  'Terminal purist or visual GUI fan? ⌨️ vs 🖱️\n\nHow do you prefer managing your server files and services on a daily basis? Vote below!\n\n#HaanHosting #TerminalVsGUI #SysAdminLife #DevLife #ServerManagement #PakistanTech',
+  ['#HaanHosting', '#TerminalVsGUI', '#SysAdminLife', '#DevLife', '#ServerManagement', '#PakistanTech', '#CoderHumor'],
+  'Poll comparing command line SSH management versus visual GUI control panels.'
+);
+
+add(
+  'engagement', 'single', 'T10-question-poll',
+  [{
+    badge: 'Business Poll', category: 'Marketing',
+    headline: 'Where does most of your business traffic come from?',
+    options: [
+      { letter: 'A', text: 'Google Search (Organic SEO)' },
+      { letter: 'B', text: 'Instagram & Facebook Ads' },
+      { letter: 'C', text: 'Word of Mouth & Referrals' },
+      { letter: 'D', text: 'TikTok & Video Content' }
+    ],
+    promptText: 'Drop your answer A, B, C or D below!',
+    cta: 'haanhosting.store'
+  }],
+  'Entrepreneurs and creators: what is your primary customer acquisition channel? 🎯\n\nShare what has been working best for your brand this year! 👇\n\n#HaanHosting #TrafficSources #SmallBusinessPK #MarketingPoll #EcommerceGrowth #DigitalMarketingPK',
+  ['#HaanHosting', '#TrafficSources', '#SmallBusinessPK', '#MarketingPoll', '#EcommerceGrowth', '#DigitalMarketingPK', '#PollTime'],
+  'Poll asking small business owners where they acquire the majority of their website traffic.'
+);
+
+add(
+  'engagement', 'single', 'T10-question-poll',
+  [{
+    badge: 'Quick Quiz', category: 'Web Knowledge',
+    headline: 'What does the DNS record type "CNAME" stand for?',
+    options: [
+      { letter: 'A', text: 'Canonical Name' },
+      { letter: 'B', text: 'Custom Network Address' },
+      { letter: 'C', text: 'Cloud Node Alias' },
+      { letter: 'D', text: 'Connected Name Entry' }
+    ],
+    promptText: 'Comment your answer A, B, C or D below!',
+    cta: 'haanhosting.store'
+  }],
+  'Tech trivia time! 🧠\n\nTest your networking knowledge: What does CNAME actually stand for in DNS terminology?\n\nComment your guess below without looking it up! 👇\n\n#HaanHosting #TechTrivia #CodingQuiz #NetworkingQuiz #DNS #WebDevCommunity #PakistanTech',
+  ['#HaanHosting', '#TechTrivia', '#CodingQuiz', '#NetworkingQuiz', '#DNS', '#WebDevCommunity', '#PakistanTech', '#QuizTime'],
+  'Trivia quiz asking for the definition of a DNS CNAME record.'
+);
+
+// -------------------------------------------------------------
+// 6. TRUST & BRAND (6 posts)
+// -------------------------------------------------------------
+add(
+  'trust', 'single', 'T01-bold-statement',
+  [{
+    badge: 'Local Support', category: 'Lahore Team',
+    headline: 'Real human technical support based right here in Lahore, Pakistan.',
+    body: 'No automated chatbot loops. Connect directly with our engineering team on WhatsApp whenever you need assistance.',
+    cta: 'haanhosting.store'
+  }],
+  'Tired of waiting days for robotic email ticket responses? 🇵🇰\n\nAt HAAN HOSTING, our core technical team is based right here in Lahore. We are available 24/7 on WhatsApp (+92 317 7109812) to help with server setup, migrations, and technical questions.\n\nExperience hosting with real human support.\n\n👉 Visit haanhosting.store (link in bio)!\n\n#HaanHosting #LahoreTech #PakistaniBusiness #CustomerSupport #LocalHosting #PakistanEntrepreneurs',
+  ['#HaanHosting', '#LahoreTech', '#PakistaniBusiness', '#CustomerSupport', '#LocalHosting', '#PakistanEntrepreneurs', '#TrustedBrand'],
+  'Brand statement highlighting genuine 24/7 WhatsApp technical support from the Lahore team.'
+);
+
+add(
+  'trust', 'single', 'T06-quote-card',
+  [{
+    badge: 'Brand Value', category: 'Commitment',
+    headline: 'We measure our success not by server count, but by the uptime of our customers’ businesses.',
+    author: 'HAAN Operations Team',
+    role: 'Lahore, Pakistan',
+    cta: 'haanhosting.store'
+  }],
+  'Behind every server is someone’s livelihood, shop, or client project. 🤝\n\nWe take that responsibility seriously. From enterprise NVMe hardware to round-the-clock monitoring, HAAN HOSTING is committed to keeping your business online.\n\n👉 Join our community at haanhosting.store!\n\n#HaanHosting #CustomerFirst #HostingPhilosophy #EnterpriseStandards #PakistanTech #Reliability',
+  ['#HaanHosting', '#CustomerFirst', '#HostingPhilosophy', '#EnterpriseStandards', '#PakistanTech', '#Reliability', '#BrandCommitment'],
+  'Quote card expressing Haan Hosting core commitment to client business uptime.'
+);
+
+add(
+  'trust', 'single', 'T08-browser-mockup',
+  [{
+    badge: 'Live Status', category: 'Infrastructure',
+    headline: 'Real-Time Server Health & Transparent SLA Metrics',
+    urlDomain: 'haanhosting.store/status',
+    statusText: 'All Systems Operational',
+    contentTitle: 'Enterprise Hardware Specifications',
+    body: '• High-performance Intel Xeon & AMD EPYC processors\n• DDR4 / DDR5 enterprise ECC memory\n• 10 Gbps redundant network links\n• 99.9% verified SLA uptime',
+    cta: 'haanhosting.store'
+  }],
+  'Transparency is the cornerstone of great hosting. 🔍\n\nWe build our infrastructure on genuine enterprise Intel Xeon and AMD EPYC processors with ECC memory to ensure rock-solid stability for your applications.\n\nExplore our high-performance cloud plans.\n\n👉 Link in bio to visit haanhosting.store!\n\n#HaanHosting #ServerSpecs #EnterpriseHardware #IntelXeon #AMDEpyc #CloudInfrastructure #PakistanTech',
+  ['#HaanHosting', '#ServerSpecs', '#EnterpriseHardware', '#IntelXeon', '#AMDEpyc', '#CloudInfrastructure', '#PakistanTech', '#TransparentHosting'],
+  'Browser mockup displaying enterprise hardware specifications and transparent server status metrics.'
+);
+
+add(
+  'trust', 'single', 'T12-minimal-editorial',
+  [{
+    badge: 'Zero Surprises', category: 'Fair Pricing',
+    headline: 'Honest pricing with zero hidden fees or sudden renewal shocks.',
+    editorialTag: 'Fairness Guarantee',
+    body: 'Many hosting providers lure you in with $1 teasers only to bill $25 on renewal. We believe in transparent, straightforward pricing that respects your budget.',
+    cta: 'haanhosting.store'
+  }],
+  'Ever felt tricked by hosting companies tripling your bill on renewal? 🛑\n\nAt HAAN HOSTING, what you see is what you pay. Transparent monthly pricing, no mandatory multi-year commitments, and a 7-day money-back guarantee on web hosting plans.\n\nStart with confidence at haanhosting.store.\n\n👉 Link in bio!\n\n#HaanHosting #FairPricing #TransparentBusiness #NoHiddenFees #HonestTech #PakistanHosting',
+  ['#HaanHosting', '#FairPricing', '#TransparentBusiness', '#NoHiddenFees', '#HonestTech', '#PakistanHosting', '#TrustMatters'],
+  'Editorial card emphasizing transparent pricing without teaser rates or unexpected renewal spikes.'
+);
+
+add(
+  'trust', 'single', 'T01-bold-statement',
+  [{
+    badge: 'Quick Delivery', category: 'Instant Setup',
+    headline: 'Your server is deployed and ready within minutes of payment confirmation.',
+    body: 'Instant automated provisioning on NVMe storage. No waiting days for an administrator to set up your virtual machine.',
+    cta: 'haanhosting.store'
+  }],
+  'Need your server deployed right now? ⏱️\n\nOur automated provisioning engine deploys your Cloud VPS or Windows RDP within minutes of payment confirmation, complete with clean dedicated IPs and your chosen OS.\n\nPlans start at $11.99/mo.\n\n👉 Deploy your server instantly at haanhosting.store!\n\n#HaanHosting #InstantDeployment #CloudVPS #FastSetup #DevOpsSpeed #PakistanDevelopers',
+  ['#HaanHosting', '#InstantDeployment', '#CloudVPS', '#FastSetup', '#DevOpsSpeed', '#PakistanDevelopers', '#QuickHosting'],
+  'Statement card highlighting automated instant server provisioning within minutes.'
+);
+
+add(
+  'trust', 'single', 'T06-quote-card',
+  [{
+    badge: 'Engineering', category: 'Quality',
+    headline: 'Great hosting doesn’t cut corners on hardware or customer care.',
+    author: 'HAAN HOSTING',
+    role: 'Infrastructure Team',
+    cta: 'haanhosting.store'
+  }],
+  'From 10 Gbps networking to NVMe SSD storage, quality is in every detail of our infrastructure. 💎\n\nChoose a hosting provider that treats your business like its own.\n\n👉 Learn more at haanhosting.store!\n\n#HaanHosting #EngineeringQuality #HighStandard #TechPakistan #QualityInfrastructure',
+  ['#HaanHosting', '#EngineeringQuality', '#HighStandard', '#TechPakistan', '#QualityInfrastructure', '#HostingStandards'],
+  'Quote card highlighting the company philosophy of uncompromised hardware and customer care.'
+);
+
+// -------------------------------------------------------------
+// 7. ORIGINAL MOTIVATION & INSIGHTS (4 posts)
+// -------------------------------------------------------------
+add(
+  'quotes', 'single', 'T06-quote-card',
+  [{
+    badge: 'Daily Motivation', category: 'Builders',
+    headline: 'The best time to launch your project was yesterday. The next best time is right now.',
+    author: 'HAAN Creators Circle',
+    role: 'Build in Public',
+    cta: 'haanhosting.store'
+  }],
+  'Stop waiting for the "perfect" moment to launch your idea. 🚀\n\nShip your MVP, test with real users, gather feedback, and iterate. The builders who win are the ones who put their work into the world.\n\nLaunch your project today at haanhosting.store.\n\n👉 Link in bio to deploy!\n\n#HaanHosting #BuildInPublic #MakerMindset #ShipIt #FounderLife #PakistaniEntrepreneurs #CodingMotivation',
+  ['#HaanHosting', '#BuildInPublic', '#MakerMindset', '#ShipIt', '#FounderLife', '#PakistaniEntrepreneurs', '#CodingMotivation', '#DailyInspo'],
+  'Inspirational quote card encouraging builders and entrepreneurs to launch their digital projects today.'
+);
+
+add(
+  'quotes', 'single', 'T01-bold-statement',
+  [{
+    badge: 'Founder Wisdom', category: 'Mindset',
+    headline: 'Simplicity in your architecture scales better than premature optimization.',
+    body: 'Focus on shipping reliable software on proven infrastructure. Clean code and dependable hosting beat complex over-engineering every time.',
+    cta: 'haanhosting.store'
+  }],
+  'Keep it simple and focus on what provides real value to your customers. 💡\n\nA clean monolithic web app on a fast NVMe VPS will often outperform an over-complicated microservices cluster while costing 90% less.\n\nBuild smart at haanhosting.store.\n\n👉 Link in bio!\n\n#HaanHosting #SoftwareArchitecture #KISSPrinciple #WebDevWisdom #FullStackDev #CleanCode',
+  ['#HaanHosting', '#SoftwareArchitecture', '#KISSPrinciple', '#WebDevWisdom', '#FullStackDev', '#CleanCode', '#TechWisdom'],
+  'Architectural insight advocating for simplicity and reliable hosting over premature over-engineering.'
+);
+
+add(
+  'quotes', 'single', 'T12-minimal-editorial',
+  [{
+    badge: 'Perspective', category: 'Consistency',
+    headline: 'Small daily technical improvements compound into an unbeatable product.',
+    editorialTag: 'Compounding Value',
+    body: 'Fix one slow database query, compress one heavy asset, automate one tedious task. Excellence is a daily practice, not a one-time event.',
+    cta: 'haanhosting.store'
+  }],
+  'Continuous improvement is the real superpower of successful founders and engineers. 📈\n\nKeep polishing your craft, optimizing your code, and building on reliable infrastructure.\n\n👉 Grow your digital project at haanhosting.store!\n\n#HaanHosting #ContinuousImprovement #Kaizen #ProductivityTips #DeveloperMindset #PakistanTech',
+  ['#HaanHosting', '#ContinuousImprovement', '#Kaizen', '#ProductivityTips', '#DeveloperMindset', '#PakistanTech', '#CompoundingEffort'],
+  'Minimalist editorial card discussing the power of small daily technical improvements compounding over time.'
+);
+
+add(
+  'quotes', 'single', 'T06-quote-card',
+  [{
+    badge: 'Creator Fuel', category: 'Growth',
+    headline: 'Code gives you the power to build global solutions from anywhere on Earth.',
+    author: 'HAAN Developer Collective',
+    role: 'Pakistan',
+    cta: 'haanhosting.store'
+  }],
+  'From your laptop in Lahore, Karachi, or Peshawar, you can build software that serves users across the entire globe. 🌍\n\nNever underestimate the reach of your code when supported by high-speed global infrastructure.\n\n👉 Build and deploy at haanhosting.store!\n\n#HaanHosting #GlobalDevelopers #CodeFromAnywhere #PakistanIT #FreelancersPK #TechEmpowerment',
+  ['#HaanHosting', '#GlobalDevelopers', '#CodeFromAnywhere', '#PakistanIT', '#FreelancersPK', '#TechEmpowerment', '#Inspiration'],
+  'Motivational quote card celebrating the global reach of modern developers building from anywhere.'
+);
+
+export function buildAndSaveBank() {
+  const bankDir = path.resolve(process.cwd(), 'content/bank');
+  if (!fs.existsSync(bankDir)) {
+    fs.mkdirSync(bankDir, { recursive: true });
+  }
+
+  const outPath = path.join(bankDir, 'posts.json');
+  fs.writeFileSync(outPath, JSON.stringify(posts, null, 2));
+  console.log(`Generated ${posts.length} posts in ${outPath}`);
+  return posts;
+}
+
+buildAndSaveBank();
