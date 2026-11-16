@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+
+# Environment secrets
+.env
+.env.local
+.env.*.local
+
+# Build & preview outputs
+dist/
+preview/
+coverage/
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Playwright cache & test results
+test-results/
+playwright-report/

@@ -1,0 +1,44 @@
+{
+  "name": "haan-insta-agent",
+  "version": "1.0.0",
+  "description": "Autonomous AI Instagram content creation and publishing agent for Haan Hosting",
+  "main": "src/cli.ts",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "cli": "tsx src/cli.ts",
+    "generate": "tsx src/cli.ts generate",
+    "render": "tsx src/cli.ts render",
+    "publish": "tsx src/cli.ts publish",
+    "preview": "tsx src/cli.ts preview",
+    "refresh-token": "tsx src/cli.ts refresh-token",
+    "doctor": "tsx src/cli.ts doctor",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "lint": "tsc --noEmit"
+  },
+  "keywords": [
+    "instagram",
+    "automation",
+    "agent",
+    "haan-hosting",
+    "marketing",
+    "ai"
+  ],
+  "author": "Haan Hosting",
+  "license": "MIT",
+  "dependencies": {
+    "@google/genai": "^3.3.0",
+    "commander": "^12.1.0",
+    "dotenv": "^16.4.7",
+    "playwright": "^1.49.1",
+    "sharp": "^0.33.5",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.17.10",
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.2",
+    "vitest": "^2.1.8"
+  }
+}
