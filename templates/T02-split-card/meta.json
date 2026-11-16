@@ -1,0 +1,10 @@
+{
+  "id": "T02-split-card",
+  "name": "Split Card",
+  "formats": ["single"],
+  "maxHeadlineChars": 75,
+  "maxBodyChars": 220,
+  "supportsBadge": true,
+  "layoutVariants": 3,
+  "bestFor": ["tips", "growth"]
+}

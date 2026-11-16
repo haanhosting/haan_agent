@@ -1,0 +1,10 @@
+{
+  "id": "T06-quote-card",
+  "name": "Quote Card",
+  "formats": ["single"],
+  "maxHeadlineChars": 160,
+  "maxBodyChars": 90,
+  "supportsBadge": true,
+  "layoutVariants": 3,
+  "bestFor": ["quotes", "trust"]
+}

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350" fill="none">
+  <defs>
+    <pattern id="diagonal-pattern" width="60" height="60" patternTransform="rotate(45 0 0)" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="0" y2="60" stroke="var(--accent, #2563eb)" stroke-width="1.5" opacity="0.12" />
+    </pattern>
+  </defs>
+  <rect width="1080" height="1350" fill="url(#diagonal-pattern)" />
+</svg>

@@ -1,0 +1,10 @@
+{
+  "id": "T05-offer-poster",
+  "name": "Offer Poster",
+  "formats": ["single"],
+  "maxHeadlineChars": 65,
+  "maxBodyChars": 200,
+  "supportsBadge": true,
+  "layoutVariants": 3,
+  "bestFor": ["offers"]
+}

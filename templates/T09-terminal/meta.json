@@ -1,0 +1,10 @@
+{
+  "id": "T09-terminal",
+  "name": "Terminal / Code",
+  "formats": ["single"],
+  "maxHeadlineChars": 70,
+  "maxBodyChars": 220,
+  "supportsBadge": true,
+  "layoutVariants": 3,
+  "bestFor": ["tips", "educational"]
+}

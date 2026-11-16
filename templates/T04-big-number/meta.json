@@ -1,0 +1,10 @@
+{
+  "id": "T04-big-number",
+  "name": "Big Number",
+  "formats": ["single"],
+  "maxHeadlineChars": 75,
+  "maxBodyChars": 180,
+  "supportsBadge": true,
+  "layoutVariants": 3,
+  "bestFor": ["offers", "tips", "trust"]
+}

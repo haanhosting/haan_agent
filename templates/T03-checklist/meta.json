@@ -1,0 +1,10 @@
+{
+  "id": "T03-checklist",
+  "name": "Checklist",
+  "formats": ["single"],
+  "maxHeadlineChars": 70,
+  "maxBodyChars": 300,
+  "supportsBadge": true,
+  "layoutVariants": 3,
+  "bestFor": ["tips"]
+}

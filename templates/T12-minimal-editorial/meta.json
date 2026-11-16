@@ -1,0 +1,10 @@
+{
+  "id": "T12-minimal-editorial",
+  "name": "Minimal Editorial",
+  "formats": ["single"],
+  "maxHeadlineChars": 90,
+  "maxBodyChars": 220,
+  "supportsBadge": true,
+  "layoutVariants": 3,
+  "bestFor": ["growth", "trust", "quotes"]
+}

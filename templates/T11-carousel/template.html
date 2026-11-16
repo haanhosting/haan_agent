@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>T11 - Carousel Slide</title>
+  <link rel="stylesheet" href="../_shared/base.css">
+  <style>
+    .t11-container {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+      flex: 1;
+      justify-content: center;
+      margin: 20px 0;
+    }
+
+    .t11-slide-counter {
+      font-family: var(--font-code);
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--accent2);
+      letter-spacing: 0.05em;
+    }
+
+    .t11-headline {
+      font-family: var(--font-display);
+      font-size: 64px;
+      font-weight: 900;
+      line-height: 1.18;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+    }
+
+    .t11-card {
+      background: var(--card);
+      border: 1px solid var(--card-border);
+      border-radius: var(--radius);
+      padding: 44px;
+      backdrop-filter: blur(20px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .t11-body-text {
+      font-size: 30px;
+      font-weight: 500;
+      line-height: 1.5;
+      color: var(--muted);
+    }
+
+    .t11-bullets {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .t11-bullet-item {
+      display: flex;
+      align-items: baseline;
+      gap: 14px;
+      font-size: 26px;
+      font-weight: 600;
+      color: #ffffff;
+      line-height: 1.4;
+    }
+
+    .t11-bullet-item .icon {
+      color: var(--accent);
+      font-size: 20px;
+    }
+
+    .t11-swipe-action {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 10px;
+    }
+
+    .t11-swipe-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      background: rgba(37, 99, 235, 0.15);
+      border: 1px solid var(--accent);
+      border-radius: 9999px;
+      padding: 12px 24px;
+      color: var(--accent);
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* Variant 1: Centered Cover Slide */
+    .variant-1 .t11-container {
+      align-items: center;
+      text-align: center;
+    }
+    .variant-1 .t11-swipe-action {
+      justify-content: center;
+    }
+
+    /* Variant 2: Left accent border */
+    .variant-2 .t11-card {
+      border-left: 6px solid var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas {{variantClass}}" style="{{cssVariables}}">
+    <div class="decoration-layer" style="{{decorationStyle}}"></div>
+    <div class="content-layer">
+      <!-- Header -->
+      <div class="brand-header">
+        <div class="brand-badge">
+          <span class="brand-badge-dot"></span>
+          <span>{{badge}}</span>
+        </div>
+        <div class="t11-slide-counter">{{slideIndex}} / {{totalSlides}}</div>
+      </div>
+
+      <!-- Main Body -->
+      <div class="t11-container">
+        <div class="t11-headline auto-shrink">{{headline}}</div>
+
+        <div class="t11-card">
+          {{#if body}}
+          <div class="t11-body-text auto-shrink">{{body}}</div>
+          {{/if}}
+
+          {{#if bullets}}
+          <div class="t11-bullets">
+            {{#each bullets}}
+            <div class="t11-bullet-item">
+              <span class="icon">➔</span>
+              <span>{{this}}</span>
+            </div>
+            {{/each}}
+          </div>
+          {{/if}}
+        </div>
+
+        {{#if isCover}}
+        <div class="t11-swipe-action">
+          <div class="t11-swipe-btn">
+            <span>Swipe ➔</span>
+          </div>
+        </div>
+        {{/if}}
+      </div>
+
+      <!-- Footer -->
+      <div class="brand-footer">
+        <div class="brand-logo-wrap">
+          <div class="brand-logo-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm0 4h16V6H4v2zm0 4h16v-2H4v2zm0 4h16v-2H4v2z"/></svg>
+          </div>
+          <div class="brand-logo-text">HAAN<span>HOSTING</span></div>
+        </div>
+        <div class="brand-footer-cta">
+          <span class="dot">●</span> {{cta}}
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

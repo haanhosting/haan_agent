@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350" fill="none">
+  <g stroke="var(--accent, #2563eb)" stroke-width="3" opacity="0.35">
+    <!-- Top-left -->
+    <path d="M 60 110 L 60 60 L 110 60" />
+    <!-- Top-right -->
+    <path d="M 970 60 L 1020 60 L 1020 110" />
+    <!-- Bottom-left -->
+    <path d="M 60 1240 L 60 1290 L 110 1290" />
+    <!-- Bottom-right -->
+    <path d="M 970 1290 L 1020 1290 L 1020 1240" />
+  </g>
+</svg>

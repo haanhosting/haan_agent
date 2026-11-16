@@ -1,0 +1,10 @@
+{
+  "id": "T10-question-poll",
+  "name": "Question Poll",
+  "formats": ["single"],
+  "maxHeadlineChars": 80,
+  "maxBodyChars": 150,
+  "supportsBadge": true,
+  "layoutVariants": 3,
+  "bestFor": ["engagement"]
+}

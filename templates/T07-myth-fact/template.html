@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>T07 - Myth vs Fact</title>
+  <link rel="stylesheet" href="../_shared/base.css">
+  <style>
+    .t07-container {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+      flex: 1;
+      justify-content: center;
+      margin: 20px 0;
+    }
+
+    .t07-headline {
+      font-family: var(--font-display);
+      font-size: 58px;
+      font-weight: 900;
+      line-height: 1.18;
+      letter-spacing: -0.02em;
+      color: #ffffff;
+      text-align: center;
+    }
+
+    .t07-panels {
+      display: flex;
+      flex-direction: column;
+      gap: 22px;
+    }
+
+    .t07-panel {
+      border-radius: var(--radius);
+      padding: 38px 44px;
+      backdrop-filter: blur(20px);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    .t07-myth {
+      background: rgba(244, 63, 94, 0.1);
+      border: 1.5px solid rgba(244, 63, 94, 0.35);
+    }
+
+    .t07-fact {
+      background: rgba(0, 187, 127, 0.12);
+      border: 2px solid var(--accent2);
+      box-shadow: 0 0 40px rgba(0, 187, 127, 0.15);
+    }
+
+    .t07-label {
+      font-family: var(--font-code);
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .t07-myth .t07-label {
+      color: #fb7185;
+    }
+
+    .t07-fact .t07-label {
+      color: var(--accent2);
+    }
+
+    .t07-text {
+      font-size: 30px;
+      font-weight: 600;
+      line-height: 1.45;
+      color: #ffffff;
+    }
+
+    /* Variant 1: Inverted / Fact Dominant */
+    .variant-1 .t07-fact {
+      padding: 48px 44px;
+    }
+    .variant-1 .t07-fact .t07-text {
+      font-size: 34px;
+    }
+
+    /* Variant 2: Left-aligned with subtle contrast */
+    .variant-2 .t07-headline {
+      text-align: left;
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas {{variantClass}}" style="{{cssVariables}}">
+    <div class="decoration-layer" style="{{decorationStyle}}"></div>
+    <div class="content-layer">
+      <!-- Header -->
+      <div class="brand-header">
+        <div class="brand-badge">
+          <span class="brand-badge-dot"></span>
+          <span>{{badge}}</span>
+        </div>
+        <div class="pill-tag">{{category}}</div>
+      </div>
+
+      <!-- Main Body -->
+      <div class="t07-container">
+        <div class="t07-headline auto-shrink">{{headline}}</div>
+
+        <div class="t07-panels">
+          <div class="t07-panel t07-myth">
+            <div class="t07-label">❌ MYTH</div>
+            <div class="t07-text auto-shrink">{{myth}}</div>
+          </div>
+
+          <div class="t07-panel t07-fact">
+            <div class="t07-label">✅ THE REALITY</div>
+            <div class="t07-text auto-shrink">{{fact}}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Footer -->
+      <div class="brand-footer">
+        <div class="brand-logo-wrap">
+          <div class="brand-logo-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm0 4h16V6H4v2zm0 4h16v-2H4v2zm0 4h16v-2H4v2z"/></svg>
+          </div>
+          <div class="brand-logo-text">HAAN<span>HOSTING</span></div>
+        </div>
+        <div class="brand-footer-cta">
+          <span class="dot">●</span> {{cta}}
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

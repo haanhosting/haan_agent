@@ -1,0 +1,10 @@
+{
+  "id": "T07-myth-fact",
+  "name": "Myth vs Fact",
+  "formats": ["single"],
+  "maxHeadlineChars": 65,
+  "maxBodyChars": 250,
+  "supportsBadge": true,
+  "layoutVariants": 3,
+  "bestFor": ["educational"]
+}

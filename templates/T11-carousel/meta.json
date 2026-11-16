@@ -1,0 +1,10 @@
+{
+  "id": "T11-carousel",
+  "name": "Carousel Family",
+  "formats": ["carousel"],
+  "maxHeadlineChars": 80,
+  "maxBodyChars": 240,
+  "supportsBadge": true,
+  "layoutVariants": 3,
+  "bestFor": ["tips", "educational"]
+}

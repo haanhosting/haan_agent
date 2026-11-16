@@ -1,0 +1,10 @@
+{
+  "id": "T01-bold-statement",
+  "name": "Bold Statement",
+  "formats": ["single"],
+  "maxHeadlineChars": 85,
+  "maxBodyChars": 160,
+  "supportsBadge": true,
+  "layoutVariants": 3,
+  "bestFor": ["growth", "trust", "engagement", "tips", "quotes"]
+}

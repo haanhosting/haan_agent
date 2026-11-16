@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350" fill="none">
+  <g stroke="var(--accent, #2563eb)" stroke-width="1.5" opacity="0.18">
+    <!-- Top Right Geometric Cube -->
+    <polygon points="900,100 980,146 980,238 900,192" fill="none" />
+    <polygon points="900,100 820,146 820,238 900,192" fill="none" />
+    <polygon points="900,100 980,146 900,192 820,146" fill="var(--accent, #2563eb)" fill-opacity="0.1" />
+    <!-- Bottom Left Subtle Cube -->
+    <polygon points="180,1100 240,1135 240,1205 180,1170" fill="none" />
+    <polygon points="180,1100 120,1135 120,1205 180,1170" fill="none" />
+  </g>
+</svg>

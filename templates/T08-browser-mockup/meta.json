@@ -1,0 +1,10 @@
+{
+  "id": "T08-browser-mockup",
+  "name": "Browser Mockup",
+  "formats": ["single"],
+  "maxHeadlineChars": 70,
+  "maxBodyChars": 200,
+  "supportsBadge": true,
+  "layoutVariants": 3,
+  "bestFor": ["educational", "growth", "offers", "trust"]
+}

@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1350" viewBox="0 0 1080 1350" fill="none">
+  <g stroke="var(--accent, #2563eb)" stroke-width="2" opacity="0.16">
+    <path d="M 0 200 L 250 200 L 350 300 L 700 300" />
+    <circle cx="700" cy="300" r="4" fill="var(--accent, #2563eb)" />
+    <path d="M 1080 450 L 850 450 L 750 550 L 400 550" />
+    <circle cx="400" cy="550" r="4" fill="var(--accent, #2563eb)" />
+    <path d="M 100 1100 L 300 1100 L 450 950 L 900 950" />
+    <circle cx="900" cy="950" r="4" fill="var(--accent, #2563eb)" />
+    <path d="M 950 1200 L 800 1200 L 700 1300 L 400 1300" />
+    <circle cx="400" cy="1300" r="4" fill="var(--accent, #2563eb)" />
+  </g>
+</svg>
