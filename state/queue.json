@@ -1,1 +1,312 @@
-[]
+[
+  {
+    "id": "2026-11-20-slot1",
+    "date": "2026-11-20",
+    "slot": 1,
+    "scheduledAt": "2026-11-20T09:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "tips",
+    "format": "single",
+    "template": "T04-big-number",
+    "design": {
+      "palette": "berry-cream",
+      "seed": 3401903895,
+      "decoration": "isometric-cube",
+      "layoutVariant": 0
+    },
+    "slides": [
+      {
+        "badge": "Linux Command",
+        "category": "SysAdmin",
+        "headline": "Check Server RAM & CPU Usage in One Second",
+        "terminalTitle": "haan@vps:~# htop",
+        "command": "htop",
+        "output": "Tasks: 34, 114 thr; 1 running\nMem: 2.1G / 8.0G [|||||...........]\nCPU: [||.. 8.4%]",
+        "successLine": "Server healthy: 5.9 GB RAM available",
+        "body": "With full root access on HAAN NVMe VPS, you have total visibility into your server resources and process performance.",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Monitoring your server health should be quick and easy. 📊\n\nRun htop on your Linux VPS to get real-time visualization of CPU core loads, memory allocation, and running threads.\n\nEvery HAAN Cloud VPS gives you full root access and 10 Gbps networking.\n\n👉 Deploy your Linux server at haanhosting.store!\n\n#HaanHosting #LinuxTips #SysAdmin #ServerAdmin #Htop #CloudVPS #PakistanDevelopers",
+    "hashtags": [
+      "#HaanHosting",
+      "#seoexpert",
+      "#developerslife",
+      "#websecurity",
+      "#webdesign",
+      "#webdevelopment",
+      "#webspeed",
+      "#webdeveloper",
+      "#onlinebusiness",
+      "#cloudhosting"
+    ],
+    "altText": "Terminal screen demonstrating htop command showing real-time CPU and RAM metrics on a Linux VPS.",
+    "images": [
+      "media/2026-11-20/slot1.jpg"
+    ],
+    "imageUrls": [
+      "https://username.github.io/haan-insta-agent/media/2026-11-20/slot1.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-20-slot2",
+    "date": "2026-11-20",
+    "slot": 2,
+    "scheduledAt": "2026-11-20T12:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "engagement",
+    "format": "single",
+    "template": "T01-bold-statement",
+    "design": {
+      "palette": "sand-terracotta",
+      "seed": 3418681514,
+      "decoration": "none",
+      "layoutVariant": 1
+    },
+    "slides": [
+      {
+        "badge": "Quick Quiz",
+        "category": "Web Knowledge",
+        "headline": "What does the DNS record type \"CNAME\" stand for?",
+        "options": [
+          {
+            "letter": "A",
+            "text": "Canonical Name"
+          },
+          {
+            "letter": "B",
+            "text": "Custom Network Address"
+          },
+          {
+            "letter": "C",
+            "text": "Cloud Node Alias"
+          },
+          {
+            "letter": "D",
+            "text": "Connected Name Entry"
+          }
+        ],
+        "promptText": "Comment your answer A, B, C or D below!",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Tech trivia time! 🧠\n\nTest your networking knowledge: What does CNAME actually stand for in DNS terminology?\n\nComment your guess below without looking it up! 👇\n\n#HaanHosting #TechTrivia #CodingQuiz #NetworkingQuiz #DNS #WebDevCommunity #PakistanTech",
+    "hashtags": [
+      "#HaanHosting",
+      "#webdevcommunity",
+      "#programmerlife",
+      "#codingquiz",
+      "#developerhumor",
+      "#techpoll",
+      "#techcommunity",
+      "#webhosting",
+      "#pakistantech"
+    ],
+    "altText": "Trivia quiz asking for the definition of a DNS CNAME record.",
+    "images": [
+      "media/2026-11-20/slot2.jpg"
+    ],
+    "imageUrls": [
+      "https://username.github.io/haan-insta-agent/media/2026-11-20/slot2.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-20-slot3",
+    "date": "2026-11-20",
+    "slot": 3,
+    "scheduledAt": "2026-11-20T16:00:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "growth",
+    "format": "single",
+    "template": "T02-split-card",
+    "design": {
+      "palette": "slate-cyan",
+      "seed": 3435459133,
+      "decoration": "wave-curves",
+      "layoutVariant": 0
+    },
+    "slides": [
+      {
+        "badge": "Client Retention",
+        "category": "Portfolio",
+        "headline": "Your Portfolio Website Is Your Most Valuable Resume",
+        "urlDomain": "yourname.store",
+        "statusText": "Portfolio Live",
+        "contentTitle": "Stand Out From Thousands of Applicants",
+        "body": "Sending a PDF resume looks ordinary. Sharing a custom domain with live demo projects and APIs proves your skills instantly.",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Ready to land higher-paying international clients? 🌟\n\nA custom domain portfolio running live deployed projects demonstrates technical competence that no PDF resume can match.\n\nDeploy your portfolio with free SSL for just $3.99/mo.\n\n👉 Link in bio to start building at haanhosting.store!\n\n#HaanHosting #DeveloperPortfolio #CareerTips #SoftwareEngineer #PakistaniTech #RemoteJobs",
+    "hashtags": [
+      "#HaanHosting",
+      "#ecommercepakistan",
+      "#digitalpakistan",
+      "#smallbusinesspakistan",
+      "#startuptips",
+      "#digitalmarketing",
+      "#entrepreneurship",
+      "#cloudhosting",
+      "#webdeveloper",
+      "#onlinebusiness"
+    ],
+    "altText": "Browser mockup highlighting the competitive advantage of hosting a personal portfolio website.",
+    "images": [
+      "media/2026-11-20/slot3.jpg"
+    ],
+    "imageUrls": [
+      "https://username.github.io/haan-insta-agent/media/2026-11-20/slot3.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-20-slot4",
+    "date": "2026-11-20",
+    "slot": 4,
+    "scheduledAt": "2026-11-20T19:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "offers",
+    "format": "single",
+    "template": "T08-browser-mockup",
+    "design": {
+      "palette": "electric-indigo",
+      "seed": 3318015800,
+      "decoration": "diagonal-stripes",
+      "layoutVariant": 2
+    },
+    "slides": [
+      {
+        "badge": "Starter Pricing",
+        "category": "Affordable Tech",
+        "statNumber": "$3.99",
+        "statLabel": "Monthly Starting Price",
+        "headline": "Everything You Need to Host Your First Website",
+        "body": "Includes free SSL, cPanel management, business email, and 24/7 customer support from a real team based in Lahore.",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Launch your online presence today for less than the cost of a coffee! ☕\n\nAt HAAN HOSTING, our Starter Web Hosting plan is only $3.99/mo. No hidden contract traps, no sudden renewals.\n\n✔ Free SSL certificate\n✔ 1-Click WordPress install\n✔ 24/7 WhatsApp help\n\n👉 Visit haanhosting.store to launch your site!\n\n#HaanHosting #CheapWebHosting #AffordableHosting #SmallBizPK #WebHostingDeal #WordPressPK",
+    "hashtags": [
+      "#HaanHosting",
+      "#serverdeal",
+      "#budgethosting",
+      "#nvmehosting",
+      "#forexvps",
+      "#rdpserver",
+      "#windowsrdp",
+      "#webhosting",
+      "#pakistantech"
+    ],
+    "altText": "Graphic featuring the $3.99/mo starting price for reliable cPanel web hosting.",
+    "images": [
+      "media/2026-11-20/slot4.jpg"
+    ],
+    "imageUrls": [
+      "https://username.github.io/haan-insta-agent/media/2026-11-20/slot4.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-20-slot5",
+    "date": "2026-11-20",
+    "slot": 5,
+    "scheduledAt": "2026-11-20T21:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "educational",
+    "format": "carousel",
+    "template": "T11-carousel",
+    "design": {
+      "palette": "ocean-blue",
+      "seed": 3334793419,
+      "decoration": "corner-brackets",
+      "layoutVariant": 1
+    },
+    "slides": [
+      {
+        "slideIndex": 1,
+        "totalSlides": 3,
+        "isCover": true,
+        "badge": "Trading Guide",
+        "category": "Forex VPS",
+        "headline": "Why Dedicated Forex VPS Gives You an Unfair Edge",
+        "body": "Forex markets move in milliseconds. If your automated Expert Advisor is running on a residential connection, you are losing money to slippage.",
+        "bullets": [
+          "Sub-millisecond broker execution",
+          "Zero home power cut risks",
+          "Continuous 24/5 uptime"
+        ],
+        "cta": "haanhosting.store"
+      },
+      {
+        "slideIndex": 2,
+        "totalSlides": 3,
+        "badge": "Slippage Facts",
+        "category": "Trading Tech",
+        "headline": "What is Slippage and How Latency Causes It",
+        "body": "When your order takes 150ms to reach London, the market price can shift by several pips before filling. Placing your RDP in London LD4 eliminates this gap.",
+        "bullets": [
+          "Under 1ms ping to major brokers",
+          "Equinix LD4 & NY4 datacenters",
+          "Clean dedicated IP addresses"
+        ],
+        "cta": "haanhosting.store"
+      },
+      {
+        "slideIndex": 3,
+        "totalSlides": 3,
+        "badge": "Get Started",
+        "category": "Windows RDP",
+        "headline": "Deploy Your Trading Server in 5 Minutes",
+        "body": "Get full admin access on Windows Server with pre-optimized configurations for MT4, MT5, and cTrader starting at $11.99/mo.",
+        "bullets": [
+          "USA, UK & Singapore locations",
+          "24/7 support in Pakistan",
+          "Visit haanhosting.store"
+        ],
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Are you running Forex Expert Advisors from home? 📈\n\nHome internet drops, load shedding, and latency slippage kill trading profitability. Swipe to see why professional traders run on dedicated Windows RDP in London and New York.\n\nPlans start at $11.99/mo.\n\n👉 Link in bio to deploy your Forex server at haanhosting.store!\n\n#HaanHosting #ForexPakistan #MT4Trading #ForexVPS #TradingBot #ExpertAdvisor #AlgoTrading",
+    "hashtags": [
+      "#HaanHosting",
+      "#cybersecurity",
+      "#linuxserver",
+      "#dnsmanagement",
+      "#sysadmin",
+      "#techfacts",
+      "#cloudcomputing",
+      "#cloudhosting",
+      "#webdeveloper",
+      "#onlinebusiness"
+    ],
+    "altText": "Carousel presentation breaking down order latency, trading slippage, and why traders locate servers in London and New York.",
+    "images": [
+      "media/2026-11-20/slot5-1.jpg",
+      "media/2026-11-20/slot5-2.jpg",
+      "media/2026-11-20/slot5-3.jpg"
+    ],
+    "imageUrls": [
+      "https://username.github.io/haan-insta-agent/media/2026-11-20/slot5-1.jpg",
+      "https://username.github.io/haan-insta-agent/media/2026-11-20/slot5-2.jpg",
+      "https://username.github.io/haan-insta-agent/media/2026-11-20/slot5-3.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  }
+]
