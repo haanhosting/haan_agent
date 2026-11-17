@@ -168,7 +168,7 @@ function buildDryRunLog(post: any): string {
   return lines.join('\n');
 }
 
-function getDashboardHtml(): string {
+export function getDashboardHtml(): string {
   return `<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -1314,4 +1314,6 @@ async function boot() {
   });
 }
 
-boot();
+if (process.argv[1] && process.argv[1].endsWith('server.ts')) {
+  boot();
+}
