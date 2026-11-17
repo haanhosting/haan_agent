@@ -4,6 +4,7 @@ import path from 'path';
 export interface Palette {
   id: string;
   name: string;
+  bg?: string;
   bg1: string;
   bg2: string;
   ink: string;
@@ -11,6 +12,7 @@ export interface Palette {
   accent: string;
   accent2: string;
   card: string;
+  cardInk?: string;
   cardBorder: string;
   isBrandAccent: boolean;
 }
@@ -50,49 +52,50 @@ export function getContrastRatio(hex1: string, hex2: string): number {
 }
 
 /**
- * Generates a dynamic HSL-based palette seeded by an integer, ensuring >= 7:1 contrast for text.
+ * Generates a flat solid HSL-based palette seeded by an integer, ensuring >= 7:1 contrast.
  */
 export function generatePalette(seed: number): Palette {
   const hue = Math.abs(seed) % 360;
-  const secondaryHue = (hue + 120 + ((seed >> 2) % 60)) % 360;
-  
-  // Dark theme background
-  const bg1 = `hsl(${hue}, 45%, 7%)`;
-  const bg2 = `hsl(${(hue + 20) % 360}, 50%, 4%)`;
-  const ink = '#ffffff';
-  const muted = `hsl(${hue}, 60%, 75%)`;
-  const accent = `hsl(${hue}, 85%, 55%)`;
-  const accent2 = `hsl(${secondaryHue}, 90%, 55%)`;
-  const card = `hsla(${hue}, 40%, 10%, 0.8)`;
-  const cardBorder = `hsla(${hue}, 70%, 50%, 0.25)`;
+  const bg = `hsl(${hue}, 55%, 18%)`;
+  const ink = `hsl(${hue}, 80%, 96%)`;
+  const muted = `hsl(${hue}, 65%, 80%)`;
+  const accent = `hsl(${hue}, 70%, 62%)`;
+  const card = `hsl(${hue}, 50%, 24%)`;
+  const cardInk = `hsl(${hue}, 80%, 96%)`;
 
   return {
     id: `dyn-${seed}`,
-    name: `Dynamic Aurora ${hue}°`,
-    bg1,
-    bg2,
+    name: `Dynamic Flat ${hue}°`,
+    bg,
+    bg1: bg,
+    bg2: bg,
     ink,
     muted,
     accent,
-    accent2,
+    accent2: muted,
     card,
-    cardBorder,
+    cardInk,
+    cardBorder: accent,
     isBrandAccent: false
   };
 }
 
 /**
- * Formats palette into inline CSS custom properties.
+ * Formats palette into inline CSS custom properties matching STYLE_REFERENCE.md.
  */
 export function formatCssVariables(palette: Palette): string {
+  const bg = palette.bg || palette.bg1;
+  const cardInk = palette.cardInk || palette.ink;
   return [
-    `--bg1: ${palette.bg1};`,
-    `--bg2: ${palette.bg2};`,
+    `--bg: ${bg};`,
+    `--bg1: ${bg};`,
+    `--bg2: ${bg};`,
     `--ink: ${palette.ink};`,
     `--muted: ${palette.muted};`,
     `--accent: ${palette.accent};`,
-    `--accent2: ${palette.accent2};`,
+    `--accent2: ${palette.accent2 || palette.muted};`,
     `--card: ${palette.card};`,
-    `--card-border: ${palette.cardBorder};`
+    `--cardInk: ${cardInk};`,
+    `--card-border: ${palette.cardBorder || palette.accent};`
   ].join(' ');
 }

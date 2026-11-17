@@ -2,165 +2,115 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>T05 - Offer Poster</title>
+  <title>T05 – Offer Poster</title>
   <link rel="stylesheet" href="../_shared/base.css">
   <style>
-    .t05-container {
+    .post.t05 {
+      width: 1080px;
+      height: 1350px;
+      padding: 100px;
+      box-sizing: border-box;
       display: flex;
       flex-direction: column;
-      gap: 30px;
-      flex: 1;
-      justify-content: center;
-      margin: 20px 0;
-    }
-
-    .t05-headline-wrap {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .t05-headline {
-      font-family: var(--font-display);
-      font-size: 60px;
-      font-weight: 900;
-      line-height: 1.18;
-      letter-spacing: -0.02em;
-      color: #ffffff;
-    }
-
-    .t05-offer-card {
-      background: var(--card);
-      border: 2px solid var(--accent);
-      border-radius: var(--radius);
-      padding: 44px 50px;
-      backdrop-filter: blur(20px);
-      box-shadow: 0 24px 60px rgba(37, 99, 235, 0.25);
-      display: flex;
-      flex-direction: column;
-      gap: 26px;
-    }
-
-    .t05-price-row {
-      display: flex;
-      align-items: baseline;
       justify-content: space-between;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-      padding-bottom: 22px;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, sans-serif;
     }
-
-    .t05-plan-title {
-      font-family: var(--font-display);
-      font-size: 36px;
-      font-weight: 800;
-      color: #ffffff;
+    .t05 .label {
+      font-size: 34px;
+      color: var(--muted);
     }
-
-    .t05-price {
-      font-family: var(--font-display);
-      font-size: 54px;
-      font-weight: 900;
+    .t05 .mid {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+    .t05 h1 {
+      font-family: Poppins, sans-serif;
+      font-weight: 600;
+      font-size: 76px;
+      line-height: 1.12;
+      margin: 0;
+      color: var(--ink);
+    }
+    .t05 .offer-box {
+      background: var(--card);
+      color: var(--cardInk);
+      border-radius: 24px;
+      padding: 44px 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .t05 .price-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding-bottom: 24px;
+      border-bottom: 3px solid var(--accent);
+    }
+    .t05 .plan-name {
+      font-family: Poppins, sans-serif;
+      font-weight: 600;
+      font-size: 44px;
+      color: var(--cardInk);
+    }
+    .t05 .price {
+      font-family: Poppins, sans-serif;
+      font-weight: 600;
+      font-size: 56px;
       color: var(--accent);
     }
-
-    .t05-specs-grid {
+    .t05 .specs {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 16px;
+      gap: 18px 28px;
+      font-size: 36px;
+      color: var(--cardInk);
     }
-
-    .t05-spec-pill {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 12px;
-      padding: 14px 18px;
-      font-size: 22px;
+    .t05 .specs div span {
+      color: var(--accent);
       font-weight: 600;
-      color: #f8fafc;
+      margin-right: 10px;
     }
-
-    .t05-spec-pill .check {
-      color: var(--accent2);
-      font-weight: 900;
+    .t05 .cta-pill {
+      display: inline-block;
+      align-self: flex-start;
+      background: var(--accent);
+      color: #FFFFFF;
+      border-radius: 999px;
+      padding: 20px 44px;
+      font-family: Poppins, sans-serif;
+      font-weight: 600;
+      font-size: 36px;
     }
-
-    .t05-cta-wrap {
-      display: flex;
-      justify-content: center;
-      margin-top: 10px;
-    }
-
-    /* Variant 1: Single column specs */
-    .variant-1 .t05-specs-grid {
-      grid-template-columns: 1fr;
-    }
-
-    /* Variant 2: Solid accent border glow */
-    .variant-2 .t05-offer-card {
-      background: linear-gradient(145deg, rgba(37, 99, 235, 0.2) 0%, rgba(15, 23, 42, 0.9) 100%);
-      box-shadow: 0 0 50px rgba(37, 99, 235, 0.35);
+    .t05 .footer {
+      font-size: 34px;
+      color: var(--muted);
     }
   </style>
 </head>
 <body>
-  <div class="canvas {{variantClass}}" style="{{cssVariables}}">
+  <div class="canvas post t05 {{variantClass}}" style="{{cssVariables}}">
     <div class="decoration-layer" style="{{decorationStyle}}"></div>
-    <div class="content-layer">
-      <!-- Header -->
-      <div class="brand-header">
-        <div class="brand-badge">
-          <span class="brand-badge-dot"></span>
-          <span>{{badge}}</span>
+    <div class="label">{{label}}</div>
+    <div class="mid">
+      <h1 class="auto-shrink">{{headline}}</h1>
+      <div class="offer-box">
+        <div class="price-row">
+          <div class="plan-name">{{planName}}</div>
+          <div class="price">{{price}}</div>
         </div>
-        <div class="pill-tag">{{category}}</div>
-      </div>
-
-      <!-- Main Body -->
-      <div class="t05-container">
-        <div class="t05-headline-wrap">
-          <div class="t05-headline auto-shrink">{{headline}}</div>
+        <div class="specs">
+          {{#each specs}}
+          <div><span>✓</span>{{this}}</div>
+          {{/each}}
         </div>
-
-        <div class="t05-offer-card">
-          <div class="t05-price-row">
-            <div class="t05-plan-title">{{planName}}</div>
-            <div class="t05-price">{{price}}</div>
-          </div>
-
-          <div class="t05-specs-grid">
-            {{#each specs}}
-            <div class="t05-spec-pill">
-              <span class="check">✓</span>
-              <span>{{this}}</span>
-            </div>
-            {{/each}}
-          </div>
-
-          <div class="t05-cta-wrap">
-            <div class="cta-button">
-              <span>{{ctaButtonText}}</span>
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Footer -->
-      <div class="brand-footer">
-        <div class="brand-logo-wrap">
-          <div class="brand-logo-icon">
-            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm0 4h16V6H4v2zm0 4h16v-2H4v2zm0 4h16v-2H4v2z"/></svg>
-          </div>
-          <div class="brand-logo-text">HAAN<span>HOSTING</span></div>
-        </div>
-        <div class="brand-footer-cta">
-          <span class="dot">●</span> {{cta}}
-        </div>
+        {{#if ctaButtonText}}<div class="cta-pill">{{ctaButtonText}}</div>{{/if}}
       </div>
     </div>
+    <div class="footer">Haan Hosting · {{cta}}</div>
   </div>
 </body>
 </html>

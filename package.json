@@ -5,6 +5,8 @@
   "main": "src/cli.ts",
   "type": "module",
   "scripts": {
+    "start": "tsx src/server.ts",
+    "dev": "tsx src/server.ts",
     "build": "tsc",
     "cli": "tsx src/cli.ts",
     "generate": "tsx src/cli.ts generate",

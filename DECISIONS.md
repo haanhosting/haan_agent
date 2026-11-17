@@ -15,9 +15,13 @@ This file tracks all key decisions made during development, as required by the p
   3. Offline content bank (`content/bank/*.json` with >= 60 pre-written posts) as the deterministic safety net.
 - **Rationale:** Free tiers cost $0. Gemini offers generous RPM/TPM limits on AI Studio. If an API call fails or rate-limits after retries, the fallback chain ensures zero dropped days.
 
-## 3. Template Engine & Rendering
-- **Decision:** Pure HTML5/CSS with CSS variables (`--bg1`, `--bg2`, `--ink`, `--accent`, etc.), rendered using Playwright Chromium headless at exact 1080×1350 viewport, converted to high-quality JPEG (quality 88) via `sharp`.
-- **Rationale:** Chromium rendering provides perfect CSS grid/flexbox, custom font rendering, SVG filters, text-overflow detection and auto font-scaling. Sharp produces optimized JPEGs compliant with Instagram's 4:5 ratio and 8MB limit.
+## 3. Template Engine & Rendering (Aligned with `STYLE_REFERENCE.md`)
+- **Decision:** All 12 templates (`T01`–`T12`) are built strictly from the owner-approved visual design in `STYLE_REFERENCE.md`:
+  - Flat, high-contrast solid colors (`deep-violet`, `mint-fresh`, `coral-pop`, `navy-sky` plus 8 flat dark/light palettes in `templates/_shared/palettes.json`) — zero gradients, zero photos, zero drop-shadow clutter.
+  - 100px padding on all sides, 24px rounded inner boxes, 999px pills, top-left label (34px), bottom-left brand footer (34px).
+  - Bundled offline fonts (`Poppins` 400/500/600 for headlines, `Inter` 400/500/600 for body) inlined as base64 in `templates/_shared/fonts/fonts-inlined.css`.
+  - Rendered using Playwright Chromium headless at exact 1080×1350 viewport with auto text-fit (floor 64px headlines, 34px body) and exported to JPEG (quality 88) via `sharp`.
+- **Rationale:** Matches the exact mockup approved by the owner while guaranteeing deterministic, zero-overflow mobile legibility.
 
 ## 4. State Management
 - **Decision:** File-based state in `state/queue.json`, `state/history.json`, and `state/token.json`, committed directly to the git repository by GitHub Actions.

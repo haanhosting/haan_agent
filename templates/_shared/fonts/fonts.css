@@ -8,58 +8,37 @@
 @font-face {
   font-family: 'Inter';
   font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('./fonts/inter-500.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
   font-weight: 600;
   font-display: swap;
   src: url('./fonts/inter-600.woff2') format('woff2');
 }
 @font-face {
-  font-family: 'Inter';
+  font-family: 'Poppins';
   font-style: normal;
-  font-weight: 700;
+  font-weight: 400;
   font-display: swap;
-  src: url('./fonts/inter-700.woff2') format('woff2');
+  src: url('./fonts/poppins-400.woff2') format('woff2');
 }
 @font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 800;
-  font-display: swap;
-  src: url('./fonts/inter-800.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 900;
-  font-display: swap;
-  src: url('./fonts/inter-900.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Outfit';
+  font-family: 'Poppins';
   font-style: normal;
   font-weight: 500;
   font-display: swap;
-  src: url('./fonts/outfit-500.woff2') format('woff2');
+  src: url('./fonts/poppins-500.woff2') format('woff2');
 }
 @font-face {
-  font-family: 'Outfit';
+  font-family: 'Poppins';
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
   font-display: swap;
-  src: url('./fonts/outfit-700.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Outfit';
-  font-style: normal;
-  font-weight: 800;
-  font-display: swap;
-  src: url('./fonts/outfit-800.woff2') format('woff2');
-}
-@font-face {
-  font-family: 'Outfit';
-  font-style: normal;
-  font-weight: 900;
-  font-display: swap;
-  src: url('./fonts/outfit-900.woff2') format('woff2');
+  src: url('./fonts/poppins-600.woff2') format('woff2');
 }
 @font-face {
   font-family: 'Space Grotesk';
@@ -71,7 +50,7 @@
 @font-face {
   font-family: 'Space Grotesk';
   font-style: normal;
-  font-weight: 700;
+  font-weight: 600;
   font-display: swap;
-  src: url('./fonts/space-grotesk-700.woff2') format('woff2');
+  src: url('./fonts/space-grotesk-600.woff2') format('woff2');
 }

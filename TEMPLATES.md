@@ -1,5 +1,8 @@
 # TEMPLATES.md – pre-built templates + uniqueness engine
 
+> **Visual style is defined in `STYLE_REFERENCE.md` (owner-approved).** If anything below conflicts with it
+> (e.g. gradients, decorations), `STYLE_REFERENCE.md` wins: flat solid colors, bold type, no photos.
+
 ## 1. Technical format
 - Canvas: **1080 × 1350 px** (4:5). Safe margin 80 px on all sides. Export JPEG q≈88 via Playwright screenshot → `sharp`.
 - Each template = a folder: `template.html` (with `{{placeholders}}`), `meta.json`, optional SVG parts. All templates import `_shared/base.css`.

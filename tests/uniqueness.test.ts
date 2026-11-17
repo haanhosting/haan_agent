@@ -127,7 +127,9 @@ describe('Uniqueness Engine - Design Selection Rules', () => {
       todayDesigns.push(pick);
     }
 
-    const brandAccents = todayDesigns.filter(d => ['ocean-blue', 'electric-indigo'].includes(d.palette));
+    const brandAccents = todayDesigns.filter(d =>
+      ['ocean-blue', 'electric-indigo', 'navy-sky', 'slate-cyan'].includes(d.palette)
+    );
     expect(brandAccents.length).toBeGreaterThanOrEqual(2);
   });
 

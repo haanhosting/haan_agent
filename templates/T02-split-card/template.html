@@ -2,124 +2,79 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>T02 - Split Card</title>
+  <title>T02 – Split Card</title>
   <link rel="stylesheet" href="../_shared/base.css">
   <style>
-    .t02-split-container {
+    .post.t02 {
+      width: 1080px;
+      height: 1350px;
+      padding: 100px;
+      box-sizing: border-box;
       display: flex;
       flex-direction: column;
-      gap: 36px;
-      flex: 1;
-      justify-content: center;
-      margin: 30px 0;
+      justify-content: space-between;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, sans-serif;
     }
-
-    .t02-top-hero {
+    .t02 .label {
+      font-size: 34px;
+      color: var(--muted);
+    }
+    .t02 .mid {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 44px;
     }
-
-    .t02-headline {
-      font-family: var(--font-display);
-      font-size: 66px;
-      font-weight: 900;
-      line-height: 1.18;
-      letter-spacing: -0.02em;
-      color: #ffffff;
+    .t02 h1 {
+      font-family: Poppins, sans-serif;
+      font-weight: 600;
+      font-size: 84px;
+      line-height: 1.12;
+      margin: 0;
+      color: var(--ink);
     }
-
-    .t02-card {
+    .t02 .card-box {
       background: var(--card);
-      border: 1px solid var(--card-border);
-      border-radius: var(--radius);
-      padding: 48px;
-      backdrop-filter: blur(20px);
-      box-shadow: 0 24px 50px rgba(0, 0, 0, 0.4);
+      color: var(--cardInk);
+      border-radius: 24px;
+      padding: 48px 52px;
       display: flex;
       flex-direction: column;
       gap: 24px;
     }
-
-    .t02-card-badge {
-      font-family: var(--font-code);
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--accent2);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
+    .t02 .card-box p {
+      font-size: 40px;
+      line-height: 1.35;
+      color: var(--cardInk);
+      margin: 0;
     }
-
-    .t02-body-text {
-      font-size: 32px;
-      font-weight: 500;
-      line-height: 1.5;
+    .t02 .highlight {
+      font-family: Poppins, sans-serif;
+      font-weight: 600;
+      font-size: 36px;
+      color: var(--accent);
+      padding-top: 20px;
+      border-top: 3px solid var(--accent);
+    }
+    .t02 .footer {
+      font-size: 34px;
       color: var(--muted);
-    }
-
-    .t02-highlight-box {
-      background: rgba(37, 99, 235, 0.12);
-      border-left: 4px solid var(--accent);
-      padding: 16px 24px;
-      border-radius: 0 12px 12px 0;
-      font-size: 24px;
-      font-weight: 700;
-      color: #ffffff;
-    }
-
-    /* Variant 1: Inverted Order (Card on top, Hero summary below) */
-    .variant-1 .t02-split-container {
-      flex-direction: column-reverse;
-    }
-
-    /* Variant 2: Accent Border Glow */
-    .variant-2 .t02-card {
-      border: 2px solid var(--accent);
-      box-shadow: 0 0 35px rgba(37, 99, 235, 0.25);
     }
   </style>
 </head>
 <body>
-  <div class="canvas {{variantClass}}" style="{{cssVariables}}">
+  <div class="canvas post t02 {{variantClass}}" style="{{cssVariables}}">
     <div class="decoration-layer" style="{{decorationStyle}}"></div>
-    <div class="content-layer">
-      <!-- Header -->
-      <div class="brand-header">
-        <div class="brand-badge">
-          <span class="brand-badge-dot"></span>
-          <span>{{badge}}</span>
-        </div>
-        <div class="pill-tag">{{category}}</div>
-      </div>
-
-      <!-- Split Layout -->
-      <div class="t02-split-container">
-        <div class="t02-top-hero">
-          <h1 class="t02-headline auto-shrink">{{headline}}</h1>
-        </div>
-
-        <div class="t02-card">
-          <div class="t02-card-badge">Key Takeaway</div>
-          <div class="t02-body-text auto-shrink">{{body}}</div>
-          {{#if highlight}}
-          <div class="t02-highlight-box">{{highlight}}</div>
-          {{/if}}
-        </div>
-      </div>
-
-      <!-- Footer -->
-      <div class="brand-footer">
-        <div class="brand-logo-wrap">
-          <div class="brand-logo-icon">
-            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm0 4h16V6H4v2zm0 4h16v-2H4v2zm0 4h16v-2H4v2z"/></svg>
-          </div>
-          <div class="brand-logo-text">HAAN<span>HOSTING</span></div>
-        </div>
-        <div class="brand-footer-cta">
-          <span class="dot">●</span> {{cta}}
-        </div>
+    <div class="label">{{label}}</div>
+    <div class="mid">
+      <h1 class="auto-shrink">{{headline}}</h1>
+      <div class="card-box">
+        <p class="auto-shrink">{{subline}}</p>
+        {{#if highlight}}<div class="highlight">{{highlight}}</div>{{/if}}
       </div>
     </div>
+    <div class="footer">Haan Hosting · {{cta}}</div>
   </div>
 </body>
 </html>

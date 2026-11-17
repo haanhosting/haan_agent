@@ -26,7 +26,6 @@ function getBundledCss(): string {
     }
   }
 
-  // Replace @import in base.css with the fonts definition
   baseCss = baseCss.replace(/@import\s+url\(['\"][^'\"]+fonts\.css['\"]\);?/, fontsCss);
   cachedBundledCss = baseCss;
   return cachedBundledCss;
@@ -62,7 +61,7 @@ export interface RenderOptions {
 export async function renderSlide(options: RenderOptions): Promise<string> {
   const {
     templateId,
-    paletteId = 'ocean-blue',
+    paletteId = 'deep-violet',
     seed = 1000,
     decoration = 'none',
     layoutVariant = 0,
@@ -79,7 +78,7 @@ export async function renderSlide(options: RenderOptions): Promise<string> {
 
   let rawHtml = fs.readFileSync(templateHtmlPath, 'utf8');
 
-  // Inline the bundled base.css and fonts
+  // Inline bundled base.css and fonts
   const bundledCss = getBundledCss();
   rawHtml = rawHtml.replace(
     /<link\s+rel=["']stylesheet["']\s+href=["'][^"']*base\.css["']\s*\/?>/i,
@@ -94,7 +93,7 @@ export async function renderSlide(options: RenderOptions): Promise<string> {
     palette = getPaletteById(paletteId);
   }
 
-  // Resolve decoration
+  // Resolve optional subtle flat decoration
   let decorationStyle = '';
   if (decoration && decoration !== 'none') {
     const shapePath = path.resolve(process.cwd(), 'templates/_shared/shapes', `${decoration}.svg`);
@@ -104,14 +103,23 @@ export async function renderSlide(options: RenderOptions): Promise<string> {
     }
   }
 
-  // Prepare template variables
+  // Normalize options array for T10 poll pills
+  const pillOptions: string[] = Array.isArray(data.options)
+    ? data.options.map((opt: any) => (typeof opt === 'string' ? opt : opt.text || `${opt.letter}. ${opt.text}`))
+    : [];
+
+  // Prepare template variables supporting both STYLE_REFERENCE.md and schema keys
   const templateVars: Record<string, any> = {
     ...data,
     variantClass: `variant-${layoutVariant}`,
     cssVariables: formatCssVariables(palette),
     decorationStyle,
+    label: data.label || data.badge || data.category || 'Haan Hosting',
+    subline: data.subline || data.body || '',
+    question: data.question || data.headline || '',
+    pillOptions,
     cta: data.cta || 'haanhosting.store',
-    badge: data.badge || 'Haan Hosting'
+    badge: data.badge || data.label || 'Haan Hosting'
   };
 
   const compiledHtml = compileTemplate(rawHtml, templateVars);
@@ -127,19 +135,13 @@ export async function renderSlide(options: RenderOptions): Promise<string> {
       waitUntil: 'load'
     });
 
-    // Wait for bundled fonts to be fully decoded
     await page.evaluate(() => document.fonts.ready);
-
-    // Apply auto text-fit
     await page.evaluate(TEXT_FIT_SCRIPT);
+    await page.waitForTimeout(40);
 
-    // Give a brief moment for layout to settle
-    await page.waitForTimeout(50);
-
-    // Screenshot the canvas element
-    const canvasElement = await page.$('.canvas');
+    const canvasElement = await page.$('.canvas, .post');
     if (!canvasElement) {
-      throw new Error(`Could not find .canvas element in template ${templateId}`);
+      throw new Error(`Could not find .canvas or .post element in template ${templateId}`);
     }
 
     const pngBuffer = await canvasElement.screenshot({
@@ -147,13 +149,11 @@ export async function renderSlide(options: RenderOptions): Promise<string> {
       omitBackground: false
     });
 
-    // Ensure output directory exists
     const outDir = path.dirname(outputPath);
     if (!fs.existsSync(outDir)) {
       fs.mkdirSync(outDir, { recursive: true });
     }
 
-    // Convert to Instagram-compliant JPEG via sharp (1080x1350, quality 88)
     await sharp(pngBuffer)
       .resize(1080, 1350, { fit: 'cover' })
       .jpeg({
@@ -162,7 +162,6 @@ export async function renderSlide(options: RenderOptions): Promise<string> {
       })
       .toFile(outputPath);
 
-    // Verify output file size < 8MB
     const stats = fs.statSync(outputPath);
     if (stats.size > 8 * 1024 * 1024) {
       throw new Error(`Rendered image exceeds 8MB limit: ${stats.size} bytes`);

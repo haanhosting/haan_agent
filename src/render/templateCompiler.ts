@@ -20,15 +20,19 @@ export function compileTemplate(html: string, data: Record<string, any>): string
     }).join('');
   });
 
-  // Process #if blocks
-  const ifRegex = /{{#if\s+([a-zA-Z0-9_]+)}}([\s\S]*?){{\/if}}/g;
-  result = result.replace(ifRegex, (_, varName, innerContent) => {
-    const val = data[varName];
-    if (val && (!Array.isArray(val) || val.length > 0)) {
-      return innerContent;
-    }
-    return '';
-  });
+  // Process #if blocks iteratively (innermost first to support nesting)
+  const innerIfRegex = /{{#if\s+([a-zA-Z0-9_]+)}}((?:(?!{{#if)[\s\S])*?){{\/if}}/g;
+  let prev = '';
+  while (prev !== result && innerIfRegex.test(result)) {
+    prev = result;
+    result = result.replace(innerIfRegex, (_, varName, innerContent) => {
+      const val = data[varName];
+      if (val && (!Array.isArray(val) || val.length > 0)) {
+        return innerContent;
+      }
+      return '';
+    });
+  }
 
   // Process simple variables {{key}}
   const varRegex = /{{([a-zA-Z0-9_]+)}}/g;

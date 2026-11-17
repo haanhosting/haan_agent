@@ -2,138 +2,81 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>T07 - Myth vs Fact</title>
+  <title>T07 – Myth vs fact</title>
   <link rel="stylesheet" href="../_shared/base.css">
   <style>
-    .t07-container {
+    .post.t07 {
+      width: 1080px;
+      height: 1350px;
+      padding: 100px;
+      box-sizing: border-box;
       display: flex;
       flex-direction: column;
-      gap: 28px;
-      flex: 1;
-      justify-content: center;
-      margin: 20px 0;
+      justify-content: space-between;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, sans-serif;
     }
-
-    .t07-headline {
-      font-family: var(--font-display);
-      font-size: 58px;
-      font-weight: 900;
-      line-height: 1.18;
-      letter-spacing: -0.02em;
-      color: #ffffff;
-      text-align: center;
-    }
-
-    .t07-panels {
-      display: flex;
-      flex-direction: column;
-      gap: 22px;
-    }
-
-    .t07-panel {
-      border-radius: var(--radius);
-      padding: 38px 44px;
-      backdrop-filter: blur(20px);
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
-    }
-
-    .t07-myth {
-      background: rgba(244, 63, 94, 0.1);
-      border: 1.5px solid rgba(244, 63, 94, 0.35);
-    }
-
-    .t07-fact {
-      background: rgba(0, 187, 127, 0.12);
-      border: 2px solid var(--accent2);
-      box-shadow: 0 0 40px rgba(0, 187, 127, 0.15);
-    }
-
-    .t07-label {
-      font-family: var(--font-code);
-      font-size: 22px;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .t07-myth .t07-label {
-      color: #fb7185;
-    }
-
-    .t07-fact .t07-label {
-      color: var(--accent2);
-    }
-
-    .t07-text {
-      font-size: 30px;
-      font-weight: 600;
-      line-height: 1.45;
-      color: #ffffff;
-    }
-
-    /* Variant 1: Inverted / Fact Dominant */
-    .variant-1 .t07-fact {
-      padding: 48px 44px;
-    }
-    .variant-1 .t07-fact .t07-text {
+    .t07 .label {
       font-size: 34px;
+      color: var(--muted);
     }
-
-    /* Variant 2: Left-aligned with subtle contrast */
-    .variant-2 .t07-headline {
-      text-align: left;
+    .t07 .mid {
+      display: grid;
+      gap: 28px;
+    }
+    .t07 .box {
+      border-radius: 24px;
+      padding: 48px 52px;
+    }
+    .t07 .box small {
+      display: block;
+      font-size: 34px;
+      font-weight: 500;
+      margin-bottom: 12px;
+    }
+    .t07 .box b {
+      display: block;
+      font-family: Poppins, sans-serif;
+      font-weight: 600;
+      font-size: 64px;
+      line-height: 1.15;
+    }
+    .t07 .myth {
+      background: #F5C4B3;
+      color: #4A1B0C;
+    }
+    .t07 .myth small {
+      color: #712B13;
+    }
+    .t07 .fact {
+      background: #C0DD97;
+      color: #173404;
+    }
+    .t07 .fact small {
+      color: #27500A;
+    }
+    .t07 .footer {
+      font-size: 34px;
+      color: var(--muted);
     }
   </style>
 </head>
 <body>
-  <div class="canvas {{variantClass}}" style="{{cssVariables}}">
+  <div class="canvas post t07 {{variantClass}}" style="{{cssVariables}}">
     <div class="decoration-layer" style="{{decorationStyle}}"></div>
-    <div class="content-layer">
-      <!-- Header -->
-      <div class="brand-header">
-        <div class="brand-badge">
-          <span class="brand-badge-dot"></span>
-          <span>{{badge}}</span>
-        </div>
-        <div class="pill-tag">{{category}}</div>
+    <div class="label">{{label}}</div>
+    <div class="mid">
+      <div class="box myth">
+        <small>Myth</small>
+        <b class="auto-shrink">{{myth}}</b>
       </div>
-
-      <!-- Main Body -->
-      <div class="t07-container">
-        <div class="t07-headline auto-shrink">{{headline}}</div>
-
-        <div class="t07-panels">
-          <div class="t07-panel t07-myth">
-            <div class="t07-label">❌ MYTH</div>
-            <div class="t07-text auto-shrink">{{myth}}</div>
-          </div>
-
-          <div class="t07-panel t07-fact">
-            <div class="t07-label">✅ THE REALITY</div>
-            <div class="t07-text auto-shrink">{{fact}}</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Footer -->
-      <div class="brand-footer">
-        <div class="brand-logo-wrap">
-          <div class="brand-logo-icon">
-            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm0 4h16V6H4v2zm0 4h16v-2H4v2zm0 4h16v-2H4v2z"/></svg>
-          </div>
-          <div class="brand-logo-text">HAAN<span>HOSTING</span></div>
-        </div>
-        <div class="brand-footer-cta">
-          <span class="dot">●</span> {{cta}}
-        </div>
+      <div class="box fact">
+        <small>Fact</small>
+        <b class="auto-shrink">{{fact}}</b>
       </div>
     </div>
+    <div class="footer">Haan Hosting · {{cta}}</div>
   </div>
 </body>
 </html>

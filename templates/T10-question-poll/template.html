@@ -2,138 +2,58 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>T10 - Question Poll</title>
+  <title>T10 – Poll / question</title>
   <link rel="stylesheet" href="../_shared/base.css">
   <style>
-    .t10-container {
+    .post.t10 {
+      width: 1080px;
+      height: 1350px;
+      padding: 100px;
+      box-sizing: border-box;
       display: flex;
       flex-direction: column;
-      gap: 32px;
-      flex: 1;
-      justify-content: center;
-      margin: 20px 0;
+      justify-content: space-between;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Inter, sans-serif;
     }
-
-    .t10-question {
-      font-family: var(--font-display);
-      font-size: 60px;
-      font-weight: 900;
-      line-height: 1.18;
-      letter-spacing: -0.02em;
-      color: #ffffff;
-      text-align: center;
+    .t10 .label {
+      font-size: 34px;
+      color: var(--muted);
     }
-
-    .t10-options {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .t10-option {
-      background: var(--card);
-      border: 1px solid var(--card-border);
-      border-radius: 20px;
-      padding: 24px 30px;
-      display: flex;
-      align-items: center;
-      gap: 22px;
-      backdrop-filter: blur(16px);
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
-    }
-
-    .t10-letter {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      background: rgba(37, 99, 235, 0.2);
-      border: 2px solid var(--accent);
-      color: var(--accent);
-      font-family: var(--font-display);
-      font-size: 24px;
-      font-weight: 800;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .t10-option-text {
-      font-size: 28px;
+    .t10 h1 {
+      font-family: Poppins, sans-serif;
       font-weight: 600;
-      color: #ffffff;
+      font-size: 84px;
+      line-height: 1.12;
+      margin: 0 0 56px;
+      color: var(--ink);
     }
-
-    .t10-prompt-box {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px dashed rgba(255, 255, 255, 0.2);
-      border-radius: 16px;
-      padding: 16px 24px;
-      font-size: 24px;
-      font-weight: 700;
-      color: var(--accent2);
+    .t10 .pill {
+      border: 3px solid var(--accent);
+      border-radius: 999px;
+      padding: 24px 40px;
+      font-size: 42px;
+      color: var(--cardInk, var(--muted));
+      margin-bottom: 22px;
     }
-
-    /* Variant 1: 2-column options */
-    .variant-1 .t10-options {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-    }
-
-    /* Variant 2: Left-aligned question */
-    .variant-2 .t10-question {
-      text-align: left;
+    .t10 .footer {
+      font-size: 34px;
+      color: var(--muted);
     }
   </style>
 </head>
 <body>
-  <div class="canvas {{variantClass}}" style="{{cssVariables}}">
+  <div class="canvas post t10 {{variantClass}}" style="{{cssVariables}}">
     <div class="decoration-layer" style="{{decorationStyle}}"></div>
-    <div class="content-layer">
-      <!-- Header -->
-      <div class="brand-header">
-        <div class="brand-badge">
-          <span class="brand-badge-dot"></span>
-          <span>{{badge}}</span>
-        </div>
-        <div class="pill-tag">{{category}}</div>
-      </div>
-
-      <!-- Main Body -->
-      <div class="t10-container">
-        <div class="t10-question auto-shrink">{{headline}}</div>
-
-        <div class="t10-options">
-          {{#each options}}
-          <div class="t10-option">
-            <div class="t10-letter">{{this.letter}}</div>
-            <div class="t10-option-text auto-shrink">{{this.text}}</div>
-          </div>
-          {{/each}}
-        </div>
-
-        <div class="t10-prompt-box">
-          <span>👇</span> <span>{{promptText}}</span>
-        </div>
-      </div>
-
-      <!-- Footer -->
-      <div class="brand-footer">
-        <div class="brand-logo-wrap">
-          <div class="brand-logo-icon">
-            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2zm0 4h16V6H4v2zm0 4h16v-2H4v2zm0 4h16v-2H4v2z"/></svg>
-          </div>
-          <div class="brand-logo-text">HAAN<span>HOSTING</span></div>
-        </div>
-        <div class="brand-footer-cta">
-          <span class="dot">●</span> {{cta}}
-        </div>
-      </div>
+    <div class="label">{{label}}</div>
+    <div class="mid">
+      <h1 class="auto-shrink">{{question}}</h1>
+      {{#each pillOptions}}
+      <div class="pill auto-shrink">{{this}}</div>
+      {{/each}}
     </div>
+    <div class="footer">{{cta}}</div>
   </div>
 </body>
 </html>
