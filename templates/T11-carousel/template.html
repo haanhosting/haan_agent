@@ -84,8 +84,8 @@
   <div class="canvas post t11 {{variantClass}}" style="{{cssVariables}}">
     <div class="decoration-layer" style="{{decorationStyle}}"></div>
     <div class="label">
-      <span>{{label}}</span>
-      {{#if slideIndex}}<span>{{slideIndex}} / {{totalSlides}}</span>{{/if}}
+      <span class="brand-top-pill">{{label}} {{#if slideIndex}}· {{slideIndex}}/{{totalSlides}}{{/if}}</span>
+      <div class="brand-top-logo"><img src="{{logoDataUri}}" alt="HAAN" /><span>HAAN HOSTING</span></div>
     </div>
     <div class="mid">
       <h1 class="auto-shrink">{{headline}}</h1>
@@ -100,8 +100,8 @@
       {{/if}}
     </div>
     <div class="footer">
-      <span>Haan Hosting · {{cta}}</span>
-      {{#if isCover}}<span class="swipe">Swipe →</span>{{/if}}
+      <div class="brand-footer-left"><img src="{{logoDataUri}}" alt="HAAN" /><div><div class="brand-footer-title">HAAN HOSTING</div><div class="brand-footer-sub">{{cta}}</div></div></div>
+      {{#if isCover}}<span class="brand-footer-cta">Swipe →</span>{{/if}}
     </div>
   </div>
 </body>

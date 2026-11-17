@@ -191,6 +191,86 @@ export const SAMPLE_POSTS: TemplateSample[] = [
       subline: 'Enterprise NVMe hardware, 99.9% SLA uptime, and real human support in Lahore.',
       cta: 'haanhosting.store'
     }
+  },
+  {
+    templateId: 'T13-cyber-hero-bg',
+    paletteId: 'ocean-blue',
+    decoration: 'none',
+    layoutVariant: 0,
+    data: {
+      label: 'Cloud Architecture',
+      headline: 'Dedicated NVMe Power With Zero CPU Throttling',
+      subline: 'Deploy isolated Linux & Windows instances on 10 Gbps enterprise racks in under 60 seconds.',
+      highlight: 'Instant Root & Admin Access · 99.9% Uptime SLA',
+      cta: 'haanhosting.store'
+    }
+  },
+  {
+    templateId: 'T14-datacenter-spotlight',
+    paletteId: 'navy-sky',
+    decoration: 'none',
+    layoutVariant: 0,
+    data: {
+      label: 'Global Infrastructure',
+      headline: 'Host Right Next to Your Customers & Brokers',
+      subline: 'Choose USA, UK London LD4, or Singapore data centers with 10 Gbps connectivity.',
+      cta: 'haanhosting.store'
+    }
+  },
+  {
+    templateId: 'T15-vs-comparison',
+    paletteId: 'electric-indigo',
+    decoration: 'none',
+    layoutVariant: 0,
+    data: {
+      label: 'Hosting Comparison',
+      headline: 'Why Growing Brands Leave Cheap Shared Hosting',
+      beforeText: 'Crowded CPUs, slow 5-second database queries, and random account suspensions.',
+      afterText: 'Dedicated NVMe Gen4 storage, guaranteed RAM, and 10 Gbps network speed from $11.99/mo.',
+      cta: 'haanhosting.store'
+    }
+  },
+  {
+    templateId: 'T16-bento-grid',
+    paletteId: 'deep-violet',
+    decoration: 'none',
+    layoutVariant: 0,
+    data: {
+      label: 'Enterprise Stack',
+      headline: '4 Reasons Developers Trust Haan Hosting',
+      bentoItems: [
+        '10 Gbps Dedicated Network Ports',
+        'Pure Gen4 NVMe SSD Arrays',
+        'USA, UK LD4 & Singapore Nodes',
+        '24/7 WhatsApp Support in Lahore'
+      ],
+      cta: 'haanhosting.store'
+    }
+  },
+  {
+    templateId: 'T17-forex-telemetry',
+    paletteId: 'forest-lime',
+    decoration: 'none',
+    layoutVariant: 0,
+    data: {
+      label: 'Forex RDP',
+      headline: 'Zero Slippage for Your MT4 & MT5 Trading Bots',
+      subline: 'Keep your Expert Advisors running 24/5 on dedicated Windows Server RDP in London LD4 & New York.',
+      cta: 'haanhosting.store'
+    }
+  },
+  {
+    templateId: 'T18-vip-promo-poster',
+    paletteId: 'ocean-blue',
+    decoration: 'none',
+    layoutVariant: 0,
+    data: {
+      label: 'Verified Offer',
+      headline: 'Launch Your High-Speed Website or RDP Today',
+      priceBadge: 'Web Hosting $3.99/mo · VPS $11.99/mo',
+      subline: 'Includes Free SSL, DDoS Protection, Instant Provisioning, and 24/7 WhatsApp Engineering Support.',
+      cta: 'haanhosting.store'
+    }
   }
 ];
 

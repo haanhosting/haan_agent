@@ -58,8 +58,12 @@ export function pickBankPost(params: {
     eligible = bank;
   }
 
-  const idx = Math.floor(Math.random() * eligible.length);
-  const chosen = eligible[idx];
+  // Prefer new hero/bg templates (T13-T18) when available in eligible pool
+  const heroEligible = eligible.filter(p => /^T1[3-8]/.test(p.template || ''));
+  const pool = heroEligible.length > 0 ? heroEligible : eligible;
+
+  const idx = Math.floor(Math.random() * pool.length);
+  const chosen = pool[idx];
   if (chosen?.id) {
     params.usedIds.add(chosen.id);
   }

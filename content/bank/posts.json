@@ -1,5 +1,175 @@
 [
   {
+    "id": "bank-101",
+    "pillar": "tips",
+    "format": "single",
+    "template": "T13-cyber-hero-bg",
+    "slides": [
+      {
+        "badge": "Cloud Architecture",
+        "category": "NVMe Speed",
+        "headline": "Dedicated NVMe Power With Zero CPU Throttling",
+        "body": "Stop sharing CPU cores with noisy neighbors. Deploy isolated Linux & Windows instances on 10 Gbps enterprise racks in under 60 seconds.",
+        "highlight": "Instant Root & Admin Access · 99.9% Uptime SLA",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Tired of noisy neighbors slowing down your database queries? ⚡\n\nOn HAAN NVMe Cloud VPS, your CPU cores, DDR4 RAM, and Gen4 NVMe storage are 100% isolated—giving your apps sub-100ms response times around the clock.\n\nCloud VPS plans start at $11.99/mo.\n\n👉 Deploy in 60 seconds at haanhosting.store (link in bio)!\n\n#HaanHosting #NVMeVPS #CloudHosting #LinuxServer #WebPerformance #PakistanTech #DevOps",
+    "hashtags": [
+      "#HaanHosting",
+      "#NVMeVPS",
+      "#CloudHosting",
+      "#LinuxServer",
+      "#WebPerformance",
+      "#PakistanTech",
+      "#DevOps",
+      "#ServerSpeed"
+    ],
+    "altText": "Cyber hero graphic with low-opacity server rack background and HAAN Hosting logo crest highlighting dedicated NVMe power."
+  },
+  {
+    "id": "bank-102",
+    "pillar": "educational",
+    "format": "single",
+    "template": "T14-datacenter-spotlight",
+    "slides": [
+      {
+        "badge": "Global Infrastructure",
+        "category": "Low Latency",
+        "headline": "Host Right Next to Your Customers & Brokers",
+        "body": "Deploy your workload in London LD4 for Forex brokers, New York for US SaaS traffic, or Singapore for ultra-low ping from Pakistan.",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Physical distance directly impacts your server latency. 🌍\n\n• 🇬🇧 London LD4: < 1ms ping to major Forex brokers\n• 🇺🇸 New York NY4: Ideal for North American eCommerce & SaaS\n• 🇸🇬 Singapore: Fastest routing for Pakistan, Gulf & Asia\n\nPick your ideal datacenter location at checkout from $11.99/mo.\n\n👉 Visit haanhosting.store!\n\n#HaanHosting #DataCenter #LowLatency #ForexVPS #CloudInfrastructure #SingaporeServer #LondonLD4",
+    "hashtags": [
+      "#HaanHosting",
+      "#DataCenter",
+      "#LowLatency",
+      "#ForexVPS",
+      "#CloudInfrastructure",
+      "#SingaporeServer",
+      "#LondonLD4",
+      "#TechPakistan"
+    ],
+    "altText": "Global datacenter spotlight card showing London LD4, New York NY4, and Singapore server ping metrics."
+  },
+  {
+    "id": "bank-103",
+    "pillar": "growth",
+    "format": "single",
+    "template": "T15-vs-comparison",
+    "slides": [
+      {
+        "badge": "Hosting Upgrade",
+        "category": "Comparison",
+        "headline": "Why Growing Brands Leave Cheap Shared Hosting",
+        "beforeText": "Crowded CPUs, slow 5-second checkout pages, and sudden traffic suspension.",
+        "afterText": "Dedicated NVMe Gen4 storage, guaranteed RAM, and 10 Gbps network speed from $11.99/mo.",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "When your marketing campaign takes off, cheap shared hosting becomes your biggest bottleneck. 📈\n\nUpgrade to dedicated NVMe Cloud VPS resources so every visitor gets instant page loads and smooth checkouts.\n\n👉 Compare plans at haanhosting.store (link in bio)!\n\n#HaanHosting #VPSvsShared #EcommerceGrowth #WebSpeed #CloudVPS #SmallBusinessPK #DigitalPakistan",
+    "hashtags": [
+      "#HaanHosting",
+      "#VPSvsShared",
+      "#EcommerceGrowth",
+      "#WebSpeed",
+      "#CloudVPS",
+      "#SmallBusinessPK",
+      "#DigitalPakistan",
+      "#OnlineStore"
+    ],
+    "altText": "Comparison graphic contrasting ordinary budget shared hosting against HAAN NVMe Cloud and RDP."
+  },
+  {
+    "id": "bank-104",
+    "pillar": "trust",
+    "format": "single",
+    "template": "T16-bento-grid",
+    "slides": [
+      {
+        "badge": "Enterprise Stack",
+        "category": "Why HAAN",
+        "headline": "4 Reasons Developers Trust Haan Hosting",
+        "bentoItems": [
+          "10 Gbps Dedicated Network Ports",
+          "Pure Gen4 NVMe SSD Arrays",
+          "USA, UK LD4 & Singapore Nodes",
+          "24/7 WhatsApp Support in Lahore"
+        ],
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Built by engineers, backed by real human support in Lahore. 🛡️\n\nWhether you are deploying a production Node.js API, WordPress store, or Windows RDP workstation, HAAN HOSTING delivers enterprise hardware without the enterprise markup.\n\n👉 Chat with us 24/7 or launch at haanhosting.store!\n\n#HaanHosting #PakistaniDevelopers #WebHostingPakistan #CloudVPS #WindowsRDP #TechSupport #LahoreTech",
+    "hashtags": [
+      "#HaanHosting",
+      "#PakistaniDevelopers",
+      "#WebHostingPakistan",
+      "#CloudVPS",
+      "#WindowsRDP",
+      "#TechSupport",
+      "#LahoreTech",
+      "#ServerHosting"
+    ],
+    "altText": "4-card Bento grid displaying 10 Gbps ports, Gen4 NVMe SSDs, global nodes, and 24/7 WhatsApp support."
+  },
+  {
+    "id": "bank-105",
+    "pillar": "offers",
+    "format": "single",
+    "template": "T17-forex-telemetry",
+    "slides": [
+      {
+        "badge": "Forex RDP",
+        "category": "Trading Tech",
+        "headline": "Zero Slippage for Your MT4 & MT5 Trading Bots",
+        "body": "Keep your Expert Advisors running 24/5 on dedicated Windows Server RDP in London LD4 & New York starting at $11.99/mo.",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Never miss a trade to load shedding or home Wi-Fi drops again. 📊\n\nOur Windows RDP servers in London LD4 and New York deliver sub-millisecond execution to top brokers with 99.9% uptime and full Administrator access.\n\nPlans start at $11.99/mo.\n\n👉 Deploy your Forex RDP at haanhosting.store!\n\n#HaanHosting #ForexRDP #MT4 #MT5 #AlgoTrading #ForexPakistan #TradingServer #LondonLD4",
+    "hashtags": [
+      "#HaanHosting",
+      "#ForexRDP",
+      "#MT4",
+      "#MT5",
+      "#AlgoTrading",
+      "#ForexPakistan",
+      "#TradingServer",
+      "#LondonLD4"
+    ],
+    "altText": "Forex telemetry poster with candlestick chart background showing <1ms London LD4 ping and 99.9% uptime."
+  },
+  {
+    "id": "bank-106",
+    "pillar": "offers",
+    "format": "single",
+    "template": "T18-vip-promo-poster",
+    "slides": [
+      {
+        "badge": "Verified Offer",
+        "category": "Special Pricing",
+        "headline": "Launch Your High-Speed Website or RDP Today",
+        "priceBadge": "Web Hosting $3.99/mo · VPS $11.99/mo",
+        "body": "Includes Free SSL, DDoS Protection, Instant Provisioning, and 24/7 WhatsApp Engineering Support.",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Enterprise performance at startup-friendly pricing. 🚀\n\n• Starter Web Hosting: $3.99/mo (Free SSL + cPanel)\n• Starter Cloud VPS / RDP: $11.99/mo (4 vCPU, 8 GB RAM, 50 GB NVMe)\n• Pro Cloud VPS / RDP: $14.99/mo (6 vCPU, 8 GB RAM, 80 GB NVMe)\n• Business Cloud VPS / RDP: $16.99/mo (6 vCPU, 16 GB RAM, 100 GB NVMe)\n\n👉 Order now at haanhosting.store (link in bio)!\n\n#HaanHosting #WebHostingDeal #VPSDeal #WindowsRDP #CloudHosting #StartupPakistan #AffordableHosting",
+    "hashtags": [
+      "#HaanHosting",
+      "#WebHostingDeal",
+      "#VPSDeal",
+      "#WindowsRDP",
+      "#CloudHosting",
+      "#StartupPakistan",
+      "#AffordableHosting",
+      "#NVMeHosting"
+    ],
+    "altText": "VIP promotional poster featuring the glowing HAAN Hosting crest and plans starting from $3.99/mo."
+  },
+  {
     "id": "bank-001",
     "pillar": "tips",
     "format": "single",

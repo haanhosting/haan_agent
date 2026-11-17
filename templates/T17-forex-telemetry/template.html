@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>T17 – Forex Telemetry</title>
+  <link rel="stylesheet" href="../_shared/base.css">
+  <style>
+    .post.t17 {
+      background: #030c18;
+      color: #ffffff;
+    }
+    .t17 .bg-image-layer {
+      opacity: 0.36 !important;
+    }
+    .t17 .mid {
+      display: flex;
+      flex-direction: column;
+      gap: 34px;
+    }
+    .t17 .live-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      align-self: flex-start;
+      background: rgba(16, 185, 129, 0.18);
+      border: 2px solid #10b981;
+      color: #34d399;
+      padding: 10px 26px;
+      border-radius: 999px;
+      font-family: Poppins, sans-serif;
+      font-weight: 600;
+      font-size: 28px;
+    }
+    .t17 h1 {
+      font-family: Poppins, sans-serif;
+      font-weight: 600;
+      font-size: 80px;
+      line-height: 1.1;
+      color: #ffffff;
+    }
+    .t17 .metrics-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 20px;
+    }
+    .t17 .metric-card {
+      background: rgba(15, 23, 42, 0.84);
+      border: 2px solid rgba(16, 185, 129, 0.45);
+      border-radius: 22px;
+      padding: 28px 24px;
+      text-align: center;
+    }
+    .t17 .metric-val {
+      font-family: Poppins, sans-serif;
+      font-weight: 600;
+      font-size: 46px;
+      color: #34d399;
+    }
+    .t17 .metric-lbl {
+      font-size: 26px;
+      color: #cbd5e1;
+      margin-top: 6px;
+    }
+    .t17 .desc-card {
+      background: rgba(15, 23, 42, 0.78);
+      border-radius: 22px;
+      padding: 32px 38px;
+      font-size: 36px;
+      line-height: 1.36;
+      color: #e2e8f0;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas post t17 {{variantClass}}" style="{{cssVariables}}">
+    <div class="bg-image-layer" style="{{bgImageStyle}}"></div>
+    <div class="bg-vignette-layer"></div>
+    <div class="label">{{label}}</div>
+    <div class="mid">
+      <div class="live-pill">● MT4 / MT5 ALGO EXECUTION READY</div>
+      <h1 class="auto-shrink">{{headline}}</h1>
+      <div class="metrics-row">
+        <div class="metric-card">
+          <div class="metric-val">&lt; 1ms</div>
+          <div class="metric-lbl">London LD4</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-val">99.9%</div>
+          <div class="metric-lbl">24/7 Uptime</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-val">10 Gbps</div>
+          <div class="metric-lbl">NVMe Uplink</div>
+        </div>
+      </div>
+      {{#if subline}}<div class="desc-card auto-shrink">{{subline}}</div>{{/if}}
+    </div>
+    <div class="footer">Haan Hosting · {{cta}}</div>
+  </div>
+</body>
+</html>

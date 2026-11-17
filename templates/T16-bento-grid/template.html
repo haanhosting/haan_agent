@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>T16 – Bento Grid</title>
+  <link rel="stylesheet" href="../_shared/base.css">
+  <style>
+    .post.t16 {
+      background: #060919;
+      color: #ffffff;
+    }
+    .t16 .bg-image-layer {
+      opacity: 0.32 !important;
+    }
+    .t16 .mid {
+      display: flex;
+      flex-direction: column;
+      gap: 34px;
+    }
+    .t16 h1 {
+      font-family: Poppins, sans-serif;
+      font-weight: 600;
+      font-size: 74px;
+      line-height: 1.12;
+      color: #ffffff;
+    }
+    .t16 .bento {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+    .t16 .bento-item {
+      background: rgba(15, 23, 42, 0.82);
+      border: 2px solid rgba(139, 92, 246, 0.45);
+      border-radius: 24px;
+      padding: 32px 34px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .t16 .bento-dot {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: rgba(56, 189, 248, 0.2);
+      border: 2px solid #38bdf8;
+      color: #38bdf8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: Poppins, sans-serif;
+      font-weight: 600;
+      font-size: 26px;
+    }
+    .t16 .bento-text {
+      font-family: Inter, sans-serif;
+      font-weight: 500;
+      font-size: 34px;
+      line-height: 1.3;
+      color: #f1f5f9;
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas post t16 {{variantClass}}" style="{{cssVariables}}">
+    <div class="bg-image-layer" style="{{bgImageStyle}}"></div>
+    <div class="bg-vignette-layer"></div>
+    <div class="label">{{label}}</div>
+    <div class="mid">
+      <h1 class="auto-shrink">{{headline}}</h1>
+      <div class="bento">
+        {{#each bentoItems}}
+        <div class="bento-item">
+          <div class="bento-dot">✦</div>
+          <div class="bento-text auto-shrink">{{this}}</div>
+        </div>
+        {{/each}}
+      </div>
+    </div>
+    <div class="footer">Haan Hosting · {{cta}}</div>
+  </div>
+</body>
+</html>

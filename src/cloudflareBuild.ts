@@ -29,9 +29,10 @@ async function buildCloudflarePages() {
   // 1. Write main Dashboard HTML
   fs.writeFileSync(path.join(dist, 'index.html'), getDashboardHtml(), 'utf8');
 
-  // 2. Copy static media & preview directories
+  // 2. Copy static media, preview & logo directories
   copyDirRecursive(path.join(root, 'media'), path.join(dist, 'media'));
   copyDirRecursive(path.join(root, 'preview'), path.join(dist, 'preview'));
+  copyDirRecursive(path.join(root, 'logo'), path.join(dist, 'logo'));
 
   // 3. Copy JSON state/config/content for Cloudflare Pages Functions
   copyDirRecursive(path.join(root, 'config'), path.join(dist, 'config'));

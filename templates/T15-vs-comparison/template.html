@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>T15 – VS Comparison</title>
+  <link rel="stylesheet" href="../_shared/base.css">
+  <style>
+    .post.t15 {
+      background: #060b19;
+      color: #ffffff;
+    }
+    .t15 .bg-image-layer {
+      opacity: 0.30 !important;
+    }
+    .t15 .mid {
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .t15 h1 {
+      font-family: Poppins, sans-serif;
+      font-weight: 600;
+      font-size: 72px;
+      line-height: 1.12;
+      color: #ffffff;
+    }
+    .t15 .vs-box {
+      border-radius: 24px;
+      padding: 34px 42px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .t15 .vs-bad {
+      background: rgba(127, 29, 29, 0.45);
+      border: 2px solid rgba(248, 113, 113, 0.55);
+    }
+    .t15 .vs-good {
+      background: rgba(6, 78, 59, 0.55);
+      border: 2px solid rgba(52, 211, 153, 0.65);
+    }
+    .t15 .vs-tag {
+      font-family: Poppins, sans-serif;
+      font-weight: 600;
+      font-size: 28px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .t15 .vs-bad .vs-tag { color: #fca5a5; }
+    .t15 .vs-good .vs-tag { color: #6ee7b7; }
+    .t15 .vs-text {
+      font-family: Poppins, sans-serif;
+      font-weight: 500;
+      font-size: 38px;
+      line-height: 1.28;
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas post t15 {{variantClass}}" style="{{cssVariables}}">
+    <div class="bg-image-layer" style="{{bgImageStyle}}"></div>
+    <div class="bg-vignette-layer"></div>
+    <div class="label">{{label}}</div>
+    <div class="mid">
+      <h1 class="auto-shrink">{{headline}}</h1>
+      <div class="vs-box vs-bad">
+        <div class="vs-tag">✕ Ordinary Budget Hosting</div>
+        <div class="vs-text auto-shrink">{{beforeText}}</div>
+      </div>
+      <div class="vs-box vs-good">
+        <div class="vs-tag">✓ HAAN NVMe Cloud &amp; RDP</div>
+        <div class="vs-text auto-shrink">{{afterText}}</div>
+      </div>
+    </div>
+    <div class="footer">Haan Hosting · {{cta}}</div>
+  </div>
+</body>
+</html>

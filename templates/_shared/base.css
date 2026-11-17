@@ -34,12 +34,12 @@ html, body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Master 1080x1350 Flat Canvas per STYLE_REFERENCE.md */
+/* Master 1080x1350 Canvas */
 .canvas, .post {
   position: relative;
   width: 1080px;
   height: 1350px;
-  padding: 100px;
+  padding: 84px 92px;
   box-sizing: border-box;
   overflow: hidden;
   background: var(--bg);
@@ -48,6 +48,32 @@ html, body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+}
+
+/* Low-opacity background image layer */
+.bg-image-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1080px;
+  height: 1350px;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.22;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.bg-vignette-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 1080px;
+  height: 1350px;
+  pointer-events: none;
+  z-index: 1;
+  background: radial-gradient(circle at 50% 45%, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.42) 100%);
 }
 
 /* Optional subtle flat decoration layer */
@@ -59,7 +85,7 @@ html, body {
   height: 1350px;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.06;
+  opacity: 0.08;
   background-position: center;
   background-size: cover;
   background-repeat: no-repeat;
@@ -70,24 +96,114 @@ html, body {
   z-index: 2;
 }
 
+/* Top Brand Header with Category Pill + Official HAAN Logo */
 .label {
   font-family: 'Inter', sans-serif;
-  font-size: 34px;
+  font-size: 30px;
+  font-weight: 600;
+  color: var(--ink);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.brand-top-pill {
+  background: rgba(255, 255, 255, 0.12);
+  border: 2px solid rgba(255, 255, 255, 0.22);
+  padding: 10px 26px;
+  border-radius: 999px;
+  font-family: 'Poppins', sans-serif;
+  font-size: 26px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+}
+
+.brand-top-logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  background: rgba(8, 15, 35, 0.65);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  padding: 8px 22px 8px 10px;
+  border-radius: 999px;
+}
+
+.brand-top-logo img {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+}
+
+.brand-top-logo span {
+  font-family: 'Poppins', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #ffffff;
+  letter-spacing: 0.04em;
+}
+
+/* Bottom Brand Footer with Logo + CTA Pill */
+.footer {
+  font-family: 'Inter', sans-serif;
+  font-size: 28px;
   font-weight: 500;
+  color: var(--ink);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding-top: 22px;
+  border-top: 2px solid rgba(255, 255, 255, 0.16);
+}
+
+.brand-footer-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.brand-footer-left img {
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.35);
+}
+
+.brand-footer-title {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 28px;
+  color: var(--ink);
+  line-height: 1.15;
+}
+
+.brand-footer-sub {
+  font-size: 22px;
   color: var(--muted);
 }
 
-.footer {
-  font-family: 'Inter', sans-serif;
-  font-size: 34px;
-  font-weight: 400;
-  color: var(--muted);
+.brand-footer-cta {
+  background: var(--accent);
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  padding: 12px 28px;
+  border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
 }
 
 h1 {
   font-family: 'Poppins', sans-serif;
   font-weight: 600;
-  font-size: 84px;
+  font-size: 82px;
   line-height: 1.12;
   margin: 0;
   color: var(--ink);
@@ -95,7 +211,7 @@ h1 {
 
 p {
   font-family: 'Inter', sans-serif;
-  font-size: 42px;
+  font-size: 40px;
   font-weight: 400;
   line-height: 1.35;
   color: var(--muted);

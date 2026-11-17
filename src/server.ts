@@ -175,6 +175,7 @@ export function getDashboardHtml(): string {
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>HAAN HOSTING · Instagram Auto-Poster Dashboard</title>
+  <link rel="icon" type="image/png" href="/logo/logo.png" />
   <style>
     :root {
       --bg: #070d1d;
@@ -214,16 +215,12 @@ export function getDashboardHtml(): string {
       gap: 14px;
     }
     .brand-icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 10px;
-      background: linear-gradient(135deg, #2563eb, #1d4ed8);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: 900;
-      font-size: 20px;
-      box-shadow: 0 6px 20px rgba(37, 99, 235, 0.35);
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 2px solid rgba(56, 189, 248, 0.65);
+      box-shadow: 0 0 22px rgba(56, 189, 248, 0.35);
     }
     .brand h1 {
       margin: 0;
@@ -516,18 +513,18 @@ export function getDashboardHtml(): string {
 <body>
   <header>
     <div class="brand">
-      <div class="brand-icon">H</div>
+      <img src="/logo/logo.png" alt="HAAN HOSTING" class="brand-icon" />
       <div>
         <h1>HAAN <span>HOSTING</span> · Auto-Poster Agent</h1>
-        <p>Localhost Control Center · 1080×1350 (4:5) JPEG · $0 Free Stack</p>
+        <p>Official Brand Crest · 18 Templates with Low-Opacity BG &amp; Overlay · Upload-Post API</p>
       </div>
     </div>
     <div class="nav-tabs">
       <button class="tab-btn active" onclick="switchTab('queue')">📅 Pending Queue (<span id="tab-queue-count">0</span>)</button>
       <button class="tab-btn" onclick="switchTab('published')">✅ Published (<span id="tab-published-count">0</span>)</button>
       <button class="tab-btn" onclick="switchTab('rejected')">🚫 Rejected (<span id="tab-rejected-count">0</span>)</button>
-      <button class="tab-btn" onclick="switchTab('templates')">🎨 12 Templates</button>
-      <button class="tab-btn" onclick="switchTab('bank')">📚 Content Bank (<span id="tab-bank-count">66</span>)</button>
+      <button class="tab-btn" onclick="switchTab('templates')">🎨 18 Templates</button>
+      <button class="tab-btn" onclick="switchTab('bank')">📚 Content Bank (<span id="tab-bank-count">72</span>)</button>
       <button class="tab-btn" onclick="switchTab('doctor')">🩺 Doctor & Brand</button>
     </div>
   </header>
@@ -589,12 +586,12 @@ export function getDashboardHtml(): string {
       <div class="grid-posts" id="rejected-grid"></div>
     </section>
 
-    <!-- TAB 2: TEMPLATES -->
+    <!-- TAB 4: TEMPLATES -->
     <section id="sec-templates" class="section">
       <div class="toolbar">
         <div>
-          <strong>12 Pre-Built HTML/CSS Launch Templates</strong>
-          <span style="color:var(--muted); font-size:13px; margin-left:10px;">1080×1350 px · Auto Text-Fit · Offline Bundled Fonts</span>
+          <strong>18 Branded HTML/CSS Launch Templates (T01–T18)</strong>
+          <span style="color:var(--muted); font-size:13px; margin-left:10px;">Includes Official Logo Crest, Low-Opacity Tech Backgrounds &amp; Glass Overlays</span>
         </div>
         <div style="display:flex; gap:10px;">
           <a href="/preview/contact-sheet.jpg" target="_blank" class="btn btn-secondary">🖼️ Open Contact Sheet</a>
@@ -1292,7 +1289,7 @@ const server = http.createServer(async (req, res) => {
       return;
     }
 
-    if (pathname.startsWith('/preview/') || pathname.startsWith('/media/')) {
+    if (pathname.startsWith('/preview/') || pathname.startsWith('/media/') || pathname.startsWith('/logo/')) {
       serveStaticFile(res, pathname.slice(1));
       return;
     }

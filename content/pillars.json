@@ -5,7 +5,7 @@
       "name": "Tips & How-To",
       "weight": 30,
       "description": "Actionable, easy tech tips: speed up WordPress, optimize databases, choose domain name, security basics.",
-      "allowedTemplates": ["T02-split-card", "T03-checklist", "T04-big-number", "T09-terminal", "T11-carousel"],
+      "allowedTemplates": ["T02-split-card", "T03-checklist", "T04-big-number", "T09-terminal", "T11-carousel", "T13-cyber-hero-bg", "T16-bento-grid"],
       "requiresRealOffer": false
     },
     {
@@ -13,7 +13,7 @@
       "name": "Myth vs Fact & Explainers",
       "weight": 15,
       "description": "Busting hosting myths: shared vs VPS, why cheap RDPs get banned, what is DNS and latency.",
-      "allowedTemplates": ["T07-myth-fact", "T08-browser-mockup", "T09-terminal", "T11-carousel"],
+      "allowedTemplates": ["T07-myth-fact", "T08-browser-mockup", "T09-terminal", "T11-carousel", "T14-datacenter-spotlight", "T15-vs-comparison", "T17-forex-telemetry"],
       "requiresRealOffer": false
     },
     {
@@ -21,7 +21,7 @@
       "name": "Business & Website Growth",
       "weight": 15,
       "description": "Why small businesses need websites, local SEO tips, online trust signals, conversion tips.",
-      "allowedTemplates": ["T01-bold-statement", "T02-split-card", "T08-browser-mockup", "T12-minimal-editorial"],
+      "allowedTemplates": ["T01-bold-statement", "T02-split-card", "T08-browser-mockup", "T12-minimal-editorial", "T13-cyber-hero-bg", "T15-vs-comparison", "T16-bento-grid"],
       "requiresRealOffer": false
     },
     {
@@ -29,7 +29,7 @@
       "name": "Offers & Services",
       "weight": 15,
       "description": "Real verified hosting plans, Windows RDP, NVMe VPS pricing directly from brand.json offers.",
-      "allowedTemplates": ["T04-big-number", "T05-offer-poster", "T08-browser-mockup"],
+      "allowedTemplates": ["T04-big-number", "T05-offer-poster", "T08-browser-mockup", "T17-forex-telemetry", "T18-vip-promo-poster"],
       "requiresRealOffer": true
     },
     {
@@ -37,7 +37,7 @@
       "name": "Community & Polls",
       "weight": 10,
       "description": "Interactive questions, tech preferences (Linux vs Windows, cPanel vs CLI), audience engagement.",
-      "allowedTemplates": ["T10-question-poll", "T01-bold-statement"],
+      "allowedTemplates": ["T10-question-poll", "T01-bold-statement", "T13-cyber-hero-bg"],
       "requiresRealOffer": false
     },
     {
@@ -45,7 +45,7 @@
       "name": "Trust & Local Support",
       "weight": 10,
       "description": "Real Lahore-based support team, 24/7 WhatsApp help, reliable 10Gbps NVMe hardware facts.",
-      "allowedTemplates": ["T01-bold-statement", "T06-quote-card", "T08-browser-mockup", "T12-minimal-editorial"],
+      "allowedTemplates": ["T01-bold-statement", "T06-quote-card", "T08-browser-mockup", "T12-minimal-editorial", "T14-datacenter-spotlight", "T16-bento-grid", "T18-vip-promo-poster"],
       "requiresRealOffer": false
     },
     {
@@ -53,7 +53,7 @@
       "name": "Original Motivation & Insights",
       "weight": 5,
       "description": "Inspirational quotes for creators, builders, and entrepreneurs (original wording only).",
-      "allowedTemplates": ["T06-quote-card", "T01-bold-statement", "T12-minimal-editorial"],
+      "allowedTemplates": ["T06-quote-card", "T01-bold-statement", "T12-minimal-editorial", "T13-cyber-hero-bg"],
       "requiresRealOffer": false
     }
   ]
