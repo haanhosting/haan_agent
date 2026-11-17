@@ -1,5 +1,291 @@
 [
   {
+    "id": "2026-11-18-slot1-b2",
+    "date": "2026-11-18",
+    "slot": 1,
+    "scheduledAt": "2026-11-18T09:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "tips",
+    "format": "single",
+    "template": "T03-checklist",
+    "design": {
+      "palette": "coral-pop",
+      "seed": 1794917051062,
+      "decoration": "none",
+      "layoutVariant": 0
+    },
+    "slides": [
+      {
+        "badge": "Launch Checklist",
+        "category": "Security",
+        "headline": "3 Things to Check Before Launching Your Website",
+        "items": [
+          "Free SSL installed & HTTPS redirection forced",
+          "Automated daily backup schedule configured",
+          "PHP version updated to 8.2+ in cPanel"
+        ],
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Launching a new client site this week? Don’t skip these 3 essentials! 🚀\n\n1️⃣ Always force HTTPS with an SSL certificate so visitors don’t see browser warnings.\n2️⃣ Set up automated backups BEFORE launching so you can restore in one click.\n3️⃣ Run modern PHP (8.2+) for up to 30% faster execution.\n\nEvery HAAN Web Hosting plan includes free SSL and 1-click cPanel management.\n\n👉 Save this checklist for your next launch! Link in bio.\n\n#HaanHosting #WebDevTips #cPanel #WebHostingPakistan #CyberSecurity #WordPressPakistan #DevOps",
+    "hashtags": [
+      "#HaanHosting",
+      "#WebDevTips",
+      "#cPanel",
+      "#WebHostingPakistan",
+      "#CyberSecurity",
+      "#WordPressPakistan",
+      "#DevOps",
+      "#SecurityChecklist"
+    ],
+    "altText": "Checklist graphic outlining three essential security and performance steps before launching any website.",
+    "images": [
+      "preview/renders/T03-checklist.jpg"
+    ],
+    "imageUrls": [],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-18-slot2-b2",
+    "date": "2026-11-18",
+    "slot": 2,
+    "scheduledAt": "2026-11-18T12:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "tips",
+    "format": "single",
+    "template": "T09-terminal",
+    "design": {
+      "palette": "navy-sky",
+      "seed": 1794917051063,
+      "decoration": "none",
+      "layoutVariant": 1
+    },
+    "slides": [
+      {
+        "badge": "Quick Fix",
+        "category": "WordPress",
+        "headline": "How to Fix the 500 Internal Server Error",
+        "terminalTitle": "haan@admin:~# tail -n 20 error_log",
+        "command": "tail -n 20 error_log",
+        "output": "PHP Fatal error: Allowed memory size exhausted in /wp-includes/functions.php",
+        "successLine": "Solution: Increase memory_limit to 512M in cPanel PHP Selector",
+        "body": "The infamous white screen of death in WordPress is almost always caused by PHP memory exhaustion or a corrupted .htaccess file.",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Seeing a 500 Internal Server Error on your WordPress site? Don’t panic! 🛠️\n\n9 times out of 10, it is simply PHP running out of memory. Log into your cPanel, navigate to Select PHP Version, and raise memory_limit to 256M or 512M.\n\nNeed help? Our 24/7 technical team is always online to assist.\n\n👉 Link in bio to explore cPanel hosting at haanhosting.store.\n\n#HaanHosting #WordPressError #500Error #WebDevTroubleshooting #cPanel #PHP #WebMaster",
+    "hashtags": [
+      "#HaanHosting",
+      "#WordPressError",
+      "#500Error",
+      "#WebDevTroubleshooting",
+      "#cPanel",
+      "#PHP",
+      "#WebMaster",
+      "#TechHelp"
+    ],
+    "altText": "Terminal view illustrating error_log inspection and resolving WordPress 500 internal server memory errors.",
+    "images": [
+      "preview/renders/T09-terminal.jpg"
+    ],
+    "imageUrls": [],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-18-slot3-b2",
+    "date": "2026-11-18",
+    "slot": 3,
+    "scheduledAt": "2026-11-18T16:00:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "trust",
+    "format": "single",
+    "template": "T01-bold-statement",
+    "design": {
+      "palette": "ocean-blue",
+      "seed": 1794917051064,
+      "decoration": "none",
+      "layoutVariant": 2
+    },
+    "slides": [
+      {
+        "badge": "Local Support",
+        "category": "Lahore Team",
+        "headline": "Real human technical support based right here in Lahore, Pakistan.",
+        "body": "No automated chatbot loops. Connect directly with our engineering team on WhatsApp whenever you need assistance.",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Tired of waiting days for robotic email ticket responses? 🇵🇰\n\nAt HAAN HOSTING, our core technical team is based right here in Lahore. We are available 24/7 on WhatsApp (+92 317 7109812) to help with server setup, migrations, and technical questions.\n\nExperience hosting with real human support.\n\n👉 Visit haanhosting.store (link in bio)!\n\n#HaanHosting #LahoreTech #PakistaniBusiness #CustomerSupport #LocalHosting #PakistanEntrepreneurs",
+    "hashtags": [
+      "#HaanHosting",
+      "#LahoreTech",
+      "#PakistaniBusiness",
+      "#CustomerSupport",
+      "#LocalHosting",
+      "#PakistanEntrepreneurs",
+      "#TrustedBrand"
+    ],
+    "altText": "Brand statement highlighting genuine 24/7 WhatsApp technical support from the Lahore team.",
+    "images": [
+      "preview/renders/T01-bold-statement.jpg"
+    ],
+    "imageUrls": [],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-18-slot4-b2",
+    "date": "2026-11-18",
+    "slot": 4,
+    "scheduledAt": "2026-11-18T19:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "tips",
+    "format": "single",
+    "template": "T03-checklist",
+    "design": {
+      "palette": "electric-indigo",
+      "seed": 1794917051065,
+      "decoration": "none",
+      "layoutVariant": 0
+    },
+    "slides": [
+      {
+        "badge": "SEO Checklist",
+        "category": "Search Rankings",
+        "headline": "Technical SEO Audit: 3 Server Factors Google Ranks",
+        "items": [
+          "Time to First Byte (TTFB): Keep under 200ms",
+          "Consistent Uptime: Zero dropouts during Google crawls",
+          "Valid HTTPS Encryption: Secure green padlock"
+        ],
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Great content won’t rank if your server takes 2 seconds to respond. 📈\n\nGoogle’s Core Web Vitals prioritize fast Time to First Byte (TTFB) and high reliability. A fast NVMe VPS in a local datacenter gives your website the speed foundation it needs.\n\n👉 Test your site speed today at haanhosting.store!\n\n#HaanHosting #TechnicalSEO #CoreWebVitals #TTFB #GoogleRankings #WebMaster #PakistanBusiness",
+    "hashtags": [
+      "#HaanHosting",
+      "#TechnicalSEO",
+      "#CoreWebVitals",
+      "#TTFB",
+      "#GoogleRankings",
+      "#WebMaster",
+      "#PakistanBusiness",
+      "#SEOTips"
+    ],
+    "altText": "Checklist highlighting Time to First Byte (TTFB), uptime, and HTTPS as critical technical SEO ranking factors.",
+    "images": [
+      "preview/renders/T03-checklist.jpg"
+    ],
+    "imageUrls": [],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-18-slot5-b2",
+    "date": "2026-11-18",
+    "slot": 5,
+    "scheduledAt": "2026-11-18T21:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "tips",
+    "format": "carousel",
+    "template": "T11-carousel",
+    "design": {
+      "palette": "berry-cream",
+      "seed": 1794917051066,
+      "decoration": "none",
+      "layoutVariant": 1
+    },
+    "slides": [
+      {
+        "slideIndex": 1,
+        "totalSlides": 4,
+        "isCover": true,
+        "badge": "Speed Guide",
+        "category": "WordPress",
+        "headline": "How to Speed Up Your WordPress Site in 3 Simple Steps",
+        "body": "A slow site ruins your conversion rate and hurts Google search rankings. Follow this simple guide to fix it today.",
+        "bullets": [
+          "Step 1: Image compression",
+          "Step 2: Caching setup",
+          "Step 3: Fast server hosting"
+        ],
+        "cta": "haanhosting.store"
+      },
+      {
+        "slideIndex": 2,
+        "totalSlides": 4,
+        "badge": "Step 1 of 4",
+        "category": "Images",
+        "headline": "Convert All Images to WebP Format",
+        "body": "Standard JPEGs and PNGs are heavy. Using modern WebP format reduces file weight by 40-70% with zero visible loss in quality.",
+        "bullets": [
+          "Use free plugins like Converter for Media",
+          "Set max image dimensions to 1920px",
+          "Clean up unattached media uploads"
+        ],
+        "cta": "haanhosting.store"
+      },
+      {
+        "slideIndex": 3,
+        "totalSlides": 4,
+        "badge": "Step 2 of 4",
+        "category": "Caching",
+        "headline": "Enable Server-Level Object Caching",
+        "body": "Instead of querying MySQL every time a visitor opens a page, cache queries in RAM using Redis or LiteSpeed cache.",
+        "bullets": [
+          "Reduces server response time to under 100ms",
+          "Handles traffic spikes smoothly",
+          "Available on all HAAN NVMe VPS plans"
+        ],
+        "cta": "haanhosting.store"
+      },
+      {
+        "slideIndex": 4,
+        "totalSlides": 4,
+        "badge": "Step 3 of 4",
+        "category": "Hosting",
+        "headline": "Host on High-Speed NVMe Storage",
+        "body": "No optimization plugin can save a website that is hosted on slow mechanical drives. Choose NVMe cloud storage with dedicated CPU cores.",
+        "bullets": [
+          "Starter Cloud VPS from $11.99/mo",
+          "10 Gbps port speed included",
+          "Visit haanhosting.store to deploy"
+        ],
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Is your WordPress website struggling to load quickly? ⚡\n\nSwipe through our 3-step blueprint to cut your page load time in half:\n\n1️⃣ Modern WebP image optimization\n2️⃣ Server-level object caching with Redis\n3️⃣ High-performance NVMe cloud hosting\n\n📌 Save this carousel so you have it ready for your next project!\n\n👉 Link in bio to deploy high-speed hosting today.\n\n#HaanHosting #WordPressPakistan #WebOptimization #WebDesign #SpeedUpWordPress #VPSHosting #PakistanTech",
+    "hashtags": [
+      "#HaanHosting",
+      "#WordPressPakistan",
+      "#WebOptimization",
+      "#WebDesign",
+      "#SpeedUpWordPress",
+      "#VPSHosting",
+      "#PakistanTech",
+      "#CarouselTips"
+    ],
+    "altText": "4-slide carousel guide demonstrating image compression, Redis caching, and NVMe hosting for WordPress acceleration.",
+    "images": [
+      "preview/renders/T11-carousel.jpg"
+    ],
+    "imageUrls": [],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
     "id": "2026-11-20-slot1",
     "date": "2026-11-20",
     "slot": 1,
@@ -28,7 +314,7 @@
         "cta": "haanhosting.store"
       }
     ],
-    "caption": "Monitoring your server health should be quick and easy. 📊\n\nRun htop on your Linux VPS to get real-time visualization of CPU core loads, memory allocation, and running threads.\n\nEvery HAAN Cloud VPS gives you full root access and 10 Gbps networking.\n\n👉 Deploy your Linux server at haanhosting.store!\n\n#HaanHosting #LinuxTips #SysAdmin #ServerAdmin #Htop #CloudVPS #PakistanDevelopers",
+    "caption": "Monitoring your server health should be quick and easy. ð\n\nRun htop on your Linux VPS to get real-time visualization of CPU core loads, memory allocation, and running threads.\n\nEvery HAAN Cloud VPS gives you full root access and 10 Gbps networking.\n\nð Deploy your Linux server at haanhosting.store!\n\n#HaanHosting #LinuxTips #SysAdmin #ServerAdmin #Htop #CloudVPS #PakistanDevelopers",
     "hashtags": [
       "#HaanHosting",
       "#seoexpert",
@@ -95,7 +381,7 @@
         "cta": "haanhosting.store"
       }
     ],
-    "caption": "Tech trivia time! 🧠\n\nTest your networking knowledge: What does CNAME actually stand for in DNS terminology?\n\nComment your guess below without looking it up! 👇\n\n#HaanHosting #TechTrivia #CodingQuiz #NetworkingQuiz #DNS #WebDevCommunity #PakistanTech",
+    "caption": "Tech trivia time! ð§ \n\nTest your networking knowledge: What does CNAME actually stand for in DNS terminology?\n\nComment your guess below without looking it up! ð\n\n#HaanHosting #TechTrivia #CodingQuiz #NetworkingQuiz #DNS #WebDevCommunity #PakistanTech",
     "hashtags": [
       "#HaanHosting",
       "#webdevcommunity",
@@ -146,7 +432,7 @@
         "cta": "haanhosting.store"
       }
     ],
-    "caption": "Ready to land higher-paying international clients? 🌟\n\nA custom domain portfolio running live deployed projects demonstrates technical competence that no PDF resume can match.\n\nDeploy your portfolio with free SSL for just $3.99/mo.\n\n👉 Link in bio to start building at haanhosting.store!\n\n#HaanHosting #DeveloperPortfolio #CareerTips #SoftwareEngineer #PakistaniTech #RemoteJobs",
+    "caption": "Ready to land higher-paying international clients? ð\n\nA custom domain portfolio running live deployed projects demonstrates technical competence that no PDF resume can match.\n\nDeploy your portfolio with free SSL for just $3.99/mo.\n\nð Link in bio to start building at haanhosting.store!\n\n#HaanHosting #DeveloperPortfolio #CareerTips #SoftwareEngineer #PakistaniTech #RemoteJobs",
     "hashtags": [
       "#HaanHosting",
       "#ecommercepakistan",
@@ -197,7 +483,7 @@
         "cta": "haanhosting.store"
       }
     ],
-    "caption": "Launch your online presence today for less than the cost of a coffee! ☕\n\nAt HAAN HOSTING, our Starter Web Hosting plan is only $3.99/mo. No hidden contract traps, no sudden renewals.\n\n✔ Free SSL certificate\n✔ 1-Click WordPress install\n✔ 24/7 WhatsApp help\n\n👉 Visit haanhosting.store to launch your site!\n\n#HaanHosting #CheapWebHosting #AffordableHosting #SmallBizPK #WebHostingDeal #WordPressPK",
+    "caption": "Launch your online presence today for less than the cost of a coffee! â\n\nAt HAAN HOSTING, our Starter Web Hosting plan is only $3.99/mo. No hidden contract traps, no sudden renewals.\n\nâ Free SSL certificate\nâ 1-Click WordPress install\nâ 24/7 WhatsApp help\n\nð Visit haanhosting.store to launch your site!\n\n#HaanHosting #CheapWebHosting #AffordableHosting #SmallBizPK #WebHostingDeal #WordPressPK",
     "hashtags": [
       "#HaanHosting",
       "#serverdeal",
@@ -281,7 +567,7 @@
         "cta": "haanhosting.store"
       }
     ],
-    "caption": "Are you running Forex Expert Advisors from home? 📈\n\nHome internet drops, load shedding, and latency slippage kill trading profitability. Swipe to see why professional traders run on dedicated Windows RDP in London and New York.\n\nPlans start at $11.99/mo.\n\n👉 Link in bio to deploy your Forex server at haanhosting.store!\n\n#HaanHosting #ForexPakistan #MT4Trading #ForexVPS #TradingBot #ExpertAdvisor #AlgoTrading",
+    "caption": "Are you running Forex Expert Advisors from home? ð\n\nHome internet drops, load shedding, and latency slippage kill trading profitability. Swipe to see why professional traders run on dedicated Windows RDP in London and New York.\n\nPlans start at $11.99/mo.\n\nð Link in bio to deploy your Forex server at haanhosting.store!\n\n#HaanHosting #ForexPakistan #MT4Trading #ForexVPS #TradingBot #ExpertAdvisor #AlgoTrading",
     "hashtags": [
       "#HaanHosting",
       "#cybersecurity",
@@ -338,7 +624,7 @@
         "cta": "haanhosting.store"
       }
     ],
-    "caption": "Your domain name is your brand’s permanent digital address. 🌐\n\nChoose a name that is memorable, easy to spell over the phone, and free of confusing hyphens. When you are ready to launch, host it on high-performance servers.\n\nWeb hosting plans start at just $3.99/mo.\n\n👉 Visit haanhosting.store (link in bio)!\n\n#HaanHosting #DomainName #BrandingTips #SmallBusinessPakistan #Ecommerce #StartUpPK",
+    "caption": "Your domain name is your brandâs permanent digital address. ð\n\nChoose a name that is memorable, easy to spell over the phone, and free of confusing hyphens. When you are ready to launch, host it on high-performance servers.\n\nWeb hosting plans start at just $3.99/mo.\n\nð Visit haanhosting.store (link in bio)!\n\n#HaanHosting #DomainName #BrandingTips #SmallBusinessPakistan #Ecommerce #StartUpPK",
     "hashtags": [
       "#HaanHosting",
       "#learntocode",
@@ -405,7 +691,7 @@
         "cta": "haanhosting.store"
       }
     ],
-    "caption": "Terminal purist or visual GUI fan? ⌨️ vs 🖱️\n\nHow do you prefer managing your server files and services on a daily basis? Vote below!\n\n#HaanHosting #TerminalVsGUI #SysAdminLife #DevLife #ServerManagement #PakistanTech",
+    "caption": "Terminal purist or visual GUI fan? â¨ï¸ vs ð±ï¸\n\nHow do you prefer managing your server files and services on a daily basis? Vote below!\n\n#HaanHosting #TerminalVsGUI #SysAdminLife #DevLife #ServerManagement #PakistanTech",
     "hashtags": [
       "#HaanHosting",
       "#webdevcommunity",
@@ -453,7 +739,7 @@
         "cta": "haanhosting.store"
       }
     ],
-    "caption": "Preparing for Black Friday, Eid sales, or a major marketing launch? 🚀\n\nDon’t let your server crash under peak traffic. With HAAN NVMe Cloud VPS, you can scale CPU cores and RAM seamlessly as your audience grows.\n\nDeploy high-speed hosting today from $11.99/mo.\n\n👉 Link in bio to learn more!\n\n#HaanHosting #CloudScaling #TrafficSpikes #EcommerceScaling #PakistanBusiness #ServerPerformance",
+    "caption": "Preparing for Black Friday, Eid sales, or a major marketing launch? ð\n\nDonât let your server crash under peak traffic. With HAAN NVMe Cloud VPS, you can scale CPU cores and RAM seamlessly as your audience grows.\n\nDeploy high-speed hosting today from $11.99/mo.\n\nð Link in bio to learn more!\n\n#HaanHosting #CloudScaling #TrafficSpikes #EcommerceScaling #PakistanBusiness #ServerPerformance",
     "hashtags": [
       "#HaanHosting",
       "#digitalmarketing",
@@ -504,7 +790,7 @@
         "cta": "haanhosting.store"
       }
     ],
-    "caption": "Need serious computing power for your APIs, databases, or trading bots? ⚡\n\nUpgrade to our Business Cloud VPS:\n\n• 6 Cores CPU\n• 16 GB RAM\n• 100 GB NVMe Storage\n• 10 Gbps Port Speed\n• Dedicated IPv4 & IPv6\n\nOnly $16.99/mo. Instant provisioning.\n\n👉 Deploy your Business server at haanhosting.store!\n\n#HaanHosting #BusinessVPS #CloudHosting #16GBRAM #NVMeVPS #ServerDeal #TechPakistan",
+    "caption": "Need serious computing power for your APIs, databases, or trading bots? â¡\n\nUpgrade to our Business Cloud VPS:\n\nâ¢ 6 Cores CPU\nâ¢ 16 GB RAM\nâ¢ 100 GB NVMe Storage\nâ¢ 10 Gbps Port Speed\nâ¢ Dedicated IPv4 & IPv6\n\nOnly $16.99/mo. Instant provisioning.\n\nð Deploy your Business server at haanhosting.store!\n\n#HaanHosting #BusinessVPS #CloudHosting #16GBRAM #NVMeVPS #ServerDeal #TechPakistan",
     "hashtags": [
       "#HaanHosting",
       "#budgethosting",
@@ -588,7 +874,7 @@
         "cta": "haanhosting.store"
       }
     ],
-    "caption": "Are you running Forex Expert Advisors from home? 📈\n\nHome internet drops, load shedding, and latency slippage kill trading profitability. Swipe to see why professional traders run on dedicated Windows RDP in London and New York.\n\nPlans start at $11.99/mo.\n\n👉 Link in bio to deploy your Forex server at haanhosting.store!\n\n#HaanHosting #ForexPakistan #MT4Trading #ForexVPS #TradingBot #ExpertAdvisor #AlgoTrading",
+    "caption": "Are you running Forex Expert Advisors from home? ð\n\nHome internet drops, load shedding, and latency slippage kill trading profitability. Swipe to see why professional traders run on dedicated Windows RDP in London and New York.\n\nPlans start at $11.99/mo.\n\nð Link in bio to deploy your Forex server at haanhosting.store!\n\n#HaanHosting #ForexPakistan #MT4Trading #ForexVPS #TradingBot #ExpertAdvisor #AlgoTrading",
     "hashtags": [
       "#HaanHosting",
       "#linuxserver",
