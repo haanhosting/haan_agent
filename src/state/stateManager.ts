@@ -40,20 +40,30 @@ export function saveHistory(history: HistoryItem[]): void {
 /**
  * Enqueues newly generated posts idempotently (ignoring duplicates by ID).
  */
-export function enqueuePosts(newPosts: PreparedPost[]): { added: number; existing: number } {
+export function enqueuePosts(
+  newPosts: PreparedPost[],
+  options: { prepend?: boolean } = {}
+): { added: number; existing: number } {
   const queue = loadQueue();
   const existingIds = new Set(queue.map(p => p.id));
   let added = 0;
   let existing = 0;
+  const toInsert: PreparedPost[] = [];
 
   for (const post of newPosts) {
     if (existingIds.has(post.id)) {
       existing++;
     } else {
-      queue.push(post);
+      toInsert.push(post);
       existingIds.add(post.id);
       added++;
     }
+  }
+
+  if (options.prepend) {
+    queue.unshift(...toInsert);
+  } else {
+    queue.push(...toInsert);
   }
 
   saveQueue(queue);

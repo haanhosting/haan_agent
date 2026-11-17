@@ -117,8 +117,10 @@ export async function generateDailyPosts(params: {
   date: string; // YYYY-MM-DD
   history: HistoryItem[];
   postsPerDay?: number;
+  existingQueue?: PreparedPost[];
+  allowNewBatch?: boolean;
 }): Promise<PreparedPost[]> {
-  const { date, history, postsPerDay = 5 } = params;
+  const { date, history, postsPerDay = 5, existingQueue = [], allowNewBatch = false } = params;
   const schedule = loadScheduleConfig();
   const pillarsConfig = loadPillarsConfig();
   const slots = getActiveSlotsForDay(postsPerDay);
@@ -128,17 +130,29 @@ export async function generateDailyPosts(params: {
   const usedBankIds = new Set<string>();
   let lastHashtags: string[] = [];
 
-  const recentHeadlines = history.slice(-30).map(h => h.headline);
+  const existingIds = new Set(existingQueue.map(p => p.id));
+  const queueHeadlines = existingQueue.map(p => p.slides?.[0]?.headline || '').filter(Boolean);
+  const recentHeadlines = [...history.slice(-30).map(h => h.headline), ...queueHeadlines];
 
-  console.log(`Generating ${slots.length} daily posts for ${date} (Asia/Karachi)...`);
+  // Determine batch number if generating additional posts for a date that already exists
+  let batchNum = 1;
+  if (allowNewBatch) {
+    while (slots.some(s => existingIds.has(batchNum === 1 ? `${date}-slot${s.id}` : `${date}-slot${s.id}-b${batchNum}`))) {
+      batchNum++;
+    }
+  }
+
+  console.log(`Generating ${slots.length} daily posts for ${date} (Batch #${batchNum}, Asia/Karachi)...`);
 
   for (let i = 0; i < slots.length; i++) {
     const slot = slots[i];
     const pillarDef = pillarsConfig.pillars.find(p => p.id === slot.suggestedPillar) || pillarsConfig.pillars[0];
 
+    const designDateKey = batchNum === 1 ? date : `${date}-b${batchNum}`;
+
     // Pick unique design per anti-repeat rules
     const design = pickDesign({
-      date,
+      date: designDateKey,
       slot: slot.id,
       totalSlotsToday: slots.length,
       pillar: pillarDef.id,
@@ -164,6 +178,9 @@ export async function generateDailyPosts(params: {
     if (content.offerId) {
       usedBankIds.add(content.offerId);
     }
+    if ((content as any).id) {
+      usedBankIds.add((content as any).id);
+    }
 
     // Refresh hashtags for >= 40% rotation
     const hashtags = pickHashtagsForPost(pillarDef.id, lastHashtags);
@@ -171,7 +188,10 @@ export async function generateDailyPosts(params: {
 
     // ISO-8601 with Asia/Karachi +05:00 offset
     const scheduledAt = `${date}T${slot.timePkt}:00+05:00`;
-    const postId = `${date}-slot${slot.id}`;
+    const postId = batchNum === 1 ? `${date}-slot${slot.id}` : `${date}-slot${slot.id}-b${batchNum}`;
+
+    // Use bank post's native template if present so slide fields match template HTML
+    const effectiveTemplate = (content as any).template || design.template;
 
     // Images will be populated during rendering phase
     const images: string[] = [];
@@ -186,7 +206,7 @@ export async function generateDailyPosts(params: {
       approved: !schedule.requireApproval,
       pillar: pillarDef.id,
       format: slot.format,
-      template: design.template,
+      template: effectiveTemplate,
       design: {
         palette: design.palette,
         seed: design.seed,

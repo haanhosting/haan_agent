@@ -14,26 +14,54 @@ export function pickBankPost(params: {
   pillar: string;
   format: 'single' | 'carousel';
   usedIds: Set<string>;
+  recentHeadlines?: string[];
 }): any {
   const bank = loadContentBank();
-  
-  // Filter matching pillar and format
-  let eligible = bank.filter(p =>
-    p.pillar === params.pillar &&
-    p.format === params.format &&
-    !params.usedIds.has(p.id)
-  );
+  const recentSet = new Set((params.recentHeadlines || []).map(h => h.toLowerCase().trim()));
 
-  // If none available without reuse, pick any matching pillar
+  // 1. Filter matching pillar, format, not in usedIds, and headline not already in queue/history
+  let eligible = bank.filter(p => {
+    const headline = (p.slides?.[0]?.headline || '').toLowerCase().trim();
+    return (
+      p.pillar === params.pillar &&
+      p.format === params.format &&
+      !params.usedIds.has(p.id) &&
+      !recentSet.has(headline)
+    );
+  });
+
+  // 2. Fallback: matching format, not in usedIds, and headline not in queue/history (any pillar)
   if (eligible.length === 0) {
-    eligible = bank.filter(p => p.pillar === params.pillar && p.format === params.format);
+    eligible = bank.filter(p => {
+      const headline = (p.slides?.[0]?.headline || '').toLowerCase().trim();
+      return p.format === params.format && !params.usedIds.has(p.id) && !recentSet.has(headline);
+    });
   }
 
-  // If still none, pick any from bank
+  // 3. Fallback: matching pillar & format, not in usedIds
+  if (eligible.length === 0) {
+    eligible = bank.filter(
+      p => p.pillar === params.pillar && p.format === params.format && !params.usedIds.has(p.id)
+    );
+  }
+
+  // 4. Fallback: any matching format not in usedIds
+  if (eligible.length === 0) {
+    eligible = bank.filter(p => p.format === params.format && !params.usedIds.has(p.id));
+  }
+
+  // 5. Final fallback: any matching format
+  if (eligible.length === 0) {
+    eligible = bank.filter(p => p.format === params.format);
+  }
   if (eligible.length === 0) {
     eligible = bank;
   }
 
   const idx = Math.floor(Math.random() * eligible.length);
-  return eligible[idx];
+  const chosen = eligible[idx];
+  if (chosen?.id) {
+    params.usedIds.add(chosen.id);
+  }
+  return chosen;
 }

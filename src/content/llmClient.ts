@@ -181,7 +181,8 @@ export async function generatePost(options: GeneratePostOptions): Promise<Genera
       const bankPost = pickBankPost({
         pillar: options.pillar,
         format: options.format,
-        usedIds: options.usedBankIds || new Set()
+        usedIds: options.usedBankIds || new Set(),
+        recentHeadlines: options.recentHeadlines
       });
       return bankPost;
     }
@@ -227,6 +228,7 @@ export async function generatePost(options: GeneratePostOptions): Promise<Genera
   return pickBankPost({
     pillar: options.pillar,
     format: options.format,
-    usedIds: options.usedBankIds || new Set()
+    usedIds: options.usedBankIds || new Set(),
+    recentHeadlines: options.recentHeadlines
   });
 }

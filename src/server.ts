@@ -1158,10 +1158,13 @@ const server = http.createServer(async (req, res) => {
       const body = await readJsonBody(req);
       const targetDate = body.date || getNextDayKarachi();
       const history = loadHistory();
+      const existingQueue = loadQueue();
       const newPosts = await generateDailyPosts({
         date: targetDate,
         history,
-        postsPerDay: 5
+        postsPerDay: 5,
+        existingQueue,
+        allowNewBatch: true
       });
 
       const dateDir = path.resolve(process.cwd(), 'media', targetDate);
@@ -1170,8 +1173,9 @@ const server = http.createServer(async (req, res) => {
       for (const post of newPosts) {
         const images: string[] = [];
         const imageUrls: string[] = [];
+        const slug = post.id.replace(`${post.date}-`, '');
         for (let sIdx = 0; sIdx < post.slides.length; sIdx++) {
-          const filename = post.slides.length > 1 ? `slot${post.slot}-${sIdx + 1}.jpg` : `slot${post.slot}.jpg`;
+          const filename = post.slides.length > 1 ? `${slug}-${sIdx + 1}.jpg` : `${slug}.jpg`;
           const relPath = `media/${post.date}/${filename}`;
           const outPath = path.join(dateDir, filename);
           await renderSlide({
@@ -1191,8 +1195,8 @@ const server = http.createServer(async (req, res) => {
       }
 
       await closeBrowser();
-      enqueuePosts(newPosts);
-      sendJson(res, 200, { ok: true, count: newPosts.length });
+      const enqueueRes = enqueuePosts(newPosts, { prepend: true });
+      sendJson(res, 200, { ok: true, count: enqueueRes.added, posts: newPosts.map(p => p.id) });
       return;
     }
 

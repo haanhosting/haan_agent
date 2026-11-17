@@ -353,10 +353,77 @@ export async function onRequest(context) {
     }
 
     if (request.method === 'POST' && pathname === '/api/generate') {
+      const body = await request.json().catch(() => ({}));
+      const targetDate = body.date || getNextDayKarachi();
+      const [queue, bank, schedule] = await Promise.all([
+        getQueueState(context),
+        fetchAssetJson(context, '/content/bank/posts.json', []),
+        fetchAssetJson(context, '/config/schedule.json', { slots: [] })
+      ]);
+
+      const existingIds = new Set(queue.map(p => p.id));
+      const usedHeadlines = new Set(queue.map(p => (p.slides?.[0]?.headline || '').toLowerCase().trim()));
+      const slots = (schedule.slots || []).slice(0, 5);
+
+      let batchNum = 1;
+      while (slots.some(s => existingIds.has(batchNum === 1 ? `${targetDate}-slot${s.id}` : `${targetDate}-slot${s.id}-b${batchNum}`))) {
+        batchNum++;
+      }
+
+      const palettes = ['deep-violet', 'mint-fresh', 'coral-pop', 'navy-sky', 'ocean-blue', 'electric-indigo', 'berry-cream', 'sand-terracotta', 'slate-cyan', 'midnight-gold'];
+      const newPosts = [];
+
+      for (let i = 0; i < slots.length; i++) {
+        const slot = slots[i];
+        const postId = batchNum === 1 ? `${targetDate}-slot${slot.id}` : `${targetDate}-slot${slot.id}-b${batchNum}`;
+        let candidates = bank.filter(b => b.format === slot.format && !usedHeadlines.has((b.slides?.[0]?.headline || '').toLowerCase().trim()));
+        if (!candidates.length) candidates = bank.filter(b => b.format === slot.format);
+        if (!candidates.length) candidates = bank;
+
+        const chosen = candidates[Math.floor(Math.random() * candidates.length)];
+        const headline = (chosen.slides?.[0]?.headline || '').toLowerCase().trim();
+        usedHeadlines.add(headline);
+
+        const templateId = chosen.template || (slot.format === 'carousel' ? 'T11-carousel' : 'T01-bold-statement');
+        const previewImg = `preview/renders/${templateId}.jpg`;
+
+        newPosts.push({
+          id: postId,
+          date: targetDate,
+          slot: slot.id,
+          scheduledAt: `${targetDate}T${slot.timePkt}:00+05:00`,
+          status: 'queued',
+          approved: true,
+          pillar: chosen.pillar || slot.suggestedPillar,
+          format: chosen.format || slot.format,
+          template: templateId,
+          design: {
+            palette: palettes[(i + batchNum) % palettes.length],
+            seed: Date.now() + i,
+            decoration: 'none',
+            layoutVariant: i % 3
+          },
+          slides: chosen.slides,
+          caption: chosen.caption,
+          hashtags: chosen.hashtags || ['#HaanHosting'],
+          altText: chosen.altText || chosen.slides?.[0]?.headline || 'Haan Hosting post',
+          images: [previewImg],
+          imageUrls: [],
+          igMediaId: null,
+          attempts: 0,
+          error: null
+        });
+      }
+
+      queue.unshift(...newPosts);
+      memoryQueue = queue;
+      await saveGithubQueueIfConfigured(env, queue);
+
+      // Also trigger GitHub Actions workflow if GH_PAT is configured for full Playwright rendering
       const pat = env.GH_PAT;
       const repo = env.GITHUB_REPOSITORY || 'haanhosting/haan_agent';
       if (pat) {
-        const ghRes = await fetch(`https://api.github.com/repos/${repo}/actions/workflows/generate.yml/dispatches`, {
+        fetch(`https://api.github.com/repos/${repo}/actions/workflows/generate.yml/dispatches`, {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${pat}`,
@@ -365,17 +432,10 @@ export async function onRequest(context) {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({ ref: 'main' })
-        });
-        if (ghRes.ok) {
-          return jsonResponse(200, {
-            ok: true,
-            message: 'Triggered GitHub Actions workflow (generate.yml) to render 5 new posts! Cloudflare Pages will auto-update once the workflow finishes.'
-          });
-        }
+        }).catch(() => {});
       }
-      return jsonResponse(400, {
-        error: 'Playwright Chromium rendering runs via GitHub Actions or locally (`npx tsx src/cli.ts generate --render`). Add GH_PAT to Cloudflare environment variables to trigger GitHub Actions directly from this button.'
-      });
+
+      return jsonResponse(200, { ok: true, count: newPosts.length, posts: newPosts.map(p => p.id) });
     }
 
     return jsonResponse(404, { error: `Unknown API route: ${pathname}` });

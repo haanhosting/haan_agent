@@ -42,14 +42,17 @@ program
 
       console.log(`\n=== GENERATING POSTS FOR ${targetDate} (Asia/Karachi) ===`);
       const history = loadHistory();
+      const existingQueue = loadQueue();
 
       const newPosts = await generateDailyPosts({
         date: targetDate,
         history,
-        postsPerDay: postsCount
+        postsPerDay: postsCount,
+        existingQueue,
+        allowNewBatch: true
       });
 
-      enqueuePosts(newPosts);
+      enqueuePosts(newPosts, { prepend: true });
 
       if (options.render) {
         console.log('\n=== RENDERING GENERATED POSTS ===');
@@ -87,11 +90,12 @@ async function renderPostsForDate(targetDate?: string, force = false): Promise<v
     const images: string[] = [];
     const imageUrls: string[] = [];
 
+    const slug = post.id.replace(`${post.date}-`, '');
     for (let sIdx = 0; sIdx < post.slides.length; sIdx++) {
       const slideData = post.slides[sIdx];
       const filename = post.slides.length > 1
-        ? `slot${post.slot}-${sIdx + 1}.jpg`
-        : `slot${post.slot}.jpg`;
+        ? `${slug}-${sIdx + 1}.jpg`
+        : `${slug}.jpg`;
       const localRelPath = `media/${post.date}/${filename}`;
       const outputPath = path.join(dateDir, filename);
 

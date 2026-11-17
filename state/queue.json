@@ -8,7 +8,7 @@
     "approved": true,
     "pillar": "tips",
     "format": "single",
-    "template": "T04-big-number",
+    "template": "T09-terminal",
     "design": {
       "palette": "berry-cream",
       "seed": 3401903895,
@@ -61,7 +61,7 @@
     "approved": true,
     "pillar": "engagement",
     "format": "single",
-    "template": "T01-bold-statement",
+    "template": "T10-question-poll",
     "design": {
       "palette": "sand-terracotta",
       "seed": 3418681514,
@@ -127,7 +127,7 @@
     "approved": true,
     "pillar": "growth",
     "format": "single",
-    "template": "T02-split-card",
+    "template": "T08-browser-mockup",
     "design": {
       "palette": "slate-cyan",
       "seed": 3435459133,
@@ -179,7 +179,7 @@
     "approved": false,
     "pillar": "offers",
     "format": "single",
-    "template": "T08-browser-mockup",
+    "template": "T04-big-number",
     "design": {
       "palette": "electric-indigo",
       "seed": 3318015800,
@@ -318,7 +318,7 @@
     "approved": true,
     "pillar": "tips",
     "format": "single",
-    "template": "T02-split-card",
+    "template": "T03-checklist",
     "design": {
       "palette": "coral-pop",
       "seed": 2362606868,
@@ -371,7 +371,7 @@
     "approved": true,
     "pillar": "engagement",
     "format": "single",
-    "template": "T01-bold-statement",
+    "template": "T10-question-poll",
     "design": {
       "palette": "midnight-gold",
       "seed": 2412939725,
@@ -437,7 +437,7 @@
     "approved": true,
     "pillar": "growth",
     "format": "single",
-    "template": "T08-browser-mockup",
+    "template": "T01-bold-statement",
     "design": {
       "palette": "berry-cream",
       "seed": 2396162106,
@@ -486,7 +486,7 @@
     "approved": true,
     "pillar": "offers",
     "format": "single",
-    "template": "T05-offer-poster",
+    "template": "T04-big-number",
     "design": {
       "palette": "ocean-blue",
       "seed": 2312274011,
