@@ -90,7 +90,7 @@ export function getDuePosts(referenceTime: Date = new Date()): PreparedPost[] {
  */
 export function updatePostStatus(
   postId: string,
-  newStatus: 'queued' | 'publishing' | 'posted' | 'failed' | 'skipped',
+  newStatus: 'queued' | 'publishing' | 'posted' | 'failed' | 'skipped' | 'rejected',
   meta: { igMediaId?: string; error?: string } = {}
 ): PreparedPost {
   const queue = loadQueue();
@@ -101,6 +101,16 @@ export function updatePostStatus(
   }
 
   post.status = newStatus;
+  if (newStatus === 'posted') {
+    post.postedAt = new Date().toISOString();
+    post.approved = true;
+  } else if (newStatus === 'rejected') {
+    post.rejectedAt = new Date().toISOString();
+    post.approved = false;
+  } else if (newStatus === 'queued') {
+    post.rejectedAt = null;
+  }
+
   if (meta.error) {
     post.error = meta.error;
     post.attempts = (post.attempts || 0) + 1;

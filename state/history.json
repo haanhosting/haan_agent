@@ -1,1 +1,24 @@
-[]
+[
+  {
+    "date": "2026-11-20",
+    "slot": 5,
+    "template": "T11-carousel",
+    "palette": "ocean-blue",
+    "decoration": "corner-brackets",
+    "layoutVariant": 1,
+    "headline": "Why Dedicated Forex VPS Gives You an Unfair Edge",
+    "pillar": "educational",
+    "captionHash": "764247228"
+  },
+  {
+    "date": "2026-11-20",
+    "slot": 4,
+    "template": "T08-browser-mockup",
+    "palette": "electric-indigo",
+    "decoration": "diagonal-stripes",
+    "layoutVariant": 2,
+    "headline": "Everything You Need to Host Your First Website",
+    "pillar": "offers",
+    "captionHash": "2809401445"
+  }
+]

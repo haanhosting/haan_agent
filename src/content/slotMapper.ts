@@ -86,7 +86,7 @@ export interface PreparedPost {
   date: string;
   slot: number;
   scheduledAt: string; // ISO 8601 with +05:00
-  status: 'queued' | 'publishing' | 'posted' | 'failed' | 'skipped';
+  status: 'queued' | 'publishing' | 'posted' | 'failed' | 'skipped' | 'rejected';
   approved: boolean;
   pillar: string;
   format: 'single' | 'carousel';
@@ -104,6 +104,8 @@ export interface PreparedPost {
   images: string[];
   imageUrls: string[];
   igMediaId: string | null;
+  postedAt?: string | null;
+  rejectedAt?: string | null;
   attempts: number;
   error: string | null;
 }

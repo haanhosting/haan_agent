@@ -5,13 +5,14 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-import { loadQueue, saveQueue, loadHistory } from './state/stateManager.js';
+import { loadQueue, saveQueue, loadHistory, enqueuePosts, updatePostStatus } from './state/stateManager.js';
 import { generateDailyPosts, loadScheduleConfig, loadPillarsConfig } from './content/slotMapper.js';
 import { loadContentBank } from './content/bank.js';
 import { renderSlide, closeBrowser } from './render/renderer.js';
 import { generatePreviews, SAMPLE_POSTS } from './render/preview.js';
 import { getPublicMediaUrl } from './publish/mediaHost.js';
-import { enqueuePosts } from './state/stateManager.js';
+import { publishPost, getActivePublisherType } from './publish/publisher.js';
+import { checkUploadPostConnection } from './publish/uploadPost.js';
 import { loadTokenState } from './publish/tokenRefresh.js';
 import { getNextDayKarachi } from './schedule/scheduler.js';
 
@@ -63,11 +64,60 @@ function sendJson(res: http.ServerResponse, status: number, payload: any): void 
   res.end(JSON.stringify(payload));
 }
 
+function upsertEnvFile(updates: Record<string, string>): void {
+  const envPath = path.resolve(process.cwd(), '.env');
+  const examplePath = path.resolve(process.cwd(), '.env.example');
+  let content = '';
+  if (fs.existsSync(envPath)) {
+    content = fs.readFileSync(envPath, 'utf8');
+  } else if (fs.existsSync(examplePath)) {
+    content = fs.readFileSync(examplePath, 'utf8');
+  }
+
+  for (const [key, val] of Object.entries(updates)) {
+    process.env[key] = val;
+    const regex = new RegExp(`^${key}=.*$`, 'm');
+    if (regex.test(content)) {
+      content = content.replace(regex, `${key}=${val}`);
+    } else {
+      content = content.trimEnd() + `\n${key}=${val}\n`;
+    }
+  }
+  fs.writeFileSync(envPath, content, 'utf8');
+}
+
 function buildDryRunLog(post: any): string {
+  const activePublisher = getActivePublisherType();
+  const urls = post.imageUrls?.length ? post.imageUrls : post.images.map((i: string) => getPublicMediaUrl(i));
+
+  if (activePublisher === 'uploadpost') {
+    const user = process.env.UPLOADPOST_USER || 'haanhosting';
+    const lines: string[] = [];
+    lines.push(`=== UPLOAD-POST API DRY-RUN (${post.format.toUpperCase()}) ===`);
+    lines.push(`POST https://api.upload-post.com/api/upload_photos`);
+    lines.push(`Headers:`);
+    lines.push(`  Authorization: Apikey ${process.env.UPLOADPOST_API_KEY ? '[CONFIGURED]' : '[MISSING - set UPLOADPOST_API_KEY]'}`);
+    lines.push(`  Idempotency-Key: ${post.id}`);
+    lines.push(`  Content-Type: multipart/form-data\n`);
+    lines.push(`Form Fields:`);
+    lines.push(`  user: "${user}"`);
+    lines.push(`  platform[]: "instagram"`);
+    if (post.altText) {
+      lines.push(`  instagram_alt_text: "${post.altText}"`);
+    }
+    for (const imgPath of post.images || []) {
+      lines.push(`  photos[]: @${imgPath} (local 1080×1350 JPEG binary)`);
+    }
+    lines.push(`\n  title (Instagram Caption):`);
+    lines.push(`----------------------------------------`);
+    lines.push(post.caption);
+    lines.push(`----------------------------------------`);
+    return lines.join('\n');
+  }
+
   const apiVersion = 'v22.0';
   const baseUrl = 'https://graph.instagram.com';
   const userId = process.env.IG_USER_ID || 'IG_USER_ID';
-  const urls = post.imageUrls?.length ? post.imageUrls : post.images.map((i: string) => getPublicMediaUrl(i));
 
   const lines: string[] = [];
   lines.push(`GET ${baseUrl}/${apiVersion}/${userId}/content_publishing_limit?fields=config,quota_usage`);
@@ -268,6 +318,33 @@ function getDashboardHtml(): string {
       border: 1px solid var(--border);
     }
     .btn-emerald { background: var(--emerald); color: #041d14; }
+    .btn-danger {
+      background: rgba(239, 68, 68, 0.16);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.35);
+    }
+    .btn-danger:hover {
+      background: rgba(239, 68, 68, 0.28);
+    }
+    .badge-danger {
+      background: rgba(239, 68, 68, 0.2);
+      color: #f87171;
+    }
+    .post-card.card-published {
+      border-color: rgba(0, 187, 127, 0.45);
+    }
+    .post-card.card-rejected {
+      border-color: rgba(239, 68, 68, 0.4);
+      opacity: 0.92;
+    }
+    .section-divider {
+      margin: 36px 0 18px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
     input[type="date"], select, input[type="text"] {
       background: #050914;
       color: #fff;
@@ -446,7 +523,9 @@ function getDashboardHtml(): string {
       </div>
     </div>
     <div class="nav-tabs">
-      <button class="tab-btn active" onclick="switchTab('queue')">📅 Daily Queue (<span id="tab-queue-count">0</span>)</button>
+      <button class="tab-btn active" onclick="switchTab('queue')">📅 Pending Queue (<span id="tab-queue-count">0</span>)</button>
+      <button class="tab-btn" onclick="switchTab('published')">✅ Published (<span id="tab-published-count">0</span>)</button>
+      <button class="tab-btn" onclick="switchTab('rejected')">🚫 Rejected (<span id="tab-rejected-count">0</span>)</button>
       <button class="tab-btn" onclick="switchTab('templates')">🎨 12 Templates</button>
       <button class="tab-btn" onclick="switchTab('bank')">📚 Content Bank (<span id="tab-bank-count">66</span>)</button>
       <button class="tab-btn" onclick="switchTab('doctor')">🩺 Doctor & Brand</button>
@@ -456,7 +535,7 @@ function getDashboardHtml(): string {
   <main>
     <div class="stats-bar" id="stats-bar"></div>
 
-    <!-- TAB 1: QUEUE -->
+    <!-- TAB 1: PENDING QUEUE -->
     <section id="sec-queue" class="section active">
       <div class="toolbar">
         <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
@@ -464,11 +543,50 @@ function getDashboardHtml(): string {
           <input type="date" id="gen-date" />
           <button class="btn" id="btn-generate" onclick="triggerGenerate()">⚡ Generate & Render 5 Posts</button>
         </div>
-        <div style="display:flex; gap:10px;">
+        <div style="display:flex; gap:10px; align-items:center;">
+          <span style="font-size:13px; color:var(--muted);">Uploaded & rejected posts are automatically moved to their tabs.</span>
           <button class="btn btn-secondary" onclick="loadState()">↻ Refresh</button>
         </div>
       </div>
       <div class="grid-posts" id="queue-grid"></div>
+    </section>
+
+    <!-- TAB 2: PUBLISHED POSTS -->
+    <section id="sec-published" class="section">
+      <div class="toolbar">
+        <div>
+          <strong>✅ Uploaded Instagram Posts</strong>
+          <span style="color:var(--muted); font-size:13px; margin-left:10px;">Posts successfully published via Upload-Post API</span>
+        </div>
+        <div style="display:flex; gap:10px;">
+          <button class="btn btn-secondary" onclick="switchTab('rejected')">🚫 View Rejected Posts</button>
+          <button class="btn btn-secondary" onclick="loadState()">↻ Refresh</button>
+        </div>
+      </div>
+      <div class="grid-posts" id="published-grid"></div>
+
+      <div class="section-divider">
+        <div>
+          <strong style="font-size:18px;">🚫 Rejected & Failed Posts (<span id="sub-rejected-count">0</span>)</strong>
+          <span style="color:var(--muted); font-size:13px; margin-left:10px;">Posts removed from the active queue</span>
+        </div>
+      </div>
+      <div class="grid-posts" id="published-rejected-subgrid"></div>
+    </section>
+
+    <!-- TAB 3: REJECTED POSTS -->
+    <section id="sec-rejected" class="section">
+      <div class="toolbar">
+        <div>
+          <strong>🚫 Rejected & Failed Posts</strong>
+          <span style="color:var(--muted); font-size:13px; margin-left:10px;">Removed from the main queue — restore anytime or delete permanently</span>
+        </div>
+        <div style="display:flex; gap:10px;">
+          <button class="btn btn-secondary" onclick="switchTab('published')">✅ View Published Posts</button>
+          <button class="btn btn-secondary" onclick="loadState()">↻ Refresh</button>
+        </div>
+      </div>
+      <div class="grid-posts" id="rejected-grid"></div>
     </section>
 
     <!-- TAB 2: TEMPLATES -->
@@ -544,88 +662,120 @@ function getDashboardHtml(): string {
     function switchTab(tab) {
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      const map = { queue: 0, templates: 1, bank: 2, doctor: 3 };
-      document.querySelectorAll('.tab-btn')[map[tab]].classList.add('active');
+      const map = { queue: 0, published: 1, rejected: 2, templates: 3, bank: 4, doctor: 5 };
+      if (map[tab] !== undefined) {
+        document.querySelectorAll('.tab-btn')[map[tab]].classList.add('active');
+      }
       document.getElementById('sec-' + tab).classList.add('active');
+    }
+
+    function getPendingPosts() {
+      return (appState.queue || []).filter(p => p.status === 'queued' || p.status === 'publishing');
+    }
+
+    function getPublishedPosts() {
+      return (appState.queue || []).filter(p => p.status === 'posted');
+    }
+
+    function getRejectedPosts() {
+      return (appState.queue || []).filter(p => p.status === 'rejected' || p.status === 'failed' || p.status === 'skipped');
     }
 
     async function loadState() {
       const res = await fetch('/api/state');
       appState = await res.json();
 
+      const pending = getPendingPosts();
+      const published = getPublishedPosts();
+      const rejected = getRejectedPosts();
+
       document.getElementById('gen-date').value = appState.nextDay;
-      document.getElementById('tab-queue-count').textContent = appState.queue.length;
+      document.getElementById('tab-queue-count').textContent = pending.length;
+      document.getElementById('tab-published-count').textContent = published.length;
+      document.getElementById('tab-rejected-count').textContent = rejected.length;
+      document.getElementById('sub-rejected-count').textContent = rejected.length;
       document.getElementById('tab-bank-count').textContent = appState.bank.length;
 
       // Render stats
       document.getElementById('stats-bar').innerHTML = \`
-        <div class="stat-card">
-          <div class="stat-label">Queued Posts</div>
-          <div class="stat-value">\${appState.queue.length}</div>
-          <div class="stat-sub">5 slots/day (Asia/Karachi)</div>
+        <div class="stat-card" style="cursor:pointer;" onclick="switchTab('queue')">
+          <div class="stat-label">Pending Queue</div>
+          <div class="stat-value">\${pending.length}</div>
+          <div class="stat-sub">Ready to review & upload</div>
         </div>
-        <div class="stat-card">
-          <div class="stat-label">Launch Templates</div>
-          <div class="stat-value">12</div>
-          <div class="stat-sub">10 Palettes · 8 SVG Shapes</div>
+        <div class="stat-card" style="cursor:pointer;" onclick="switchTab('published')">
+          <div class="stat-label">Uploaded to IG</div>
+          <div class="stat-value" style="color:#34d399;">\${published.length}</div>
+          <div class="stat-sub">✅ Published via Upload-Post</div>
         </div>
-        <div class="stat-card">
-          <div class="stat-label">Offline Content Bank</div>
-          <div class="stat-value">\${appState.bank.length}</div>
-          <div class="stat-sub">7 Content Pillars Validated</div>
+        <div class="stat-card" style="cursor:pointer;" onclick="switchTab('rejected')">
+          <div class="stat-label">Rejected / Failed</div>
+          <div class="stat-value" style="color:\${rejected.length ? '#f87171' : '#fff'};">\${rejected.length}</div>
+          <div class="stat-sub">Hidden from active queue</div>
         </div>
-        <div class="stat-card">
-          <div class="stat-label">Monthly Cost</div>
-          <div class="stat-value">$0.00</div>
-          <div class="stat-sub">IG Graph API + GitHub Free</div>
+        <div class="stat-card" style="cursor:pointer;" onclick="switchTab('doctor')">
+          <div class="stat-label">Active Publisher</div>
+          <div class="stat-value" style="font-size:22px;">Upload-Post API</div>
+          <div class="stat-sub">\${appState.doctor.hasUploadPost ? '✅ API Key Connected' : '⚠️ Set UPLOADPOST_API_KEY in Doctor tab'}</div>
         </div>
       \`;
 
       renderQueue();
+      renderPublished();
+      renderRejected();
       renderTemplates();
       renderBankTable();
       renderDoctor();
     }
 
-    function changeSlide(postId, delta, total) {
-      const curr = slideIndices[postId] || 0;
+    function buildPostSlideViewer(post, idPrefix = '') {
+      const imgs = post.images || [];
+      const firstImg = imgs[0] ? '/' + imgs[0] : '';
+      const isCarousel = imgs.length > 1;
+      const domId = idPrefix + post.id;
+      return \`
+        <div class="slide-viewer">
+          \${firstImg ? \`<a href="\${firstImg}" target="_blank"><img id="img-\${domId}" src="\${firstImg}" alt="\${post.altText}" /></a>\` : '<div style="padding:40px;text-align:center;">Not rendered</div>'}
+          \${isCarousel ? \`
+            <div class="carousel-nav">
+              <button onclick="changeSlide('\${post.id}', -1, \${imgs.length}, '\${idPrefix}')">‹</button>
+              <span id="cnt-\${domId}">1 / \${imgs.length}</span>
+              <button onclick="changeSlide('\${post.id}', 1, \${imgs.length}, '\${idPrefix}')">›</button>
+            </div>
+          \` : ''}
+        </div>
+      \`;
+    }
+
+    function changeSlide(postId, delta, total, idPrefix = '') {
+      const key = idPrefix + postId;
+      const curr = slideIndices[key] || 0;
       const next = (curr + delta + total) % total;
-      slideIndices[postId] = next;
+      slideIndices[key] = next;
       const post = appState.queue.find(p => p.id === postId);
       if (!post) return;
-      const imgEl = document.getElementById('img-' + postId);
-      const countEl = document.getElementById('cnt-' + postId);
-      imgEl.src = '/' + post.images[next] + '?t=' + Date.now();
-      countEl.textContent = (next + 1) + ' / ' + total;
+      const imgEl = document.getElementById('img-' + key);
+      const countEl = document.getElementById('cnt-' + key);
+      if (imgEl) imgEl.src = '/' + post.images[next] + '?t=' + Date.now();
+      if (countEl) countEl.textContent = (next + 1) + ' / ' + total;
     }
 
     function renderQueue() {
       const container = document.getElementById('queue-grid');
-      if (!appState.queue.length) {
-        container.innerHTML = '<p style="color:var(--muted)">No posts in queue. Click "Generate & Render 5 Posts" above.</p>';
+      const pending = getPendingPosts();
+      if (!pending.length) {
+        container.innerHTML = '<div class="post-card" style="padding:32px; grid-column: 1 / -1; text-align:center;"><p style="color:var(--muted); margin:0;">🎉 No pending posts in queue! Uploaded posts are in the <strong>✅ Published</strong> tab, or click <strong>"⚡ Generate & Render 5 Posts"</strong> above.</p></div>';
         return;
       }
 
-      container.innerHTML = appState.queue.map(post => {
-        const imgs = post.images || [];
-        const firstImg = imgs[0] ? '/' + imgs[0] : '';
-        const isCarousel = imgs.length > 1;
+      container.innerHTML = pending.map(post => {
         return \`
           <div class="post-card">
             <div class="post-top">
               <strong>\${post.id}</strong>
               <span class="badge \${post.format === 'carousel' ? 'badge-emerald' : ''}">\${post.pillar} · \${post.format}</span>
             </div>
-            <div class="slide-viewer">
-              \${firstImg ? \`<a href="\${firstImg}" target="_blank"><img id="img-\${post.id}" src="\${firstImg}" alt="\${post.altText}" /></a>\` : '<div style="padding:40px;text-align:center;">Not rendered</div>'}
-              \${isCarousel ? \`
-                <div class="carousel-nav">
-                  <button onclick="changeSlide('\${post.id}', -1, \${imgs.length})">‹</button>
-                  <span id="cnt-\${post.id}">1 / \${imgs.length}</span>
-                  <button onclick="changeSlide('\${post.id}', 1, \${imgs.length})">›</button>
-                </div>
-              \` : ''}
-            </div>
+            \${buildPostSlideViewer(post, 'q-')}
             <div class="post-body">
               <div class="meta-row">
                 <span>🕒 <strong>\${post.scheduledAt}</strong></span>
@@ -633,17 +783,115 @@ function getDashboardHtml(): string {
               </div>
               <div class="caption-box">\${post.caption}</div>
             </div>
-            <div class="post-actions">
-              <button class="btn btn-secondary" onclick="toggleApprove('\${post.id}')">
-                \${post.approved ? '✅ Approved' : '⏳ Needs Approval'}
-              </button>
-              <button class="btn btn-emerald" onclick="showDryRun('\${post.id}')">
-                🚀 Dry-Run Publish
-              </button>
+            <div class="post-actions" style="flex-wrap:wrap;">
+              <div style="display:flex; gap:8px;">
+                <button class="btn btn-secondary" onclick="toggleApprove('\${post.id}')">
+                  \${post.approved ? '✅ Approved' : '⏳ Approve'}
+                </button>
+                <button class="btn btn-danger" onclick="setPostStatus('\${post.id}', 'rejected')" title="Reject and remove from main queue">
+                  🚫 Reject
+                </button>
+              </div>
+              <div style="display:flex; gap:8px;">
+                <button class="btn btn-secondary" onclick="showDryRun('\${post.id}')">
+                  🔍 Dry-Run
+                </button>
+                <button class="btn btn-emerald" id="pub-\${post.id}" onclick="publishLive('\${post.id}')">
+                  📤 Publish Now
+                </button>
+              </div>
             </div>
           </div>
         \`;
       }).join('');
+    }
+
+    function renderPublishedCard(post, idPrefix = 'pub-') {
+      return \`
+        <div class="post-card card-published">
+          <div class="post-top">
+            <strong>\${post.id}</strong>
+            <span class="badge badge-emerald">✅ UPLOADED TO INSTAGRAM</span>
+          </div>
+          \${buildPostSlideViewer(post, idPrefix)}
+          <div class="post-body">
+            <div class="meta-row">
+              <span>🆔 <strong>Request/Media ID:</strong> <code>\${post.igMediaId || 'N/A'}</code></span>
+            </div>
+            <div class="meta-row">
+              <span>🕒 Slot: <strong>\${post.scheduledAt}</strong></span>
+              <span>🎨 \${post.template} (\${post.pillar})</span>
+            </div>
+            \${post.postedAt ? \`<div class="meta-row"><span>📤 Uploaded At: <strong>\${post.postedAt}</strong></span></div>\` : ''}
+            <div class="caption-box">\${post.caption}</div>
+          </div>
+          <div class="post-actions" style="flex-wrap:wrap;">
+            <button class="btn btn-secondary" onclick="setPostStatus('\${post.id}', 'queued')">
+              ↩️ Move Back to Queue
+            </button>
+            <button class="btn btn-danger" onclick="setPostStatus('\${post.id}', 'rejected')">
+              🚫 Move to Rejected
+            </button>
+          </div>
+        </div>
+      \`;
+    }
+
+    function renderRejectedCard(post, idPrefix = 'rej-') {
+      const badgeLabel = post.status === 'failed' ? '⚠️ PUBLISH FAILED' : '🚫 REJECTED';
+      return \`
+        <div class="post-card card-rejected">
+          <div class="post-top">
+            <strong>\${post.id}</strong>
+            <span class="badge badge-danger">\${badgeLabel}</span>
+          </div>
+          \${buildPostSlideViewer(post, idPrefix)}
+          <div class="post-body">
+            <div class="meta-row">
+              <span>🕒 Slot: <strong>\${post.scheduledAt}</strong></span>
+              <span>🎨 \${post.template} (\${post.pillar})</span>
+            </div>
+            \${post.error ? \`<div style="color:#f87171; font-size:12px; background:rgba(239,68,68,0.1); padding:8px; border-radius:6px;">Error: \${post.error}</div>\` : ''}
+            <div class="caption-box">\${post.caption}</div>
+          </div>
+          <div class="post-actions" style="flex-wrap:wrap;">
+            <button class="btn btn-emerald" onclick="setPostStatus('\${post.id}', 'queued')">
+              ↩️ Restore to Queue
+            </button>
+            <button class="btn btn-danger" onclick="deletePostPermanently('\${post.id}')">
+              🗑️ Delete Permanently
+            </button>
+          </div>
+        </div>
+      \`;
+    }
+
+    function renderPublished() {
+      const container = document.getElementById('published-grid');
+      const published = getPublishedPosts();
+      if (!published.length) {
+        container.innerHTML = '<div class="post-card" style="padding:32px; grid-column: 1 / -1; text-align:center;"><p style="color:var(--muted); margin:0;">No posts have been uploaded yet. Click <strong>"📤 Publish Now"</strong> on any post in the Pending Queue.</p></div>';
+      } else {
+        container.innerHTML = published.map(p => renderPublishedCard(p, 'pub-')).join('');
+      }
+
+      const subRejected = document.getElementById('published-rejected-subgrid');
+      const rejected = getRejectedPosts();
+      if (!rejected.length) {
+        subRejected.innerHTML = '<div class="post-card" style="padding:24px; grid-column: 1 / -1; text-align:center;"><p style="color:var(--muted); margin:0;">No rejected posts.</p></div>';
+      } else {
+        subRejected.innerHTML = rejected.map(p => renderRejectedCard(p, 'subrej-')).join('');
+      }
+    }
+
+    function renderRejected() {
+      const container = document.getElementById('rejected-grid');
+      const rejected = getRejectedPosts();
+      if (!rejected.length) {
+        container.innerHTML = '<div class="post-card" style="padding:32px; grid-column: 1 / -1; text-align:center;"><p style="color:var(--muted); margin:0;">No rejected or failed posts. Clicking <strong>"🚫 Reject"</strong> on a post in the Pending Queue moves it here.</p></div>';
+        return;
+      }
+      container.innerHTML = rejected.map(p => renderRejectedCard(p, 'rej-')).join('');
     }
 
     function renderTemplates() {
@@ -688,15 +936,38 @@ function getDashboardHtml(): string {
 
     function renderDoctor() {
       const b = appState.brand;
+      const up = appState.uploadPostHealth || {};
+      const profilesHtml = (up.profiles && up.profiles.length)
+        ? up.profiles.map(p => \`<li><strong>\${p.username}</strong> — Instagram: \${p.hasInstagram ? '<span style="color:#34d399;">✅ Connected</span>' : '<span style="color:#f87171;">❌ Not linked</span>'}</li>\`).join('')
+        : '<li>No profiles detected yet (enter API key below & click Save & Test)</li>';
+
       document.getElementById('doctor-grid').innerHTML = \`
         <div class="post-card" style="padding:24px;">
+          <h3 style="margin-top:0;">🚀 Upload-Post.com Instagram Publisher</h3>
+          <p style="font-size:13px; color:var(--muted);">
+            Connect your account at <a href="https://app.upload-post.com/dashboard" target="_blank" style="color:#60a5fa;">app.upload-post.com/dashboard</a>, copy your API Key & Profile Username, and save below:
+          </p>
+          <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:14px;">
+            <label style="font-size:12px; color:var(--muted);">UPLOADPOST_API_KEY:</label>
+            <input type="text" id="up-api-key" placeholder="Paste your Upload-Post API Key..." value="" />
+            <label style="font-size:12px; color:var(--muted);">UPLOADPOST_USER (Profile Username on Upload-Post):</label>
+            <input type="text" id="up-user" placeholder="e.g. haanhosting (leave blank to auto-detect)" value="\${up.resolvedUser || up.configuredUser || ''}" />
+            <button class="btn btn-emerald" onclick="saveUploadPostConfig()">💾 Save to .env & Verify Connection</button>
+          </div>
+          <p><strong>Connection Status:</strong> \${up.ok ? '<span style="color:#34d399;">✅ Connected to Upload-Post API</span>' : '<span style="color:#fbbf24;">⚠️ ' + (up.error || 'Not configured') + '</span>'}</p>
+          <p><strong>Resolved Profile:</strong> <code>\${up.resolvedUser || 'Auto-detect'}</code></p>
+          <h4 style="margin-bottom:6px;">Dashboard Profiles:</h4>
+          <ul style="margin-top:0; font-size:13px;">\${profilesHtml}</ul>
+        </div>
+        <div class="post-card" style="padding:24px;">
           <h3 style="margin-top:0;">🩺 System Health Checks</h3>
+          <p>✅ <strong>Active Publisher:</strong> <code>\${appState.doctor.activePublisher}</code></p>
           <p>✅ <strong>Node.js Runtime:</strong> \${appState.doctor.nodeVersion}</p>
-          <p>✅ <strong>Bundled Offline Fonts:</strong> Inter, Outfit, Space Grotesk (542.1 KB inlined)</p>
+          <p>✅ <strong>Bundled Offline Fonts:</strong> Poppins & Inter (inlined)</p>
           <p>✅ <strong>12 Launch Templates:</strong> All verified (1080×1350 4:5 JPEG)</p>
           <p>✅ <strong>Offline Content Bank:</strong> \${appState.bank.length} validated posts ready</p>
-          <p>🔑 <strong>GEMINI_API_KEY:</strong> \${appState.doctor.hasGemini ? 'Configured' : 'Not set (Using Offline Content Bank fallback)'}</p>
-          <p>🔑 <strong>IG_ACCESS_TOKEN:</strong> \${appState.doctor.hasIgToken ? 'Configured' : 'Not set (Dry-run active)'}</p>
+          <p>🔑 <strong>UPLOADPOST_API_KEY:</strong> \${appState.doctor.hasUploadPost ? 'Configured ✅' : 'Not set ⚠️'}</p>
+          <p>🔑 <strong>GEMINI_API_KEY:</strong> \${appState.doctor.hasGemini ? 'Configured ✅' : 'Not set (Using Offline Content Bank fallback)'}</p>
         </div>
         <div class="post-card" style="padding:24px;">
           <h3 style="margin-top:0;">🏢 Verified Brand Profile (\${b.name})</h3>
@@ -743,6 +1014,35 @@ function getDashboardHtml(): string {
       await loadState();
     }
 
+    async function setPostStatus(postId, status) {
+      const res = await fetch('/api/set-status', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ postId, status })
+      });
+      if (!res.ok) {
+        const d = await res.json();
+        alert('Error: ' + (d.error || 'Failed to update status'));
+        return;
+      }
+      await loadState();
+    }
+
+    async function deletePostPermanently(postId) {
+      if (!confirm('Permanently delete post ' + postId + ' from the queue?')) return;
+      const res = await fetch('/api/delete-post', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ postId })
+      });
+      if (!res.ok) {
+        const d = await res.json();
+        alert('Error: ' + (d.error || 'Failed to delete post'));
+        return;
+      }
+      await loadState();
+    }
+
     async function showDryRun(postId) {
       const res = await fetch('/api/publish-dry-run', {
         method: 'POST',
@@ -750,9 +1050,55 @@ function getDashboardHtml(): string {
         body: JSON.stringify({ postId })
       });
       const data = await res.json();
-      document.getElementById('modal-title').textContent = 'Instagram Graph API Dry-Run · ' + postId;
+      document.getElementById('modal-title').textContent = 'Upload-Post API Dry-Run · ' + postId;
       document.getElementById('modal-content').textContent = data.log;
       document.getElementById('dryrun-modal').classList.add('open');
+    }
+
+    async function publishLive(postId) {
+      const btn = document.getElementById('pub-' + postId);
+      if (btn) {
+        btn.disabled = true;
+        btn.textContent = '⏳ Uploading...';
+      }
+      try {
+        const res = await fetch('/api/publish-live', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ postId })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Upload failed');
+        document.getElementById('modal-title').textContent = '✅ Published to Instagram via Upload-Post · ' + postId;
+        document.getElementById('modal-content').textContent = JSON.stringify(data, null, 2);
+        document.getElementById('dryrun-modal').classList.add('open');
+        await loadState();
+      } catch (e) {
+        alert('Publish failed: ' + e.message);
+        if (btn) {
+          btn.disabled = false;
+          btn.textContent = '📤 Publish Now';
+        }
+      }
+    }
+
+    async function saveUploadPostConfig() {
+      const apiKey = document.getElementById('up-api-key').value.trim();
+      const user = document.getElementById('up-user').value.trim();
+      const res = await fetch('/api/save-uploadpost-config', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ apiKey, user })
+      });
+      const data = await res.json();
+      if (!res.ok) {
+        alert('Error: ' + (data.error || 'Failed to save'));
+        return;
+      }
+      await loadState();
+      alert(data.health?.ok
+        ? 'Connected to Upload-Post! Resolved profile: ' + (data.health.resolvedUser || 'none')
+        : 'Saved to .env, but connection check returned: ' + (data.health?.error || 'Unknown error'));
     }
 
     function closeModal() {
@@ -784,6 +1130,7 @@ const server = http.createServer(async (req, res) => {
       const history = loadHistory();
       const bank = loadContentBank();
       const token = loadTokenState();
+      const uploadPostHealth = await checkUploadPostConnection();
 
       sendJson(res, 200, {
         nextDay: getNextDayKarachi(),
@@ -794,11 +1141,14 @@ const server = http.createServer(async (req, res) => {
         history,
         bank,
         token,
+        uploadPostHealth,
         samples: SAMPLE_POSTS,
         doctor: {
+          activePublisher: getActivePublisherType(),
           nodeVersion: process.version,
           hasGemini: Boolean(process.env.GEMINI_API_KEY),
-          hasIgToken: Boolean(process.env.IG_ACCESS_TOKEN)
+          hasIgToken: Boolean(process.env.IG_ACCESS_TOKEN),
+          hasUploadPost: Boolean(process.env.UPLOADPOST_API_KEY)
         }
       });
       return;
@@ -860,6 +1210,31 @@ const server = http.createServer(async (req, res) => {
       return;
     }
 
+    if (req.method === 'POST' && pathname === '/api/set-status') {
+      const body = await readJsonBody(req);
+      if (!body.postId || !body.status) {
+        sendJson(res, 400, { error: 'postId and status are required' });
+        return;
+      }
+      const updated = updatePostStatus(body.postId, body.status);
+      sendJson(res, 200, { ok: true, post: updated });
+      return;
+    }
+
+    if (req.method === 'POST' && pathname === '/api/delete-post') {
+      const body = await readJsonBody(req);
+      const queue = loadQueue();
+      const idx = queue.findIndex(p => p.id === body.postId);
+      if (idx === -1) {
+        sendJson(res, 404, { error: 'Post not found' });
+        return;
+      }
+      queue.splice(idx, 1);
+      saveQueue(queue);
+      sendJson(res, 200, { ok: true });
+      return;
+    }
+
     if (req.method === 'POST' && pathname === '/api/publish-dry-run') {
       const body = await readJsonBody(req);
       const queue = loadQueue();
@@ -870,6 +1245,46 @@ const server = http.createServer(async (req, res) => {
       }
       const log = buildDryRunLog(post);
       sendJson(res, 200, { ok: true, log });
+      return;
+    }
+
+    if (req.method === 'POST' && pathname === '/api/publish-live') {
+      const body = await readJsonBody(req);
+      const queue = loadQueue();
+      const post = queue.find(p => p.id === body.postId);
+      if (!post) {
+        sendJson(res, 404, { error: 'Post not found in queue' });
+        return;
+      }
+      updatePostStatus(post.id, 'publishing');
+      try {
+        const result = await publishPost(post, { dryRun: false, skipMediaWait: true });
+        updatePostStatus(post.id, 'posted', { igMediaId: result.igMediaId });
+        sendJson(res, 200, { ok: true, postId: post.id, result });
+      } catch (err: any) {
+        updatePostStatus(post.id, 'queued', { error: err.message });
+        sendJson(res, 400, { error: err.message });
+      }
+      return;
+    }
+
+    if (req.method === 'POST' && pathname === '/api/save-uploadpost-config') {
+      const body = await readJsonBody(req);
+      const updates: Record<string, string> = {};
+      if (typeof body.apiKey === 'string' && body.apiKey.trim()) {
+        updates.UPLOADPOST_API_KEY = body.apiKey.trim();
+      }
+      if (typeof body.user === 'string') {
+        updates.UPLOADPOST_USER = body.user.trim();
+      }
+      if (Object.keys(updates).length > 0) {
+        upsertEnvFile(updates);
+      }
+      const health = await checkUploadPostConnection();
+      if (health.ok && health.resolvedUser && !process.env.UPLOADPOST_USER) {
+        upsertEnvFile({ UPLOADPOST_USER: health.resolvedUser });
+      }
+      sendJson(res, 200, { ok: true, health });
       return;
     }
 

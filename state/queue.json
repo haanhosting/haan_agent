@@ -175,8 +175,8 @@
     "date": "2026-11-20",
     "slot": 4,
     "scheduledAt": "2026-11-20T19:30:00+05:00",
-    "status": "queued",
-    "approved": true,
+    "status": "posted",
+    "approved": false,
     "pillar": "offers",
     "format": "single",
     "template": "T08-browser-mockup",
@@ -216,7 +216,7 @@
     "imageUrls": [
       "https://username.github.io/haan-insta-agent/media/2026-11-20/slot4.jpg"
     ],
-    "igMediaId": null,
+    "igMediaId": "522aa8d9c41042649ba05b3be82cde23",
     "attempts": 0,
     "error": null
   },
@@ -225,7 +225,7 @@
     "date": "2026-11-20",
     "slot": 5,
     "scheduledAt": "2026-11-20T21:30:00+05:00",
-    "status": "queued",
+    "status": "posted",
     "approved": true,
     "pillar": "educational",
     "format": "carousel",
@@ -305,7 +305,7 @@
       "https://username.github.io/haan-insta-agent/media/2026-11-20/slot5-2.jpg",
       "https://username.github.io/haan-insta-agent/media/2026-11-20/slot5-3.jpg"
     ],
-    "igMediaId": null,
+    "igMediaId": "3ddff162702e41938045718750f91a12",
     "attempts": 0,
     "error": null
   },

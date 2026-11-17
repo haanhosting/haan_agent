@@ -21,7 +21,7 @@
     }
   },
   "publisher": {
-    "active": "instagram-graph",
+    "active": "uploadpost",
     "instagramGraph": {
       "apiVersion": "v22.0",
       "baseUrl": "https://graph.instagram.com",
@@ -30,8 +30,10 @@
       "statusPollIntervalMs": 3000
     },
     "uploadPost": {
-      "enabled": false,
+      "enabled": true,
       "endpoint": "https://api.upload-post.com/api/upload_photos",
+      "usersEndpoint": "https://api.upload-post.com/api/uploadposts/users",
+      "statusEndpoint": "https://api.upload-post.com/api/uploadposts/status",
       "monthlyUploadLimit": 10
     }
   }
