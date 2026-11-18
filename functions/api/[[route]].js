@@ -2,8 +2,6 @@
 
 let memoryQueue = null;
 let memoryHistory = null;
-let runtimeApiKey = null;
-let runtimeUser = null;
 
 function jsonResponse(status, payload) {
   return new Response(JSON.stringify(payload), {
@@ -96,63 +94,45 @@ async function getQueueState(context) {
   return memoryQueue;
 }
 
-async function checkUploadPostHealth(apiKey, configuredUser) {
-  if (!apiKey) {
-    return {
-      ok: false,
-      configuredUser: configuredUser || null,
-      resolvedUser: configuredUser || null,
-      profiles: [],
-      error: 'UPLOADPOST_API_KEY is not set (add in Cloudflare Environment Variables or paste below)'
-    };
+async function checkInstagramHealth(env) {
+  // Publishing runs in GitHub Actions, where IG_ACCESS_TOKEN lives as a secret.
+  // If the token is also set in Cloudflare, verify it live; otherwise report that.
+  const token = env.IG_ACCESS_TOKEN;
+  const userId = env.IG_USER_ID;
+  if (!token || !userId) {
+    return { ok: false, error: 'Publishing runs in GitHub Actions (IG token is a GitHub secret, not set in Cloudflare)' };
   }
+  const base = token.startsWith('EAA') ? 'https://graph.facebook.com' : 'https://graph.instagram.com';
   try {
-    const res = await fetch('https://api.upload-post.com/api/uploadposts/users', {
-      headers: {
-        'Authorization': `Apikey ${apiKey}`,
-        'X-Upload-Post-Source': 'haan-insta-agent-cf'
-      }
+    const res = await fetch(`${base}/v22.0/${userId}?fields=id,username`, {
+      headers: { 'Authorization': `Bearer ${token}` }
     });
-    if (!res.ok) {
-      return {
-        ok: false,
-        configuredUser,
-        resolvedUser: configuredUser,
-        profiles: [],
-        error: `HTTP ${res.status}: ${await res.text()}`
-      };
-    }
     const json = await res.json();
-    const rawProfiles = Array.isArray(json.profiles) ? json.profiles : [];
-    const profiles = rawProfiles.map(p => {
-      const social = p.social_accounts || {};
-      return {
-        username: p.username,
-        hasInstagram: Boolean(social.instagram),
-        platforms: Object.keys(social).filter(k => Boolean(social[k]))
-      };
-    });
-    let resolvedUser = configuredUser || null;
-    if (profiles.length > 0) {
-      const exact = configuredUser ? profiles.find(p => p.username === configuredUser) : undefined;
-      const withIg = profiles.find(p => p.hasInstagram);
-      resolvedUser = (exact && exact.username) || (withIg && withIg.username) || profiles[0].username;
-    }
-    return {
-      ok: true,
-      configuredUser: configuredUser || null,
-      resolvedUser,
-      profiles
-    };
+    if (!res.ok) return { ok: false, error: json?.error?.message || `HTTP ${res.status}` };
+    return { ok: true, username: json.username };
   } catch (err) {
-    return {
-      ok: false,
-      configuredUser: configuredUser || null,
-      resolvedUser: configuredUser || null,
-      profiles: [],
-      error: err.message
-    };
+    return { ok: false, error: err.message };
   }
+}
+
+async function dispatchWorkflow(env, workflowFile, inputs) {
+  const pat = env.GH_PAT;
+  const repo = env.GITHUB_REPOSITORY || 'haanhosting/haan_agent';
+  if (!pat) return { ok: false, error: 'GH_PAT is not set in Cloudflare environment variables' };
+  const res = await fetch(`https://api.github.com/repos/${repo}/actions/workflows/${workflowFile}/dispatches`, {
+    method: 'POST',
+    headers: {
+      'Authorization': `Bearer ${pat}`,
+      'Accept': 'application/vnd.github+json',
+      'User-Agent': 'haan-insta-agent-cloudflare',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ ref: 'main', ...(inputs ? { inputs } : {}) })
+  });
+  if (res.status !== 204) {
+    return { ok: false, error: `GitHub dispatch HTTP ${res.status}: ${await res.text()}` };
+  }
+  return { ok: true };
 }
 
 export async function onRequest(context) {
@@ -160,12 +140,9 @@ export async function onRequest(context) {
   const url = new URL(request.url);
   const pathname = url.pathname;
 
-  const apiKey = runtimeApiKey || env.UPLOADPOST_API_KEY || '';
-  const upUser = runtimeUser || env.UPLOADPOST_USER || '';
-
   try {
     if (request.method === 'GET' && pathname === '/api/state') {
-      const [brand, schedule, pillars, queue, history, bank, samples, token, uploadPostHealth] = await Promise.all([
+      const [brand, schedule, pillars, queue, history, bank, samples, token, instagramHealth] = await Promise.all([
         fetchAssetJson(context, '/config/brand.json', {}),
         fetchAssetJson(context, '/config/schedule.json', {}),
         fetchAssetJson(context, '/content/pillars.json', {}),
@@ -174,7 +151,7 @@ export async function onRequest(context) {
         fetchAssetJson(context, '/content/bank/posts.json', []),
         fetchAssetJson(context, '/state/samples.json', []),
         fetchAssetJson(context, '/state/token.json', { status: 'uninitialized', lastRefreshed: null, daysLeft: null }),
-        checkUploadPostHealth(apiKey, upUser)
+        checkInstagramHealth(env)
       ]);
 
       return jsonResponse(200, {
@@ -186,31 +163,15 @@ export async function onRequest(context) {
         history,
         bank,
         token,
-        uploadPostHealth,
+        instagramHealth,
         samples,
         doctor: {
-          activePublisher: 'uploadpost',
+          activePublisher: 'instagramGraph (GitHub Actions)',
           nodeVersion: 'Cloudflare Pages Edge Runtime',
           hasGemini: Boolean(env.GEMINI_API_KEY),
-          hasIgToken: Boolean(env.IG_ACCESS_TOKEN),
-          hasUploadPost: Boolean(apiKey)
+          hasIgToken: Boolean(env.IG_ACCESS_TOKEN)
         }
       });
-    }
-
-    if (request.method === 'POST' && pathname === '/api/save-uploadpost-config') {
-      const body = await request.json();
-      if (body.apiKey && body.apiKey.trim()) {
-        runtimeApiKey = body.apiKey.trim();
-      }
-      if (typeof body.user === 'string') {
-        runtimeUser = body.user.trim();
-      }
-      const health = await checkUploadPostHealth(runtimeApiKey || env.UPLOADPOST_API_KEY, runtimeUser || env.UPLOADPOST_USER);
-      if (health.ok && health.resolvedUser && !runtimeUser) {
-        runtimeUser = health.resolvedUser;
-      }
-      return jsonResponse(200, { ok: true, health });
     }
 
     if (request.method === 'POST' && pathname === '/api/toggle-approve') {
@@ -259,23 +220,22 @@ export async function onRequest(context) {
       const post = queue.find(p => p.id === body.postId);
       if (!post) return jsonResponse(404, { error: 'Post not found' });
 
-      const user = upUser || 'haanhosting';
+      const base = (env.PAGES_BASE_URL || new URL(request.url).origin).replace(/\/+$/, '');
+      const urls = (post.images || []).map(i => `${base}/${i.replace(/^\/+/, '')}`);
+      const isCarousel = post.format === 'carousel' || urls.length > 1;
       const lines = [
-        `=== UPLOAD-POST API DRY-RUN (${(post.format || 'single').toUpperCase()}) ===`,
-        `POST https://api.upload-post.com/api/upload_photos`,
-        `Headers:`,
-        `  Authorization: Apikey ${apiKey ? '[CONFIGURED]' : '[MISSING - set UPLOADPOST_API_KEY]'}`,
-        `  Idempotency-Key: ${post.id}`,
-        `  Content-Type: multipart/form-data\n`,
-        `Form Fields:`,
-        `  user: "${user}"`,
-        `  platform[]: "instagram"`
+        `=== INSTAGRAM GRAPH API DRY-RUN (${isCarousel ? 'CAROUSEL' : 'SINGLE'}) ===`,
+        `Runs in GitHub Actions: publish.yml (post_id=${post.id})`,
+        ''
       ];
-      if (post.altText) lines.push(`  instagram_alt_text: "${post.altText}"`);
-      for (const imgPath of post.images || []) {
-        lines.push(`  photos[]: @${imgPath} (1080×1350 JPEG binary)`);
+      if (isCarousel) {
+        urls.forEach((u, i) => lines.push(`POST /{IG_USER_ID}/media  image_url=${u}  is_carousel_item=true  (slide ${i + 1})`));
+        lines.push(`POST /{IG_USER_ID}/media  media_type=CAROUSEL  children=<${urls.length} ids>`);
+      } else {
+        lines.push(`POST /{IG_USER_ID}/media  image_url=${urls[0] || '(no image rendered yet)'}`);
       }
-      lines.push(`\n  title (Instagram Caption):\n----------------------------------------\n${post.caption}\n----------------------------------------`);
+      lines.push(`POST /{IG_USER_ID}/media_publish  creation_id=<container id>`);
+      lines.push(`\nCaption:\n----------------------------------------\n${post.caption}\n----------------------------------------`);
       return jsonResponse(200, { ok: true, log: lines.join('\n') });
     }
 
@@ -291,71 +251,15 @@ export async function onRequest(context) {
         return jsonResponse(409, { error: 'Post has no rendered images yet; wait for the render workflow' });
       }
 
-      if (!apiKey) {
-        return jsonResponse(400, {
-          error: 'UPLOADPOST_API_KEY is missing. Add UPLOADPOST_API_KEY in Cloudflare Pages Settings -> Environment Variables (or in the Doctor tab).'
-        });
-      }
+      // Publishing happens in GitHub Actions so the Instagram token never leaves GitHub secrets.
+      const dispatched = await dispatchWorkflow(env, 'publish.yml', { post_id: post.id });
+      if (!dispatched.ok) return jsonResponse(502, { error: dispatched.error });
 
-      const health = await checkUploadPostHealth(apiKey, upUser);
-      const targetUser = (health.ok && health.resolvedUser) ? health.resolvedUser : (upUser || 'haanhosting');
-
-      const formData = new FormData();
-      formData.append('user', targetUser);
-      formData.append('platform[]', 'instagram');
-      formData.append('title', post.caption);
-      if (post.altText) {
-        formData.append('instagram_alt_text', post.altText);
-      }
-
-      for (const imgRelPath of post.images || []) {
-        const assetUrl = new URL('/' + imgRelPath.replace(/^\/+/, ''), request.url);
-        const imgRes = await env.ASSETS.fetch(assetUrl.toString());
-        if (imgRes.ok) {
-          const blob = await imgRes.blob();
-          const filename = imgRelPath.split('/').pop() || 'slide.jpg';
-          formData.append('photos[]', new Blob([await blob.arrayBuffer()], { type: 'image/jpeg' }), filename);
-        } else {
-          formData.append('photos[]', assetUrl.toString());
-        }
-      }
-
-      const upRes = await fetch('https://api.upload-post.com/api/upload_photos', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Apikey ${apiKey}`,
-          'Idempotency-Key': post.id,
-          'X-Upload-Post-Source': 'haan-insta-agent-cf'
-        },
-        body: formData
-      });
-
-      if (!upRes.ok) {
-        const errText = await upRes.text();
-        return jsonResponse(400, { error: `Upload-Post HTTP ${upRes.status}: ${errText}` });
-      }
-
-      const upJson = await upRes.json();
-      if (upJson.success === false) {
-        return jsonResponse(400, { error: upJson.message || upJson.error || JSON.stringify(upJson) });
-      }
-
-      const resultId = upJson.request_id || upJson.job_id || upJson.id || `up-${Date.now()}`;
-      post.status = 'posted';
-      post.igMediaId = resultId;
-      post.postedAt = new Date().toISOString();
-      post.approved = true;
-      memoryQueue = queue;
-      await saveGithubQueueIfConfigured(env, queue);
-
-      return jsonResponse(200, {
+      return jsonResponse(202, {
         ok: true,
+        queued: true,
         postId: post.id,
-        result: {
-          igMediaId: resultId,
-          creationId: resultId,
-          publishedAt: post.postedAt
-        }
+        message: 'Publish workflow started on GitHub Actions. The post should appear on Instagram within ~2 minutes; refresh to see its status.'
       });
     }
 

@@ -67,7 +67,7 @@ Follow these steps to set up and run the agent locally or via GitHub Actions:
 - **12 Modern Launch Templates:** HTML/CSS with CSS variables, auto text-fit, bundled offline fonts (Inter, Outfit, Space Grotesk), ≥10 palettes, and ≥8 SVG decorations.
 - **Strict Anti-Repeat Engine:** Enforces no template reuse within 3 days, no palette reuse within 4 days, brand color in ≥2 of 5 posts, and Jaccard token similarity guard against headline repeats.
 - **Zero-Downtime Fallback Chain:** `Google Gemini → Groq → OpenRouter → Offline Content Bank (66 pre-written verified posts)`.
-- **Official Instagram Graph API:** Uses the official Instagram Login API (50 posts/24h limit, carousels up to 10 slides). Includes optional disabled Upload-Post adapter.
+- **Official Instagram Graph API:** Free, 100 posts/24h, carousels up to 10 slides. Uses a never-expiring Meta system-user token; images are served from Cloudflare Pages.
 - **Truthfulness Guardrails:** Enforces real plans and prices directly from [haanhosting.store](https://haanhosting.store). Prohibits invented claims, discounts, or fake "100% uptime".
 
 ---

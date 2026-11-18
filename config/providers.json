@@ -28,13 +28,6 @@
       "maxDailyPosts": 50,
       "statusPollTimeoutMs": 90000,
       "statusPollIntervalMs": 3000
-    },
-    "uploadPost": {
-      "enabled": true,
-      "endpoint": "https://api.upload-post.com/api/upload_photos",
-      "usersEndpoint": "https://api.upload-post.com/api/uploadposts/users",
-      "statusEndpoint": "https://api.upload-post.com/api/uploadposts/status",
-      "monthlyUploadLimit": 10
     }
   }
 }

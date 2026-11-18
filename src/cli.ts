@@ -11,7 +11,6 @@ import { loadQueue, saveQueue, loadHistory, getDuePosts, updatePostStatus, enque
 import { renderSlide, closeBrowser } from './render/renderer.js';
 import { generatePreviews } from './render/preview.js';
 import { publishPost, getActivePublisherType } from './publish/publisher.js';
-import { checkUploadPostConnection } from './publish/uploadPost.js';
 import { refreshInstagramToken, loadTokenState } from './publish/tokenRefresh.js';
 import { getPublicMediaUrl } from './publish/mediaHost.js';
 import { getKarachiNow, getNextDayKarachi } from './schedule/scheduler.js';
@@ -165,6 +164,9 @@ program
         const queue = loadQueue();
         const found = queue.find(p => p.id === options.postId);
         if (!found) throw new Error(`Post ID ${options.postId} not found in queue`);
+        if (found.status !== 'queued' && !dryRun) {
+          throw new Error(`Post ${found.id} is '${found.status}'; only queued posts can be published`);
+        }
         postsToPublish = [found];
       } else {
         postsToPublish = getDuePosts();
@@ -343,38 +345,32 @@ program
     const activePub = getActivePublisherType();
     const geminiKey = process.env.GEMINI_API_KEY;
     const groqKey = process.env.GROQ_API_KEY;
-    const uploadPostKey = process.env.UPLOADPOST_API_KEY;
-    const uploadPostUser = process.env.UPLOADPOST_USER;
     const igToken = process.env.IG_ACCESS_TOKEN;
     const igUser = process.env.IG_USER_ID;
     const pagesUrl = process.env.PAGES_BASE_URL;
 
     console.log('\n--- Publisher & Environment ---');
     console.log(`  Active Publisher:   ${activePub}`);
-    console.log(`  UPLOADPOST_API_KEY: ${uploadPostKey ? 'Configured [OK]' : 'Not set (get from https://app.upload-post.com/dashboard)'}`);
-    console.log(`  UPLOADPOST_USER:    ${uploadPostUser ? uploadPostUser + ' [OK]' : 'Not set (will auto-detect from Upload-Post profile)'}`);
     console.log(`  GEMINI_API_KEY:     ${geminiKey ? 'Configured [OK]' : 'Not set (will fallback to Groq/Bank)'}`);
     console.log(`  GROQ_API_KEY:       ${groqKey ? 'Configured [OK]' : 'Not set'}`);
-    console.log(`  IG_ACCESS_TOKEN:    ${igToken ? 'Configured [OK]' : 'Not set (only needed for instagram-graph mode)'}`);
-    console.log(`  IG_USER_ID:         ${igUser ? 'Configured [OK]' : 'Not set (only needed for instagram-graph mode)'}`);
-    console.log(`  PAGES_BASE_URL:     ${pagesUrl ? pagesUrl + ' [OK]' : 'Not set (not required when Upload-Post uploads local files)'}`);
+    console.log(`  IG_ACCESS_TOKEN:    ${igToken ? 'Configured [OK]' : 'Not set [REQUIRED]'}`);
+    console.log(`  IG_USER_ID:         ${igUser ? 'Configured [OK]' : 'Not set [REQUIRED]'}`);
+    console.log(`  PAGES_BASE_URL:     ${pagesUrl ? pagesUrl + ' [OK]' : 'Not set [REQUIRED] (public host for images)'}`);
+    if (!igToken || !igUser || !pagesUrl) allOk = false;
 
-    if (uploadPostKey) {
-      console.log('\nTesting Upload-Post API connection...');
-      const upHealth = await checkUploadPostConnection();
-      if (upHealth.ok) {
-        const profileSummary = upHealth.profiles.length > 0
-          ? upHealth.profiles.map(p => `${p.username} (IG: ${p.hasInstagram ? 'Connected' : 'Not linked'})`).join(', ')
-          : 'No profiles created yet';
-        console.log(`[PASS] Upload-Post API connected! Active profile: ${upHealth.resolvedUser || 'none'} | Profiles: ${profileSummary}`);
-      } else {
-        console.log(`[WARN] Upload-Post API check failed: ${upHealth.error}`);
+    if (igToken && igUser) {
+      try {
+        const acct = await new InstagramGraphClient().verifyAccount();
+        console.log(`[PASS] Instagram API connected: @${acct.username} via ${acct.baseUrl}`);
+      } catch (err: any) {
+        console.log(`[FAIL] Instagram API check failed: ${err.message}`);
+        allOk = false;
       }
     }
 
     // 6. Token Metadata Check
     const tokenState = loadTokenState();
-    console.log('\n--- Instagram Graph Token Health (Optional Fallback) ---');
+    console.log('\n--- Instagram Token Metadata ---');
     console.log(`  Status:             ${tokenState.status}`);
     console.log(`  Last Refreshed:     ${tokenState.lastRefreshed || 'Never'}`);
     console.log(`  Days Left:          ${tokenState.daysLeft !== null ? tokenState.daysLeft + ' days' : 'Unknown'}`);

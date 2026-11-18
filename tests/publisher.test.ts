@@ -2,7 +2,6 @@ import { describe, it, expect } from 'vitest';
 import { getPublicMediaUrl, waitForMediaUrl } from '../src/publish/mediaHost.js';
 import { InstagramGraphClient } from '../src/publish/instagramGraph.js';
 import { refreshInstagramToken, loadTokenState } from '../src/publish/tokenRefresh.js';
-import { publishViaUploadPost } from '../src/publish/uploadPost.js';
 import { publishPost } from '../src/publish/publisher.js';
 import { PreparedPost } from '../src/content/slotMapper.js';
 
@@ -67,22 +66,11 @@ describe('Instagram Graph API Client (Dry Run)', () => {
   });
 });
 
-describe('Token Refresh & UploadPost Adapters (Dry Run)', () => {
+describe('Token Refresh & Publisher (Dry Run)', () => {
   it('simulates token refresh in dry run mode', async () => {
     const res = await refreshInstagramToken({ token: 'mock-token', dryRun: true });
     expect(res.daysLeft).toBe(60);
     expect(res.newToken).toBeDefined();
-  });
-
-  it('simulates upload-post adapter in dry run mode', async () => {
-    const res = await publishViaUploadPost({
-      imageUrls: ['https://username.github.io/test.jpg'],
-      caption: 'UploadPost test',
-      dryRun: true
-    });
-
-    expect(res.id).toBeDefined();
-    expect(res.platform).toBe('instagram');
   });
 
   it('dispatches prepared post via master publishPost in dry run', async () => {

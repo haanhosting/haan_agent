@@ -24,7 +24,6 @@ The dashboard layout changes over time; if a step differs, follow Meta's current
    - `GEMINI_API_KEY` – from aistudio.google.com (free, no card)
    - `GROQ_API_KEY` – optional second provider (console.groq.com, free)
    - `GH_PAT` – fine-grained personal access token limited to this repo (Secrets: read/write) for token refresh
-   - `UPLOADPOST_API_KEY` – optional, only if you enable the fallback
 4. In **Settings → Actions → General**: allow workflows read/write permissions.
 5. Add a repository variable `PAGES_BASE_URL` = `https://<username>.github.io/<repo>`.
 

@@ -19,7 +19,7 @@ haan-insta-agent/
 │  ├─ content/              # llm clients, prompt builder, validator, bank fallback
 │  ├─ design/               # uniqueness engine, palette generator, template picker
 │  ├─ render/               # Playwright renderer, HTML→PNG→JPEG (sharp), text-fit logic
-│  ├─ publish/              # instagramGraph.ts, uploadPost.ts (optional), mediaHost.ts
+│  ├─ publish/              # instagramGraph.ts, publisher.ts, mediaHost.ts
 │  ├─ schedule/             # slot calculator (Asia/Karachi), due-post selector
 │  ├─ state/                # read/write queue.json, history.json, token.json
 │  └─ util/                 # logger, retry, env, time

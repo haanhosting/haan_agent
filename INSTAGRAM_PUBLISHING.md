@@ -44,13 +44,6 @@ Auth: `Authorization: Bearer <token>` header or `access_token` param. Never log 
 | Network/5xx | exponential backoff 3 tries |
 | Crash between create & publish | on next run check recent media/caption hash before re-publishing → no duplicates |
 
-## 5. Optional fallback adapter: Upload-Post (disabled by default)
-Upload-Post offers a one-call API (`POST https://api.upload-post.com/api/upload_photos`, header `Authorization: Apikey …`,
-form fields `photos[]`, `title`, `user`, `platform[]=instagram`) and handles Instagram auth for you.
-**But the free plan is only 10 uploads/month**, so it cannot sustain 4–5 posts/day. Implement it as
-`src/publish/uploadPost.ts` behind `providers.json → publisher: "uploadpost"`, useful for first tests or emergencies.
-Verify the current endpoint/fields in their docs before coding (APIs change).
-
-## 6. Compliance
+## 5. Compliance
 Official API only. No scraping, no unofficial login libraries, no follow/like/comment bots (ban risk).
 Spread posts through the day (never burst-post). Keep content original and truthful (see CONTENT_STRATEGY.md §5).

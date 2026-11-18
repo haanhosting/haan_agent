@@ -5,6 +5,11 @@ on:
     # Runs every 15 minutes to catch due posts promptly
     - cron: '*/15 * * * *'
   workflow_dispatch:
+    inputs:
+      post_id:
+        description: 'Publish this queued post now (leave empty to publish whatever is due)'
+        required: false
+        default: ''
 
 concurrency:
   # Shared by every workflow that commits state/ so they never race each other.
@@ -36,10 +41,14 @@ jobs:
         env:
           IG_ACCESS_TOKEN: ${{ secrets.IG_ACCESS_TOKEN }}
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
-          UPLOADPOST_API_KEY: ${{ secrets.UPLOADPOST_API_KEY }}
-          UPLOADPOST_USER: ${{ secrets.UPLOADPOST_USER }}
           PAGES_BASE_URL: ${{ vars.PAGES_BASE_URL }}
-        run: npx tsx src/cli.ts publish
+          POST_ID: ${{ github.event.inputs.post_id }}
+        run: |
+          if [ -n "$POST_ID" ]; then
+            npx tsx src/cli.ts publish --post-id "$POST_ID"
+          else
+            npx tsx src/cli.ts publish
+          fi
 
       - name: Commit state updates
         run: |

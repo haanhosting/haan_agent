@@ -12,7 +12,7 @@ import { renderSlide, closeBrowser } from './render/renderer.js';
 import { generatePreviews, SAMPLE_POSTS } from './render/preview.js';
 import { getPublicMediaUrl } from './publish/mediaHost.js';
 import { publishPost, getActivePublisherType } from './publish/publisher.js';
-import { checkUploadPostConnection } from './publish/uploadPost.js';
+import { InstagramGraphClient, resolveGraphBaseUrl } from './publish/instagramGraph.js';
 import { loadTokenState } from './publish/tokenRefresh.js';
 import { getNextDayKarachi } from './schedule/scheduler.js';
 
@@ -87,36 +87,10 @@ function upsertEnvFile(updates: Record<string, string>): void {
 }
 
 function buildDryRunLog(post: any): string {
-  const activePublisher = getActivePublisherType();
-  const urls = post.imageUrls?.length ? post.imageUrls : post.images.map((i: string) => getPublicMediaUrl(i));
-
-  if (activePublisher === 'uploadpost') {
-    const user = process.env.UPLOADPOST_USER || 'haanhosting';
-    const lines: string[] = [];
-    lines.push(`=== UPLOAD-POST API DRY-RUN (${post.format.toUpperCase()}) ===`);
-    lines.push(`POST https://api.upload-post.com/api/upload_photos`);
-    lines.push(`Headers:`);
-    lines.push(`  Authorization: Apikey ${process.env.UPLOADPOST_API_KEY ? '[CONFIGURED]' : '[MISSING - set UPLOADPOST_API_KEY]'}`);
-    lines.push(`  Idempotency-Key: ${post.id}`);
-    lines.push(`  Content-Type: multipart/form-data\n`);
-    lines.push(`Form Fields:`);
-    lines.push(`  user: "${user}"`);
-    lines.push(`  platform[]: "instagram"`);
-    if (post.altText) {
-      lines.push(`  instagram_alt_text: "${post.altText}"`);
-    }
-    for (const imgPath of post.images || []) {
-      lines.push(`  photos[]: @${imgPath} (local 1080×1350 JPEG binary)`);
-    }
-    lines.push(`\n  title (Instagram Caption):`);
-    lines.push(`----------------------------------------`);
-    lines.push(post.caption);
-    lines.push(`----------------------------------------`);
-    return lines.join('\n');
-  }
+  const urls = post.images?.length ? post.images.map((i: string) => getPublicMediaUrl(i)) : (post.imageUrls || []);
 
   const apiVersion = 'v22.0';
-  const baseUrl = 'https://graph.instagram.com';
+  const baseUrl = resolveGraphBaseUrl(process.env.IG_ACCESS_TOKEN || '', 'auto');
   const userId = process.env.IG_USER_ID || 'IG_USER_ID';
 
   const lines: string[] = [];
@@ -516,7 +490,7 @@ export function getDashboardHtml(): string {
       <img src="/logo/logo.png" alt="HAAN HOSTING" class="brand-icon" />
       <div>
         <h1>HAAN <span>HOSTING</span> · Auto-Poster Agent</h1>
-        <p>Official Brand Crest · 18 Templates with Low-Opacity BG &amp; Overlay · Upload-Post API</p>
+        <p>Official Brand Crest · 18 Templates with Low-Opacity BG &amp; Overlay · Instagram Graph API</p>
       </div>
     </div>
     <div class="nav-tabs">
@@ -553,7 +527,7 @@ export function getDashboardHtml(): string {
       <div class="toolbar">
         <div>
           <strong>✅ Uploaded Instagram Posts</strong>
-          <span style="color:var(--muted); font-size:13px; margin-left:10px;">Posts successfully published via Upload-Post API</span>
+          <span style="color:var(--muted); font-size:13px; margin-left:10px;">Posts successfully published via the Instagram API</span>
         </div>
         <div style="display:flex; gap:10px;">
           <button class="btn btn-secondary" onclick="switchTab('rejected')">🚫 View Rejected Posts</button>
@@ -703,7 +677,7 @@ export function getDashboardHtml(): string {
         <div class="stat-card" style="cursor:pointer;" onclick="switchTab('published')">
           <div class="stat-label">Uploaded to IG</div>
           <div class="stat-value" style="color:#34d399;">\${published.length}</div>
-          <div class="stat-sub">✅ Published via Upload-Post</div>
+          <div class="stat-sub">✅ Published via Instagram API</div>
         </div>
         <div class="stat-card" style="cursor:pointer;" onclick="switchTab('rejected')">
           <div class="stat-label">Rejected / Failed</div>
@@ -712,8 +686,8 @@ export function getDashboardHtml(): string {
         </div>
         <div class="stat-card" style="cursor:pointer;" onclick="switchTab('doctor')">
           <div class="stat-label">Active Publisher</div>
-          <div class="stat-value" style="font-size:22px;">Upload-Post API</div>
-          <div class="stat-sub">\${appState.doctor.hasUploadPost ? '✅ API Key Connected' : '⚠️ Set UPLOADPOST_API_KEY in Doctor tab'}</div>
+          <div class="stat-value" style="font-size:22px;">Instagram API</div>
+          <div class="stat-sub">\${appState.instagramHealth?.ok ? '✅ Connected as @' + appState.instagramHealth.username : '⚠️ Not connected (see Doctor tab)'}</div>
         </div>
       \`;
 
@@ -933,28 +907,16 @@ export function getDashboardHtml(): string {
 
     function renderDoctor() {
       const b = appState.brand;
-      const up = appState.uploadPostHealth || {};
-      const profilesHtml = (up.profiles && up.profiles.length)
-        ? up.profiles.map(p => \`<li><strong>\${p.username}</strong> — Instagram: \${p.hasInstagram ? '<span style="color:#34d399;">✅ Connected</span>' : '<span style="color:#f87171;">❌ Not linked</span>'}</li>\`).join('')
-        : '<li>No profiles detected yet (enter API key below & click Save & Test)</li>';
+      const ig = appState.instagramHealth || {};
 
       document.getElementById('doctor-grid').innerHTML = \`
         <div class="post-card" style="padding:24px;">
-          <h3 style="margin-top:0;">🚀 Upload-Post.com Instagram Publisher</h3>
+          <h3 style="margin-top:0;">📸 Instagram API (Official, Free)</h3>
           <p style="font-size:13px; color:var(--muted);">
-            Connect your account at <a href="https://app.upload-post.com/dashboard" target="_blank" style="color:#60a5fa;">app.upload-post.com/dashboard</a>, copy your API Key & Profile Username, and save below:
+            Publishes through Meta's Instagram Graph API using <code>IG_ACCESS_TOKEN</code> and <code>IG_USER_ID</code>
+            (GitHub Actions secrets). Images are served from <code>PAGES_BASE_URL</code>.
           </p>
-          <div style="display:flex; flex-direction:column; gap:10px; margin-bottom:14px;">
-            <label style="font-size:12px; color:var(--muted);">UPLOADPOST_API_KEY:</label>
-            <input type="text" id="up-api-key" placeholder="Paste your Upload-Post API Key..." value="" />
-            <label style="font-size:12px; color:var(--muted);">UPLOADPOST_USER (Profile Username on Upload-Post):</label>
-            <input type="text" id="up-user" placeholder="e.g. haanhosting (leave blank to auto-detect)" value="\${up.resolvedUser || up.configuredUser || ''}" />
-            <button class="btn btn-emerald" onclick="saveUploadPostConfig()">💾 Save to .env & Verify Connection</button>
-          </div>
-          <p><strong>Connection Status:</strong> \${up.ok ? '<span style="color:#34d399;">✅ Connected to Upload-Post API</span>' : '<span style="color:#fbbf24;">⚠️ ' + (up.error || 'Not configured') + '</span>'}</p>
-          <p><strong>Resolved Profile:</strong> <code>\${up.resolvedUser || 'Auto-detect'}</code></p>
-          <h4 style="margin-bottom:6px;">Dashboard Profiles:</h4>
-          <ul style="margin-top:0; font-size:13px;">\${profilesHtml}</ul>
+          <p><strong>Connection Status:</strong> \${ig.ok ? '<span style="color:#34d399;">✅ Connected as @' + ig.username + '</span>' : '<span style="color:#fbbf24;">⚠️ ' + (ig.error || 'Not configured') + '</span>'}</p>
         </div>
         <div class="post-card" style="padding:24px;">
           <h3 style="margin-top:0;">🩺 System Health Checks</h3>
@@ -963,7 +925,7 @@ export function getDashboardHtml(): string {
           <p>✅ <strong>Bundled Offline Fonts:</strong> Poppins & Inter (inlined)</p>
           <p>✅ <strong>12 Launch Templates:</strong> All verified (1080×1350 4:5 JPEG)</p>
           <p>✅ <strong>Offline Content Bank:</strong> \${appState.bank.length} validated posts ready</p>
-          <p>🔑 <strong>UPLOADPOST_API_KEY:</strong> \${appState.doctor.hasUploadPost ? 'Configured ✅' : 'Not set ⚠️'}</p>
+          <p>🔑 <strong>IG_ACCESS_TOKEN:</strong> \${appState.doctor.hasIgToken ? 'Configured ✅' : 'Not set ⚠️'}</p>
           <p>🔑 <strong>GEMINI_API_KEY:</strong> \${appState.doctor.hasGemini ? 'Configured ✅' : 'Not set (Using Offline Content Bank fallback)'}</p>
         </div>
         <div class="post-card" style="padding:24px;">
@@ -1047,7 +1009,7 @@ export function getDashboardHtml(): string {
         body: JSON.stringify({ postId })
       });
       const data = await res.json();
-      document.getElementById('modal-title').textContent = 'Upload-Post API Dry-Run · ' + postId;
+      document.getElementById('modal-title').textContent = 'Instagram API Dry-Run · ' + postId;
       document.getElementById('modal-content').textContent = data.log;
       document.getElementById('dryrun-modal').classList.add('open');
     }
@@ -1066,7 +1028,7 @@ export function getDashboardHtml(): string {
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Upload failed');
-        document.getElementById('modal-title').textContent = '✅ Published to Instagram via Upload-Post · ' + postId;
+        document.getElementById('modal-title').textContent = (data.queued ? '🚀 Publish started · ' : '✅ Published to Instagram · ') + postId;
         document.getElementById('modal-content').textContent = JSON.stringify(data, null, 2);
         document.getElementById('dryrun-modal').classList.add('open');
         await loadState();
@@ -1077,25 +1039,6 @@ export function getDashboardHtml(): string {
           btn.textContent = '📤 Publish Now';
         }
       }
-    }
-
-    async function saveUploadPostConfig() {
-      const apiKey = document.getElementById('up-api-key').value.trim();
-      const user = document.getElementById('up-user').value.trim();
-      const res = await fetch('/api/save-uploadpost-config', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ apiKey, user })
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        alert('Error: ' + (data.error || 'Failed to save'));
-        return;
-      }
-      await loadState();
-      alert(data.health?.ok
-        ? 'Connected to Upload-Post! Resolved profile: ' + (data.health.resolvedUser || 'none')
-        : 'Saved to .env, but connection check returned: ' + (data.health?.error || 'Unknown error'));
     }
 
     function closeModal() {
@@ -1127,7 +1070,13 @@ const server = http.createServer(async (req, res) => {
       const history = loadHistory();
       const bank = loadContentBank();
       const token = loadTokenState();
-      const uploadPostHealth = await checkUploadPostConnection();
+      let instagramHealth: { ok: boolean; username?: string; error?: string };
+      try {
+        const acct = await new InstagramGraphClient().verifyAccount();
+        instagramHealth = { ok: true, username: acct.username };
+      } catch (err: any) {
+        instagramHealth = { ok: false, error: err.message };
+      }
 
       sendJson(res, 200, {
         nextDay: getNextDayKarachi(),
@@ -1138,14 +1087,13 @@ const server = http.createServer(async (req, res) => {
         history,
         bank,
         token,
-        uploadPostHealth,
+        instagramHealth,
         samples: SAMPLE_POSTS,
         doctor: {
           activePublisher: getActivePublisherType(),
           nodeVersion: process.version,
           hasGemini: Boolean(process.env.GEMINI_API_KEY),
-          hasIgToken: Boolean(process.env.IG_ACCESS_TOKEN),
-          hasUploadPost: Boolean(process.env.UPLOADPOST_API_KEY)
+          hasIgToken: Boolean(process.env.IG_ACCESS_TOKEN)
         }
       });
       return;
@@ -1270,26 +1218,6 @@ const server = http.createServer(async (req, res) => {
         updatePostStatus(post.id, 'queued', { error: err.message });
         sendJson(res, 400, { error: err.message });
       }
-      return;
-    }
-
-    if (req.method === 'POST' && pathname === '/api/save-uploadpost-config') {
-      const body = await readJsonBody(req);
-      const updates: Record<string, string> = {};
-      if (typeof body.apiKey === 'string' && body.apiKey.trim()) {
-        updates.UPLOADPOST_API_KEY = body.apiKey.trim();
-      }
-      if (typeof body.user === 'string') {
-        updates.UPLOADPOST_USER = body.user.trim();
-      }
-      if (Object.keys(updates).length > 0) {
-        upsertEnvFile(updates);
-      }
-      const health = await checkUploadPostConnection();
-      if (health.ok && health.resolvedUser && !process.env.UPLOADPOST_USER) {
-        upsertEnvFile({ UPLOADPOST_USER: health.resolvedUser });
-      }
-      sendJson(res, 200, { ok: true, health });
       return;
     }
 

@@ -11,7 +11,6 @@
 | Icons/shapes | Inline SVG, Lucide / Phosphor icons (MIT) | Free |
 | Text generation (LLM) | **Google Gemini API free tier** (key from Google AI Studio) – primary. **Groq free tier** or **OpenRouter `:free` models** – secondary. **Offline content bank** – last resort. | Free tiers have rate limits; generating 5 posts/day is a tiny load. No card needed. Model names change: put them in `config/providers.json`, never hard-code. |
 | Publishing | **Instagram Graph API** (Instagram API with Instagram Login) | Free. Limit: 50 API posts / rolling 24h per account; carousel = 1 post. We use ≤ 5/day. |
-| Optional fallback publisher | Upload-Post free plan | Free but **only 10 uploads/month**, 2 profiles – disabled by default, for testing only. |
 | Alerts | GitHub Actions failure e-mails | Free |
 | Tests | Vitest | Free |
 

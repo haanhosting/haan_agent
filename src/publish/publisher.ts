@@ -1,13 +1,12 @@
 import fs from 'fs';
 import path from 'path';
 import { InstagramGraphClient, PublishResult } from './instagramGraph.js';
-import { publishViaUploadPost } from './uploadPost.js';
 import { waitForMediaUrl, getPublicMediaUrl } from './mediaHost.js';
 import { PreparedPost } from '../content/slotMapper.js';
 
 export function getActivePublisherType(): string {
   const p = path.resolve(process.cwd(), 'config/providers.json');
-  return JSON.parse(fs.readFileSync(p, 'utf8')).publisher.active || 'uploadpost';
+  return JSON.parse(fs.readFileSync(p, 'utf8')).publisher.active || 'instagramGraph';
 }
 
 export async function publishPost(
@@ -29,35 +28,7 @@ export async function publishPost(
     throw new Error(`Post ${post.id} has no images associated with it`);
   }
 
-  if (activePublisher === 'uploadpost') {
-    const hasLocalFiles = (post.images || []).some(img => fs.existsSync(path.resolve(process.cwd(), img)));
-
-    // Only verify public URL reachability if we do NOT have local image files on disk
-    if (!hasLocalFiles && !skipMediaWait) {
-      for (const url of imageUrls) {
-        const waitResult = await waitForMediaUrl(url, { dryRun });
-        if (!waitResult.ok) {
-          throw new Error(`Media host validation failed for ${url}: ${waitResult.error}`);
-        }
-      }
-    }
-
-    const res = await publishViaUploadPost({
-      imageUrls,
-      imagePaths: post.images || [],
-      caption: post.caption,
-      altText: post.altText,
-      postId: post.id,
-      dryRun
-    });
-    return {
-      igMediaId: res.id,
-      creationId: res.requestId || res.id,
-      publishedAt: res.publishedAt
-    };
-  }
-
-  // Verify public reachability via GitHub Pages before notifying Instagram Graph API
+  // Verify the images are publicly reachable before Instagram tries to fetch them
   if (!skipMediaWait) {
     for (const url of imageUrls) {
       const waitResult = await waitForMediaUrl(url, { dryRun });
@@ -67,7 +38,7 @@ export async function publishPost(
     }
   }
 
-  // Fallback/Alternative: official Instagram Graph API
+  // Official Instagram Graph API
   const client = new InstagramGraphClient();
   if (post.format === 'carousel' || imageUrls.length > 1) {
     return client.publishCarousel({
