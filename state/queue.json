@@ -162,7 +162,7 @@
       "https://username.github.io/haan-insta-agent/media/2026-11-19/slot3-b2.jpg"
     ],
     "igMediaId": null,
-    "attempts": 1,
+    "attempts": 2,
     "error": "Media host validation failed for https://username.github.io/haan-insta-agent/media/2026-11-19/slot3-b2.jpg: Timed out after 180s waiting for https://username.github.io/haan-insta-agent/media/2026-11-19/slot3-b2.jpg to become publicly reachable",
     "rejectedAt": null
   },
