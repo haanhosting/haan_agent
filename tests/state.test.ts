@@ -80,6 +80,20 @@ describe('State Management & Queue Lifecycle', () => {
     expect(due[0].id).toBe(samplePost.id);
   });
 
+  it('skips stale posts and returns at most one (oldest) due post per run', () => {
+    const later = { ...samplePost, id: 'test-2026-11-18-slot2', slot: 2, scheduledAt: '2026-11-18T10:00:00+05:00' };
+    const batchDupe = { ...samplePost, id: 'test-2026-11-18-slot1-b2' };
+    enqueuePosts([later, samplePost, batchDupe]);
+
+    // 05:10Z: slot1 (04:30Z) and slot2 (05:00Z) are both due -> only the oldest is returned
+    const due = getDuePosts(new Date('2026-11-18T05:10:00Z'));
+    expect(due).toHaveLength(1);
+    expect(due[0].scheduledAt).toBe(samplePost.scheduledAt);
+
+    // Next day: everything is far overdue -> nothing is auto-published
+    expect(getDuePosts(new Date('2026-11-19T05:00:00Z'))).toHaveLength(0);
+  });
+
   it('transitions status from queued to publishing to posted, writing to history', () => {
     enqueuePosts([samplePost]);
 

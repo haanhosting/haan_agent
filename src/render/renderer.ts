@@ -154,7 +154,7 @@ export async function renderSlide(options: RenderOptions): Promise<string> {
 
   rawHtml = rawHtml.replace(
     /<div class="footer">(?:Haan Hosting · )?{{cta}}<\/div>/g,
-    `<div class="footer"><div class="brand-footer-left"><img src="{{logoDataUri}}" alt="HAAN" /><div><div class="brand-footer-title">HAAN HOSTING</div><div class="brand-footer-sub">NVMe Cloud VPS · Windows RDP · Web Hosting</div></div></div><div class="brand-footer-cta">{{cta}} →</div></div>`
+    `<div class="footer"><div class="brand-footer-left"><img src="{{logoDataUri}}" alt="HAAN" /><div><div class="brand-footer-title">HAAN HOSTING</div><div class="brand-footer-sub">Cloud VPS · Windows RDP · Web Hosting</div></div></div><div class="brand-footer-cta">{{cta}} →</div></div>`
   );
 
   // Resolve palette

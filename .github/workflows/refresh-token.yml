@@ -1,13 +1,17 @@
 name: Weekly Instagram Token Refresh
 
 on:
-  schedule:
-    # Runs weekly on Sunday at midnight UTC
-    - cron: '0 0 * * 0'
+  # Scheduled refresh disabled: the publisher uses a Meta system-user token (EAA…)
+  # that never expires. Re-enable the schedule only if you switch to a 60-day IG… token.
   workflow_dispatch:
 
 permissions:
   contents: write
+
+# Shared by every workflow that commits state/ so they never race each other.
+concurrency:
+  group: haan-state-writer
+  cancel-in-progress: false
 
 jobs:
   refresh-token:
@@ -43,5 +47,10 @@ jobs:
             echo "No token metadata changes to commit."
           else
             git commit -m "chore(security): refresh instagram token metadata [skip ci]"
-            git push origin main
+            for i in 1 2 3; do
+              if git pull --rebase origin main && git push origin main; then pushed=1; break; fi
+              git rebase --abort 2>/dev/null || true
+              sleep $((i * 5))
+            done
+            [ "${pushed:-0}" = "1" ] || { echo "::error::git push failed after 3 attempts"; exit 1; }
           fi

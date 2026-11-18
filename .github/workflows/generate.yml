@@ -9,6 +9,11 @@ on:
 permissions:
   contents: write
 
+# Shared by every workflow that commits state/ so they never race each other.
+concurrency:
+  group: haan-state-writer
+  cancel-in-progress: false
+
 jobs:
   generate:
     runs-on: ubuntu-latest
@@ -50,6 +55,11 @@ jobs:
           PAGES_BASE_URL: ${{ vars.PAGES_BASE_URL }}
         run: npx tsx src/cli.ts generate --render
 
+      - name: Render any other unrendered posts (e.g. created from the dashboard)
+        env:
+          PAGES_BASE_URL: ${{ vars.PAGES_BASE_URL }}
+        run: npx tsx src/cli.ts render
+
       - name: Commit rendered media and updated queue
         run: |
           git config user.name "github-actions[bot]"
@@ -59,5 +69,10 @@ jobs:
             echo "No changes to commit."
           else
             git commit -m "chore(agent): generate and render daily posts"
-            git push origin main
+            for i in 1 2 3; do
+              if git pull --rebase origin main && git push origin main; then pushed=1; break; fi
+              git rebase --abort 2>/dev/null || true
+              sleep $((i * 5))
+            done
+            [ "${pushed:-0}" = "1" ] || { echo "::error::git push failed after 3 attempts"; exit 1; }
           fi

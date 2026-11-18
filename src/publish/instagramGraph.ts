@@ -13,6 +13,19 @@ export function loadPublisherConfig(): any {
   return JSON.parse(fs.readFileSync(p, 'utf8')).publisher.instagramGraph;
 }
 
+/**
+ * Picks the Graph API host for the token type:
+ * - Instagram-Login user tokens start with "IG"  -> graph.instagram.com
+ * - Facebook / system-user tokens start with "EAA" -> graph.facebook.com
+ * IG_GRAPH_BASE_URL overrides detection; config.baseUrl is used if it is not "auto".
+ */
+export function resolveGraphBaseUrl(token: string, configured?: string): string {
+  if (process.env.IG_GRAPH_BASE_URL) return process.env.IG_GRAPH_BASE_URL;
+  if (configured && configured !== 'auto') return configured;
+  if (token.startsWith('EAA')) return 'https://graph.facebook.com';
+  return 'https://graph.instagram.com';
+}
+
 function redactToken(urlOrStr: string): string {
   return urlOrStr.replace(/access_token=([^&]+)/gi, 'access_token=[REDACTED]');
 }
@@ -33,8 +46,8 @@ export class InstagramGraphClient {
   }) {
     const config = loadPublisherConfig();
     this.apiVersion = options?.apiVersion || config.apiVersion || 'v22.0';
-    this.baseUrl = options?.baseUrl || config.baseUrl || 'https://graph.instagram.com';
     this.token = options?.token || process.env.IG_ACCESS_TOKEN || '';
+    this.baseUrl = options?.baseUrl || resolveGraphBaseUrl(this.token, config.baseUrl);
     this.userId = options?.userId || process.env.IG_USER_ID || '';
     this.pollTimeoutMs = config.statusPollTimeoutMs || 90000;
     this.pollIntervalMs = config.statusPollIntervalMs || 3000;
@@ -74,6 +87,23 @@ export class InstagramGraphClient {
 
     console.log(`[IG Graph] Quota check: ${quotaUsage}/${configTotal} posts published in rolling 24h`);
     return { quotaUsage, configTotal };
+  }
+
+  /**
+   * Verifies the token and user ID by reading the account's username.
+   */
+  async verifyAccount(): Promise<{ id: string; username: string; baseUrl: string }> {
+    if (!this.token || !this.userId) {
+      throw new Error('IG_ACCESS_TOKEN or IG_USER_ID is missing from environment');
+    }
+    const url = `${this.baseUrl}/${this.apiVersion}/${this.userId}?fields=id,username`;
+    const res = await fetch(url, { headers: this.getHeaders() });
+    if (!res.ok) {
+      const err = await res.json().catch(() => ({}));
+      this.handleGraphError(err, res.status);
+    }
+    const data = await res.json() as any;
+    return { id: data.id, username: data.username, baseUrl: this.baseUrl };
   }
 
   /**
@@ -315,6 +345,8 @@ export class InstagramGraphClient {
       }
 
       const { id: childId } = (await res.json()) as any;
+      // Instagram must finish fetching each slide before the parent carousel can reference it.
+      await this.pollContainerStatus(childId);
       childIds.push(childId);
     }
 

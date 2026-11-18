@@ -71,8 +71,11 @@ export function enqueuePosts(
   return { added, existing };
 }
 
+/** Posts more than this late are considered missed and are not auto-published. */
+export const MAX_LATENESS_MS = 90 * 60 * 1000;
+
 /**
- * Finds all posts due for publishing right now.
+ * Finds the next post due for publishing right now (at most one per run).
  */
 export function getDuePosts(referenceTime: Date = new Date()): PreparedPost[] {
   const queue = loadQueue();
@@ -91,8 +94,16 @@ export function getDuePosts(referenceTime: Date = new Date()): PreparedPost[] {
     // 4. Must not have exceeded max retries (3)
     if (post.attempts >= 3) return false;
 
+    // 5. Must not be stale: a post that missed its slot by more than the cutoff
+    // is skipped rather than dumped onto the feed alongside other backlog posts.
+    const lateMs = referenceTime.getTime() - new Date(post.scheduledAt).getTime();
+    if (lateMs > MAX_LATENESS_MS) return false;
+
     return true;
-  });
+  })
+    .sort((a, b) => new Date(a.scheduledAt).getTime() - new Date(b.scheduledAt).getTime())
+    // Publish at most one post per run so a backlog never floods the account.
+    .slice(0, 1);
 }
 
 /**

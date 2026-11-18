@@ -20,9 +20,10 @@ export async function publishPost(
   console.log(`[Publisher] Dispatching post ${post.id} (Pillar: ${post.pillar}, Format: ${post.format}) via ${activePublisher}`);
 
   // Ensure image URLs are set
-  const imageUrls = post.imageUrls && post.imageUrls.length > 0
-    ? post.imageUrls
-    : post.images.map(img => getPublicMediaUrl(img));
+  // Always derive URLs from the current PAGES_BASE_URL; stored imageUrls may hold a stale host.
+  const imageUrls = post.images && post.images.length > 0
+    ? post.images.map(img => getPublicMediaUrl(img))
+    : (post.imageUrls || []);
 
   if (imageUrls.length === 0 && (!post.images || post.images.length === 0)) {
     throw new Error(`Post ${post.id} has no images associated with it`);

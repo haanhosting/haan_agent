@@ -49,7 +49,9 @@ program
         history,
         postsPerDay: postsCount,
         existingQueue,
-        allowNewBatch: true
+        // Never stack extra batches on the same slot times from the scheduled run.
+        // Existing IDs for this date are skipped idempotently by enqueuePosts.
+        allowNewBatch: false
       });
 
       enqueuePosts(newPosts, { prepend: true });
@@ -240,6 +242,37 @@ program
       console.log(`✓ Token refreshed! Valid until: ${res.expiresAt} (${res.daysLeft} days remaining)`);
     } catch (err: any) {
       console.error(`\n❌ Token refresh failed: ${err.message}`);
+      process.exit(1);
+    }
+  });
+
+/**
+ * COMMAND: ig-check — verifies the Instagram token, account ID, quota and media hosting (posts nothing)
+ */
+program
+  .command('ig-check')
+  .description('Verify Instagram token, account ID, publishing quota and public media URL (does not post)')
+  .action(async () => {
+    try {
+      const token = process.env.IG_ACCESS_TOKEN || '';
+      console.log(`Token type: ${token.startsWith('EAA') ? 'Facebook/system-user (EAA…)' : token.startsWith('IG') ? 'Instagram Login (IG…)' : token ? 'unknown prefix' : 'MISSING'}`);
+      const client = new InstagramGraphClient();
+      const acct = await client.verifyAccount();
+      console.log(`✓ Account OK: @${acct.username} (id ${acct.id}) via ${acct.baseUrl}`);
+      const quota = await client.checkPublishingLimit();
+      console.log(`✓ Publishing quota: ${quota.quotaUsage}/${quota.configTotal} used in last 24h`);
+
+      const base = process.env.PAGES_BASE_URL || '';
+      if (!base || base.includes('username.github.io')) {
+        console.log('✗ PAGES_BASE_URL is not set to your real public site');
+      } else {
+        const sample = getPublicMediaUrl('logo/logo.png');
+        const res = await fetch(sample, { method: 'HEAD' });
+        const type = res.headers.get('content-type') || '';
+        console.log(`${res.ok && type.startsWith('image/') ? '✓' : '✗'} Media host: ${sample} -> HTTP ${res.status} ${type}`);
+      }
+    } catch (err: any) {
+      console.error(`\n❌ ig-check failed: ${err.message}`);
       process.exit(1);
     }
   });

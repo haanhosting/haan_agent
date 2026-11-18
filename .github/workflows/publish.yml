@@ -7,7 +7,8 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: publish-lock
+  # Shared by every workflow that commits state/ so they never race each other.
+  group: haan-state-writer
   cancel-in-progress: false
 
 permissions:
@@ -49,5 +50,10 @@ jobs:
             echo "No state changes to commit."
           else
             git commit -m "chore(agent): update publishing queue and history [skip ci]"
-            git push origin main
+            for i in 1 2 3; do
+              if git pull --rebase origin main && git push origin main; then pushed=1; break; fi
+              git rebase --abort 2>/dev/null || true
+              sleep $((i * 5))
+            done
+            [ "${pushed:-0}" = "1" ] || { echo "::error::git push failed after 3 attempts"; exit 1; }
           fi

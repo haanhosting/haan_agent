@@ -21,10 +21,10 @@
     }
   },
   "publisher": {
-    "active": "uploadpost",
+    "active": "instagramGraph",
     "instagramGraph": {
       "apiVersion": "v22.0",
-      "baseUrl": "https://graph.instagram.com",
+      "baseUrl": "auto",
       "maxDailyPosts": 50,
       "statusPollTimeoutMs": 90000,
       "statusPollIntervalMs": 3000

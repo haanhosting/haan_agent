@@ -1257,6 +1257,10 @@ const server = http.createServer(async (req, res) => {
         sendJson(res, 404, { error: 'Post not found in queue' });
         return;
       }
+      if (post.status !== 'queued') {
+        sendJson(res, 409, { error: `Post is '${post.status}', only queued posts can be published` });
+        return;
+      }
       updatePostStatus(post.id, 'publishing');
       try {
         const result = await publishPost(post, { dryRun: false, skipMediaWait: true });

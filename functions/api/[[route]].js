@@ -50,7 +50,8 @@ async function loadGithubQueueIfConfigured(env) {
     });
     if (!res.ok) return null;
     const data = await res.json();
-    const decoded = atob(data.content.replace(/\n/g, ''));
+    const bin = atob(data.content.replace(/\n/g, ''));
+    const decoded = new TextDecoder().decode(Uint8Array.from(bin, c => c.charCodeAt(0)));
     return { queue: JSON.parse(decoded), sha: data.sha };
   } catch {
     return null;
@@ -283,6 +284,12 @@ export async function onRequest(context) {
       const queue = await getQueueState(context);
       const post = queue.find(p => p.id === body.postId);
       if (!post) return jsonResponse(404, { error: 'Post not found in queue' });
+      if (post.status !== 'queued') {
+        return jsonResponse(409, { error: `Post is '${post.status}', only queued posts can be published` });
+      }
+      if (!post.images?.length) {
+        return jsonResponse(409, { error: 'Post has no rendered images yet; wait for the render workflow' });
+      }
 
       if (!apiKey) {
         return jsonResponse(400, {
@@ -385,7 +392,6 @@ export async function onRequest(context) {
         usedHeadlines.add(headline);
 
         const templateId = chosen.template || (slot.format === 'carousel' ? 'T11-carousel' : 'T01-bold-statement');
-        const previewImg = `preview/renders/${templateId}.jpg`;
 
         newPosts.push({
           id: postId,
@@ -407,7 +413,8 @@ export async function onRequest(context) {
           caption: chosen.caption,
           hashtags: chosen.hashtags || ['#HaanHosting'],
           altText: chosen.altText || chosen.slides?.[0]?.headline || 'Haan Hosting post',
-          images: [previewImg],
+          // Left empty so the dispatched generate workflow renders this post's real images.
+          images: [],
           imageUrls: [],
           igMediaId: null,
           attempts: 0,
@@ -423,7 +430,8 @@ export async function onRequest(context) {
       const pat = env.GH_PAT;
       const repo = env.GITHUB_REPOSITORY || 'haanhosting/haan_agent';
       if (pat) {
-        fetch(`https://api.github.com/repos/${repo}/actions/workflows/generate.yml/dispatches`, {
+        // waitUntil keeps the worker alive until the dispatch request completes.
+        context.waitUntil(fetch(`https://api.github.com/repos/${repo}/actions/workflows/generate.yml/dispatches`, {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${pat}`,
@@ -432,7 +440,7 @@ export async function onRequest(context) {
             'Content-Type': 'application/json'
           },
           body: JSON.stringify({ ref: 'main' })
-        }).catch(() => {});
+        }).catch(() => {}));
       }
 
       return jsonResponse(200, { ok: true, count: newPosts.length, posts: newPosts.map(p => p.id) });
