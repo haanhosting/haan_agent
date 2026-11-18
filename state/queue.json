@@ -628,8 +628,9 @@
     ],
     "imageUrls": [],
     "igMediaId": null,
-    "attempts": 0,
-    "error": null
+    "attempts": 1,
+    "error": "UPLOADPOST_API_KEY environment variable is missing. Get your API key from https://app.upload-post.com/dashboard and set UPLOADPOST_API_KEY in .env",
+    "rejectedAt": null
   },
   {
     "id": "2026-11-18-slot2-b5",
@@ -674,8 +675,9 @@
     ],
     "imageUrls": [],
     "igMediaId": null,
-    "attempts": 0,
-    "error": null
+    "attempts": 1,
+    "error": "UPLOADPOST_API_KEY environment variable is missing. Get your API key from https://app.upload-post.com/dashboard and set UPLOADPOST_API_KEY in .env",
+    "rejectedAt": null
   },
   {
     "id": "2026-11-18-slot3-b5",
@@ -945,8 +947,9 @@
     ],
     "imageUrls": [],
     "igMediaId": null,
-    "attempts": 0,
-    "error": null
+    "attempts": 1,
+    "error": "UPLOADPOST_API_KEY environment variable is missing. Get your API key from https://app.upload-post.com/dashboard and set UPLOADPOST_API_KEY in .env",
+    "rejectedAt": null
   },
   {
     "id": "2026-11-18-slot3-b4",
@@ -1165,8 +1168,9 @@
     ],
     "imageUrls": [],
     "igMediaId": null,
-    "attempts": 0,
-    "error": null
+    "attempts": 1,
+    "error": "UPLOADPOST_API_KEY environment variable is missing. Get your API key from https://app.upload-post.com/dashboard and set UPLOADPOST_API_KEY in .env",
+    "rejectedAt": null
   },
   {
     "id": "2026-11-18-slot2-b3",
@@ -1211,8 +1215,9 @@
     ],
     "imageUrls": [],
     "igMediaId": null,
-    "attempts": 0,
-    "error": null
+    "attempts": 1,
+    "error": "UPLOADPOST_API_KEY environment variable is missing. Get your API key from https://app.upload-post.com/dashboard and set UPLOADPOST_API_KEY in .env",
+    "rejectedAt": null
   },
   {
     "id": "2026-11-18-slot3-b3",
@@ -1438,8 +1443,9 @@
     ],
     "imageUrls": [],
     "igMediaId": null,
-    "attempts": 0,
-    "error": null
+    "attempts": 1,
+    "error": "UPLOADPOST_API_KEY environment variable is missing. Get your API key from https://app.upload-post.com/dashboard and set UPLOADPOST_API_KEY in .env",
+    "rejectedAt": null
   },
   {
     "id": "2026-11-18-slot2-b2",
@@ -1487,8 +1493,9 @@
     ],
     "imageUrls": [],
     "igMediaId": null,
-    "attempts": 0,
-    "error": null
+    "attempts": 1,
+    "error": "UPLOADPOST_API_KEY environment variable is missing. Get your API key from https://app.upload-post.com/dashboard and set UPLOADPOST_API_KEY in .env",
+    "rejectedAt": null
   },
   {
     "id": "2026-11-18-slot3-b2",
@@ -2038,8 +2045,9 @@
       "https://username.github.io/haan-insta-agent/media/2026-11-18/slot1.jpg"
     ],
     "igMediaId": null,
-    "attempts": 0,
-    "error": null
+    "attempts": 1,
+    "error": "UPLOADPOST_API_KEY environment variable is missing. Get your API key from https://app.upload-post.com/dashboard and set UPLOADPOST_API_KEY in .env",
+    "rejectedAt": null
   },
   {
     "id": "2026-11-18-slot2",
@@ -2104,8 +2112,9 @@
       "https://username.github.io/haan-insta-agent/media/2026-11-18/slot2.jpg"
     ],
     "igMediaId": null,
-    "attempts": 0,
-    "error": null
+    "attempts": 1,
+    "error": "UPLOADPOST_API_KEY environment variable is missing. Get your API key from https://app.upload-post.com/dashboard and set UPLOADPOST_API_KEY in .env",
+    "rejectedAt": null
   },
   {
     "id": "2026-11-18-slot3",
