@@ -340,9 +340,11 @@
     ],
     "altText": "Architectural insight advocating for simplicity and reliable hosting over premature over-engineering.",
     "images": [
-      "preview/renders/T01-bold-statement.jpg"
+      "media/2026-11-19/slot1.jpg"
     ],
-    "imageUrls": [],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-19/slot1.jpg"
+    ],
     "igMediaId": null,
     "attempts": 0,
     "error": null
@@ -387,9 +389,11 @@
     ],
     "altText": "Bold graphic highlighting free SSL certificates included automatically with all Haan Hosting plans.",
     "images": [
-      "preview/renders/T04-big-number.jpg"
+      "media/2026-11-19/slot2.jpg"
     ],
-    "imageUrls": [],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-19/slot2.jpg"
+    ],
     "igMediaId": null,
     "attempts": 0,
     "error": null
@@ -450,9 +454,11 @@
     ],
     "altText": "Poll surveying the community on their preferred automated trading terminal between MT4, MT5, and cTrader.",
     "images": [
-      "preview/renders/T10-question-poll.jpg"
+      "media/2026-11-19/slot3.jpg"
     ],
-    "imageUrls": [],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-19/slot3.jpg"
+    ],
     "igMediaId": null,
     "attempts": 0,
     "error": null
@@ -498,9 +504,11 @@
     ],
     "altText": "Browser mockup illustrating the 3 global datacenter regions available with Haan Hosting.",
     "images": [
-      "preview/renders/T08-browser-mockup.jpg"
+      "media/2026-11-19/slot4.jpg"
     ],
-    "imageUrls": [],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-19/slot4.jpg"
+    ],
     "igMediaId": null,
     "attempts": 0,
     "error": null
@@ -579,9 +587,15 @@
     ],
     "altText": "3-slide carousel explaining Windows Remote Desktop capabilities for Forex trading, SEO automation, and remote work.",
     "images": [
-      "preview/renders/T11-carousel.jpg"
+      "media/2026-11-19/slot5-1.jpg",
+      "media/2026-11-19/slot5-2.jpg",
+      "media/2026-11-19/slot5-3.jpg"
     ],
-    "imageUrls": [],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-19/slot5-1.jpg",
+      "https://haan-agent.pages.dev/media/2026-11-19/slot5-2.jpg",
+      "https://haan-agent.pages.dev/media/2026-11-19/slot5-3.jpg"
+    ],
     "igMediaId": null,
     "attempts": 0,
     "error": null
@@ -623,9 +637,7 @@
       "#HostingFacts"
     ],
     "altText": "Comparison panel contrasting shared hosting resource contention with guaranteed isolated Cloud VPS resources.",
-    "images": [
-      "preview/renders/T07-myth-fact.jpg"
-    ],
+    "images": [],
     "imageUrls": [],
     "igMediaId": null,
     "attempts": 2,
@@ -670,9 +682,7 @@
       "#NetworkingTips"
     ],
     "altText": "Graphic highlighting the 300-second TTL rule to prevent downtime during server migrations.",
-    "images": [
-      "preview/renders/T04-big-number.jpg"
-    ],
+    "images": [],
     "imageUrls": [],
     "igMediaId": null,
     "attempts": 2,
@@ -718,9 +728,7 @@
       "#DigitalPakistan"
     ],
     "altText": "Browser mockup showcasing local SEO benefits for brick-and-mortar stores with verified websites.",
-    "images": [
-      "preview/renders/T08-browser-mockup.jpg"
-    ],
+    "images": [],
     "imageUrls": [],
     "igMediaId": null,
     "attempts": 1,
@@ -847,9 +855,7 @@
       "#RDPGuide"
     ],
     "altText": "3-slide carousel explaining Windows Remote Desktop capabilities for Forex trading, SEO automation, and remote work.",
-    "images": [
-      "preview/renders/T11-carousel.jpg"
-    ],
+    "images": [],
     "imageUrls": [],
     "igMediaId": null,
     "attempts": 1,
@@ -944,9 +950,7 @@
       "#DevOpsFacts"
     ],
     "altText": "Fact sheet explaining the difference between hardware RAID fault-tolerance and independent off-site backups.",
-    "images": [
-      "preview/renders/T07-myth-fact.jpg"
-    ],
+    "images": [],
     "imageUrls": [],
     "igMediaId": null,
     "attempts": 2,
@@ -992,9 +996,7 @@
       "#TechExplainers"
     ],
     "altText": "Browser mockup diagram showing the 4 steps of a DNS lookup process from domain name to server IP.",
-    "images": [
-      "preview/renders/T08-browser-mockup.jpg"
-    ],
+    "images": [],
     "imageUrls": [],
     "igMediaId": null,
     "attempts": 1,
@@ -1040,9 +1042,7 @@
       "#HighSpeed"
     ],
     "altText": "Callout highlighting the 10 Gbps port speed standard on all Haan Hosting servers.",
-    "images": [
-      "preview/renders/T04-big-number.jpg"
-    ],
+    "images": [],
     "imageUrls": [],
     "igMediaId": null,
     "attempts": 1,
@@ -1122,9 +1122,7 @@
       "#RDPGuide"
     ],
     "altText": "3-slide carousel explaining Windows Remote Desktop capabilities for Forex trading, SEO automation, and remote work.",
-    "images": [
-      "preview/renders/T11-carousel.jpg"
-    ],
+    "images": [],
     "imageUrls": [],
     "igMediaId": null,
     "attempts": 1,
@@ -1168,9 +1166,7 @@
       "#OnlineShop"
     ],
     "altText": "Business advice card explaining 3 essential trust signals that boost online store conversions.",
-    "images": [
-      "preview/renders/T02-split-card.jpg"
-    ],
+    "images": [],
     "imageUrls": [],
     "igMediaId": null,
     "attempts": 2,
@@ -1215,9 +1211,7 @@
       "#WebSecurity"
     ],
     "altText": "Security advisory card detailing SSH key authentication and port customization to block brute-force attacks.",
-    "images": [
-      "preview/renders/T02-split-card.jpg"
-    ],
+    "images": [],
     "imageUrls": [],
     "igMediaId": null,
     "attempts": 2,
@@ -1265,9 +1259,7 @@
       "#TechTricks"
     ],
     "altText": "Terminal window showing a live ping command with 12ms response time and advice on selecting data center locations.",
-    "images": [
-      "preview/renders/T09-terminal.jpg"
-    ],
+    "images": [],
     "imageUrls": [],
     "igMediaId": null,
     "attempts": 1,
@@ -1314,9 +1306,7 @@
       "#TechExplainers"
     ],
     "altText": "Diagram illustrating how HTTP/2 and HTTP/3 multiplexing streams website assets simultaneously.",
-    "images": [
-      "preview/renders/T08-browser-mockup.jpg"
-    ],
+    "images": [],
     "imageUrls": [],
     "igMediaId": null,
     "attempts": 1,
@@ -1396,9 +1386,7 @@
       "#RDPGuide"
     ],
     "altText": "3-slide carousel explaining Windows Remote Desktop capabilities for Forex trading, SEO automation, and remote work.",
-    "images": [
-      "preview/renders/T11-carousel.jpg"
-    ],
+    "images": [],
     "imageUrls": [],
     "igMediaId": null,
     "attempts": 1,
@@ -1446,9 +1434,7 @@
       "#SecurityChecklist"
     ],
     "altText": "Checklist graphic outlining three essential security and performance steps before launching any website.",
-    "images": [
-      "preview/renders/T03-checklist.jpg"
-    ],
+    "images": [],
     "imageUrls": [],
     "igMediaId": null,
     "attempts": 2,
@@ -1496,9 +1482,7 @@
       "#TechHelp"
     ],
     "altText": "Terminal view illustrating error_log inspection and resolving WordPress 500 internal server memory errors.",
-    "images": [
-      "preview/renders/T09-terminal.jpg"
-    ],
+    "images": [],
     "imageUrls": [],
     "igMediaId": null,
     "attempts": 2,
@@ -1541,9 +1525,7 @@
       "#TrustedBrand"
     ],
     "altText": "Brand statement highlighting genuine 24/7 WhatsApp technical support from the Lahore team.",
-    "images": [
-      "preview/renders/T01-bold-statement.jpg"
-    ],
+    "images": [],
     "imageUrls": [],
     "igMediaId": null,
     "attempts": 1,
@@ -1591,9 +1573,7 @@
       "#SEOTips"
     ],
     "altText": "Checklist highlighting Time to First Byte (TTFB), uptime, and HTTPS as critical technical SEO ranking factors.",
-    "images": [
-      "preview/renders/T03-checklist.jpg"
-    ],
+    "images": [],
     "imageUrls": [],
     "igMediaId": null,
     "attempts": 1,
@@ -1687,9 +1667,7 @@
       "#CarouselTips"
     ],
     "altText": "4-slide carousel guide demonstrating image compression, Redis caching, and NVMe hosting for WordPress acceleration.",
-    "images": [
-      "preview/renders/T11-carousel.jpg"
-    ],
+    "images": [],
     "imageUrls": [],
     "igMediaId": null,
     "attempts": 1,
@@ -1725,7 +1703,7 @@
         "cta": "haanhosting.store"
       }
     ],
-    "caption": "Monitoring your server health should be quick and easy. ð\n\nRun htop on your Linux VPS to get real-time visualization of CPU core loads, memory allocation, and running threads.\n\nEvery HAAN Cloud VPS gives you full root access and 10 Gbps networking.\n\nð Deploy your Linux server at haanhosting.store!\n\n#HaanHosting #LinuxTips #SysAdmin #ServerAdmin #Htop #CloudVPS #PakistanDevelopers",
+    "caption": "Monitoring your server health should be quick and easy. 📊\n\nRun htop on your Linux VPS to get real-time visualization of CPU core loads, memory allocation, and running threads.\n\nEvery HAAN Cloud VPS gives you full root access and 10 Gbps networking.\n\n👉 Deploy your Linux server at haanhosting.store!\n\n#HaanHosting #LinuxTips #SysAdmin #ServerAdmin #Htop #CloudVPS #PakistanDevelopers",
     "hashtags": [
       "#HaanHosting",
       "#seoexpert",
@@ -1792,7 +1770,7 @@
         "cta": "haanhosting.store"
       }
     ],
-    "caption": "Tech trivia time! ð§ \n\nTest your networking knowledge: What does CNAME actually stand for in DNS terminology?\n\nComment your guess below without looking it up! ð\n\n#HaanHosting #TechTrivia #CodingQuiz #NetworkingQuiz #DNS #WebDevCommunity #PakistanTech",
+    "caption": "Tech trivia time! 🧠\n\nTest your networking knowledge: What does CNAME actually stand for in DNS terminology?\n\nComment your guess below without looking it up! 👇\n\n#HaanHosting #TechTrivia #CodingQuiz #NetworkingQuiz #DNS #WebDevCommunity #PakistanTech",
     "hashtags": [
       "#HaanHosting",
       "#webdevcommunity",
@@ -1843,7 +1821,7 @@
         "cta": "haanhosting.store"
       }
     ],
-    "caption": "Ready to land higher-paying international clients? ð\n\nA custom domain portfolio running live deployed projects demonstrates technical competence that no PDF resume can match.\n\nDeploy your portfolio with free SSL for just $3.99/mo.\n\nð Link in bio to start building at haanhosting.store!\n\n#HaanHosting #DeveloperPortfolio #CareerTips #SoftwareEngineer #PakistaniTech #RemoteJobs",
+    "caption": "Ready to land higher-paying international clients? 🌟\n\nA custom domain portfolio running live deployed projects demonstrates technical competence that no PDF resume can match.\n\nDeploy your portfolio with free SSL for just $3.99/mo.\n\n👉 Link in bio to start building at haanhosting.store!\n\n#HaanHosting #DeveloperPortfolio #CareerTips #SoftwareEngineer #PakistaniTech #RemoteJobs",
     "hashtags": [
       "#HaanHosting",
       "#ecommercepakistan",
@@ -1894,7 +1872,7 @@
         "cta": "haanhosting.store"
       }
     ],
-    "caption": "Launch your online presence today for less than the cost of a coffee! â\n\nAt HAAN HOSTING, our Starter Web Hosting plan is only $3.99/mo. No hidden contract traps, no sudden renewals.\n\nâ Free SSL certificate\nâ 1-Click WordPress install\nâ 24/7 WhatsApp help\n\nð Visit haanhosting.store to launch your site!\n\n#HaanHosting #CheapWebHosting #AffordableHosting #SmallBizPK #WebHostingDeal #WordPressPK",
+    "caption": "Launch your online presence today for less than the cost of a coffee! ☕\n\nAt HAAN HOSTING, our Starter Web Hosting plan is only $3.99/mo. No hidden contract traps, no sudden renewals.\n\n✔ Free SSL certificate\n✔ 1-Click WordPress install\n✔ 24/7 WhatsApp help\n\n👉 Visit haanhosting.store to launch your site!\n\n#HaanHosting #CheapWebHosting #AffordableHosting #SmallBizPK #WebHostingDeal #WordPressPK",
     "hashtags": [
       "#HaanHosting",
       "#serverdeal",
@@ -1978,7 +1956,7 @@
         "cta": "haanhosting.store"
       }
     ],
-    "caption": "Are you running Forex Expert Advisors from home? ð\n\nHome internet drops, load shedding, and latency slippage kill trading profitability. Swipe to see why professional traders run on dedicated Windows RDP in London and New York.\n\nPlans start at $11.99/mo.\n\nð Link in bio to deploy your Forex server at haanhosting.store!\n\n#HaanHosting #ForexPakistan #MT4Trading #ForexVPS #TradingBot #ExpertAdvisor #AlgoTrading",
+    "caption": "Are you running Forex Expert Advisors from home? 📈\n\nHome internet drops, load shedding, and latency slippage kill trading profitability. Swipe to see why professional traders run on dedicated Windows RDP in London and New York.\n\nPlans start at $11.99/mo.\n\n👉 Link in bio to deploy your Forex server at haanhosting.store!\n\n#HaanHosting #ForexPakistan #MT4Trading #ForexVPS #TradingBot #ExpertAdvisor #AlgoTrading",
     "hashtags": [
       "#HaanHosting",
       "#cybersecurity",
@@ -2035,7 +2013,7 @@
         "cta": "haanhosting.store"
       }
     ],
-    "caption": "Your domain name is your brandâs permanent digital address. ð\n\nChoose a name that is memorable, easy to spell over the phone, and free of confusing hyphens. When you are ready to launch, host it on high-performance servers.\n\nWeb hosting plans start at just $3.99/mo.\n\nð Visit haanhosting.store (link in bio)!\n\n#HaanHosting #DomainName #BrandingTips #SmallBusinessPakistan #Ecommerce #StartUpPK",
+    "caption": "Your domain name is your brand’s permanent digital address. 🌐\n\nChoose a name that is memorable, easy to spell over the phone, and free of confusing hyphens. When you are ready to launch, host it on high-performance servers.\n\nWeb hosting plans start at just $3.99/mo.\n\n👉 Visit haanhosting.store (link in bio)!\n\n#HaanHosting #DomainName #BrandingTips #SmallBusinessPakistan #Ecommerce #StartUpPK",
     "hashtags": [
       "#HaanHosting",
       "#learntocode",
@@ -2103,7 +2081,7 @@
         "cta": "haanhosting.store"
       }
     ],
-    "caption": "Terminal purist or visual GUI fan? â¨ï¸ vs ð±ï¸\n\nHow do you prefer managing your server files and services on a daily basis? Vote below!\n\n#HaanHosting #TerminalVsGUI #SysAdminLife #DevLife #ServerManagement #PakistanTech",
+    "caption": "Terminal purist or visual GUI fan? ⌨️ vs 🖱️\n\nHow do you prefer managing your server files and services on a daily basis? Vote below!\n\n#HaanHosting #TerminalVsGUI #SysAdminLife #DevLife #ServerManagement #PakistanTech",
     "hashtags": [
       "#HaanHosting",
       "#webdevcommunity",
@@ -2152,7 +2130,7 @@
         "cta": "haanhosting.store"
       }
     ],
-    "caption": "Preparing for Black Friday, Eid sales, or a major marketing launch? ð\n\nDonât let your server crash under peak traffic. With HAAN NVMe Cloud VPS, you can scale CPU cores and RAM seamlessly as your audience grows.\n\nDeploy high-speed hosting today from $11.99/mo.\n\nð Link in bio to learn more!\n\n#HaanHosting #CloudScaling #TrafficSpikes #EcommerceScaling #PakistanBusiness #ServerPerformance",
+    "caption": "Preparing for Black Friday, Eid sales, or a major marketing launch? 🚀\n\nDon’t let your server crash under peak traffic. With HAAN NVMe Cloud VPS, you can scale CPU cores and RAM seamlessly as your audience grows.\n\nDeploy high-speed hosting today from $11.99/mo.\n\n👉 Link in bio to learn more!\n\n#HaanHosting #CloudScaling #TrafficSpikes #EcommerceScaling #PakistanBusiness #ServerPerformance",
     "hashtags": [
       "#HaanHosting",
       "#digitalmarketing",
@@ -2204,7 +2182,7 @@
         "cta": "haanhosting.store"
       }
     ],
-    "caption": "Need serious computing power for your APIs, databases, or trading bots? â¡\n\nUpgrade to our Business Cloud VPS:\n\nâ¢ 6 Cores CPU\nâ¢ 16 GB RAM\nâ¢ 100 GB NVMe Storage\nâ¢ 10 Gbps Port Speed\nâ¢ Dedicated IPv4 & IPv6\n\nOnly $16.99/mo. Instant provisioning.\n\nð Deploy your Business server at haanhosting.store!\n\n#HaanHosting #BusinessVPS #CloudHosting #16GBRAM #NVMeVPS #ServerDeal #TechPakistan",
+    "caption": "Need serious computing power for your APIs, databases, or trading bots? ⚡\n\nUpgrade to our Business Cloud VPS:\n\n• 6 Cores CPU\n• 16 GB RAM\n• 100 GB NVMe Storage\n• 10 Gbps Port Speed\n• Dedicated IPv4 & IPv6\n\nOnly $16.99/mo. Instant provisioning.\n\n👉 Deploy your Business server at haanhosting.store!\n\n#HaanHosting #BusinessVPS #CloudHosting #16GBRAM #NVMeVPS #ServerDeal #TechPakistan",
     "hashtags": [
       "#HaanHosting",
       "#budgethosting",
@@ -2289,7 +2267,7 @@
         "cta": "haanhosting.store"
       }
     ],
-    "caption": "Are you running Forex Expert Advisors from home? ð\n\nHome internet drops, load shedding, and latency slippage kill trading profitability. Swipe to see why professional traders run on dedicated Windows RDP in London and New York.\n\nPlans start at $11.99/mo.\n\nð Link in bio to deploy your Forex server at haanhosting.store!\n\n#HaanHosting #ForexPakistan #MT4Trading #ForexVPS #TradingBot #ExpertAdvisor #AlgoTrading",
+    "caption": "Are you running Forex Expert Advisors from home? 📈\n\nHome internet drops, load shedding, and latency slippage kill trading profitability. Swipe to see why professional traders run on dedicated Windows RDP in London and New York.\n\nPlans start at $11.99/mo.\n\n👉 Link in bio to deploy your Forex server at haanhosting.store!\n\n#HaanHosting #ForexPakistan #MT4Trading #ForexVPS #TradingBot #ExpertAdvisor #AlgoTrading",
     "hashtags": [
       "#HaanHosting",
       "#linuxserver",
