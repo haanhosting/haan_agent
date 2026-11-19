@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>T24 – Global Locations Map</title>
+  <link rel="stylesheet" href="../_shared/base.css">
+  <style>
+    .post.t24 { background: #030817; color: #fff; }
+    .canvas.neon.t24 .bg-image-layer { opacity: 0.4 !important; background-position: center 35% !important; }
+    .t24 .radar {
+      position: absolute; left: 50%; top: 46%; width: 1200px; height: 1200px; z-index: 1; pointer-events: none;
+      transform: translate(-50%, -50%); border-radius: 50%; opacity: 0.4;
+      background: repeating-radial-gradient(circle, transparent 0 88px, rgba(79,210,255,0.35) 88px 90px);
+      -webkit-mask-image: radial-gradient(circle, #000 20%, transparent 62%);
+    }
+    .canvas.neon.t24 > .mid { gap: 40px; justify-content: flex-end; padding-bottom: 48px; }
+    .canvas.neon.t24 h1 { font-size: 84px; text-align: left; }
+    .t24 .sub { font-size: 32px; line-height: 1.4; color: #cfe0ff; max-width: 900px; }
+    .t24 .locs { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+    .t24 .locs > :last-child:nth-child(odd) { grid-column: 1 / -1; }
+    .t24 .loc {
+      display: flex; align-items: center; gap: 22px; padding: 26px 26px;
+      border-radius: 20px; background: rgba(5,14,40,0.8); border: 2px solid rgba(64,160,255,0.55);
+      backdrop-filter: blur(4px);
+      font-size: 30px; line-height: 1.25; font-weight: 600; color: #e8f0ff;
+    }
+    .t24 .pin {
+      position: relative; flex: 0 0 26px; height: 26px; border-radius: 50%;
+      background: #4fd2ff; box-shadow: 0 0 0 8px rgba(79,210,255,0.22), 0 0 0 18px rgba(79,210,255,0.1), 0 0 22px #2f9bff;
+    }
+    .t24 .loc:nth-child(n+5) { display: none; }
+  </style>
+</head>
+<body>
+  <div class="canvas post t24 {{variantClass}}" style="{{cssVariables}}">
+    <div class="bg-image-layer" style="{{bgImageStyle}}"></div>
+    <div class="bg-vignette-layer"></div>
+    <div class="radar"></div>
+    <div class="label">{{label}}</div>
+    <div class="mid">
+      <h1 class="auto-shrink">{{headline}}</h1>
+      {{#if subline}}<div class="sub auto-shrink">{{subline}}</div>{{/if}}
+      <div class="locs">
+        {{#each bentoItems}}<div class="loc"><span class="pin"></span><span>{{this}}</span></div>{{/each}}
+      </div>
+    </div>
+    <div class="footer">Haan Hosting · {{cta}}</div>
+  </div>
+</body>
+</html>

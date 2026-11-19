@@ -46,17 +46,43 @@
     radial-gradient(55% 28% at 50% 0%, rgba(47, 155, 255, 0.38) 0%, transparent 100%),
     radial-gradient(70% 10% at 50% 100%, rgba(47, 155, 255, 0.35) 0%, transparent 100%);
 }
-.neon-glow::after {
+.canvas.neon .footer.neon-footer::before {
   content: '';
   position: absolute;
-  left: 8%;
-  right: 8%;
-  bottom: 300px;
+  left: 4%;
+  right: 4%;
+  top: -30px;
   height: 2px;
   background: linear-gradient(90deg, transparent, rgba(110, 200, 255, 0.85), transparent);
   box-shadow: 0 0 24px 4px rgba(47, 155, 255, 0.55);
-  opacity: 0.55;
+  opacity: 0.5;
+  pointer-events: none;
 }
+
+/* ---------- Layout: consistent safe margins + vertical rhythm ---------- */
+.canvas.neon {
+  padding: 72px 80px 64px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-start !important;
+  gap: 44px;
+}
+.canvas.neon > .label,
+.canvas.neon > .footer {
+  flex: 0 0 auto;
+  margin: 0 !important;
+}
+/* Content fills the space between header and footer and sits optically centred */
+.canvas.neon > .mid {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0 !important;
+  width: 100%;
+}
+.canvas.neon.t18 > .mid { align-items: center; }
 
 /* ---------- Typography ---------- */
 .canvas.neon h1 {
@@ -173,6 +199,7 @@
 
 /* ---------- Footer: feature strip + ORDER NOW ---------- */
 .canvas.neon .footer.neon-footer {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -252,3 +279,176 @@
   box-shadow: 0 0 28px rgba(47, 155, 255, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.4);
   white-space: nowrap;
 }
+
+/* =====================================================================
+   HEADER VARIANTS  (class hdr-* on the canvas, set per template)
+   ===================================================================== */
+.canvas.neon .label { align-items: center; }
+
+/* center: crest + wordmark centred, category between neon rules */
+.canvas.neon.hdr-center .label {
+  flex-direction: column-reverse;
+  justify-content: center;
+  gap: 16px;
+}
+.canvas.neon.hdr-center .brand-top-logo {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  gap: 16px;
+}
+.canvas.neon.hdr-center .brand-top-logo span { font-size: 30px; letter-spacing: 0.18em; }
+.canvas.neon.hdr-center .brand-top-pill {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  font-size: 22px;
+  letter-spacing: 0.22em;
+  color: #7fd4ff;
+}
+.canvas.neon.hdr-center .brand-top-pill::before,
+.canvas.neon.hdr-center .brand-top-pill::after {
+  content: '';
+  width: 90px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #4fc3ff);
+  box-shadow: 0 0 10px rgba(47, 155, 255, 0.8);
+}
+.canvas.neon.hdr-center .brand-top-pill::after { background: linear-gradient(90deg, #4fc3ff, transparent); }
+
+/* ribbon: crest + wordmark left, category as underlined label right */
+.canvas.neon.hdr-ribbon .label { flex-direction: row-reverse; }
+.canvas.neon.hdr-ribbon .brand-top-logo {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+.canvas.neon.hdr-ribbon .brand-top-pill {
+  background: none;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0 0 8px;
+  font-size: 24px;
+  letter-spacing: 0.16em;
+  color: #cfe8ff;
+  border-bottom: 3px solid #2fa4ff;
+  box-shadow: 0 10px 14px -10px rgba(47, 155, 255, 0.9);
+}
+
+/* bar: one full-width glass bar, crest left, category right */
+.canvas.neon.hdr-bar .label {
+  flex-direction: row-reverse;
+  padding: 10px 14px 10px 10px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(14, 36, 92, 0.85), rgba(4, 12, 34, 0.75));
+  border: 2px solid rgba(79, 195, 255, 0.6);
+  box-shadow: 0 0 22px rgba(47, 155, 255, 0.35);
+}
+.canvas.neon.hdr-bar .brand-top-logo {
+  background: none;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+}
+.canvas.neon.hdr-bar .brand-top-pill {
+  background: linear-gradient(180deg, #2fa4ff 0%, #0b5ed7 100%);
+  border: none;
+  font-size: 22px;
+  padding: 10px 24px;
+}
+
+/* =====================================================================
+   FOOTER VARIANTS
+   ===================================================================== */
+/* compact: single glass bar */
+.canvas.neon .f-compact .neon-footer-row {
+  padding: 14px 14px 14px 16px;
+  border-radius: 22px;
+  background: linear-gradient(90deg, rgba(14, 36, 92, 0.85), rgba(4, 12, 34, 0.8));
+  border: 2px solid rgba(79, 195, 255, 0.55);
+  box-shadow: 0 0 22px rgba(47, 155, 255, 0.3);
+}
+
+/* centered: feature line, wide CTA, url */
+.canvas.neon .f-centered { align-items: center; gap: 20px; }
+.feature-line {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+.feature-inline,
+.feature-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Oswald', 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 19px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #cfe4ff;
+  white-space: nowrap;
+}
+.feature-inline svg,
+.feature-chip svg {
+  width: 26px;
+  height: 26px;
+  flex-shrink: 0;
+  stroke: #5cc8ff;
+  fill: none;
+  stroke-width: 1.9;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 5px rgba(79, 195, 255, 0.9));
+}
+.canvas.neon .f-centered .order-btn {
+  min-width: 560px;
+  text-align: center;
+  font-size: 38px;
+  border-radius: 999px;
+}
+.footer-url {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  font-family: 'Oswald', 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 22px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #ffffff;
+}
+.footer-url span:last-child { color: #7fd4ff; text-transform: none; letter-spacing: 0.04em; font-family: 'Inter', sans-serif; }
+.footer-url i { width: 6px; height: 6px; border-radius: 50%; background: #4fc3ff; box-shadow: 0 0 8px #4fc3ff; }
+.footer-url img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(79, 195, 255, 0.8);
+}
+
+/* chips: feature pills + url/CTA row */
+.feature-chips {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+.feature-chip {
+  flex: 1;
+  justify-content: center;
+  padding: 10px 8px;
+  border-radius: 999px;
+  font-size: 17px;
+  background: rgba(30, 144, 255, 0.1);
+  border: 1.5px solid rgba(79, 195, 255, 0.55);
+  box-shadow: 0 0 12px rgba(47, 155, 255, 0.25);
+}
+.feature-chip svg { width: 22px; height: 22px; }

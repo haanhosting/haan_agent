@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>T19 – Photo Diagonal Hero</title>
+  <link rel="stylesheet" href="../_shared/base.css">
+  <style>
+    .post.t19 { background: #030817; color: #fff; }
+    /* Photo fills the top band, cut on a diagonal */
+    .canvas.neon.t19 .bg-image-layer {
+      opacity: 0.62 !important;
+      clip-path: polygon(0 0, 100% 0, 100% 46%, 0 60%);
+      filter: saturate(1.3) contrast(1.05);
+    }
+    .t19 .photo-fade {
+      position: absolute; inset: 0; z-index: 1; pointer-events: none;
+      background: linear-gradient(180deg, rgba(3,8,23,0.55) 0%, rgba(3,8,23,0.05) 22%, rgba(3,8,23,0.35) 44%, rgba(3,8,23,0.96) 58%);
+    }
+    .t19 .diag-line {
+      position: absolute; left: -5%; right: -5%; top: 53%; height: 4px; z-index: 1;
+      background: linear-gradient(90deg, transparent, #4fd2ff 30%, #1e90ff 70%, transparent);
+      box-shadow: 0 0 22px 4px rgba(47,155,255,0.65);
+      transform: rotate(-7.4deg);
+    }
+    .canvas.neon.t19 > .mid { justify-content: flex-end; gap: 30px; }
+    .t19 .kicker {
+      display: inline-flex; align-items: center; gap: 14px; align-self: flex-start;
+      font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 30px; letter-spacing: 0.14em;
+      text-transform: uppercase; color: #6fd0ff;
+    }
+    .t19 .kicker::before { content: ''; width: 56px; height: 4px; background: #4fd2ff; box-shadow: 0 0 12px #2f9bff; }
+    .canvas.neon.t19 h1 { font-size: 104px; text-align: left; }
+    .t19 .body {
+      font-size: 36px; line-height: 1.4; color: #d6e4ff;
+      border-left: 6px solid #2f9bff; padding: 6px 0 6px 30px; max-width: 880px;
+    }
+    .t19 .chip {
+      align-self: flex-start; padding: 14px 30px; border-radius: 999px;
+      background: rgba(47,155,255,0.16); border: 2px solid rgba(79,210,255,0.7);
+      font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 30px; color: #bfe7ff; letter-spacing: 0.04em;
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas post t19 {{variantClass}}" style="{{cssVariables}}">
+    <div class="bg-image-layer" style="{{bgImageStyle}}"></div>
+    <div class="photo-fade"></div>
+    <div class="diag-line"></div>
+    <div class="label">{{label}}</div>
+    <div class="mid">
+      <div class="kicker">{{badge}}</div>
+      <h1 class="auto-shrink">{{headline}}</h1>
+      {{#if subline}}<div class="body auto-shrink">{{subline}}</div>{{/if}}
+      {{#if highlight}}<div class="chip">{{highlight}}</div>{{/if}}
+    </div>
+    <div class="footer">Haan Hosting · {{cta}}</div>
+  </div>
+</body>
+</html>

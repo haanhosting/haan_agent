@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>T23 – Pricing Tier Card</title>
+  <link rel="stylesheet" href="../_shared/base.css">
+  <style>
+    .post.t23 { background: #030817; color: #fff; }
+    .canvas.neon.t23 .bg-image-layer { opacity: 0.3 !important; transform: scale(1.08); filter: blur(1px) saturate(1.2); }
+    .t23 .beam {
+      position: absolute; left: 50%; top: 0; width: 900px; height: 100%; z-index: 1; transform: translateX(-50%);
+      background: radial-gradient(50% 40% at 50% 55%, rgba(47,155,255,0.35), transparent 70%); pointer-events: none;
+    }
+    .canvas.neon.t23 > .mid { align-items: center; gap: 30px; }
+    .canvas.neon.t23 h1 { font-size: 62px; text-align: center; }
+    .t23 .tier {
+      position: relative; width: 760px; border-radius: 34px; padding: 58px 56px 44px; overflow: hidden;
+      background: linear-gradient(180deg, rgba(20,52,130,0.9) 0%, rgba(6,16,44,0.94) 100%);
+      border: 3px solid #4fd2ff;
+      box-shadow: 0 0 0 10px rgba(47,155,255,0.12), 0 0 70px rgba(47,155,255,0.45), inset 0 0 40px rgba(79,210,255,0.15);
+      display: flex; flex-direction: column; align-items: center; gap: 14px;
+    }
+    .t23 .ribbon {
+      position: absolute; top: 38px; right: -62px; transform: rotate(40deg);
+      width: 260px; text-align: center; padding: 10px 0;
+      background: linear-gradient(90deg, #ffb020, #ff7a18); color: #1a0c00;
+      font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 20px; letter-spacing: 0.12em;
+    }
+    .t23 .plan { font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 38px; letter-spacing: 0.08em; text-transform: uppercase; color: #bfe7ff; }
+    .t23 .price { font-size: 128px; line-height: 1; }
+    .t23 .divider { width: 100%; height: 2px; margin: 12px 0 8px; background: linear-gradient(90deg, transparent, rgba(79,210,255,0.8), transparent); }
+    .t23 .specs { list-style: none; padding: 0; margin: 0; width: 100%; display: flex; flex-direction: column; gap: 14px; }
+    .t23 .specs li { display: flex; align-items: center; gap: 18px; font-size: 32px; font-weight: 600; color: #e8f0ff; }
+    .t23 .specs li::before { content: '✓'; color: #4fd2ff; font-size: 32px; text-shadow: 0 0 10px #2f9bff; }
+    .t23 .specs li:nth-child(n+5) { display: none; }
+    .t23 .buy {
+      margin-top: 18px; width: 100%; text-align: center; padding: 22px 0; border-radius: 16px;
+      background: linear-gradient(90deg, #1e90ff, #4fd2ff); color: #031030;
+      font-family: 'Oswald', sans-serif; font-weight: 700; font-size: 32px; letter-spacing: 0.08em; text-transform: uppercase;
+      box-shadow: 0 10px 30px rgba(47,155,255,0.5);
+    }
+  </style>
+</head>
+<body>
+  <div class="canvas post t23 {{variantClass}}" style="{{cssVariables}}">
+    <div class="bg-image-layer" style="{{bgImageStyle}}"></div>
+    <div class="bg-vignette-layer"></div>
+    <div class="beam"></div>
+    <div class="label">{{label}}</div>
+    <div class="mid">
+      <h1 class="auto-shrink">{{headline}}</h1>
+      <div class="tier">
+        <div class="ribbon">BEST VALUE</div>
+        {{#if planName}}<div class="plan">{{planName}}</div>{{/if}}
+        <div class="price">{{priceBadge}}</div>
+        <div class="divider"></div>
+        <ul class="specs">{{#each bentoItems}}<li>{{this}}</li>{{/each}}</ul>
+        {{#if ctaButtonText}}<div class="buy">{{ctaButtonText}}</div>{{/if}}
+      </div>
+    </div>
+    <div class="footer">Haan Hosting · {{cta}}</div>
+  </div>
+</body>
+</html>

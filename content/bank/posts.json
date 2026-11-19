@@ -2310,5 +2310,355 @@
       "#Inspiration"
     ],
     "altText": "Motivational quote card celebrating the global reach of modern developers building from anywhere."
+  },
+  {
+    "id": "bank-107",
+    "pillar": "tips",
+    "format": "single",
+    "template": "T19-photo-diagonal-hero",
+    "slides": [
+      {
+        "badge": "Built for Speed",
+        "category": "Performance",
+        "headline": "Your Website Deserves NVMe Speed",
+        "subline": "NVMe storage reads data far faster than old SATA SSDs, so pages load quicker and visitors stay longer.",
+        "highlight": "Starter Cloud VPS · $11.99/mo",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Slow site = lost visitors. ⚡\n\n✅ NVMe storage on every server\n✅ 10 Gbps network port\n✅ DDoS protection included\n\n👉 Upgrade your speed at haanhosting.store\n\n#HaanHosting #NVMe #CloudVPS #WebsiteSpeed #PakistanIT",
+    "hashtags": [
+      "#HaanHosting",
+      "#NVMe",
+      "#CloudVPS",
+      "#WebsiteSpeed",
+      "#PakistanIT"
+    ],
+    "altText": "Neon hero post with a datacenter photo promoting NVMe storage speed on Starter Cloud VPS at $11.99 per month."
+  },
+  {
+    "id": "bank-108",
+    "pillar": "growth",
+    "format": "single",
+    "template": "T19-photo-diagonal-hero",
+    "slides": [
+      {
+        "badge": "Go Online",
+        "category": "Business",
+        "headline": "Your Business Needs a Home Online",
+        "subline": "Customers search before they buy. A fast website with free SSL builds trust from the first click.",
+        "highlight": "Starter Web Hosting · $3.99/mo",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Apka business Google pe nazar aata hai? 🌐\n\n✅ 1-Click WordPress\n✅ Free SSL certificate\n✅ cPanel access + 24/7 support\n\n👉 Start your website at haanhosting.store\n\n#HaanHosting #SmallBusiness #WebHosting #WordPress #PakistanBusiness",
+    "hashtags": [
+      "#HaanHosting",
+      "#SmallBusiness",
+      "#WebHosting",
+      "#WordPress",
+      "#PakistanBusiness"
+    ],
+    "altText": "Neon hero post encouraging small businesses to launch a website with Starter Web Hosting at $3.99 per month."
+  },
+  {
+    "id": "bank-109",
+    "pillar": "offers",
+    "format": "single",
+    "template": "T20-stat-dashboard",
+    "slides": [
+      {
+        "badge": "By the Numbers",
+        "category": "Cloud VPS",
+        "headline": "Port Speed That Keeps Up",
+        "statNumber": "10 Gbps",
+        "statLabel": "Network Port",
+        "items": [
+          "4 CPU Cores",
+          "8 GB RAM",
+          "50 GB NVMe"
+        ],
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Starter Cloud VPS — $11.99/mo 🚀\n\n✅ 4 Cores CPU\n✅ 8 GB RAM\n✅ 50 GB NVMe\n✅ 10 Gbps port\n\n👉 Deploy your VPS at haanhosting.store\n\n#HaanHosting #CloudVPS #NVMe #10Gbps #VPSHosting",
+    "hashtags": [
+      "#HaanHosting",
+      "#CloudVPS",
+      "#NVMe",
+      "#10Gbps",
+      "#VPSHosting"
+    ],
+    "altText": "Dashboard-style post with a 10 Gbps gauge and Starter Cloud VPS specs: 4 CPU cores, 8 GB RAM, 50 GB NVMe."
+  },
+  {
+    "id": "bank-110",
+    "pillar": "educational",
+    "format": "single",
+    "template": "T20-stat-dashboard",
+    "slides": [
+      {
+        "badge": "Spec Check",
+        "category": "Windows RDP",
+        "headline": "What 8 GB RAM Gets You",
+        "statNumber": "8 GB",
+        "statLabel": "RAM on Starter RDP",
+        "items": [
+          "4 Cores CPU",
+          "50 GB NVMe",
+          "Dedicated Clean IP"
+        ],
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "RDP choose karte waqt RAM matter karti hai. 🧠\n\n8 GB lets you run MT4/MT5, a browser and your tools side by side without lag.\n\nStarter Windows RDP — $11.99/mo\n\n👉 Get your RDP at haanhosting.store\n\n#HaanHosting #WindowsRDP #ForexVPS #MT5 #RemoteDesktop",
+    "hashtags": [
+      "#HaanHosting",
+      "#WindowsRDP",
+      "#ForexVPS",
+      "#MT5",
+      "#RemoteDesktop"
+    ],
+    "altText": "Dashboard-style post highlighting 8 GB RAM on the Starter Windows RDP with 4 CPU cores, 50 GB NVMe and a dedicated clean IP."
+  },
+  {
+    "id": "bank-111",
+    "pillar": "tips",
+    "format": "single",
+    "template": "T21-steps-timeline",
+    "slides": [
+      {
+        "badge": "How To",
+        "category": "WordPress",
+        "headline": "Launch a WordPress Site in 4 Steps",
+        "items": [
+          "Pick the Starter Web Hosting plan",
+          "Point your domain to Haan Hosting",
+          "Install WordPress with 1 click",
+          "Free SSL turns on automatically"
+        ],
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Website banana mushkil nahi! 💻\n\n1️⃣ Pick Starter Web Hosting ($3.99/mo)\n2️⃣ Point your domain\n3️⃣ 1-Click WordPress\n4️⃣ Free SSL — done\n\n👉 Start today at haanhosting.store\n\n#HaanHosting #WordPress #WebHosting #HowTo #PakistanIT",
+    "hashtags": [
+      "#HaanHosting",
+      "#WordPress",
+      "#WebHosting",
+      "#HowTo",
+      "#PakistanIT"
+    ],
+    "altText": "Step-by-step timeline showing how to launch a WordPress site in four steps with Haan Hosting."
+  },
+  {
+    "id": "bank-112",
+    "pillar": "educational",
+    "format": "single",
+    "template": "T21-steps-timeline",
+    "slides": [
+      {
+        "badge": "Quick Guide",
+        "category": "Windows RDP",
+        "headline": "Connect to Your RDP in 4 Steps",
+        "items": [
+          "Open Remote Desktop Connection",
+          "Enter your server IP address",
+          "Log in with your admin details",
+          "Install your tools and get to work"
+        ],
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "New to RDP? It takes 2 minutes. 🖥️\n\n1️⃣ Open Remote Desktop Connection\n2️⃣ Enter your server IP\n3️⃣ Log in with admin details\n4️⃣ Install your apps\n\nFull admin access on every plan.\n\n👉 Get your Windows RDP at haanhosting.store\n\n#HaanHosting #WindowsRDP #RemoteDesktop #HowTo #TechTips",
+    "hashtags": [
+      "#HaanHosting",
+      "#WindowsRDP",
+      "#RemoteDesktop",
+      "#HowTo",
+      "#TechTips"
+    ],
+    "altText": "Step-by-step timeline explaining how to connect to a Windows RDP server in four steps."
+  },
+  {
+    "id": "bank-113",
+    "pillar": "trust",
+    "format": "single",
+    "template": "T22-guarantee-seal",
+    "slides": [
+      {
+        "badge": "Our Promise",
+        "category": "Support",
+        "headline": "Hosting You Can Count On",
+        "statNumber": "24/7",
+        "statLabel": "Support",
+        "items": [
+          "Real humans on support, day or night",
+          "Dedicated clean IP on every RDP",
+          "Fast NVMe storage on every server"
+        ],
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Problem raat 3 baje? Hum available hain. 🤝\n\n✅ 24/7 WhatsApp support from our Lahore team\n✅ Dedicated clean IP on RDP\n✅ NVMe on every server\n\n👉 Talk to us at haanhosting.store\n\n#HaanHosting #24x7Support #LahoreTech #WindowsRDP #TrustedHosting",
+    "hashtags": [
+      "#HaanHosting",
+      "#24x7Support",
+      "#LahoreTech",
+      "#WindowsRDP",
+      "#TrustedHosting"
+    ],
+    "altText": "Guarantee seal post showing 24/7 support with three service promises from Haan Hosting."
+  },
+  {
+    "id": "bank-114",
+    "pillar": "growth",
+    "format": "single",
+    "template": "T22-guarantee-seal",
+    "slides": [
+      {
+        "badge": "Protected",
+        "category": "Security",
+        "headline": "DDoS Protection Included",
+        "statNumber": "DDoS",
+        "statLabel": "Protected",
+        "items": [
+          "Protection included on every server",
+          "Keep your site online during attacks",
+          "No extra add-on to buy"
+        ],
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Attacks happen. Downtime doesn't have to. 🛡️\n\nEvery Haan Hosting server comes with DDoS protection built in, so your business keeps running.\n\n👉 Stay protected at haanhosting.store\n\n#HaanHosting #DDoSProtection #CyberSecurity #CloudVPS #BusinessGrowth",
+    "hashtags": [
+      "#HaanHosting",
+      "#DDoSProtection",
+      "#CyberSecurity",
+      "#CloudVPS",
+      "#BusinessGrowth"
+    ],
+    "altText": "Guarantee seal post stating that DDoS protection is included on every Haan Hosting server."
+  },
+  {
+    "id": "bank-115",
+    "pillar": "offers",
+    "format": "single",
+    "template": "T23-pricing-tier",
+    "slides": [
+      {
+        "badge": "Verified Offer",
+        "category": "Windows RDP",
+        "headline": "Power Up Your Trading Desk",
+        "planName": "Business Windows RDP",
+        "price": "$16.99/mo",
+        "specs": [
+          "6 Cores CPU",
+          "16 GB RAM",
+          "100 GB NVMe SSD",
+          "Dedicated IP"
+        ],
+        "ctaButtonText": "Order Now",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Business Windows RDP — $16.99/mo 📈\n\n✅ 6 Cores CPU\n✅ 16 GB RAM\n✅ 100 GB NVMe SSD\n✅ Dedicated IP\n\nMT4/MT5 optimized, low latency to brokers.\n\n👉 Order now at haanhosting.store\n\n#HaanHosting #WindowsRDP #ForexVPS #MT4 #MT5",
+    "hashtags": [
+      "#HaanHosting",
+      "#WindowsRDP",
+      "#ForexVPS",
+      "#MT4",
+      "#MT5"
+    ],
+    "altText": "Pricing card for Business Windows RDP at $16.99 per month with 6 CPU cores, 16 GB RAM, 100 GB NVMe SSD and a dedicated IP."
+  },
+  {
+    "id": "bank-116",
+    "pillar": "offers",
+    "format": "single",
+    "template": "T23-pricing-tier",
+    "slides": [
+      {
+        "badge": "Verified Offer",
+        "category": "Web Hosting",
+        "headline": "Launch Your Website Today",
+        "planName": "Starter Web Hosting",
+        "price": "$3.99/mo",
+        "specs": [
+          "1 Website",
+          "10 GB SSD",
+          "Free SSL",
+          "1-Click WordPress"
+        ],
+        "ctaButtonText": "Order Now",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Starter Web Hosting — sirf $3.99/mo 🌐\n\n✅ 1 Website\n✅ 10 GB SSD\n✅ Free SSL\n✅ 1-Click WordPress\n\n👉 Order now at haanhosting.store\n\n#HaanHosting #WebHosting #WordPress #SmallBusiness #PakistanBusiness",
+    "hashtags": [
+      "#HaanHosting",
+      "#WebHosting",
+      "#WordPress",
+      "#SmallBusiness",
+      "#PakistanBusiness"
+    ],
+    "altText": "Pricing card for Starter Web Hosting at $3.99 per month with 1 website, 10 GB SSD, free SSL and 1-click WordPress."
+  },
+  {
+    "id": "bank-117",
+    "pillar": "trust",
+    "format": "single",
+    "template": "T24-global-locations",
+    "slides": [
+      {
+        "badge": "Locations",
+        "category": "Network",
+        "headline": "Servers Close to Your Market",
+        "subline": "Lower latency for your trades and your visitors.",
+        "items": [
+          "London LD4",
+          "New York NY4",
+          "Singapore"
+        ],
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Choose where your server lives. 🌍\n\n🇬🇧 London LD4\n🇺🇸 New York NY4\n🇸🇬 Singapore\n\nLow latency to brokers and customers.\n\n👉 Pick your location at haanhosting.store\n\n#HaanHosting #ForexVPS #LowLatency #WindowsRDP #GlobalHosting",
+    "hashtags": [
+      "#HaanHosting",
+      "#ForexVPS",
+      "#LowLatency",
+      "#WindowsRDP",
+      "#GlobalHosting"
+    ],
+    "altText": "Location map post showing Haan Hosting servers in London LD4, New York NY4 and Singapore."
+  },
+  {
+    "id": "bank-118",
+    "pillar": "educational",
+    "format": "single",
+    "template": "T24-global-locations",
+    "slides": [
+      {
+        "badge": "Latency 101",
+        "category": "Network",
+        "headline": "Why Server Location Matters",
+        "subline": "The closer your server is to your broker or customers, the faster every request travels.",
+        "items": [
+          "UK · London",
+          "USA · New York",
+          "Singapore"
+        ],
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Latency kya hai? 🤔\n\nIt's the time data takes to travel. A server near your broker or audience means faster trades and faster pages.\n\nWe offer USA, UK & Singapore.\n\n👉 Choose your location at haanhosting.store\n\n#HaanHosting #Latency #TechTips #ForexVPS #CloudVPS",
+    "hashtags": [
+      "#HaanHosting",
+      "#Latency",
+      "#TechTips",
+      "#ForexVPS",
+      "#CloudVPS"
+    ],
+    "altText": "Explainer post on why server location matters, listing Haan Hosting locations in the UK, USA and Singapore."
   }
 ]

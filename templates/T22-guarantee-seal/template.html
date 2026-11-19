@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>T22 – Guarantee Seal Promise</title>
+  <link rel="stylesheet" href="../_shared/base.css">
+  <style>
+    .post.t22 { background: #030817; color: #fff; }
+    .canvas.neon.t22 .bg-image-layer { opacity: 0.22 !important; filter: blur(2px) saturate(1.2); }
+    .t22 .rays {
+      position: absolute; left: 50%; top: 34%; width: 1500px; height: 1500px; z-index: 1;
+      transform: translate(-50%, -50%); pointer-events: none; opacity: 0.22;
+      background: repeating-conic-gradient(from 0deg, rgba(79,210,255,0.5) 0deg 3deg, transparent 3deg 15deg);
+      -webkit-mask-image: radial-gradient(circle, #000 0%, transparent 55%);
+    }
+    .canvas.neon.t22 > .mid { align-items: center; text-align: center; gap: 34px; }
+    .t22 .seal {
+      position: relative; width: 300px; height: 300px; flex: 0 0 auto;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .t22 .seal svg { position: absolute; inset: 0; }
+    .t22 .seal-core {
+      width: 190px; height: 190px; border-radius: 50%;
+      background: radial-gradient(circle at 35% 30%, #1e5bff, #071640 75%);
+      border: 4px solid #4fd2ff; box-shadow: 0 0 40px rgba(47,155,255,0.75), inset 0 0 30px rgba(79,210,255,0.4);
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+    }
+    .t22 .seal-big { font-family: 'Anton', 'Oswald', sans-serif; font-size: 66px; line-height: 1; color: #fff; text-shadow: 0 0 16px #2f9bff; }
+    .t22 .seal-small { font-family: 'Oswald', sans-serif; font-weight: 600; font-size: 20px; letter-spacing: 0.18em; color: #bfe7ff; }
+    .canvas.neon.t22 h1 { font-size: 80px; text-align: center; }
+    .t22 .promises { display: flex; flex-direction: column; gap: 16px; width: 100%; max-width: 860px; }
+    .t22 .promise {
+      display: flex; align-items: center; gap: 22px; text-align: left;
+      font-size: 32px; font-weight: 600; color: #e8f0ff; padding: 18px 28px;
+      border-radius: 14px; background: rgba(8,22,58,0.72); border: 1.5px solid rgba(64,160,255,0.45);
+    }
+    .t22 .promise::before {
+      content: '✓'; flex: 0 0 48px; height: 48px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; font-size: 28px; color: #031030;
+      background: linear-gradient(135deg, #4fd2ff, #1e90ff); box-shadow: 0 0 14px rgba(47,155,255,0.8);
+    }
+    .t22 .promise:nth-child(n+4) { display: none; }
+  </style>
+</head>
+<body>
+  <div class="canvas post t22 {{variantClass}}" style="{{cssVariables}}">
+    <div class="bg-image-layer" style="{{bgImageStyle}}"></div>
+    <div class="bg-vignette-layer"></div>
+    <div class="rays"></div>
+    <div class="label">{{label}}</div>
+    <div class="mid">
+      <div class="seal">
+        <svg viewBox="0 0 300 300">
+          <defs><path id="t22c" d="M150,150 m-122,0 a122,122 0 1,1 244,0 a122,122 0 1,1 -244,0"/></defs>
+          <circle cx="150" cy="150" r="146" fill="none" stroke="rgba(79,210,255,0.55)" stroke-width="2" stroke-dasharray="4 8"/>
+          <text font-family="Oswald, sans-serif" font-size="22" font-weight="600" letter-spacing="5.4" fill="#9fdcff">
+            <textPath href="#t22c">HAAN HOSTING · GUARANTEED · HAAN HOSTING · GUARANTEED ·</textPath>
+          </text>
+        </svg>
+        <div class="seal-core">
+          <div class="seal-big">{{priceBadge}}</div>
+          <div class="seal-small">{{#if statLabel}}{{statLabel}}{{/if}}</div>
+        </div>
+      </div>
+      <h1 class="auto-shrink">{{headline}}</h1>
+      <div class="promises">
+        {{#each bentoItems}}<div class="promise">{{this}}</div>{{/each}}
+      </div>
+    </div>
+    <div class="footer">Haan Hosting · {{cta}}</div>
+  </div>
+</body>
+</html>

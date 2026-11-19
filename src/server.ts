@@ -564,7 +564,7 @@ export function getDashboardHtml(): string {
     <section id="sec-templates" class="section">
       <div class="toolbar">
         <div>
-          <strong>18 Branded HTML/CSS Launch Templates (T01–T18)</strong>
+          <strong>24 Branded HTML/CSS Launch Templates (T01–T24)</strong>
           <span style="color:var(--muted); font-size:13px; margin-left:10px;">Includes Official Logo Crest, Low-Opacity Tech Backgrounds &amp; Glass Overlays</span>
         </div>
         <div style="display:flex; gap:10px;">

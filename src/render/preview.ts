@@ -271,6 +271,88 @@ export const SAMPLE_POSTS: TemplateSample[] = [
       subline: 'Includes Free SSL, DDoS Protection, Instant Provisioning, and 24/7 WhatsApp Engineering Support.',
       cta: 'haanhosting.store'
     }
+  },
+  {
+    templateId: 'T19-photo-diagonal-hero',
+    paletteId: 'deep-violet',
+    decoration: 'none',
+    layoutVariant: 0,
+    data: {
+      label: 'Cloud VPS',
+      badge: 'Built for speed',
+      headline: 'Your Website Deserves NVMe Speed',
+      subline: 'NVMe storage loads pages faster than old SATA SSDs, so visitors stay longer and bounce less.',
+      highlight: 'Starter Cloud VPS · $11.99/mo',
+      cta: 'haanhosting.store'
+    }
+  },
+  {
+    templateId: 'T20-stat-dashboard',
+    paletteId: 'ocean-blue',
+    decoration: 'none',
+    layoutVariant: 0,
+    data: {
+      label: 'By the Numbers',
+      headline: 'Port Speed That Keeps Up',
+      statNumber: '10 Gbps',
+      statLabel: 'Network Port',
+      items: ['4 CPU Cores', '8 GB RAM', '50 GB NVMe'],
+      cta: 'haanhosting.store'
+    }
+  },
+  {
+    templateId: 'T21-steps-timeline',
+    paletteId: 'forest-lime',
+    decoration: 'none',
+    layoutVariant: 0,
+    data: {
+      label: 'How To',
+      headline: 'Launch a WordPress Site in 4 Steps',
+      items: ['Pick the Starter Web Hosting plan', 'Point your domain to Haan Hosting', 'Install WordPress with 1 click', 'Free SSL turns on automatically'],
+      cta: 'haanhosting.store'
+    }
+  },
+  {
+    templateId: 'T22-guarantee-seal',
+    paletteId: 'ocean-blue',
+    decoration: 'none',
+    layoutVariant: 0,
+    data: {
+      label: 'Our Promise',
+      headline: 'Hosting You Can Count On',
+      statNumber: '24/7',
+      statLabel: 'SUPPORT',
+      items: ['Real humans on support, day or night', 'Dedicated clean IP on every RDP', 'Fast NVMe storage on every server'],
+      cta: 'haanhosting.store'
+    }
+  },
+  {
+    templateId: 'T23-pricing-tier',
+    paletteId: 'deep-violet',
+    decoration: 'none',
+    layoutVariant: 0,
+    data: {
+      label: 'Verified Offer',
+      headline: 'Power Up Your Trading Desk',
+      planName: 'Business Windows RDP',
+      price: '$16.99/mo',
+      specs: ['6 Cores CPU', '16 GB RAM', '100 GB NVMe SSD', 'Dedicated IP'],
+      ctaButtonText: 'Order Now',
+      cta: 'haanhosting.store'
+    }
+  },
+  {
+    templateId: 'T24-global-locations',
+    paletteId: 'forest-lime',
+    decoration: 'none',
+    layoutVariant: 0,
+    data: {
+      label: 'Locations',
+      headline: 'Servers Close to Your Market',
+      subline: 'Lower latency for your trades and your visitors.',
+      items: ['London LD4', 'New York NY4', 'Singapore'],
+      cta: 'haanhosting.store'
+    }
   }
 ];
 

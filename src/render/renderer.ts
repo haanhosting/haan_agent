@@ -41,7 +41,17 @@ function getLogoDataUri(): string {
 
 function getBgDataUri(templateId: string, seed = 1000): string {
   let bgKey = BG_NAMES[Math.abs(seed) % BG_NAMES.length];
-  if (templateId.includes('T13') || templateId.includes('T18') || templateId.includes('T05')) {
+  if (templateId.includes('T19') || templateId.includes('T23')) {
+    bgKey = 'bg-datacenter';
+  } else if (templateId.includes('T20')) {
+    bgKey = 'bg-forex-chart';
+  } else if (templateId.includes('T21')) {
+    bgKey = 'bg-cloud-matrix';
+  } else if (templateId.includes('T22')) {
+    bgKey = 'bg-cyber-shield';
+  } else if (templateId.includes('T24')) {
+    bgKey = 'bg-globe-network';
+  } else if (templateId.includes('T13') || templateId.includes('T18') || templateId.includes('T05')) {
     bgKey = 'bg-datacenter';
   } else if (templateId.includes('T14') || templateId.includes('T08')) {
     bgKey = 'bg-globe-network';
@@ -101,15 +111,75 @@ const FEATURE_ICONS: Array<[string, string]> = [
   ['24/7 Support', '<path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="13" width="4" height="6" rx="1.5"/><rect x="17" y="13" width="4" height="6" rx="1.5"/><path d="M19 19c0 1.5-2 2.5-5 2.5"/>']
 ];
 
-const NEON_FOOTER_HTML =
-  '<div class="footer neon-footer">' +
-  '<div class="feature-strip">' +
-  FEATURE_ICONS.map(([label, svg]) => `<div class="feature-item"><svg viewBox="0 0 24 24">${svg}</svg><span>${label}</span></div>`).join('') +
-  '</div>' +
-  '<div class="neon-footer-row">' +
-  '<div class="brand-footer-left"><img src="{{logoDataUri}}" alt="HAAN" /><div><div class="brand-footer-title">HAAN HOSTING</div><div class="brand-footer-sub">haanhosting.store</div></div></div>' +
-  '<div class="order-btn">{{footerCtaLabel}}</div>' +
-  '</div></div>';
+const featureItem = ([label, svg]: [string, string], cls: string) =>
+  `<div class="${cls}"><svg viewBox="0 0 24 24">${svg}</svg><span>${label}</span></div>`;
+
+const BRAND_LEFT_HTML =
+  '<div class="brand-footer-left"><img src="{{logoDataUri}}" alt="HAAN" /><div><div class="brand-footer-title">HAAN HOSTING</div><div class="brand-footer-sub">haanhosting.store</div></div></div>';
+
+type HeaderVariant = 'split' | 'center' | 'ribbon' | 'bar';
+type FooterVariant = 'strip' | 'compact' | 'centered' | 'chips';
+
+const NEON_FOOTERS: Record<FooterVariant, string> = {
+  // Full feature strip + crest row + ORDER NOW
+  strip:
+    '<div class="footer neon-footer f-strip">' +
+    '<div class="feature-strip">' + FEATURE_ICONS.map(f => featureItem(f, 'feature-item')).join('') + '</div>' +
+    '<div class="neon-footer-row">' + BRAND_LEFT_HTML + '<div class="order-btn">{{footerCtaLabel}}</div></div>' +
+    '</div>',
+  // Single glass bar: crest + name | ORDER NOW
+  compact:
+    '<div class="footer neon-footer f-compact">' +
+    '<div class="neon-footer-row">' + BRAND_LEFT_HTML + '<div class="order-btn">{{footerCtaLabel}}</div></div>' +
+    '</div>',
+  // Inline feature line, wide centred ORDER NOW, url underneath
+  centered:
+    '<div class="footer neon-footer f-centered">' +
+    '<div class="feature-line">' + FEATURE_ICONS.slice(0, 4).map(f => featureItem(f, 'feature-inline')).join('') + '</div>' +
+    '<div class="order-btn">{{footerCtaLabel}}</div>' +
+    '<div class="footer-url"><img src="{{logoDataUri}}" alt="HAAN" /><span>HAAN HOSTING</span><i></i><span>haanhosting.store</span></div>' +
+    '</div>',
+  // Feature chips, then url + ORDER NOW
+  chips:
+    '<div class="footer neon-footer f-chips">' +
+    '<div class="feature-chips">' + FEATURE_ICONS.slice(0, 4).map(f => featureItem(f, 'feature-chip')).join('') + '</div>' +
+    '<div class="neon-footer-row">' + BRAND_LEFT_HTML + '<div class="order-btn">{{footerCtaLabel}}</div></div>' +
+    '</div>'
+};
+
+// Per-template header/footer pairing so the feed doesn't repeat one frame.
+// Content-heavy templates get the slimmer footers.
+const LAYOUT_VARIANTS: Record<string, [HeaderVariant, FooterVariant]> = {
+  T01: ['center', 'centered'],
+  T02: ['split', 'strip'],
+  T03: ['ribbon', 'chips'],
+  T04: ['bar', 'centered'],
+  T05: ['center', 'compact'],
+  T06: ['ribbon', 'centered'],
+  T07: ['split', 'chips'],
+  T08: ['bar', 'strip'],
+  T09: ['ribbon', 'compact'],
+  T10: ['center', 'strip'],
+  T11: ['split', 'chips'],
+  T12: ['ribbon', 'centered'],
+  T13: ['bar', 'compact'],
+  T14: ['center', 'compact'],
+  T15: ['split', 'compact'],
+  T16: ['ribbon', 'chips'],
+  T17: ['bar', 'compact'],
+  T18: ['center', 'compact'],
+  T19: ['split', 'strip'],
+  T20: ['center', 'compact'],
+  T21: ['ribbon', 'compact'],
+  T22: ['bar', 'centered'],
+  T23: ['center', 'compact'],
+  T24: ['split', 'compact']
+};
+
+function getLayoutVariant(templateId: string): [HeaderVariant, FooterVariant] {
+  const key = (templateId.match(/T\d{2}/) || [''])[0];
+  return LAYOUT_VARIANTS[key] || ['split', 'strip'];
+}
 
 export async function getBrowser(): Promise<Browser> {
   if (!sharedBrowser) {
@@ -179,16 +249,17 @@ export async function renderSlide(options: RenderOptions): Promise<string> {
     `<div class="label"><span class="brand-top-pill">{{label}}</span><div class="brand-top-logo"><img src="{{logoDataUri}}" alt="HAAN" /><span>HAAN HOSTING</span></div></div>`
   );
 
-  // HAAN neon brand footer: feature strip + crest + "ORDER NOW »" (replaces every template's footer)
+  // HAAN neon brand footer (variant per template; replaces every template's footer)
+  const [headerVariant, footerVariant] = getLayoutVariant(templateId);
   rawHtml = rawHtml.replace(
     /<div class="footer">[\s\S]*?<\/div>(?=\s*<\/div>\s*<\/body>)/,
-    NEON_FOOTER_HTML
+    NEON_FOOTERS[footerVariant]
   );
 
-  // Neon theme: class on canvas, glow layer, and theme CSS after template styles
+  // Neon theme: class + header variant on canvas, glow layer, and theme CSS after template styles
   rawHtml = rawHtml.replace(
     /(<div\s+class=["'])([^"']*\bcanvas\b[^"']*)(["'][^>]*>)/i,
-    '$1$2 neon$3\n    <div class="neon-glow"></div>'
+    `$1$2 neon hdr-${headerVariant}$3\n    <div class="neon-glow"></div>`
   );
   rawHtml = rawHtml.replace(/<\/head>/i, `<style>\n${getNeonThemeCss()}\n</style>\n</head>`);
 
@@ -233,7 +304,7 @@ export async function renderSlide(options: RenderOptions): Promise<string> {
             '24/7 WhatsApp Support in PK'
           ];
 
-  // Prepare template variables supporting all 18 templates
+  // Prepare template variables supporting all 24 templates
   const templateVars: Record<string, any> = {
     ...data,
     variantClass: `variant-${layoutVariant}`,

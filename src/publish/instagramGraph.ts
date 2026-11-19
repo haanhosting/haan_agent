@@ -217,6 +217,8 @@ export class InstagramGraphClient {
       };
     }
 
+    await assertPublicJpeg(imageUrl);
+
     // Step 1: Create Container
     const createUrl = `${this.baseUrl}/${this.apiVersion}/${this.userId}/media`;
     const body: Record<string, any> = {
@@ -324,6 +326,8 @@ export class InstagramGraphClient {
       };
     }
 
+    for (const u of imageUrls) await assertPublicJpeg(u);
+
     // Step 1: Create child container for each slide
     const childIds: string[] = [];
     for (let i = 0; i < imageUrls.length; i++) {
@@ -415,5 +419,26 @@ export class InstagramGraphClient {
     }
 
     throw new Error(`[IG Graph HTTP ${status}] Code ${code} (subcode ${subcode}): ${message}`);
+  }
+}
+
+/**
+ * Instagram fetches image_url itself. If the file isn't deployed yet, Cloudflare Pages
+ * serves its HTML fallback with HTTP 200 and IG rejects it with the vague 2207083
+ * "image format is not supported". Catch that here with an actionable message.
+ */
+async function assertPublicJpeg(url: string): Promise<void> {
+  let res: Response;
+  try {
+    res = await fetch(url, { method: 'HEAD' });
+  } catch (e: any) {
+    throw new Error(`Image URL unreachable: ${url} (${e?.message || e})`);
+  }
+  const type = (res.headers.get('content-type') || '').toLowerCase();
+  if (!res.ok || !type.startsWith('image/jpeg')) {
+    throw new Error(
+      `Image not deployed yet: ${url} returned HTTP ${res.status} (${type || 'no content-type'}). ` +
+      `Commit & push the media folder so Cloudflare Pages serves it, then retry.`
+    );
   }
 }

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>T21 – Numbered Steps Timeline</title>
+  <link rel="stylesheet" href="../_shared/base.css">
+  <style>
+    .post.t21 { background: #030817; color: #fff; }
+    .canvas.neon.t21 .bg-image-layer {
+      opacity: 0.24 !important;
+      -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 55%);
+    }
+    .canvas.neon.t21 > .mid { gap: 40px; }
+    .canvas.neon.t21 h1 { font-size: 84px; text-align: left; }
+    .t21 .steps { position: relative; display: flex; flex-direction: column; gap: 26px; counter-reset: step; padding-left: 4px; }
+    .t21 .steps::before {
+      content: ''; position: absolute; left: 47px; top: 40px; bottom: 40px; width: 4px;
+      background: linear-gradient(180deg, #4fd2ff, #1e90ff 60%, rgba(30,144,255,0.1));
+      box-shadow: 0 0 14px rgba(47,155,255,0.7);
+    }
+    .t21 .step { position: relative; display: flex; align-items: center; gap: 34px; counter-increment: step; }
+    .t21 .step::before {
+      content: counter(step, decimal-leading-zero);
+      flex: 0 0 88px; height: 88px; border-radius: 50%; z-index: 1;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Anton', 'Oswald', sans-serif; font-size: 40px; color: #fff;
+      background: radial-gradient(circle at 35% 30%, #4fd2ff, #1e5bff 70%);
+      border: 3px solid #bfe7ff; box-shadow: 0 0 26px rgba(47,155,255,0.8);
+    }
+    .t21 .step-text {
+      flex: 1; font-size: 34px; line-height: 1.32; font-weight: 600; color: #e8f0ff;
+      background: linear-gradient(90deg, rgba(14,36,92,0.85), rgba(6,16,44,0.4));
+      border-left: 3px solid rgba(79,210,255,0.7); border-radius: 0 16px 16px 0; padding: 22px 28px;
+    }
+    .t21 .step:nth-child(n+5) { display: none; }
+  </style>
+</head>
+<body>
+  <div class="canvas post t21 {{variantClass}}" style="{{cssVariables}}">
+    <div class="bg-image-layer" style="{{bgImageStyle}}"></div>
+    <div class="bg-vignette-layer"></div>
+    <div class="label">{{label}}</div>
+    <div class="mid">
+      <h1 class="auto-shrink">{{headline}}</h1>
+      <div class="steps">
+        {{#each bentoItems}}<div class="step"><div class="step-text">{{this}}</div></div>{{/each}}
+      </div>
+    </div>
+    <div class="footer">Haan Hosting · {{cta}}</div>
+  </div>
+</body>
+</html>
