@@ -36,8 +36,12 @@
       "#AgencyGrowth"
     ],
     "altText": "Business guide for freelance developers on bundling monthly hosting and maintenance retainers.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-21/slot1.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-21/slot1.jpg"
+    ],
     "igMediaId": null,
     "attempts": 0,
     "error": null
@@ -79,8 +83,12 @@
       "#SEOStrategy"
     ],
     "altText": "Strategic card explaining how server downtime degrades search engine crawl budgets and rankings.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-21/slot2.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-21/slot2.jpg"
+    ],
     "igMediaId": null,
     "attempts": 0,
     "error": null
@@ -125,8 +133,12 @@
       "#OpenSource"
     ],
     "altText": "Browser view comparing Ubuntu Server and AlmaLinux strengths for development and production hosting.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-21/slot3.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-21/slot3.jpg"
+    ],
     "igMediaId": null,
     "attempts": 0,
     "error": null
@@ -169,8 +181,12 @@
       "#DailyInspo"
     ],
     "altText": "Inspirational quote card encouraging builders and entrepreneurs to launch their digital projects today.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-21/slot4.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-21/slot4.jpg"
+    ],
     "igMediaId": null,
     "attempts": 0,
     "error": null
@@ -262,8 +278,18 @@
       "#CarouselTips"
     ],
     "altText": "4-slide carousel guide demonstrating image compression, Redis caching, and NVMe hosting for WordPress acceleration.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-21/slot5-1.jpg",
+      "media/2026-11-21/slot5-2.jpg",
+      "media/2026-11-21/slot5-3.jpg",
+      "media/2026-11-21/slot5-4.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-21/slot5-1.jpg",
+      "https://haan-agent.pages.dev/media/2026-11-21/slot5-2.jpg",
+      "https://haan-agent.pages.dev/media/2026-11-21/slot5-3.jpg",
+      "https://haan-agent.pages.dev/media/2026-11-21/slot5-4.jpg"
+    ],
     "igMediaId": null,
     "attempts": 0,
     "error": null
