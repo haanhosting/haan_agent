@@ -20,5 +20,16 @@
     "headline": "Everything You Need to Host Your First Website",
     "pillar": "offers",
     "captionHash": "2809401445"
+  },
+  {
+    "date": "2026-11-21",
+    "slot": 3,
+    "template": "T08-browser-mockup",
+    "palette": "navy-sky",
+    "decoration": "none",
+    "layoutVariant": 2,
+    "headline": "Ubuntu vs AlmaLinux for Web Hosting",
+    "pillar": "educational",
+    "captionHash": "2461631260"
   }
 ]
