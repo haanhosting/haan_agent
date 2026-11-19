@@ -1,5 +1,274 @@
 [
   {
+    "id": "2026-11-21-slot1",
+    "date": "2026-11-21",
+    "slot": 1,
+    "scheduledAt": "2026-11-21T09:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "growth",
+    "format": "single",
+    "template": "T02-split-card",
+    "design": {
+      "palette": "mint-fresh",
+      "seed": 1795122000187,
+      "decoration": "none",
+      "layoutVariant": 0
+    },
+    "slides": [
+      {
+        "badge": "Freelancer Guide",
+        "category": "Career Growth",
+        "headline": "How Freelance Developers Make Recurring Monthly Revenue",
+        "body": "Don’t just build client websites and walk away. Offer monthly hosting, backups, and maintenance packages to build predictable recurring income.",
+        "highlight": "💼 Strategy: Host client sites on a high-speed HAAN VPS.",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Calling all freelance web developers and agencies! 💡\n\nStop relying only on one-off project fees. When you build a client website, bundle ongoing hosting, daily backups, and security updates into a monthly retainer.\n\nA single HAAN Cloud VPS ($11.99/mo) can host multiple client websites with dedicated performance.\n\n👉 Start scaling your agency at haanhosting.store!\n\n#HaanHosting #FreelancerTips #WebAgency #RecurringRevenue #PakistaniFreelancers #UpworkPakistan",
+    "hashtags": [
+      "#HaanHosting",
+      "#FreelancerTips",
+      "#WebAgency",
+      "#RecurringRevenue",
+      "#PakistaniFreelancers",
+      "#UpworkPakistan",
+      "#AgencyGrowth"
+    ],
+    "altText": "Business guide for freelance developers on bundling monthly hosting and maintenance retainers.",
+    "images": [],
+    "imageUrls": [],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-21-slot2",
+    "date": "2026-11-21",
+    "slot": 2,
+    "scheduledAt": "2026-11-21T12:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "growth",
+    "format": "single",
+    "template": "T02-split-card",
+    "design": {
+      "palette": "coral-pop",
+      "seed": 1795122000188,
+      "decoration": "none",
+      "layoutVariant": 1
+    },
+    "slides": [
+      {
+        "badge": "SEO Growth",
+        "category": "Organic Reach",
+        "headline": "How Server Downtime Destroys Months of Google SEO Effort",
+        "body": "When Google spiders encounter server timeouts or 503 errors repeatedly, they drop your crawl budget and lower keyword rankings.",
+        "highlight": "🛡️ Solution: 99.9% SLA uptime on enterprise infrastructure.",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "You spend months writing articles and optimizing keywords—don’t lose it to bad hosting! 📉\n\nIf search engine crawlers encounter downtime, your crawl rate drops and rankings plummet. Keep your website online with 99.9% SLA uptime on HAAN HOSTING.\n\n👉 Protect your SEO at haanhosting.store!\n\n#HaanHosting #SEOTips #WebsiteDowntime #GoogleRankings #OrganicTraffic #PakistanTech",
+    "hashtags": [
+      "#HaanHosting",
+      "#SEOTips",
+      "#WebsiteDowntime",
+      "#GoogleRankings",
+      "#OrganicTraffic",
+      "#PakistanTech",
+      "#SEOStrategy"
+    ],
+    "altText": "Strategic card explaining how server downtime degrades search engine crawl budgets and rankings.",
+    "images": [],
+    "imageUrls": [],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-21-slot3",
+    "date": "2026-11-21",
+    "slot": 3,
+    "scheduledAt": "2026-11-21T16:00:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "educational",
+    "format": "single",
+    "template": "T08-browser-mockup",
+    "design": {
+      "palette": "navy-sky",
+      "seed": 1795122000189,
+      "decoration": "none",
+      "layoutVariant": 2
+    },
+    "slides": [
+      {
+        "badge": "Operating Systems",
+        "category": "Server OS",
+        "headline": "Ubuntu vs AlmaLinux for Web Hosting",
+        "urlDomain": "haanhosting.store/vps",
+        "statusText": "Multiple OS Available",
+        "contentTitle": "Choose the Right OS for Your Project",
+        "body": "Ubuntu Server offers vast community packages and cutting-edge software. AlmaLinux provides enterprise-grade RedHat stability with 10-year support cycles.",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Which Linux operating system should you deploy on your Cloud VPS? 🐧\n\n• Ubuntu Server: Ideal for Docker, Node.js, Python APIs, and rapid prototyping.\n• AlmaLinux / Rocky: Perfect for enterprise cPanel, production databases, and long-term stability.\n\nWith HAAN Cloud VPS, deploy any OS in 1-click.\n\n👉 Plans from $11.99/mo at haanhosting.store!\n\n#HaanHosting #Ubuntu #AlmaLinux #LinuxServer #CloudVPS #SysAdmin #PakistanDevelopers",
+    "hashtags": [
+      "#HaanHosting",
+      "#Ubuntu",
+      "#AlmaLinux",
+      "#LinuxServer",
+      "#CloudVPS",
+      "#SysAdmin",
+      "#PakistanDevelopers",
+      "#OpenSource"
+    ],
+    "altText": "Browser view comparing Ubuntu Server and AlmaLinux strengths for development and production hosting.",
+    "images": [],
+    "imageUrls": [],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-21-slot4",
+    "date": "2026-11-21",
+    "slot": 4,
+    "scheduledAt": "2026-11-21T19:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "quotes",
+    "format": "single",
+    "template": "T06-quote-card",
+    "design": {
+      "palette": "ocean-blue",
+      "seed": 1795122000190,
+      "decoration": "none",
+      "layoutVariant": 0
+    },
+    "slides": [
+      {
+        "badge": "Daily Motivation",
+        "category": "Builders",
+        "headline": "The best time to launch your project was yesterday. The next best time is right now.",
+        "author": "HAAN Creators Circle",
+        "role": "Build in Public",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Stop waiting for the \"perfect\" moment to launch your idea. 🚀\n\nShip your MVP, test with real users, gather feedback, and iterate. The builders who win are the ones who put their work into the world.\n\nLaunch your project today at haanhosting.store.\n\n👉 Link in bio to deploy!\n\n#HaanHosting #BuildInPublic #MakerMindset #ShipIt #FounderLife #PakistaniEntrepreneurs #CodingMotivation",
+    "hashtags": [
+      "#HaanHosting",
+      "#BuildInPublic",
+      "#MakerMindset",
+      "#ShipIt",
+      "#FounderLife",
+      "#PakistaniEntrepreneurs",
+      "#CodingMotivation",
+      "#DailyInspo"
+    ],
+    "altText": "Inspirational quote card encouraging builders and entrepreneurs to launch their digital projects today.",
+    "images": [],
+    "imageUrls": [],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-21-slot5",
+    "date": "2026-11-21",
+    "slot": 5,
+    "scheduledAt": "2026-11-21T21:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "tips",
+    "format": "carousel",
+    "template": "T11-carousel",
+    "design": {
+      "palette": "electric-indigo",
+      "seed": 1795122000191,
+      "decoration": "none",
+      "layoutVariant": 1
+    },
+    "slides": [
+      {
+        "slideIndex": 1,
+        "totalSlides": 4,
+        "isCover": true,
+        "badge": "Speed Guide",
+        "category": "WordPress",
+        "headline": "How to Speed Up Your WordPress Site in 3 Simple Steps",
+        "body": "A slow site ruins your conversion rate and hurts Google search rankings. Follow this simple guide to fix it today.",
+        "bullets": [
+          "Step 1: Image compression",
+          "Step 2: Caching setup",
+          "Step 3: Fast server hosting"
+        ],
+        "cta": "haanhosting.store"
+      },
+      {
+        "slideIndex": 2,
+        "totalSlides": 4,
+        "badge": "Step 1 of 4",
+        "category": "Images",
+        "headline": "Convert All Images to WebP Format",
+        "body": "Standard JPEGs and PNGs are heavy. Using modern WebP format reduces file weight by 40-70% with zero visible loss in quality.",
+        "bullets": [
+          "Use free plugins like Converter for Media",
+          "Set max image dimensions to 1920px",
+          "Clean up unattached media uploads"
+        ],
+        "cta": "haanhosting.store"
+      },
+      {
+        "slideIndex": 3,
+        "totalSlides": 4,
+        "badge": "Step 2 of 4",
+        "category": "Caching",
+        "headline": "Enable Server-Level Object Caching",
+        "body": "Instead of querying MySQL every time a visitor opens a page, cache queries in RAM using Redis or LiteSpeed cache.",
+        "bullets": [
+          "Reduces server response time to under 100ms",
+          "Handles traffic spikes smoothly",
+          "Available on all HAAN NVMe VPS plans"
+        ],
+        "cta": "haanhosting.store"
+      },
+      {
+        "slideIndex": 4,
+        "totalSlides": 4,
+        "badge": "Step 3 of 4",
+        "category": "Hosting",
+        "headline": "Host on High-Speed NVMe Storage",
+        "body": "No optimization plugin can save a website that is hosted on slow mechanical drives. Choose NVMe cloud storage with dedicated CPU cores.",
+        "bullets": [
+          "Starter Cloud VPS from $11.99/mo",
+          "10 Gbps port speed included",
+          "Visit haanhosting.store to deploy"
+        ],
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Is your WordPress website struggling to load quickly? ⚡\n\nSwipe through our 3-step blueprint to cut your page load time in half:\n\n1️⃣ Modern WebP image optimization\n2️⃣ Server-level object caching with Redis\n3️⃣ High-performance NVMe cloud hosting\n\n📌 Save this carousel so you have it ready for your next project!\n\n👉 Link in bio to deploy high-speed hosting today.\n\n#HaanHosting #WordPressPakistan #WebOptimization #WebDesign #SpeedUpWordPress #VPSHosting #PakistanTech",
+    "hashtags": [
+      "#HaanHosting",
+      "#WordPressPakistan",
+      "#WebOptimization",
+      "#WebDesign",
+      "#SpeedUpWordPress",
+      "#VPSHosting",
+      "#PakistanTech",
+      "#CarouselTips"
+    ],
+    "altText": "4-slide carousel guide demonstrating image compression, Redis caching, and NVMe hosting for WordPress acceleration.",
+    "images": [],
+    "imageUrls": [],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
     "id": "2026-11-19-slot1-b2",
     "date": "2026-11-19",
     "slot": 1,
