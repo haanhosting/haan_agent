@@ -638,8 +638,12 @@
       "#HostingFacts"
     ],
     "altText": "Comparison panel contrasting shared hosting resource contention with guaranteed isolated Cloud VPS resources.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-18/slot1-b5.jpg"
+    ],
+    "imageUrls": [
+      "https://username.github.io/haan-insta-agent/media/2026-11-18/slot1-b5.jpg"
+    ],
     "igMediaId": null,
     "attempts": 2,
     "error": "UPLOADPOST_API_KEY environment variable is missing. Get your API key from https://app.upload-post.com/dashboard and set UPLOADPOST_API_KEY in .env",
@@ -683,8 +687,12 @@
       "#NetworkingTips"
     ],
     "altText": "Graphic highlighting the 300-second TTL rule to prevent downtime during server migrations.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-18/slot2-b5.jpg"
+    ],
+    "imageUrls": [
+      "https://username.github.io/haan-insta-agent/media/2026-11-18/slot2-b5.jpg"
+    ],
     "igMediaId": null,
     "attempts": 2,
     "error": "UPLOADPOST_API_KEY environment variable is missing. Get your API key from https://app.upload-post.com/dashboard and set UPLOADPOST_API_KEY in .env",
@@ -729,8 +737,12 @@
       "#DigitalPakistan"
     ],
     "altText": "Browser mockup showcasing local SEO benefits for brick-and-mortar stores with verified websites.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-18/slot3-b5.jpg"
+    ],
+    "imageUrls": [
+      "https://username.github.io/haan-insta-agent/media/2026-11-18/slot3-b5.jpg"
+    ],
     "igMediaId": null,
     "attempts": 1,
     "error": "UPLOADPOST_API_KEY environment variable is missing. Get your API key from https://app.upload-post.com/dashboard and set UPLOADPOST_API_KEY in .env",
@@ -856,8 +868,16 @@
       "#RDPGuide"
     ],
     "altText": "3-slide carousel explaining Windows Remote Desktop capabilities for Forex trading, SEO automation, and remote work.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-18/slot5-b5-1.jpg",
+      "media/2026-11-18/slot5-b5-2.jpg",
+      "media/2026-11-18/slot5-b5-3.jpg"
+    ],
+    "imageUrls": [
+      "https://username.github.io/haan-insta-agent/media/2026-11-18/slot5-b5-1.jpg",
+      "https://username.github.io/haan-insta-agent/media/2026-11-18/slot5-b5-2.jpg",
+      "https://username.github.io/haan-insta-agent/media/2026-11-18/slot5-b5-3.jpg"
+    ],
     "igMediaId": null,
     "attempts": 1,
     "error": "UPLOADPOST_API_KEY environment variable is missing. Get your API key from https://app.upload-post.com/dashboard and set UPLOADPOST_API_KEY in .env",
@@ -951,8 +971,12 @@
       "#DevOpsFacts"
     ],
     "altText": "Fact sheet explaining the difference between hardware RAID fault-tolerance and independent off-site backups.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-18/slot2-b4.jpg"
+    ],
+    "imageUrls": [
+      "https://username.github.io/haan-insta-agent/media/2026-11-18/slot2-b4.jpg"
+    ],
     "igMediaId": null,
     "attempts": 2,
     "error": "UPLOADPOST_API_KEY environment variable is missing. Get your API key from https://app.upload-post.com/dashboard and set UPLOADPOST_API_KEY in .env",
@@ -997,8 +1021,12 @@
       "#TechExplainers"
     ],
     "altText": "Browser mockup diagram showing the 4 steps of a DNS lookup process from domain name to server IP.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-18/slot3-b4.jpg"
+    ],
+    "imageUrls": [
+      "https://username.github.io/haan-insta-agent/media/2026-11-18/slot3-b4.jpg"
+    ],
     "igMediaId": null,
     "attempts": 1,
     "error": "UPLOADPOST_API_KEY environment variable is missing. Get your API key from https://app.upload-post.com/dashboard and set UPLOADPOST_API_KEY in .env",
@@ -1043,8 +1071,12 @@
       "#HighSpeed"
     ],
     "altText": "Callout highlighting the 10 Gbps port speed standard on all Haan Hosting servers.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-18/slot4-b4.jpg"
+    ],
+    "imageUrls": [
+      "https://username.github.io/haan-insta-agent/media/2026-11-18/slot4-b4.jpg"
+    ],
     "igMediaId": null,
     "attempts": 1,
     "error": "UPLOADPOST_API_KEY environment variable is missing. Get your API key from https://app.upload-post.com/dashboard and set UPLOADPOST_API_KEY in .env",
@@ -1123,8 +1155,16 @@
       "#RDPGuide"
     ],
     "altText": "3-slide carousel explaining Windows Remote Desktop capabilities for Forex trading, SEO automation, and remote work.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-18/slot5-b4-1.jpg",
+      "media/2026-11-18/slot5-b4-2.jpg",
+      "media/2026-11-18/slot5-b4-3.jpg"
+    ],
+    "imageUrls": [
+      "https://username.github.io/haan-insta-agent/media/2026-11-18/slot5-b4-1.jpg",
+      "https://username.github.io/haan-insta-agent/media/2026-11-18/slot5-b4-2.jpg",
+      "https://username.github.io/haan-insta-agent/media/2026-11-18/slot5-b4-3.jpg"
+    ],
     "igMediaId": null,
     "attempts": 1,
     "error": "UPLOADPOST_API_KEY environment variable is missing. Get your API key from https://app.upload-post.com/dashboard and set UPLOADPOST_API_KEY in .env",
@@ -1167,8 +1207,12 @@
       "#OnlineShop"
     ],
     "altText": "Business advice card explaining 3 essential trust signals that boost online store conversions.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-18/slot1-b3.jpg"
+    ],
+    "imageUrls": [
+      "https://username.github.io/haan-insta-agent/media/2026-11-18/slot1-b3.jpg"
+    ],
     "igMediaId": null,
     "attempts": 2,
     "error": "UPLOADPOST_API_KEY environment variable is missing. Get your API key from https://app.upload-post.com/dashboard and set UPLOADPOST_API_KEY in .env",
@@ -1212,8 +1256,12 @@
       "#WebSecurity"
     ],
     "altText": "Security advisory card detailing SSH key authentication and port customization to block brute-force attacks.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-18/slot2-b3.jpg"
+    ],
+    "imageUrls": [
+      "https://username.github.io/haan-insta-agent/media/2026-11-18/slot2-b3.jpg"
+    ],
     "igMediaId": null,
     "attempts": 2,
     "error": "UPLOADPOST_API_KEY environment variable is missing. Get your API key from https://app.upload-post.com/dashboard and set UPLOADPOST_API_KEY in .env",
@@ -1260,8 +1308,12 @@
       "#TechTricks"
     ],
     "altText": "Terminal window showing a live ping command with 12ms response time and advice on selecting data center locations.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-18/slot3-b3.jpg"
+    ],
+    "imageUrls": [
+      "https://username.github.io/haan-insta-agent/media/2026-11-18/slot3-b3.jpg"
+    ],
     "igMediaId": null,
     "attempts": 1,
     "error": "UPLOADPOST_API_KEY environment variable is missing. Get your API key from https://app.upload-post.com/dashboard and set UPLOADPOST_API_KEY in .env",
@@ -1307,8 +1359,12 @@
       "#TechExplainers"
     ],
     "altText": "Diagram illustrating how HTTP/2 and HTTP/3 multiplexing streams website assets simultaneously.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-18/slot4-b3.jpg"
+    ],
+    "imageUrls": [
+      "https://username.github.io/haan-insta-agent/media/2026-11-18/slot4-b3.jpg"
+    ],
     "igMediaId": null,
     "attempts": 1,
     "error": "UPLOADPOST_API_KEY environment variable is missing. Get your API key from https://app.upload-post.com/dashboard and set UPLOADPOST_API_KEY in .env",
@@ -1387,8 +1443,16 @@
       "#RDPGuide"
     ],
     "altText": "3-slide carousel explaining Windows Remote Desktop capabilities for Forex trading, SEO automation, and remote work.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-18/slot5-b3-1.jpg",
+      "media/2026-11-18/slot5-b3-2.jpg",
+      "media/2026-11-18/slot5-b3-3.jpg"
+    ],
+    "imageUrls": [
+      "https://username.github.io/haan-insta-agent/media/2026-11-18/slot5-b3-1.jpg",
+      "https://username.github.io/haan-insta-agent/media/2026-11-18/slot5-b3-2.jpg",
+      "https://username.github.io/haan-insta-agent/media/2026-11-18/slot5-b3-3.jpg"
+    ],
     "igMediaId": null,
     "attempts": 1,
     "error": "UPLOADPOST_API_KEY environment variable is missing. Get your API key from https://app.upload-post.com/dashboard and set UPLOADPOST_API_KEY in .env",
@@ -1435,8 +1499,12 @@
       "#SecurityChecklist"
     ],
     "altText": "Checklist graphic outlining three essential security and performance steps before launching any website.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-18/slot1-b2.jpg"
+    ],
+    "imageUrls": [
+      "https://username.github.io/haan-insta-agent/media/2026-11-18/slot1-b2.jpg"
+    ],
     "igMediaId": null,
     "attempts": 2,
     "error": "UPLOADPOST_API_KEY environment variable is missing. Get your API key from https://app.upload-post.com/dashboard and set UPLOADPOST_API_KEY in .env",
@@ -1483,8 +1551,12 @@
       "#TechHelp"
     ],
     "altText": "Terminal view illustrating error_log inspection and resolving WordPress 500 internal server memory errors.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-18/slot2-b2.jpg"
+    ],
+    "imageUrls": [
+      "https://username.github.io/haan-insta-agent/media/2026-11-18/slot2-b2.jpg"
+    ],
     "igMediaId": null,
     "attempts": 2,
     "error": "UPLOADPOST_API_KEY environment variable is missing. Get your API key from https://app.upload-post.com/dashboard and set UPLOADPOST_API_KEY in .env",
@@ -1526,8 +1598,12 @@
       "#TrustedBrand"
     ],
     "altText": "Brand statement highlighting genuine 24/7 WhatsApp technical support from the Lahore team.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-18/slot3-b2.jpg"
+    ],
+    "imageUrls": [
+      "https://username.github.io/haan-insta-agent/media/2026-11-18/slot3-b2.jpg"
+    ],
     "igMediaId": null,
     "attempts": 1,
     "error": "UPLOADPOST_API_KEY environment variable is missing. Get your API key from https://app.upload-post.com/dashboard and set UPLOADPOST_API_KEY in .env",
@@ -1574,8 +1650,12 @@
       "#SEOTips"
     ],
     "altText": "Checklist highlighting Time to First Byte (TTFB), uptime, and HTTPS as critical technical SEO ranking factors.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-18/slot4-b2.jpg"
+    ],
+    "imageUrls": [
+      "https://username.github.io/haan-insta-agent/media/2026-11-18/slot4-b2.jpg"
+    ],
     "igMediaId": null,
     "attempts": 1,
     "error": "UPLOADPOST_API_KEY environment variable is missing. Get your API key from https://app.upload-post.com/dashboard and set UPLOADPOST_API_KEY in .env",
@@ -1668,8 +1748,18 @@
       "#CarouselTips"
     ],
     "altText": "4-slide carousel guide demonstrating image compression, Redis caching, and NVMe hosting for WordPress acceleration.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-18/slot5-b2-1.jpg",
+      "media/2026-11-18/slot5-b2-2.jpg",
+      "media/2026-11-18/slot5-b2-3.jpg",
+      "media/2026-11-18/slot5-b2-4.jpg"
+    ],
+    "imageUrls": [
+      "https://username.github.io/haan-insta-agent/media/2026-11-18/slot5-b2-1.jpg",
+      "https://username.github.io/haan-insta-agent/media/2026-11-18/slot5-b2-2.jpg",
+      "https://username.github.io/haan-insta-agent/media/2026-11-18/slot5-b2-3.jpg",
+      "https://username.github.io/haan-insta-agent/media/2026-11-18/slot5-b2-4.jpg"
+    ],
     "igMediaId": null,
     "attempts": 1,
     "error": "UPLOADPOST_API_KEY environment variable is missing. Get your API key from https://app.upload-post.com/dashboard and set UPLOADPOST_API_KEY in .env",
