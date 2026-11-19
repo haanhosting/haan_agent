@@ -181,3 +181,14 @@ export function updatePostStatus(
   console.log(`[Queue] Post ${postId} updated to status: ${post.status} (attempts: ${post.attempts})`);
   return post;
 }
+
+/** Records a story publish on a post without changing its feed status. */
+export function markStoryPosted(postId: string, igMediaIds: string[]): PreparedPost {
+  const queue = loadQueue();
+  const post = queue.find(p => p.id === postId);
+  if (!post) throw new Error(`Post ${postId} not found in queue`);
+  post.storyPostedAt = new Date().toISOString();
+  post.storyMediaIds = igMediaIds;
+  saveQueue(queue);
+  return post;
+}

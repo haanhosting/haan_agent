@@ -53,5 +53,27 @@
     "headline": "How to Speed Up Your WordPress Site in 3 Simple Steps",
     "pillar": "tips",
     "captionHash": "3480354456"
+  },
+  {
+    "date": "2026-11-21",
+    "slot": 1,
+    "template": "T21-steps-timeline",
+    "palette": "forest-lime",
+    "decoration": "dots-grid",
+    "layoutVariant": 0,
+    "headline": "Launch a WordPress Site in 4 Steps",
+    "pillar": "tips",
+    "captionHash": "1829855836"
+  },
+  {
+    "date": "2026-11-21",
+    "slot": 4,
+    "template": "T20-stat-dashboard",
+    "palette": "ocean-blue",
+    "decoration": "wave-curves",
+    "layoutVariant": 0,
+    "headline": "Port Speed That Keeps Up",
+    "pillar": "offers",
+    "captionHash": "6424821"
   }
 ]

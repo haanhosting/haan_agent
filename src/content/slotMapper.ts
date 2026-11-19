@@ -105,6 +105,8 @@ export interface PreparedPost {
   imageUrls: string[];
   igMediaId: string | null;
   postedAt?: string | null;
+  storyPostedAt?: string | null;
+  storyMediaIds?: string[];
   rejectedAt?: string | null;
   attempts: number;
   error: string | null;

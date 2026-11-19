@@ -263,6 +263,24 @@ export async function onRequest(context) {
       });
     }
 
+    if (request.method === 'POST' && pathname === '/api/publish-story') {
+      const body = await request.json();
+      const queue = await getQueueState(context);
+      const post = queue.find(p => p.id === body.postId);
+      if (!post) return jsonResponse(404, { error: 'Post not found in queue' });
+      if (!post.images?.length) {
+        return jsonResponse(409, { error: 'Post has no rendered images yet; wait for the render workflow' });
+      }
+      const dispatched = await dispatchWorkflow(env, 'publish.yml', { post_id: post.id, as_story: 'true' });
+      if (!dispatched.ok) return jsonResponse(502, { error: dispatched.error });
+      return jsonResponse(202, {
+        ok: true,
+        queued: true,
+        postId: post.id,
+        message: 'Story workflow started on GitHub Actions. It should appear in your Instagram Story within ~2 minutes.'
+      });
+    }
+
     if (request.method === 'POST' && pathname === '/api/generate') {
       const body = await request.json().catch(() => ({}));
       const targetDate = body.date || getNextDayKarachi();

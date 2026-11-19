@@ -56,3 +56,27 @@ export async function publishPost(
     });
   }
 }
+
+/**
+ * Posts a queued post's image(s) as Instagram Stories. A carousel becomes
+ * one story frame per slide, in order. The feed post is untouched.
+ */
+export async function publishPostAsStory(
+  post: PreparedPost,
+  options: { dryRun?: boolean } = {}
+): Promise<{ igMediaIds: string[]; publishedAt: string }> {
+  const { dryRun = false } = options;
+  const imageUrls = post.images && post.images.length > 0
+    ? post.images.map(img => getPublicMediaUrl(img))
+    : (post.imageUrls || []);
+  if (imageUrls.length === 0) throw new Error(`Post ${post.id} has no images associated with it`);
+
+  console.log(`[Publisher] Posting ${post.id} as ${imageUrls.length} story frame(s)`);
+  const client = new InstagramGraphClient();
+  const igMediaIds: string[] = [];
+  for (const imageUrl of imageUrls) {
+    const r = await client.publishStory({ imageUrl, dryRun });
+    igMediaIds.push(r.igMediaId);
+  }
+  return { igMediaIds, publishedAt: new Date().toISOString() };
+}

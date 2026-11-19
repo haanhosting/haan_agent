@@ -10,6 +10,10 @@ on:
         description: 'Publish this queued post now (leave empty to publish whatever is due)'
         required: false
         default: ''
+      as_story:
+        description: 'Post it as an Instagram Story instead of a feed post (requires post_id)'
+        required: false
+        default: 'false'
 
 concurrency:
   # Shared by every workflow that commits state/ so they never race each other.
@@ -43,8 +47,11 @@ jobs:
           IG_USER_ID: ${{ secrets.IG_USER_ID }}
           PAGES_BASE_URL: ${{ vars.PAGES_BASE_URL || 'https://haan-agent.pages.dev' }}
           POST_ID: ${{ github.event.inputs.post_id }}
+          AS_STORY: ${{ github.event.inputs.as_story }}
         run: |
-          if [ -n "$POST_ID" ]; then
+          if [ -n "$POST_ID" ] && [ "$AS_STORY" = "true" ]; then
+            npx tsx src/cli.ts publish --post-id "$POST_ID" --story
+          elif [ -n "$POST_ID" ]; then
             npx tsx src/cli.ts publish --post-id "$POST_ID"
           else
             npx tsx src/cli.ts publish

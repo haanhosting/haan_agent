@@ -7,10 +7,10 @@ import path from 'path';
 dotenv.config();
 
 import { generateDailyPosts, loadScheduleConfig, PreparedPost } from './content/slotMapper.js';
-import { loadQueue, saveQueue, loadHistory, getDuePosts, updatePostStatus, enqueuePosts } from './state/stateManager.js';
+import { loadQueue, saveQueue, loadHistory, getDuePosts, updatePostStatus, enqueuePosts, markStoryPosted } from './state/stateManager.js';
 import { renderSlide, closeBrowser } from './render/renderer.js';
 import { generatePreviews } from './render/preview.js';
-import { publishPost, getActivePublisherType } from './publish/publisher.js';
+import { publishPost, publishPostAsStory, getActivePublisherType } from './publish/publisher.js';
 import { refreshInstagramToken, loadTokenState } from './publish/tokenRefresh.js';
 import { getPublicMediaUrl } from './publish/mediaHost.js';
 import { getKarachiNow, getNextDayKarachi } from './schedule/scheduler.js';
@@ -150,10 +150,21 @@ program
   .option('--dry-run', 'Print exact API calls without sending them', false)
   .option('-p, --post-id <id>', 'Publish a specific post ID immediately')
   .option('--skip-wait', 'Skip waiting for public media URL propagation', false)
+  .option('--story', 'Post the given --post-id as Instagram Story frame(s) instead of a feed post', false)
   .action(async (options) => {
     try {
       const dryRun = Boolean(options.dryRun);
       console.log(`\n=== PUBLISHER RUN (Dry Run: ${dryRun}) ===`);
+
+      if (options.story) {
+        if (!options.postId) throw new Error('--story requires --post-id');
+        const post = loadQueue().find(p => p.id === options.postId);
+        if (!post) throw new Error(`Post ID ${options.postId} not found in queue`);
+        const res = await publishPostAsStory(post, { dryRun });
+        if (!dryRun) markStoryPosted(post.id, res.igMediaIds);
+        console.log(`✓ Story posted for ${post.id}: ${res.igMediaIds.join(', ')}`);
+        return;
+      }
 
       // Prune old media (> 60 days) to keep repo small
       pruneOldMedia(60);

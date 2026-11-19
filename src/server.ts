@@ -5,13 +5,13 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-import { loadQueue, saveQueue, loadHistory, enqueuePosts, updatePostStatus } from './state/stateManager.js';
+import { loadQueue, saveQueue, loadHistory, enqueuePosts, updatePostStatus, markStoryPosted } from './state/stateManager.js';
 import { generateDailyPosts, loadScheduleConfig, loadPillarsConfig } from './content/slotMapper.js';
 import { loadContentBank } from './content/bank.js';
 import { renderSlide, closeBrowser } from './render/renderer.js';
 import { generatePreviews, SAMPLE_POSTS } from './render/preview.js';
 import { getPublicMediaUrl } from './publish/mediaHost.js';
-import { publishPost, getActivePublisherType } from './publish/publisher.js';
+import { publishPost, publishPostAsStory, getActivePublisherType } from './publish/publisher.js';
 import { InstagramGraphClient, resolveGraphBaseUrl } from './publish/instagramGraph.js';
 import { loadTokenState } from './publish/tokenRefresh.js';
 import { getNextDayKarachi } from './schedule/scheduler.js';
@@ -751,6 +751,7 @@ export function getDashboardHtml(): string {
               <div class="meta-row">
                 <span>🕒 <strong>\${post.scheduledAt}</strong></span>
                 <span>🎨 \${post.template} (\${post.design.palette})</span>
+                \${post.storyPostedAt ? '<span class="badge badge-emerald">📲 Story posted</span>' : ''}
               </div>
               <div class="caption-box">\${post.caption}</div>
             </div>
@@ -766,6 +767,9 @@ export function getDashboardHtml(): string {
               <div style="display:flex; gap:8px;">
                 <button class="btn btn-secondary" onclick="showDryRun('\${post.id}')">
                   🔍 Dry-Run
+                </button>
+                <button class="btn btn-secondary" id="story-\${post.id}" onclick="publishStory('\${post.id}')" title="Post this image to your Instagram Story (feed post stays queued)">
+                  📲 Post Story
                 </button>
                 <button class="btn btn-emerald" id="pub-\${post.id}" onclick="publishLive('\${post.id}')">
                   📤 Publish Now
@@ -1057,6 +1061,42 @@ export function getDashboardHtml(): string {
       }
     }
 
+    async function publishStory(postId) {
+      const post = (appState.queue || []).find(p => p.id === postId);
+      const frames = post && post.images ? post.images.length : 1;
+      const already = post && post.storyPostedAt ? '\n\n⚠️ This post was already shared to your Story on ' + new Date(post.storyPostedAt).toLocaleString() + '.' : '';
+      if (!confirm('Post to Instagram Story?\n\n• ' + frames + ' story frame(s) will be posted' +
+        '\n• Stories do not show captions\n• The feed post stays in the queue' + already)) return;
+      const btn = document.getElementById('story-' + postId);
+      if (btn) { btn.disabled = true; btn.textContent = '⏳ Posting...'; }
+      let res;
+      try {
+        res = await fetch('/api/publish-story', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ postId })
+        });
+      } catch (netErr) {
+        alert('Network hiccup: the response was lost, but the story may already be posting. ' +
+          'Check Instagram in 2–3 minutes before trying again.');
+        if (btn) btn.textContent = '⏳ Check back shortly';
+        return;
+      }
+      try {
+        const text = await res.text();
+        let data;
+        try { data = JSON.parse(text); } catch { data = { error: text.slice(0, 200) || ('HTTP ' + res.status) }; }
+        if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
+        document.getElementById('modal-title').textContent = (data.queued ? '🚀 Story started · ' : '✅ Story posted · ') + postId;
+        document.getElementById('modal-content').textContent = JSON.stringify(data, null, 2);
+        document.getElementById('dryrun-modal').classList.add('open');
+        await loadState();
+      } catch (e) {
+        alert('Story failed: ' + e.message);
+        if (btn) { btn.disabled = false; btn.textContent = '📲 Post Story'; }
+      }
+    }
+
     function closeModal() {
       document.getElementById('dryrun-modal').classList.remove('open');
     }
@@ -1232,6 +1272,23 @@ const server = http.createServer(async (req, res) => {
         sendJson(res, 200, { ok: true, postId: post.id, result });
       } catch (err: any) {
         updatePostStatus(post.id, 'queued', { error: err.message });
+        sendJson(res, 400, { error: err.message });
+      }
+      return;
+    }
+
+    if (req.method === 'POST' && pathname === '/api/publish-story') {
+      const body = await readJsonBody(req);
+      const post = loadQueue().find(p => p.id === body.postId);
+      if (!post) {
+        sendJson(res, 404, { error: 'Post not found in queue' });
+        return;
+      }
+      try {
+        const result = await publishPostAsStory(post, { dryRun: false });
+        markStoryPosted(post.id, result.igMediaIds);
+        sendJson(res, 200, { ok: true, postId: post.id, result });
+      } catch (err: any) {
         sendJson(res, 400, { error: err.message });
       }
       return;

@@ -4,7 +4,7 @@
     "date": "2026-11-21",
     "slot": 1,
     "scheduledAt": "2026-11-21T09:30:00+05:00",
-    "status": "queued",
+    "status": "posted",
     "approved": true,
     "pillar": "tips",
     "format": "single",
@@ -49,10 +49,11 @@
     "imageUrls": [
       "https://haan-agent.pages.dev/media/2026-11-21/slot1-b2.jpg"
     ],
-    "igMediaId": null,
+    "igMediaId": "18016574342975807",
     "attempts": 1,
-    "error": "[IG Graph HTTP 400] Code 36001 (subcode 2207083): The image format is not supported.",
-    "rejectedAt": null
+    "error": null,
+    "rejectedAt": null,
+    "postedAt": "2026-11-19T22:35:44.530Z"
   },
   {
     "id": "2026-11-21-slot2-b2",
@@ -175,7 +176,7 @@
     "date": "2026-11-21",
     "slot": 4,
     "scheduledAt": "2026-11-21T19:30:00+05:00",
-    "status": "queued",
+    "status": "posted",
     "approved": true,
     "pillar": "offers",
     "format": "single",
@@ -220,9 +221,10 @@
     "imageUrls": [
       "https://haan-agent.pages.dev/media/2026-11-21/slot4-b2.jpg"
     ],
-    "igMediaId": null,
+    "igMediaId": "18140536429649382",
     "attempts": 0,
-    "error": null
+    "error": null,
+    "postedAt": "2026-11-19T22:35:54.687Z"
   },
   {
     "id": "2026-11-21-slot5-b2",
@@ -1009,8 +1011,9 @@
       "https://haan-agent.pages.dev/media/2026-11-19/slot2.jpg"
     ],
     "igMediaId": null,
-    "attempts": 0,
-    "error": null
+    "attempts": 1,
+    "error": "fetch failed",
+    "rejectedAt": null
   },
   {
     "id": "2026-11-19-slot3",

@@ -270,6 +270,54 @@ export class InstagramGraphClient {
   }
 
   /**
+   * Publishes one image as an Instagram Story (media_type=STORIES).
+   * Stories take no caption; IG pads non-9:16 images with a background.
+   */
+  async publishStory(params: { imageUrl: string; dryRun?: boolean }): Promise<PublishResult> {
+    const { imageUrl, dryRun = false } = params;
+
+    if (dryRun) {
+      console.log(`[IG Graph DRY-RUN: STORY] POST /${this.userId || 'USER_ID'}/media media_type=STORIES image_url=${imageUrl}`);
+      console.log(`[IG Graph DRY-RUN: STORY] POST /${this.userId || 'USER_ID'}/media_publish creation_id=<id>`);
+      return { igMediaId: 'mock-ig-story-123', creationId: 'mock-story-creation', publishedAt: new Date().toISOString() };
+    }
+
+    const quota = await this.checkPublishingLimit(dryRun);
+    if (quota.quotaUsage >= quota.configTotal) {
+      throw new Error(`Daily publishing quota reached: ${quota.quotaUsage}/${quota.configTotal}`);
+    }
+
+    await assertPublicJpeg(imageUrl);
+
+    console.log(`[IG Graph Story] Creating story container for ${imageUrl}`);
+    const createRes = await fetch(`${this.baseUrl}/${this.apiVersion}/${this.userId}/media`, {
+      method: 'POST',
+      headers: this.getHeaders(),
+      body: JSON.stringify({ image_url: imageUrl, media_type: 'STORIES' })
+    });
+    if (!createRes.ok) {
+      const err = await createRes.json().catch(() => ({}));
+      this.handleGraphError(err, createRes.status);
+    }
+    const { id: creationId } = (await createRes.json()) as any;
+
+    await this.pollContainerStatus(creationId);
+
+    const pubRes = await fetch(`${this.baseUrl}/${this.apiVersion}/${this.userId}/media_publish`, {
+      method: 'POST',
+      headers: this.getHeaders(),
+      body: JSON.stringify({ creation_id: creationId })
+    });
+    if (!pubRes.ok) {
+      const err = await pubRes.json().catch(() => ({}));
+      this.handleGraphError(err, pubRes.status);
+    }
+    const { id: igMediaId } = (await pubRes.json()) as any;
+    console.log(`[IG Graph Story] Story published! Media ID: ${igMediaId}`);
+    return { igMediaId, creationId, publishedAt: new Date().toISOString() };
+  }
+
+  /**
    * Publishes a carousel post (up to 10 slides)
    */
   async publishCarousel(params: {
