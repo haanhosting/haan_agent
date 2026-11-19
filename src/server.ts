@@ -1023,14 +1023,27 @@ export function getDashboardHtml(): string {
         btn.disabled = true;
         btn.textContent = '⏳ Uploading...';
       }
+      let res;
       try {
-        const res = await fetch('/api/publish-live', {
+        res = await fetch('/api/publish-live', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ postId })
         });
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error || 'Upload failed');
+      } catch (netErr) {
+        // The request may have reached the server (and dispatched the publish job)
+        // even though the response was lost. Don't invite a double-publish.
+        alert('Network hiccup: the response was lost, but the publish may already be running. ' +
+          'Wait 2–3 minutes and refresh before trying again.');
+        if (btn) btn.textContent = '⏳ Check back shortly';
+        setTimeout(() => loadState().catch(() => {}), 90000);
+        return;
+      }
+      try {
+        const text = await res.text();
+        let data;
+        try { data = JSON.parse(text); } catch { data = { error: text.slice(0, 200) || ('HTTP ' + res.status) }; }
+        if (!res.ok) throw new Error(data.error || ('HTTP ' + res.status));
         document.getElementById('modal-title').textContent = (data.queued ? '🚀 Publish started · ' : '✅ Published to Instagram · ') + postId;
         document.getElementById('modal-content').textContent = JSON.stringify(data, null, 2);
         document.getElementById('dryrun-modal').classList.add('open');
