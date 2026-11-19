@@ -52,12 +52,12 @@ jobs:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
           OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
-          PAGES_BASE_URL: ${{ vars.PAGES_BASE_URL }}
+          PAGES_BASE_URL: ${{ vars.PAGES_BASE_URL || 'https://haan-agent.pages.dev' }}
         run: npx tsx src/cli.ts generate --render
 
       - name: Render any other unrendered posts (e.g. created from the dashboard)
         env:
-          PAGES_BASE_URL: ${{ vars.PAGES_BASE_URL }}
+          PAGES_BASE_URL: ${{ vars.PAGES_BASE_URL || 'https://haan-agent.pages.dev' }}
         run: npx tsx src/cli.ts render
 
       - name: Commit rendered media and updated queue

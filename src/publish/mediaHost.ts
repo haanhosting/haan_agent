@@ -11,7 +11,7 @@ export interface MediaHostOptions {
  * Converts a local media path (e.g. "media/2026-11-18/slot1-1.jpg") to a public GitHub Pages URL.
  */
 export function getPublicMediaUrl(mediaPath: string, baseUrl?: string): string {
-  const base = baseUrl || process.env.PAGES_BASE_URL || 'https://username.github.io/haan-insta-agent';
+  const base = baseUrl || process.env.PAGES_BASE_URL || 'https://haan-agent.pages.dev';
   const cleanBase = base.replace(/\/+$/, '');
   const cleanPath = mediaPath.replace(/^\/+/, '');
   return `${cleanBase}/${cleanPath}`;
