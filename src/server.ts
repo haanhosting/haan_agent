@@ -956,6 +956,9 @@ export function getDashboardHtml(): string {
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Failed');
         await loadState();
+        if (data.renderDispatched === false) {
+          alert('Posts were queued, but the render workflow could not be started:\\n' + data.renderError);
+        }
       } catch (e) {
         alert('Error: ' + e.message);
       } finally {

@@ -330,24 +330,16 @@ export async function onRequest(context) {
       memoryQueue = queue;
       await saveGithubQueueIfConfigured(env, queue);
 
-      // Also trigger GitHub Actions workflow if GH_PAT is configured for full Playwright rendering
-      const pat = env.GH_PAT;
-      const repo = env.GITHUB_REPOSITORY || 'haanhosting/haan_agent';
-      if (pat) {
-        // waitUntil keeps the worker alive until the dispatch request completes.
-        context.waitUntil(fetch(`https://api.github.com/repos/${repo}/actions/workflows/generate.yml/dispatches`, {
-          method: 'POST',
-          headers: {
-            'Authorization': `Bearer ${pat}`,
-            'Accept': 'application/vnd.github+json',
-            'User-Agent': 'haan-insta-agent-cloudflare',
-            'Content-Type': 'application/json'
-          },
-          body: JSON.stringify({ ref: 'main' })
-        }).catch(() => {}));
-      }
+      // Rendering needs Playwright, which only runs in GitHub Actions; dispatch it and surface failures.
+      const dispatched = await dispatchWorkflow(env, 'generate.yml');
 
-      return jsonResponse(200, { ok: true, count: newPosts.length, posts: newPosts.map(p => p.id) });
+      return jsonResponse(200, {
+        ok: true,
+        count: newPosts.length,
+        posts: newPosts.map(p => p.id),
+        renderDispatched: dispatched.ok,
+        ...(dispatched.ok ? {} : { renderError: dispatched.error })
+      });
     }
 
     return jsonResponse(404, { error: `Unknown API route: ${pathname}` });
