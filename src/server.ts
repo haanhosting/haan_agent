@@ -1064,9 +1064,9 @@ export function getDashboardHtml(): string {
     async function publishStory(postId) {
       const post = (appState.queue || []).find(p => p.id === postId);
       const frames = post && post.images ? post.images.length : 1;
-      const already = post && post.storyPostedAt ? '\n\n⚠️ This post was already shared to your Story on ' + new Date(post.storyPostedAt).toLocaleString() + '.' : '';
-      if (!confirm('Post to Instagram Story?\n\n• ' + frames + ' story frame(s) will be posted' +
-        '\n• Stories do not show captions\n• The feed post stays in the queue' + already)) return;
+      const already = post && post.storyPostedAt ? '\\n\\n⚠️ This post was already shared to your Story on ' + new Date(post.storyPostedAt).toLocaleString() + '.' : '';
+      if (!confirm('Post to Instagram Story?\\n\\n• ' + frames + ' story frame(s) will be posted' +
+        '\\n• Stories do not show captions\\n• The feed post stays in the queue' + already)) return;
       const btn = document.getElementById('story-' + postId);
       if (btn) { btn.disabled = true; btn.textContent = '⏳ Posting...'; }
       let res;
