@@ -1,0 +1,254 @@
+/* =====================================================================
+   HAAN NEON BRAND THEME
+   Applied on top of every template by the renderer. Recreates the
+   original HAAN Instagram look: dark navy + neon blue glow, heavy
+   condensed uppercase headlines, glowing glass cards, feature strip and
+   "ORDER NOW »" footer.
+   NOTE: never use !important on font-size — the text-fit script shrinks
+   headings via inline styles.
+   ===================================================================== */
+
+.canvas.neon {
+  --bg: #050b1f !important;
+  --bg1: #0b2a6b !important;
+  --bg2: #030817 !important;
+  --ink: #ffffff !important;
+  --muted: #b4cbff !important;
+  --accent: #1e90ff !important;
+  --accent2: #4fd2ff !important;
+  --card: rgba(8, 22, 58, 0.78) !important;
+  --cardInk: #e8f0ff !important;
+  --card-border: #2b8cff !important;
+  --neon: #2f9bff;
+  --neon-soft: rgba(47, 155, 255, 0.45);
+  background: radial-gradient(120% 75% at 50% 18%, #0d2f78 0%, #071640 42%, #030817 100%) !important;
+  color: #ffffff !important;
+  overflow: hidden;
+}
+
+/* Background art: brighter and tinted blue */
+.canvas.neon .bg-image-layer {
+  opacity: 0.42 !important;
+  filter: saturate(1.25) hue-rotate(-6deg);
+}
+.canvas.neon .bg-vignette-layer {
+  background: radial-gradient(90% 70% at 50% 45%, rgba(3, 8, 23, 0.15) 0%, rgba(3, 8, 23, 0.82) 100%) !important;
+}
+.canvas.neon .decoration-layer { opacity: 0.05 !important; }
+
+/* Neon glow + horizon light streak */
+.neon-glow {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    radial-gradient(55% 28% at 50% 0%, rgba(47, 155, 255, 0.38) 0%, transparent 100%),
+    radial-gradient(70% 10% at 50% 100%, rgba(47, 155, 255, 0.35) 0%, transparent 100%);
+}
+.neon-glow::after {
+  content: '';
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 300px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(110, 200, 255, 0.85), transparent);
+  box-shadow: 0 0 24px 4px rgba(47, 155, 255, 0.55);
+  opacity: 0.55;
+}
+
+/* ---------- Typography ---------- */
+.canvas.neon h1 {
+  font-family: 'Anton', 'Oswald', 'Poppins', sans-serif;
+  font-weight: 400;
+  font-size: 100px;
+  line-height: 1.04;
+  letter-spacing: 0.005em;
+  text-transform: uppercase;
+  color: #ffffff;
+  background: linear-gradient(180deg, #ffffff 0%, #ffffff 45%, #8fd3ff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: none !important;
+  filter: drop-shadow(0 0 18px rgba(47, 155, 255, 0.55)) drop-shadow(0 4px 0 rgba(0, 20, 60, 0.6));
+}
+
+.canvas.neon p,
+.canvas.neon li {
+  color: #d6e4ff;
+}
+
+.canvas.neon .highlight,
+.canvas.neon .stat-number,
+.canvas.neon .price,
+.canvas.neon .metric-val {
+  color: #6fd0ff !important;
+  text-shadow: 0 0 18px rgba(47, 155, 255, 0.7);
+}
+.canvas.neon .stat-number,
+.canvas.neon .price,
+.canvas.neon .metric-val {
+  font-family: 'Anton', 'Oswald', sans-serif;
+  font-weight: 400;
+}
+.canvas.neon .highlight {
+  font-family: 'Oswald', 'Poppins', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  border-top-color: rgba(79, 195, 255, 0.55) !important;
+}
+
+.canvas.neon .bar,
+.canvas.neon .thin-rule {
+  background: linear-gradient(90deg, #1e90ff, #4fd2ff) !important;
+  box-shadow: 0 0 16px rgba(47, 155, 255, 0.8);
+}
+
+/* ---------- Glass / neon cards ---------- */
+.canvas.neon .card-box,
+.canvas.neon .browser,
+.canvas.neon .offer-box,
+.canvas.neon .box,
+.canvas.neon .term-box,
+.canvas.neon .glass-panel,
+.canvas.neon .vs-box,
+.canvas.neon .bento-item,
+.canvas.neon .metric-card,
+.canvas.neon .dc-card,
+.canvas.neon .desc-card,
+.canvas.neon .promo-sub,
+.canvas.neon .pill {
+  background: linear-gradient(180deg, rgba(14, 36, 92, 0.82) 0%, rgba(6, 16, 44, 0.86) 100%) !important;
+  border: 2px solid rgba(64, 160, 255, 0.75) !important;
+  box-shadow:
+    0 0 26px rgba(47, 155, 255, 0.35),
+    inset 0 0 30px rgba(47, 155, 255, 0.12) !important;
+  color: #e8f0ff !important;
+}
+.canvas.neon .card-box p,
+.canvas.neon .browser-text,
+.canvas.neon .vs-text,
+.canvas.neon .bento-text {
+  color: #dbe7ff !important;
+}
+.canvas.neon .browser-bar {
+  background: rgba(4, 12, 34, 0.9) !important;
+  border-bottom: 1px solid rgba(64, 160, 255, 0.5) !important;
+}
+.canvas.neon .url {
+  background: rgba(30, 144, 255, 0.12) !important;
+  color: #9fd8ff !important;
+}
+
+/* ---------- Header ---------- */
+.canvas.neon .brand-top-pill {
+  font-family: 'Oswald', 'Poppins', sans-serif;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 26px;
+  color: #ffffff;
+  background: rgba(30, 144, 255, 0.14);
+  border: 2px solid rgba(79, 195, 255, 0.8);
+  box-shadow: 0 0 18px rgba(47, 155, 255, 0.45);
+}
+.canvas.neon .brand-top-logo {
+  background: rgba(4, 10, 30, 0.75);
+  border: 2px solid rgba(79, 195, 255, 0.6);
+  box-shadow: 0 0 22px rgba(47, 155, 255, 0.4);
+}
+.canvas.neon .brand-top-logo img {
+  width: 62px;
+  height: 62px;
+  box-shadow: 0 0 18px rgba(79, 195, 255, 0.7);
+}
+.canvas.neon .brand-top-logo span {
+  font-family: 'Oswald', 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 26px;
+  letter-spacing: 0.1em;
+}
+
+/* ---------- Footer: feature strip + ORDER NOW ---------- */
+.canvas.neon .footer.neon-footer {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 22px;
+  border-top: none !important;
+  padding-top: 0 !important;
+  width: 100%;
+}
+
+.feature-strip {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: rgba(4, 12, 34, 0.7);
+  border: 1.5px solid rgba(64, 160, 255, 0.45);
+  box-shadow: 0 0 20px rgba(47, 155, 255, 0.22);
+}
+.feature-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Oswald', 'Inter', sans-serif;
+  font-weight: 600;
+  font-size: 19px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #cfe4ff;
+  white-space: nowrap;
+}
+.feature-item svg {
+  width: 38px;
+  height: 38px;
+  stroke: #5cc8ff;
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: drop-shadow(0 0 6px rgba(79, 195, 255, 0.9));
+}
+
+.neon-footer-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.canvas.neon .brand-footer-left img {
+  border: 2px solid rgba(79, 195, 255, 0.8);
+  box-shadow: 0 0 16px rgba(47, 155, 255, 0.6);
+}
+.canvas.neon .brand-footer-title {
+  font-family: 'Oswald', 'Poppins', sans-serif;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  color: #ffffff;
+}
+.canvas.neon .brand-footer-sub {
+  font-family: 'Inter', sans-serif;
+  font-size: 24px;
+  font-weight: 600;
+  color: #7fd4ff;
+  letter-spacing: 0.02em;
+}
+.order-btn {
+  font-family: 'Anton', 'Oswald', sans-serif;
+  font-size: 34px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #ffffff;
+  padding: 14px 34px 12px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #2fa4ff 0%, #0b5ed7 100%);
+  border: 2px solid #8fd8ff;
+  box-shadow: 0 0 28px rgba(47, 155, 255, 0.75), inset 0 1px 0 rgba(255, 255, 255, 0.4);
+  white-space: nowrap;
+}

@@ -84,6 +84,33 @@ function getBundledCss(): string {
   return cachedBundledCss;
 }
 
+let cachedNeonCss: string | null = null;
+function getNeonThemeCss(): string {
+  if (cachedNeonCss === null) {
+    const p = path.resolve(process.cwd(), 'templates/_shared/neon-theme.css');
+    cachedNeonCss = fs.existsSync(p) ? fs.readFileSync(p, 'utf8') : '';
+  }
+  return cachedNeonCss;
+}
+
+const FEATURE_ICONS: Array<[string, string]> = [
+  ['Instant Setup', '<path d="M13 2 4 14h7l-1 8 9-12h-7z"/>'],
+  ['DDoS Protection', '<path d="M12 2 4 5v6c0 5 3.4 9.3 8 11 4.6-1.7 8-6 8-11V5z"/><path d="m9 12 2 2 4-4"/>'],
+  ['NVMe SSD', '<rect x="3" y="7" width="18" height="10" rx="2"/><path d="M7 11h6M7 14h3"/><circle cx="17" cy="12" r="1.2"/>'],
+  ['99.9% Uptime', '<path d="M3 17l5-5 4 3 8-8"/><path d="M15 7h5v5"/>'],
+  ['24/7 Support', '<path d="M4 14v-2a8 8 0 0 1 16 0v2"/><rect x="3" y="13" width="4" height="6" rx="1.5"/><rect x="17" y="13" width="4" height="6" rx="1.5"/><path d="M19 19c0 1.5-2 2.5-5 2.5"/>']
+];
+
+const NEON_FOOTER_HTML =
+  '<div class="footer neon-footer">' +
+  '<div class="feature-strip">' +
+  FEATURE_ICONS.map(([label, svg]) => `<div class="feature-item"><svg viewBox="0 0 24 24">${svg}</svg><span>${label}</span></div>`).join('') +
+  '</div>' +
+  '<div class="neon-footer-row">' +
+  '<div class="brand-footer-left"><img src="{{logoDataUri}}" alt="HAAN" /><div><div class="brand-footer-title">HAAN HOSTING</div><div class="brand-footer-sub">haanhosting.store</div></div></div>' +
+  '<div class="order-btn">{{footerCtaLabel}}</div>' +
+  '</div></div>';
+
 export async function getBrowser(): Promise<Browser> {
   if (!sharedBrowser) {
     sharedBrowser = await chromium.launch({
@@ -152,10 +179,18 @@ export async function renderSlide(options: RenderOptions): Promise<string> {
     `<div class="label"><span class="brand-top-pill">{{label}}</span><div class="brand-top-logo"><img src="{{logoDataUri}}" alt="HAAN" /><span>HAAN HOSTING</span></div></div>`
   );
 
+  // HAAN neon brand footer: feature strip + crest + "ORDER NOW »" (replaces every template's footer)
   rawHtml = rawHtml.replace(
-    /<div class="footer">(?:Haan Hosting · )?{{cta}}<\/div>/g,
-    `<div class="footer"><div class="brand-footer-left"><img src="{{logoDataUri}}" alt="HAAN" /><div><div class="brand-footer-title">HAAN HOSTING</div><div class="brand-footer-sub">Cloud VPS · Windows RDP · Web Hosting</div></div></div><div class="brand-footer-cta">{{cta}} →</div></div>`
+    /<div class="footer">[\s\S]*?<\/div>(?=\s*<\/div>\s*<\/body>)/,
+    NEON_FOOTER_HTML
   );
+
+  // Neon theme: class on canvas, glow layer, and theme CSS after template styles
+  rawHtml = rawHtml.replace(
+    /(<div\s+class=["'])([^"']*\bcanvas\b[^"']*)(["'][^>]*>)/i,
+    '$1$2 neon$3\n    <div class="neon-glow"></div>'
+  );
+  rawHtml = rawHtml.replace(/<\/head>/i, `<style>\n${getNeonThemeCss()}\n</style>\n</head>`);
 
   // Resolve palette
   let palette: Palette;
@@ -215,6 +250,7 @@ export async function renderSlide(options: RenderOptions): Promise<string> {
     afterText: data.afterText || data.fact || 'Isolated NVMe Cloud VPS & Dedicated Windows RDP with 10 Gbps port speed and 99.9% SLA.',
     priceBadge: data.priceBadge || data.price || data.statNumber || 'Plans from $3.99/mo',
     cta: data.cta || 'haanhosting.store',
+    footerCtaLabel: data.isCover && Number(data.totalSlides) > 1 ? 'Swipe »' : 'Order Now »',
     badge: data.badge || data.label || 'Haan Hosting'
   };
 
