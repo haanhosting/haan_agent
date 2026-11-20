@@ -115,6 +115,10 @@ export interface PreparedPost {
   aiTextVia?: string;
   /** Repo-relative path of an AI-generated background image, if any. */
   aiBgImage?: string | null;
+  /** True when the whole image was generated in reference style (no template render). */
+  aiFullImage?: boolean;
+  /** Reference post ids used to generate this post. */
+  aiRefIds?: string[];
 }
 
 /**

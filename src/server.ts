@@ -10,6 +10,10 @@ import { loadQueue, saveQueue, loadHistory, enqueuePosts, updatePostStatus, mark
 import { generateDailyPosts, loadScheduleConfig, loadPillarsConfig } from './content/slotMapper.js';
 import { loadContentBank } from './content/bank.js';
 import { loadAiConfig } from './content/aiStudio.js';
+import {
+  loadReferences, loadStyleProfile, addReferenceImage, deleteReference, updateReferenceCaption,
+  fetchInstagramMedia, importInstagramMedia, analyzeReferences, refsHash
+} from './content/aiReferences.js';
 import { renderSlide, closeBrowser } from './render/renderer.js';
 import { generatePreviews, SAMPLE_POSTS } from './render/preview.js';
 import { getPublicMediaUrl } from './publish/mediaHost.js';
@@ -655,6 +659,33 @@ export function getDashboardHtml(): string {
           <button class="btn" id="btn-ai-save" onclick="saveAiSettings()">💾 Save Settings</button>
         </div>
       </div>
+      <div class="post-card" id="ai-refs" style="padding:18px 20px; margin-bottom:18px;">
+        <div style="display:flex; flex-wrap:wrap; gap:12px; align-items:center; justify-content:space-between;">
+          <div>
+            <strong>🎨 My Reference Posts</strong>
+            <div style="color:var(--muted); font-size:12px; margin-top:4px;">Add your best-performing posts. ChatGPT studies their look, layout and captions, then makes new posts in the same style (new text, real prices only).</div>
+          </div>
+          <div style="display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+            <label class="btn btn-secondary" style="cursor:pointer;">⬆️ Upload images<input type="file" id="ref-upload" accept="image/*" multiple style="display:none;" onchange="uploadReferences(this.files)" /></label>
+            <button class="btn btn-secondary" id="btn-ig-pick" onclick="openIgPicker()">📸 Import from Instagram</button>
+            <button class="btn" id="btn-ref-analyze" onclick="analyzeRefs()">🔍 Analyze my style</button>
+          </div>
+        </div>
+        <div style="display:flex; flex-wrap:wrap; gap:16px; align-items:center; margin-top:12px; font-size:13px;">
+          <label style="display:flex; gap:6px; align-items:center;"><input type="checkbox" id="ai-use-refs" onchange="aiSettingsDirty = true; saveAiSettings(true)" /> Generate in my reference style</label>
+          <label style="display:flex; gap:6px; align-items:center; color:var(--muted);">Image quality
+            <select id="ai-ref-quality" onchange="aiSettingsDirty = true; saveAiSettings(true)">
+              <option value="low">low (cheapest)</option>
+              <option value="medium">medium</option>
+              <option value="high">high (best, ~4x cost)</option>
+            </select>
+          </label>
+          <span id="ref-count" style="color:var(--muted);"></span>
+        </div>
+        <div id="ref-grid" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(120px, 1fr)); gap:10px; margin-top:14px;"></div>
+        <div id="ref-profile" style="margin-top:14px;"></div>
+        <div id="ig-picker" style="display:none; margin-top:14px; border-top:1px solid var(--border, #333); padding-top:14px;"></div>
+      </div>
       <div class="grid-posts" id="ai-grid"></div>
     </section>
   </main>
@@ -748,6 +779,7 @@ export function getDashboardHtml(): string {
       document.getElementById('tab-ai-count').textContent = aiPosts.length;
       const cfg = appState.ai || {};
       syncAiSettingsForm();
+      if (!refsLoaded) loadReferencesUi();
       const keyStatus = appState.doctor.hasOpenAI === null
         ? '🔑 OPENAI_API_KEY is read from GitHub secrets'
         : (appState.doctor.hasOpenAI ? '✅ OPENAI_API_KEY set' : '⚠️ OPENAI_API_KEY not set (falls back to free LLMs + built-in backgrounds)');
@@ -771,7 +803,7 @@ export function getDashboardHtml(): string {
               <span>🕒 <strong>\${post.scheduledAt}</strong></span>
               <span>🎨 \${post.template}</span>
               <span class="badge">✍️ \${post.aiTextVia || 'ai'}</span>
-              <span class="badge">\${post.aiBgImage ? '🖼️ AI background' : '🖼️ built-in background'}</span>
+              <span class="badge">\${post.aiFullImage ? '🎨 reference style' : (post.aiBgImage ? '🖼️ AI background' : '🖼️ built-in background')}</span>
             </div>
             <div class="caption-box">\${post.caption}</div>
           </div>
@@ -787,6 +819,8 @@ export function getDashboardHtml(): string {
       const cfg = appState.ai || {};
       document.getElementById('ai-ppd').value = String(Math.max(1, Math.min(cfg.postsPerDay || 1, 4)));
       renderAiTimeInputs(cfg.times || []);
+      document.getElementById('ai-use-refs').checked = cfg.useReferences !== false;
+      document.getElementById('ai-ref-quality').value = cfg.referenceQuality || 'medium';
     }
 
     function renderAiTimeInputs(presetTimes) {
@@ -802,7 +836,7 @@ export function getDashboardHtml(): string {
       wrap.innerHTML = html;
     }
 
-    async function saveAiSettings() {
+    async function saveAiSettings(quiet) {
       const btn = document.getElementById('btn-ai-save');
       const postsPerDay = parseInt(document.getElementById('ai-ppd').value, 10);
       const times = Array.from(document.querySelectorAll('#ai-times input')).map(i => i.value);
@@ -813,19 +847,200 @@ export function getDashboardHtml(): string {
         const res = await fetch('/api/ai-config', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ postsPerDay, times })
+          body: JSON.stringify({
+            postsPerDay,
+            times,
+            useReferences: document.getElementById('ai-use-refs').checked,
+            referenceQuality: document.getElementById('ai-ref-quality').value
+          })
         });
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || 'Failed');
         appState.ai = data.ai;
         aiSettingsDirty = false;
         renderAiStudio();
-        alert('Saved: ' + data.ai.postsPerDay + ' AI post(s) per day at ' + data.ai.times.join(', ') + ' PKT.');
+        if (!quiet) alert('Saved: ' + data.ai.postsPerDay + ' AI post(s) per day at ' + data.ai.times.join(', ') + ' PKT.');
       } catch (e) {
         alert('Save failed: ' + e.message);
       } finally {
         btn.disabled = false;
         btn.textContent = '💾 Save Settings';
+      }
+    }
+
+    let refsLoaded = false;
+    function escHtml(str) {
+      return String(str || '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+    }
+
+    async function loadReferencesUi() {
+      refsLoaded = true;
+      try {
+        const res = await fetch('/api/ai-references');
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        renderReferences(await res.json());
+      } catch (e) {
+        document.getElementById('ref-grid').innerHTML = '<div style="color:var(--muted); font-size:13px;">Could not load references: ' + escHtml(e.message) + '</div>';
+      }
+    }
+
+    function renderReferences(data) {
+      const refs = data.refs || [];
+      document.getElementById('ref-count').textContent = refs.length + ' / 24 reference posts';
+      const grid = document.getElementById('ref-grid');
+      grid.innerHTML = refs.length ? refs.map(r => \`
+        <div style="position:relative; border-radius:8px; overflow:hidden; background:#000;">
+          <a href="\${r.url || '/' + r.file}" target="_blank"><img src="\${r.url || '/' + r.file}" style="width:100%; aspect-ratio:4/5; object-fit:cover; display:block;" /></a>
+          <button onclick="deleteRef('\${r.id}')" title="Remove" style="position:absolute; top:4px; right:4px; background:rgba(0,0,0,.7); color:#fff; border:none; border-radius:50%; width:24px; height:24px; cursor:pointer;">×</button>
+          <div style="font-size:11px; padding:4px 6px; color:#ccc; display:flex; justify-content:space-between; gap:4px;">
+            <span>\${r.source === 'instagram' ? '📸 ' + (r.likes || 0) + '❤️' : '⬆️ upload'}</span>
+            <a href="#" onclick="editRefCaption('\${r.id}'); return false;" style="color:#9cf;">\${r.caption ? '✏️ caption' : '➕ caption'}</a>
+          </div>
+        </div>
+      \`).join('') : '<div style="color:var(--muted); font-size:13px; grid-column:1 / -1;">No reference posts yet. Upload screenshots of your best posts or import them from Instagram.</div>';
+      window.__refs = refs;
+
+      const p = data.profile;
+      const box = document.getElementById('ref-profile');
+      if (!p) {
+        box.innerHTML = refs.length ? '<div style="color:var(--muted); font-size:13px;">Not analyzed yet. Click <strong>🔍 Analyze my style</strong> (it also runs automatically before generating).</div>' : '';
+        return;
+      }
+      const row = (k, v) => v ? \`<div style="margin:3px 0;"><strong>\${k}:</strong> \${escHtml(Array.isArray(v) ? v.join(', ') : v)}</div>\` : '';
+      box.innerHTML = \`
+        <details>
+          <summary style="cursor:pointer;"><strong>🧠 Learned style profile</strong> <span style="color:var(--muted); font-size:12px;">\${data.profileFresh ? '✅ up to date' : '⚠️ references changed, will re-analyze'} · \${escHtml(p.analyzedAt || '')}</span></summary>
+          <div style="font-size:13px; margin-top:8px; line-height:1.5;">
+            \${row('Visual style', p.visualStyle)}\${row('Layout', p.layout)}\${row('Colors', p.colors)}\${row('Typography', p.typography)}
+            \${row('Text on image', p.textOnImage)}\${row('Tone', p.tone)}\${row('Caption pattern', p.captionPattern)}\${row('Hashtags', p.hashtagStyle)}
+          </div>
+        </details>\`;
+    }
+
+    function fileToDataUrl(file) {
+      return new Promise((resolve, reject) => {
+        const img = new Image();
+        const url = URL.createObjectURL(file);
+        img.onload = () => {
+          const scale = Math.min(1, 1440 / img.width);
+          const c = document.createElement('canvas');
+          c.width = Math.round(img.width * scale);
+          c.height = Math.round(img.height * scale);
+          c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+          URL.revokeObjectURL(url);
+          resolve(c.toDataURL('image/jpeg', 0.9));
+        };
+        img.onerror = () => { URL.revokeObjectURL(url); reject(new Error('Could not read ' + file.name)); };
+        img.src = url;
+      });
+    }
+
+    async function uploadReferences(files) {
+      const list = Array.from(files || []);
+      if (!list.length) return;
+      const errors = [];
+      for (const f of list) {
+        try {
+          const dataUrl = await fileToDataUrl(f);
+          const res = await fetch('/api/ai-references', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ dataUrl, caption: '' })
+          });
+          const data = await res.json();
+          if (!res.ok) throw new Error(data.error || 'Upload failed');
+        } catch (e) {
+          errors.push(f.name + ': ' + e.message);
+        }
+      }
+      document.getElementById('ref-upload').value = '';
+      await loadReferencesUi();
+      if (errors.length) alert('Some uploads failed:\\n' + errors.join('\\n'));
+      else alert('Added ' + list.length + ' reference post(s). Tip: add each post\\'s caption (✏️) so ChatGPT learns your caption style too.');
+    }
+
+    async function postJson(url, body) {
+      const res = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body || {}) });
+      const data = await res.json();
+      if (!res.ok) throw new Error(data.error || 'Failed');
+      return data;
+    }
+
+    async function deleteRef(id) {
+      if (!confirm('Remove this reference post?')) return;
+      try { await postJson('/api/ai-references/delete', { id }); await loadReferencesUi(); }
+      catch (e) { alert('Delete failed: ' + e.message); }
+    }
+
+    async function editRefCaption(id) {
+      const ref = (window.__refs || []).find(r => r.id === id);
+      const caption = prompt('Paste the original Instagram caption for this post:', ref ? ref.caption : '');
+      if (caption === null) return;
+      try { await postJson('/api/ai-references/caption', { id, caption }); await loadReferencesUi(); }
+      catch (e) { alert('Save failed: ' + e.message); }
+    }
+
+    async function analyzeRefs() {
+      const btn = document.getElementById('btn-ref-analyze');
+      btn.disabled = true;
+      btn.textContent = '⏳ ChatGPT is studying your posts...';
+      try {
+        await postJson('/api/ai-references/analyze');
+        await loadReferencesUi();
+        const d = document.querySelector('#ref-profile details');
+        if (d) d.open = true;
+      } catch (e) {
+        alert('Analyze failed: ' + e.message);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '🔍 Analyze my style';
+      }
+    }
+
+    async function openIgPicker() {
+      const box = document.getElementById('ig-picker');
+      if (box.style.display === 'block') { box.style.display = 'none'; return; }
+      box.style.display = 'block';
+      box.innerHTML = '<div style="color:var(--muted);">⏳ Loading your Instagram posts...</div>';
+      try {
+        const res = await fetch('/api/ig-media');
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Failed');
+        const items = data.items || [];
+        if (!items.length) { box.innerHTML = '<div style="color:var(--muted);">No image posts found on the account.</div>'; return; }
+        box.innerHTML = \`
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+            <strong>Pick your best posts (sorted by engagement)</strong>
+            <button class="btn" id="btn-ig-import" onclick="importIgSelected()">➕ Add selected</button>
+          </div>
+          <div style="display:grid; grid-template-columns:repeat(auto-fill, minmax(120px, 1fr)); gap:10px;">
+            \${items.map(it => \`
+              <label style="position:relative; cursor:pointer; border-radius:8px; overflow:hidden; background:#000; display:block;">
+                <img src="\${escHtml(it.imageUrl)}" style="width:100%; aspect-ratio:4/5; object-fit:cover; display:block;" loading="lazy" />
+                <input type="checkbox" class="ig-pick" value="\${escHtml(it.id)}" style="position:absolute; top:6px; left:6px; width:18px; height:18px;" />
+                <div style="font-size:11px; padding:4px 6px; color:#ccc;">❤️ \${it.likes || 0} · 💬 \${it.comments || 0}\${it.mediaType === 'VIDEO' ? ' · 🎬' : ''}</div>
+              </label>\`).join('')}
+          </div>\`;
+      } catch (e) {
+        box.innerHTML = '<div style="color:#f88;">Could not load Instagram posts: ' + escHtml(e.message) + '</div>';
+      }
+    }
+
+    async function importIgSelected() {
+      const ids = Array.from(document.querySelectorAll('.ig-pick:checked')).map(i => i.value);
+      if (!ids.length) { alert('Tick at least one post.'); return; }
+      const btn = document.getElementById('btn-ig-import');
+      btn.disabled = true;
+      btn.textContent = '⏳ Importing...';
+      try {
+        const data = await postJson('/api/ai-references/import', { ids });
+        document.getElementById('ig-picker').style.display = 'none';
+        await loadReferencesUi();
+        alert('Imported ' + data.added + ' post(s) with their captions.' + (data.errors && data.errors.length ? '\\n\\nErrors:\\n' + data.errors.join('\\n') : ''));
+      } catch (e) {
+        alert('Import failed: ' + e.message);
+        btn.disabled = false;
+        btn.textContent = '➕ Add selected';
       }
     }
 
@@ -1310,6 +1525,81 @@ const server = http.createServer(async (req, res) => {
       return;
     }
 
+    if (req.method === 'GET' && pathname === '/api/ai-references') {
+      const profile = loadStyleProfile();
+      sendJson(res, 200, {
+        refs: loadReferences(),
+        profile,
+        profileFresh: Boolean(profile && profile.refsHash === refsHash())
+      });
+      return;
+    }
+
+    if (req.method === 'POST' && pathname === '/api/ai-references') {
+      const body = await readJsonBody(req);
+      const m = /^data:image\/(png|jpe?g|webp|gif|heic|heif);base64,(.+)$/i.exec(String(body.dataUrl || ''));
+      if (!m) {
+        sendJson(res, 400, { error: 'Send an image as a base64 data URL (png/jpg/webp)' });
+        return;
+      }
+      try {
+        const ref = await addReferenceImage(Buffer.from(m[2], 'base64'), { caption: String(body.caption || ''), source: 'upload' });
+        sendJson(res, 200, { ok: true, ref });
+      } catch (err: any) {
+        sendJson(res, 400, { error: err.message });
+      }
+      return;
+    }
+
+    if (req.method === 'POST' && pathname === '/api/ai-references/delete') {
+      const body = await readJsonBody(req);
+      const ok = deleteReference(String(body.id || ''));
+      sendJson(res, ok ? 200 : 404, ok ? { ok: true } : { error: 'Reference not found' });
+      return;
+    }
+
+    if (req.method === 'POST' && pathname === '/api/ai-references/caption') {
+      const body = await readJsonBody(req);
+      const ok = updateReferenceCaption(String(body.id || ''), String(body.caption || ''));
+      sendJson(res, ok ? 200 : 404, ok ? { ok: true } : { error: 'Reference not found' });
+      return;
+    }
+
+    if (req.method === 'GET' && pathname === '/api/ig-media') {
+      try {
+        sendJson(res, 200, { items: await fetchInstagramMedia(50) });
+      } catch (err: any) {
+        sendJson(res, 400, { error: err.message });
+      }
+      return;
+    }
+
+    if (req.method === 'POST' && pathname === '/api/ai-references/import') {
+      const body = await readJsonBody(req);
+      const ids: string[] = Array.isArray(body.ids) ? body.ids.map((x: any) => String(x)).slice(0, 24) : [];
+      if (!ids.length) {
+        sendJson(res, 400, { error: 'Pick at least one post' });
+        return;
+      }
+      try {
+        const result = await importInstagramMedia(ids);
+        sendJson(res, 200, { ok: true, added: result.added.length, errors: result.errors });
+      } catch (err: any) {
+        sendJson(res, 400, { error: err.message });
+      }
+      return;
+    }
+
+    if (req.method === 'POST' && pathname === '/api/ai-references/analyze') {
+      try {
+        const profile = await analyzeReferences();
+        sendJson(res, 200, { ok: true, profile });
+      } catch (err: any) {
+        sendJson(res, 400, { error: err.message });
+      }
+      return;
+    }
+
     if (req.method === 'POST' && pathname === '/api/ai-config') {
       const body = await readJsonBody(req);
       const postsPerDay = parseInt(String(body.postsPerDay ?? ''), 10);
@@ -1324,7 +1614,10 @@ const server = http.createServer(async (req, res) => {
       }
       const providersPath = path.resolve(process.cwd(), 'config', 'providers.json');
       const providers = JSON.parse(fs.readFileSync(providersPath, 'utf8'));
-      providers.ai = { ...(providers.ai || {}), postsPerDay, times: times.slice(0, postsPerDay) };
+      const extra: Record<string, any> = {};
+      if (typeof body.useReferences === 'boolean') extra.useReferences = body.useReferences;
+      if (['low', 'medium', 'high'].includes(body.referenceQuality)) extra.referenceQuality = body.referenceQuality;
+      providers.ai = { ...(providers.ai || {}), postsPerDay, times: times.slice(0, postsPerDay), ...extra };
       fs.writeFileSync(providersPath, JSON.stringify(providers, null, 2) + '\n');
       sendJson(res, 200, { ok: true, ai: loadAiConfig() });
       return;
@@ -1487,7 +1780,7 @@ const server = http.createServer(async (req, res) => {
       return;
     }
 
-    if (pathname.startsWith('/preview/') || pathname.startsWith('/media/') || pathname.startsWith('/logo/')) {
+    if (pathname.startsWith('/preview/') || pathname.startsWith('/media/') || pathname.startsWith('/logo/') || pathname.startsWith('/content/ai-references/')) {
       serveStaticFile(res, pathname.slice(1));
       return;
     }

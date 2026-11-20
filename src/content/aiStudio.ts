@@ -16,6 +16,9 @@ import { loadContentBank } from './bank.js';
 import { generatePost, loadProvidersConfig, extractJsonString } from './llmClient.js';
 import { loadPillarsConfig, loadScheduleConfig, pickHashtagsForPost, PreparedPost } from './slotMapper.js';
 import { pickDesign, HistoryItem } from '../design/uniqueness.js';
+import { QuotaError, getOpenAiKey, openaiFetch } from './openaiApi.js';
+import { loadReferences, generateReferenceStylePost } from './aiReferences.js';
+import { getPublicMediaUrl } from '../publish/mediaHost.js';
 
 export interface AiConfig {
   enabled: boolean;
@@ -26,6 +29,10 @@ export interface AiConfig {
   imageQuality: 'low' | 'medium' | 'high';
   generateImages: boolean;
   templates: string[];
+  /** When reference posts exist, generate full images in their style instead of templates. */
+  useReferences: boolean;
+  /** Quality for reference-style full images (text renders poorly at 'low'). */
+  referenceQuality: 'low' | 'medium' | 'high';
 }
 
 const DEFAULT_AI_CONFIG: AiConfig = {
@@ -36,6 +43,8 @@ const DEFAULT_AI_CONFIG: AiConfig = {
   imageModels: ['gpt-image-1-mini', 'gpt-image-1', 'dall-e-3'],
   imageQuality: 'low',
   generateImages: true,
+  useReferences: true,
+  referenceQuality: 'medium',
   templates: [
     'T13-cyber-hero-bg', 'T14-datacenter-spotlight', 'T15-vs-comparison', 'T16-bento-grid',
     'T17-forex-telemetry', 'T18-vip-promo-poster', 'T19-photo-diagonal-hero', 'T20-stat-dashboard',
@@ -55,37 +64,7 @@ export function isAiPost(post: PreparedPost): boolean {
   return post.source === 'ai';
 }
 
-class QuotaError extends Error {}
-
-function getKey(): string | null {
-  const k = process.env.OPENAI_API_KEY;
-  return k && k.trim() ? k.trim() : null;
-}
-
-async function openaiFetch(endpoint: string, body: any): Promise<any> {
-  const key = getKey();
-  if (!key) throw new QuotaError('OPENAI_API_KEY is not set');
-  const res = await fetch(`https://api.openai.com/v1/${endpoint}`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${key}` },
-    body: JSON.stringify(body)
-  });
-  const text = await res.text();
-  let json: any = null;
-  try { json = JSON.parse(text); } catch { /* non-JSON error body */ }
-  if (!res.ok) {
-    const code = json?.error?.code || json?.error?.type || '';
-    const msg = json?.error?.message || text.slice(0, 300);
-    if (res.status === 429 && /quota|billing/i.test(`${code} ${msg}`)) {
-      throw new QuotaError(`OpenAI quota/billing: ${msg}`);
-    }
-    if (res.status === 401) throw new QuotaError(`OpenAI key rejected: ${msg}`);
-    const err: any = new Error(`OpenAI HTTP ${res.status} (${code}): ${msg}`);
-    err.status = res.status;
-    throw err;
-  }
-  return json;
-}
+const getKey = getOpenAiKey;
 
 // ---------------------------------------------------------------------------
 // Guardrails beyond validatePost
@@ -97,7 +76,7 @@ function getVerifiedPrices(brand: any): Set<string> {
   return new Set((src.match(/\$\d+(?:\.\d{1,2})?/g) || []));
 }
 
-function extraChecks(post: any, brand: any): string[] {
+export function extraChecks(post: any, brand: any): string[] {
   const errors: string[] = [];
   const allText = `${JSON.stringify(post.slides)} ${post.caption}`;
   const lower = allText.toLowerCase();
@@ -347,6 +326,7 @@ export async function generateAiPosts(params: {
   );
   const todayDesigns: any[] = [];
   const posts: PreparedPost[] = [];
+  const useRefs = config.useReferences && loadReferences().length > 0 && !!getKey();
 
   for (let i = 0; i < count; i++) {
     while (existingAiIds.has(`${params.date}-ai${nextN}`)) nextN++;
@@ -370,6 +350,54 @@ export async function generateAiPosts(params: {
     usedTemplatesToday.add(design.template);
 
     const pillar = pickPillarForTemplate(design.template, n + params.date.charCodeAt(9));
+    const time = config.times[(n - 1) % config.times.length] || '11:00';
+
+    // Reference-style mode: full image generated in the style of the user's best posts
+    if (useRefs) {
+      console.log(`\n[AI Studio] ${postId}: reference style, pillar ${pillar}`);
+      const ref = await generateReferenceStylePost({
+        postId, date: params.date, pillar, recentHeadlines, rotation: i + n, config
+      });
+      if (ref) {
+        const c = ref.content;
+        recentHeadlines.push(c.slides?.[0]?.headline || '');
+        const imageUrl = getPublicMediaUrl(ref.image);
+        posts.push({
+          id: postId,
+          date: params.date,
+          slot,
+          scheduledAt: `${params.date}T${time}:00+05:00`,
+          status: 'queued',
+          approved: !schedule.requireApproval,
+          pillar,
+          format: 'single',
+          template: 'AI-reference',
+          design: {
+            palette: design.palette,
+            seed: design.seed,
+            decoration: design.decoration,
+            layoutVariant: design.layoutVariant
+          },
+          slides: c.slides,
+          caption: c.caption,
+          hashtags: Array.isArray(c.hashtags) && c.hashtags.length >= 5 ? c.hashtags : pickHashtagsForPost(pillar, []),
+          altText: c.altText,
+          images: [ref.image],
+          imageUrls: imageUrl ? [imageUrl] : [],
+          igMediaId: null,
+          attempts: 0,
+          error: null,
+          source: 'ai',
+          aiTextVia: ref.via,
+          aiBgImage: null,
+          aiFullImage: true,
+          aiRefIds: ref.refIds
+        });
+        continue;
+      }
+      console.warn(`[AI Studio] ${postId}: reference style failed, falling back to template flow.`);
+    }
+
     console.log(`\n[AI Studio] ${postId}: template ${design.template}, pillar ${pillar}`);
 
     const { post: content, via } = await generateAiText({
@@ -386,7 +414,6 @@ export async function generateAiPosts(params: {
 
     const aiBgImage = await generateAiBackground({ postId, date: params.date, pillar, headline, config });
 
-    const time = config.times[(n - 1) % config.times.length] || '11:00';
     const hashtags = Array.isArray(content.hashtags) && content.hashtags.length >= 5
       ? content.hashtags
       : pickHashtagsForPost(pillar, []);

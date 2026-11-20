@@ -73,7 +73,7 @@ program
  */
 async function renderPostsForDate(targetDate?: string, force = false): Promise<void> {
   const queue = loadQueue();
-  const eligible = queue.filter(p => (!targetDate || p.date === targetDate) && (force || p.images.length === 0));
+  const eligible = queue.filter(p => (!targetDate || p.date === targetDate) && !p.aiFullImage && (force || p.images.length === 0));
 
   if (eligible.length === 0) {
     console.log('[Render] No posts require rendering.');

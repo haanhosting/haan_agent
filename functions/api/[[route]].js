@@ -183,6 +183,118 @@ async function dispatchWorkflow(env, workflowFile, inputs) {
   return { ok: true };
 }
 
+// ---------------------------------------------------------------------------
+// AI Studio reference posts (stored in the repo under content/ai-references/)
+const REF_DIR = 'content/ai-references';
+const REF_MAX = 24;
+
+function bytesToBase64(bytes) {
+  let bin = '';
+  for (let i = 0; i < bytes.length; i += 0x8000) bin += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+  return btoa(bin);
+}
+
+function base64ToBytes(b64) {
+  const bin = atob(b64);
+  const out = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+  return out;
+}
+
+/** Reads width/height from a JPEG's SOF marker (no image library on Workers). */
+function jpegSize(bytes) {
+  if (bytes[0] !== 0xff || bytes[1] !== 0xd8) return null;
+  let i = 2;
+  while (i + 9 < bytes.length) {
+    if (bytes[i] !== 0xff) { i++; continue; }
+    const marker = bytes[i + 1];
+    const len = (bytes[i + 2] << 8) | bytes[i + 3];
+    if (marker >= 0xc0 && marker <= 0xcf && ![0xc4, 0xc8, 0xcc].includes(marker)) {
+      return { height: (bytes[i + 5] << 8) | bytes[i + 6], width: (bytes[i + 7] << 8) | bytes[i + 8] };
+    }
+    i += 2 + len;
+  }
+  return null;
+}
+
+async function githubContents(env, filePath, init = {}) {
+  const repo = env.GITHUB_REPOSITORY || 'haanhosting/haan_agent';
+  return fetch(`https://api.github.com/repos/${repo}/contents/${filePath}`, { ...init, headers: githubHeaders(env.GH_PAT) });
+}
+
+async function githubPutBinary(env, filePath, base64, message) {
+  if (!env.GH_PAT) return { ok: false, error: 'GH_PAT is not configured on Cloudflare' };
+  const res = await githubContents(env, filePath, { method: 'PUT', body: JSON.stringify({ message, content: base64 }) });
+  if (!res.ok) return { ok: false, error: `GitHub upload failed (HTTP ${res.status}): ${(await res.text()).slice(0, 200)}` };
+  return { ok: true };
+}
+
+async function githubDeleteFile(env, filePath, message) {
+  const meta = await githubContents(env, filePath);
+  if (meta.status === 404) return { ok: true };
+  if (!meta.ok) return { ok: false, error: `GitHub read failed (HTTP ${meta.status})` };
+  const { sha } = await meta.json();
+  const res = await githubContents(env, filePath, { method: 'DELETE', body: JSON.stringify({ message, sha }) });
+  if (!res.ok) return { ok: false, error: `GitHub delete failed (HTTP ${res.status})` };
+  return { ok: true };
+}
+
+async function loadRefsCf(context) {
+  const fromGithub = await githubGetJson(context.env, `${REF_DIR}/refs.json`);
+  if (fromGithub) return { refs: Array.isArray(fromGithub.json) ? fromGithub.json : [], sha: fromGithub.sha };
+  return { refs: await fetchAssetJson(context, `/${REF_DIR}/refs.json`, []), sha: null };
+}
+
+async function refsHashCf(refs) {
+  const key = refs.map(r => `${r.id}:${(r.caption || '').length}`).sort().join('|');
+  const digest = await crypto.subtle.digest('SHA-1', new TextEncoder().encode(key));
+  return [...new Uint8Array(digest)].map(b => b.toString(16).padStart(2, '0')).join('').slice(0, 12);
+}
+
+function newRefId() {
+  return 'ref-' + Date.now().toString(36) + Math.random().toString(36).slice(2, 6);
+}
+
+/** Adds one JPEG (bytes) to the repo and returns the new ref record (refs.json is written by the caller). */
+async function addRefCf(env, bytes, meta) {
+  const id = newRefId();
+  const file = `${REF_DIR}/${id}.jpg`;
+  const size = jpegSize(bytes) || { width: 1080, height: 1350 };
+  const put = await githubPutBinary(env, file, bytesToBase64(bytes), `chore(ai-studio): add reference post ${id} [skip ci]`);
+  if (!put.ok) throw new Error(put.error);
+  return {
+    id, file,
+    caption: String(meta.caption || '').slice(0, 2200),
+    source: meta.source || 'upload',
+    ...(meta.igMediaId ? { igMediaId: meta.igMediaId, permalink: meta.permalink, likes: meta.likes, comments: meta.comments } : {}),
+    width: size.width, height: size.height,
+    addedAt: new Date().toISOString()
+  };
+}
+
+function withImageUrl(r) {
+  return { ...r, url: `/api/ai-reference-image?id=${encodeURIComponent(r.id)}` };
+}
+
+async function fetchIgMediaCf(env, limit = 50) {
+  const token = env.IG_ACCESS_TOKEN;
+  const userId = env.IG_USER_ID;
+  if (!token || !userId) throw new Error('IG_ACCESS_TOKEN / IG_USER_ID are not set in Cloudflare. Use "Upload images", or import from the local dashboard.');
+  const base = token.startsWith('EAA') ? 'https://graph.facebook.com' : 'https://graph.instagram.com';
+  const fields = 'id,caption,media_type,media_url,thumbnail_url,permalink,like_count,comments_count,timestamp';
+  const res = await fetch(`${base}/v22.0/${userId}/media?fields=${fields}&limit=${Math.min(limit, 100)}`, { headers: { Authorization: `Bearer ${token}` } });
+  const json = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(`Instagram media list failed: ${json?.error?.message || res.status}`);
+  return (json.data || [])
+    .map(m => ({
+      id: m.id, caption: m.caption || '', mediaType: m.media_type,
+      imageUrl: m.media_type === 'VIDEO' ? m.thumbnail_url : m.media_url,
+      permalink: m.permalink, likes: m.like_count ?? 0, comments: m.comments_count ?? 0, timestamp: m.timestamp
+    }))
+    .filter(m => !!m.imageUrl)
+    .sort((a, b) => (b.likes + 3 * b.comments) - (a.likes + 3 * a.comments));
+}
+
 export async function onRequest(context) {
   const { request, env } = context;
   const url = new URL(request.url);
@@ -333,6 +445,107 @@ export async function onRequest(context) {
       });
     }
 
+    if (request.method === 'GET' && pathname === '/api/ai-references') {
+      const [{ refs }, profileGh] = await Promise.all([loadRefsCf(context), githubGetJson(env, `${REF_DIR}/style-profile.json`)]);
+      const profile = profileGh ? profileGh.json : await fetchAssetJson(context, `/${REF_DIR}/style-profile.json`, null);
+      const hash = await refsHashCf(refs);
+      return jsonResponse(200, { refs: refs.map(withImageUrl), profile, profileFresh: Boolean(profile && profile.refsHash === hash) });
+    }
+
+    if (request.method === 'GET' && pathname === '/api/ai-reference-image') {
+      const id = url.searchParams.get('id') || '';
+      if (!/^ref-[a-z0-9]+$/.test(id)) return jsonResponse(400, { error: 'bad id' });
+      if (env.GH_PAT) {
+        const repo = env.GITHUB_REPOSITORY || 'haanhosting/haan_agent';
+        const res = await fetch(`https://api.github.com/repos/${repo}/contents/${REF_DIR}/${id}.jpg`, {
+          headers: { ...githubHeaders(env.GH_PAT), Accept: 'application/vnd.github.raw' }
+        });
+        if (res.ok) return new Response(res.body, { headers: { 'Content-Type': 'image/jpeg', 'Cache-Control': 'public, max-age=86400' } });
+      }
+      return env.ASSETS.fetch(new URL(`/${REF_DIR}/${id}.jpg`, request.url).toString());
+    }
+
+    if (request.method === 'POST' && pathname === '/api/ai-references') {
+      const body = await request.json().catch(() => ({}));
+      const m = /^data:image\/jpe?g;base64,(.+)$/.exec(String(body.dataUrl || ''));
+      if (!m) return jsonResponse(400, { error: 'Expected a JPEG data URL' });
+      const { refs, sha } = await loadRefsCf(context);
+      if (refs.length >= REF_MAX) return jsonResponse(400, { error: `Maximum ${REF_MAX} reference posts. Remove some first.` });
+      const ref = await addRefCf(env, base64ToBytes(m[1]), { caption: body.caption, source: 'upload' });
+      const saved = await githubPutJson(env, `${REF_DIR}/refs.json`, [...refs, ref], sha, 'chore(ai-studio): update reference posts [skip ci]');
+      if (!saved.ok) return jsonResponse(502, { error: saved.error });
+      return jsonResponse(200, { ok: true, ref: withImageUrl(ref) });
+    }
+
+    if (request.method === 'POST' && pathname === '/api/ai-references/delete') {
+      const body = await request.json().catch(() => ({}));
+      const { refs, sha } = await loadRefsCf(context);
+      const ref = refs.find(r => r.id === body.id);
+      if (!ref) return jsonResponse(404, { error: 'Reference not found' });
+      const saved = await githubPutJson(env, `${REF_DIR}/refs.json`, refs.filter(r => r.id !== body.id), sha, 'chore(ai-studio): remove reference post [skip ci]');
+      if (!saved.ok) return jsonResponse(502, { error: saved.error });
+      await githubDeleteFile(env, ref.file, `chore(ai-studio): delete ${ref.id} [skip ci]`);
+      return jsonResponse(200, { ok: true });
+    }
+
+    if (request.method === 'POST' && pathname === '/api/ai-references/caption') {
+      const body = await request.json().catch(() => ({}));
+      const { refs, sha } = await loadRefsCf(context);
+      const ref = refs.find(r => r.id === body.id);
+      if (!ref) return jsonResponse(404, { error: 'Reference not found' });
+      ref.caption = String(body.caption || '').slice(0, 2200);
+      const saved = await githubPutJson(env, `${REF_DIR}/refs.json`, refs, sha, 'chore(ai-studio): update reference caption [skip ci]');
+      if (!saved.ok) return jsonResponse(502, { error: saved.error });
+      return jsonResponse(200, { ok: true });
+    }
+
+    if (request.method === 'GET' && pathname === '/api/ig-media') {
+      try {
+        return jsonResponse(200, { items: await fetchIgMediaCf(env, 50) });
+      } catch (err) {
+        return jsonResponse(400, { error: err.message });
+      }
+    }
+
+    if (request.method === 'POST' && pathname === '/api/ai-references/import') {
+      const body = await request.json().catch(() => ({}));
+      const ids = Array.isArray(body.ids) ? body.ids.map(String).slice(0, REF_MAX) : [];
+      if (!ids.length) return jsonResponse(400, { error: 'No posts selected' });
+      let all;
+      try { all = await fetchIgMediaCf(env, 100); } catch (err) { return jsonResponse(400, { error: err.message }); }
+      const { refs, sha } = await loadRefsCf(context);
+      const added = [];
+      const errors = [];
+      for (const id of ids) {
+        if (refs.length + added.length >= REF_MAX) { errors.push(`${id}: reference limit (${REF_MAX}) reached`); continue; }
+        if (refs.some(r => r.igMediaId === id)) { errors.push(`${id}: already added`); continue; }
+        const item = all.find(x => x.id === id);
+        if (!item) { errors.push(`${id}: not found in recent media`); continue; }
+        try {
+          const res = await fetch(item.imageUrl);
+          if (!res.ok) throw new Error(`download HTTP ${res.status}`);
+          const bytes = new Uint8Array(await res.arrayBuffer());
+          added.push(await addRefCf(env, bytes, {
+            caption: item.caption, source: 'instagram', igMediaId: item.id,
+            permalink: item.permalink, likes: item.likes, comments: item.comments
+          }));
+        } catch (err) {
+          errors.push(`${id}: ${err.message}`);
+        }
+      }
+      if (added.length) {
+        const saved = await githubPutJson(env, `${REF_DIR}/refs.json`, [...refs, ...added], sha, 'chore(ai-studio): import reference posts from Instagram [skip ci]');
+        if (!saved.ok) return jsonResponse(502, { error: saved.error });
+      }
+      return jsonResponse(200, { ok: true, added: added.length, errors });
+    }
+
+    if (request.method === 'POST' && pathname === '/api/ai-references/analyze') {
+      return jsonResponse(400, {
+        error: 'Style analysis runs automatically in the daily GitHub Actions job (your OpenAI key lives there, not in Cloudflare). Click "Generate now" and it will study your reference posts first.'
+      });
+    }
+
     if (request.method === 'POST' && pathname === '/api/ai-config') {
       const body = await request.json().catch(() => ({}));
       const postsPerDay = parseInt(body.postsPerDay, 10);
@@ -344,7 +557,10 @@ export async function onRequest(context) {
       const current = await githubGetJson(env, 'config/providers.json');
       if (!current) return jsonResponse(502, { error: 'Could not read config/providers.json from GitHub (is GH_PAT set?)' });
       const providers = current.json;
-      providers.ai = { ...AI_DEFAULTS, ...(providers.ai || {}), postsPerDay, times: times.slice(0, postsPerDay) };
+      const extra = {};
+      if (typeof body.useReferences === 'boolean') extra.useReferences = body.useReferences;
+      if (['low', 'medium', 'high'].includes(body.referenceQuality)) extra.referenceQuality = body.referenceQuality;
+      providers.ai = { ...AI_DEFAULTS, ...(providers.ai || {}), postsPerDay, times: times.slice(0, postsPerDay), ...extra };
       const saved = await githubPutJson(env, 'config/providers.json', providers, current.sha, 'chore(dashboard): update AI Studio schedule [skip ci]');
       if (!saved.ok) return jsonResponse(502, { error: saved.error });
       return jsonResponse(200, { ok: true, ai: providers.ai });
