@@ -75,5 +75,16 @@
     "headline": "Port Speed That Keeps Up",
     "pillar": "offers",
     "captionHash": "6424821"
+  },
+  {
+    "date": "2026-11-20",
+    "slot": 101,
+    "template": "T24-global-locations",
+    "palette": "slate-cyan",
+    "decoration": "circuit-lines",
+    "layoutVariant": 2,
+    "headline": "Servers Close to Your Market",
+    "pillar": "trust",
+    "captionHash": "3910967038"
   }
 ]

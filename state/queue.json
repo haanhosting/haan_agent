@@ -4,7 +4,7 @@
     "date": "2026-11-20",
     "slot": 101,
     "scheduledAt": "2026-11-20T11:00:00+05:00",
-    "status": "queued",
+    "status": "posted",
     "approved": true,
     "pillar": "trust",
     "format": "single",
@@ -44,12 +44,13 @@
     "imageUrls": [
       "https://haan-agent.pages.dev/media/2026-11-20/ai1.jpg"
     ],
-    "igMediaId": null,
+    "igMediaId": "17891625024475597",
     "attempts": 0,
     "error": null,
     "source": "ai",
     "aiTextVia": "fallback-chain",
-    "aiBgImage": null
+    "aiBgImage": null,
+    "postedAt": "2026-11-20T06:05:33.894Z"
   },
   {
     "id": "2026-11-21-slot1-b2",
