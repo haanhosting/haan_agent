@@ -1,0 +1,90 @@
+name: AI Studio (OpenAI) Post Generation
+
+on:
+  schedule:
+    # 03:00 UTC = 08:00 PKT — generates today's AI posts (published at ai.times, default 11:00 PKT)
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+    inputs:
+      count:
+        description: 'Number of AI posts to generate (1-4)'
+        required: false
+        default: '1'
+      date:
+        description: 'Target date YYYY-MM-DD (blank = today in Asia/Karachi)'
+        required: false
+        default: ''
+
+permissions:
+  contents: write
+
+# Shared by every workflow that commits state/ so they never race each other.
+concurrency:
+  group: haan-state-writer
+  cancel-in-progress: false
+
+jobs:
+  ai-generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Cache Playwright browser
+        uses: actions/cache@v4
+        id: playwright-cache
+        with:
+          path: ~/.cache/ms-playwright
+          key: ${{ runner.os }}-playwright-${{ hashFiles('package-lock.json') }}
+
+      - name: Install Playwright Chromium & system deps
+        if: steps.playwright-cache.outputs.cache-hit != 'true'
+        run: npx playwright install --with-deps chromium
+
+      - name: Install Playwright system dependencies
+        if: steps.playwright-cache.outputs.cache-hit == 'true'
+        run: npx playwright install-deps chromium
+
+      - name: Generate AI posts (OpenAI) and render
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
+          PAGES_BASE_URL: ${{ vars.PAGES_BASE_URL || 'https://haan-agent.pages.dev' }}
+          AI_COUNT: ${{ github.event.inputs.count }}
+          AI_DATE: ${{ github.event.inputs.date }}
+        run: |
+          ARGS=""
+          if [ -n "$AI_COUNT" ]; then ARGS="$ARGS -n $AI_COUNT"; fi
+          if [ -n "$AI_DATE" ]; then ARGS="$ARGS -d $AI_DATE"; fi
+          npx tsx src/cli.ts ai-generate $ARGS
+
+      - name: Commit AI media and updated queue
+        if: ${{ !cancelled() }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add media/ state/
+          if git diff --staged --quiet; then
+            echo "No changes to commit."
+          else
+            git commit -m "chore(agent): AI Studio generated posts"
+            for i in 1 2 3; do
+              if git pull --rebase origin main && git push origin main; then pushed=1; break; fi
+              git rebase --abort 2>/dev/null || true
+              sleep $((i * 5))
+            done
+            [ "${pushed:-0}" = "1" ] || { echo "::error::git push failed after 3 attempts"; exit 1; }
+          fi

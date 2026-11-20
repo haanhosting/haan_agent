@@ -1,6 +1,11 @@
 {
   "llm": {
-    "providerOrder": ["gemini", "groq", "openrouter", "bank"],
+    "providerOrder": [
+      "gemini",
+      "groq",
+      "openrouter",
+      "bank"
+    ],
     "gemini": {
       "model": "gemini-2.0-flash",
       "fallbackModel": "gemini-1.5-flash",
@@ -29,5 +34,21 @@
       "statusPollTimeoutMs": 90000,
       "statusPollIntervalMs": 3000
     }
+  },
+  "ai": {
+    "enabled": true,
+    "postsPerDay": 1,
+    "times": [
+      "11:00",
+      "18:00"
+    ],
+    "textModel": "gpt-4o-mini",
+    "imageModels": [
+      "gpt-image-1-mini",
+      "gpt-image-1",
+      "dall-e-3"
+    ],
+    "imageQuality": "low",
+    "generateImages": true
   }
 }

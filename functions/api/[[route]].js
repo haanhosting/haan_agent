@@ -34,6 +34,54 @@ async function fetchAssetJson(context, assetPath, fallback = []) {
   }
 }
 
+const AI_DEFAULTS = { enabled: true, postsPerDay: 1, times: ['11:00', '18:00'] };
+const TIME_RE = /^([01]\d|2[0-3]):[0-5]\d$/;
+
+function githubHeaders(pat) {
+  return {
+    'Authorization': `Bearer ${pat}`,
+    'Accept': 'application/vnd.github+json',
+    'User-Agent': 'haan-insta-agent-cloudflare',
+    'Content-Type': 'application/json'
+  };
+}
+
+async function githubGetJson(env, filePath) {
+  const pat = env.GH_PAT;
+  const repo = env.GITHUB_REPOSITORY || 'haanhosting/haan_agent';
+  if (!pat) return null;
+  try {
+    const res = await fetch(`https://api.github.com/repos/${repo}/contents/${filePath}`, { headers: githubHeaders(pat) });
+    if (!res.ok) return null;
+    const data = await res.json();
+    const bin = atob(data.content.replace(/\n/g, ''));
+    const decoded = new TextDecoder().decode(Uint8Array.from(bin, c => c.charCodeAt(0)));
+    return { json: JSON.parse(decoded), sha: data.sha };
+  } catch {
+    return null;
+  }
+}
+
+async function githubPutJson(env, filePath, obj, sha, message) {
+  const pat = env.GH_PAT;
+  const repo = env.GITHUB_REPOSITORY || 'haanhosting/haan_agent';
+  if (!pat) return { ok: false, error: 'GH_PAT is not configured on Cloudflare' };
+  const content = btoa(unescape(encodeURIComponent(JSON.stringify(obj, null, 2) + '\n')));
+  const res = await fetch(`https://api.github.com/repos/${repo}/contents/${filePath}`, {
+    method: 'PUT',
+    headers: githubHeaders(pat),
+    body: JSON.stringify({ message, content, ...(sha ? { sha } : {}) })
+  });
+  if (!res.ok) return { ok: false, error: `GitHub write failed (HTTP ${res.status}): ${(await res.text()).slice(0, 200)}` };
+  return { ok: true };
+}
+
+async function loadAiConfigCf(context) {
+  const fromGithub = await githubGetJson(context.env, 'config/providers.json');
+  const providers = fromGithub ? fromGithub.json : await fetchAssetJson(context, '/config/providers.json', {});
+  return { ...AI_DEFAULTS, ...((providers && providers.ai) || {}) };
+}
+
 async function loadGithubQueueIfConfigured(env) {
   const pat = env.GH_PAT;
   const repo = env.GITHUB_REPOSITORY || 'haanhosting/haan_agent';
@@ -142,7 +190,7 @@ export async function onRequest(context) {
 
   try {
     if (request.method === 'GET' && pathname === '/api/state') {
-      const [brand, schedule, pillars, queue, history, bank, samples, token, instagramHealth] = await Promise.all([
+      const [brand, schedule, pillars, queue, history, bank, samples, token, instagramHealth, ai] = await Promise.all([
         fetchAssetJson(context, '/config/brand.json', {}),
         fetchAssetJson(context, '/config/schedule.json', {}),
         fetchAssetJson(context, '/content/pillars.json', {}),
@@ -151,7 +199,8 @@ export async function onRequest(context) {
         fetchAssetJson(context, '/content/bank/posts.json', []),
         fetchAssetJson(context, '/state/samples.json', []),
         fetchAssetJson(context, '/state/token.json', { status: 'uninitialized', lastRefreshed: null, daysLeft: null }),
-        checkInstagramHealth(env)
+        checkInstagramHealth(env),
+        loadAiConfigCf(context)
       ]);
 
       return jsonResponse(200, {
@@ -165,10 +214,13 @@ export async function onRequest(context) {
         token,
         instagramHealth,
         samples,
+        ai,
         doctor: {
           activePublisher: 'instagramGraph (GitHub Actions)',
           nodeVersion: 'Cloudflare Pages Edge Runtime',
           hasGemini: Boolean(env.GEMINI_API_KEY),
+          // The OpenAI key lives in GitHub Actions secrets, not Cloudflare, so it can't be checked here.
+          hasOpenAI: env.OPENAI_API_KEY ? true : null,
           hasIgToken: Boolean(env.IG_ACCESS_TOKEN)
         }
       });
@@ -278,6 +330,36 @@ export async function onRequest(context) {
         queued: true,
         postId: post.id,
         message: 'Story workflow started on GitHub Actions. It should appear in your Instagram Story within ~2 minutes.'
+      });
+    }
+
+    if (request.method === 'POST' && pathname === '/api/ai-config') {
+      const body = await request.json().catch(() => ({}));
+      const postsPerDay = parseInt(body.postsPerDay, 10);
+      const times = Array.isArray(body.times) ? body.times.map(t => String(t).trim()) : [];
+      if (!(postsPerDay >= 1 && postsPerDay <= 4)) return jsonResponse(400, { error: 'postsPerDay must be 1-4' });
+      if (times.length < postsPerDay || !times.every(t => TIME_RE.test(t))) {
+        return jsonResponse(400, { error: `Provide ${postsPerDay} valid HH:MM time(s)` });
+      }
+      const current = await githubGetJson(env, 'config/providers.json');
+      if (!current) return jsonResponse(502, { error: 'Could not read config/providers.json from GitHub (is GH_PAT set?)' });
+      const providers = current.json;
+      providers.ai = { ...AI_DEFAULTS, ...(providers.ai || {}), postsPerDay, times: times.slice(0, postsPerDay) };
+      const saved = await githubPutJson(env, 'config/providers.json', providers, current.sha, 'chore(dashboard): update AI Studio schedule [skip ci]');
+      if (!saved.ok) return jsonResponse(502, { error: saved.error });
+      return jsonResponse(200, { ok: true, ai: providers.ai });
+    }
+
+    if (request.method === 'POST' && pathname === '/api/ai-generate') {
+      const body = await request.json().catch(() => ({}));
+      const count = String(Math.max(1, Math.min(parseInt(body.count, 10) || 1, 4)));
+      const inputs = { count, date: /^\d{4}-\d{2}-\d{2}$/.test(body.date || '') ? body.date : '' };
+      const dispatched = await dispatchWorkflow(env, 'ai-generate.yml', inputs);
+      if (!dispatched.ok) return jsonResponse(502, { error: dispatched.error });
+      return jsonResponse(202, {
+        ok: true,
+        queued: true,
+        message: `AI Studio workflow started on GitHub Actions (${count} post${count === '1' ? '' : 's'}). New posts appear in the queue in ~3-4 minutes; refresh to see them.`
       });
     }
 

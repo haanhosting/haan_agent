@@ -9,6 +9,7 @@ dotenv.config();
 import { generateDailyPosts, loadScheduleConfig, PreparedPost } from './content/slotMapper.js';
 import { loadQueue, saveQueue, loadHistory, getDuePosts, updatePostStatus, enqueuePosts, markStoryPosted } from './state/stateManager.js';
 import { renderSlide, closeBrowser } from './render/renderer.js';
+import { generateAiPosts, loadAiConfig } from './content/aiStudio.js';
 import { generatePreviews } from './render/preview.js';
 import { publishPost, publishPostAsStory, getActivePublisherType } from './publish/publisher.js';
 import { refreshInstagramToken, loadTokenState } from './publish/tokenRefresh.js';
@@ -107,7 +108,8 @@ async function renderPostsForDate(targetDate?: string, force = false): Promise<v
         decoration: post.design.decoration,
         layoutVariant: post.design.layoutVariant,
         data: slideData,
-        outputPath
+        outputPath,
+        bgImagePath: post.aiBgImage || null
       });
 
       images.push(localRelPath);
@@ -137,6 +139,57 @@ program
       await renderPostsForDate(options.date, options.force);
     } catch (err: any) {
       console.error(`\n❌ Render failed: ${err.message}`);
+      process.exit(1);
+    }
+  });
+
+/**
+ * COMMAND: ai-generate (AI Studio — OpenAI text + image, auto-queued)
+ */
+program
+  .command('ai-generate')
+  .description('AI Studio: generate 1-2 posts with OpenAI (trained on our bank posts) and auto-add them to the queue')
+  .option('-d, --date <date>', 'Target date (YYYY-MM-DD), defaults to today in Asia/Karachi')
+  .option('-n, --count <number>', 'Number of AI posts to generate (default from config/providers.json ai.postsPerDay)')
+  .option('--no-render', 'Skip rendering after generation')
+  .action(async (options) => {
+    try {
+      const config = loadAiConfig();
+      if (!config.enabled) {
+        console.log('AI Studio is disabled in config/providers.json (ai.enabled=false).');
+        return;
+      }
+      const k = getKarachiNow();
+      const today = `${k.year}-${String(k.month).padStart(2, '0')}-${String(k.day).padStart(2, '0')}`;
+      const targetDate = options.date || today;
+      const count = options.count ? parseInt(options.count, 10) : config.postsPerDay;
+
+      console.log(`\n=== AI STUDIO: GENERATING ${count} POST(S) FOR ${targetDate} ===`);
+      const posts = await generateAiPosts({
+        date: targetDate,
+        count,
+        history: loadHistory(),
+        existingQueue: loadQueue()
+      });
+
+      // If a slot time has already passed today, schedule ~20 min from now so the publisher picks it up.
+      const soon = Date.now() + 20 * 60 * 1000;
+      posts.forEach((p, i) => {
+        if (new Date(p.scheduledAt).getTime() < Date.now()) {
+          const t = new Date(soon + i * 90 * 60 * 1000);
+          p.scheduledAt = t.toISOString().replace(/\.\d{3}Z$/, 'Z');
+        }
+      });
+
+      enqueuePosts(posts, { prepend: true });
+
+      if (options.render !== false) {
+        console.log('\n=== RENDERING AI POSTS ===');
+        await renderPostsForDate(targetDate);
+      }
+      console.log(`\n✓ AI Studio queued ${posts.length} post(s): ${posts.map(p => `${p.id} @ ${p.scheduledAt}`).join(', ')}`);
+    } catch (err: any) {
+      console.error(`\n❌ AI generation failed: ${err.message}`);
       process.exit(1);
     }
   });

@@ -206,6 +206,20 @@ export interface RenderOptions {
   layoutVariant?: number;
   data: Record<string, any>;
   outputPath: string;
+  /** Optional custom background (e.g. AI-generated), repo-relative or absolute path. */
+  bgImagePath?: string | null;
+}
+
+function fileToDataUri(filePath: string): string | null {
+  try {
+    const abs = path.isAbsolute(filePath) ? filePath : path.resolve(process.cwd(), filePath);
+    if (!fs.existsSync(abs)) return null;
+    const ext = path.extname(abs).toLowerCase();
+    const mime = ext === '.png' ? 'image/png' : ext === '.webp' ? 'image/webp' : 'image/jpeg';
+    return `data:${mime};base64,${fs.readFileSync(abs).toString('base64')}`;
+  } catch {
+    return null;
+  }
 }
 
 export async function renderSlide(options: RenderOptions): Promise<string> {
@@ -216,7 +230,8 @@ export async function renderSlide(options: RenderOptions): Promise<string> {
     decoration = 'none',
     layoutVariant = 0,
     data,
-    outputPath
+    outputPath,
+    bgImagePath
   } = options;
 
   const templateDir = path.resolve(process.cwd(), 'templates', templateId);
@@ -282,7 +297,7 @@ export async function renderSlide(options: RenderOptions): Promise<string> {
   }
 
   const logoDataUri = getLogoDataUri();
-  const bgDataUri = getBgDataUri(templateId, seed);
+  const bgDataUri = (bgImagePath && fileToDataUri(bgImagePath)) || getBgDataUri(templateId, seed);
   const bgImageStyle = bgDataUri ? `background-image: url('${bgDataUri}');` : '';
 
   // Normalize options array for T10 poll pills

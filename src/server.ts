@@ -1,4 +1,5 @@
 import http from 'http';
+import { execFile } from 'child_process';
 import fs from 'fs';
 import path from 'path';
 import dotenv from 'dotenv';
@@ -8,6 +9,7 @@ dotenv.config();
 import { loadQueue, saveQueue, loadHistory, enqueuePosts, updatePostStatus, markStoryPosted } from './state/stateManager.js';
 import { generateDailyPosts, loadScheduleConfig, loadPillarsConfig } from './content/slotMapper.js';
 import { loadContentBank } from './content/bank.js';
+import { loadAiConfig } from './content/aiStudio.js';
 import { renderSlide, closeBrowser } from './render/renderer.js';
 import { generatePreviews, SAMPLE_POSTS } from './render/preview.js';
 import { getPublicMediaUrl } from './publish/mediaHost.js';
@@ -500,6 +502,7 @@ export function getDashboardHtml(): string {
       <button class="tab-btn" onclick="switchTab('templates')">🎨 18 Templates</button>
       <button class="tab-btn" onclick="switchTab('bank')">📚 Content Bank (<span id="tab-bank-count">72</span>)</button>
       <button class="tab-btn" onclick="switchTab('doctor')">🩺 Doctor & Brand</button>
+      <button class="tab-btn" onclick="switchTab('ai')">🤖 AI Studio (<span id="tab-ai-count">0</span>)</button>
     </div>
   </header>
 
@@ -614,6 +617,46 @@ export function getDashboardHtml(): string {
     <section id="sec-doctor" class="section">
       <div class="grid-posts" id="doctor-grid"></div>
     </section>
+
+    <!-- TAB 7: AI STUDIO -->
+    <section id="sec-ai" class="section">
+      <div class="toolbar">
+        <div>
+          <strong>🤖 AI Studio · ChatGPT-generated posts</strong>
+          <span style="color:var(--muted); font-size:13px; margin-left:10px;" id="ai-status-line">Learns from your content bank, auto-adds to the queue daily (08:00 PKT)</span>
+        </div>
+        <div style="display:flex; gap:10px; align-items:center;">
+          <select id="ai-count">
+            <option value="1">1 post</option>
+            <option value="2">2 posts</option>
+            <option value="3">3 posts</option>
+            <option value="4">4 posts</option>
+          </select>
+          <button class="btn" id="btn-ai-generate" onclick="triggerAiGenerate()">🤖 Generate AI Post Now</button>
+          <button class="btn btn-secondary" onclick="loadState()">↻ Refresh</button>
+        </div>
+      </div>
+      <div class="post-card" id="ai-settings" style="padding:18px 20px; margin-bottom:18px;">
+        <div style="display:flex; flex-wrap:wrap; gap:16px; align-items:flex-end;">
+          <div>
+            <strong>⚙️ Daily Schedule</strong>
+            <div style="color:var(--muted); font-size:12px; margin-top:4px;">The daily run (08:00 PKT) creates this many AI posts and schedules them at these times (PKT).</div>
+          </div>
+          <label style="display:flex; flex-direction:column; gap:4px; font-size:12px; color:var(--muted);">
+            Posts per day
+            <select id="ai-ppd" onchange="renderAiTimeInputs()">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+          </label>
+          <div id="ai-times" style="display:flex; gap:10px; flex-wrap:wrap;"></div>
+          <button class="btn" id="btn-ai-save" onclick="saveAiSettings()">💾 Save Settings</button>
+        </div>
+      </div>
+      <div class="grid-posts" id="ai-grid"></div>
+    </section>
   </main>
 
   <div class="modal-backdrop" id="dryrun-modal" onclick="if(event.target===this) closeModal()">
@@ -633,7 +676,7 @@ export function getDashboardHtml(): string {
     function switchTab(tab) {
       document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
       document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
-      const map = { queue: 0, published: 1, rejected: 2, templates: 3, bank: 4, doctor: 5 };
+      const map = { queue: 0, published: 1, rejected: 2, templates: 3, bank: 4, doctor: 5, ai: 6 };
       if (map[tab] !== undefined) {
         document.querySelectorAll('.tab-btn')[map[tab]].classList.add('active');
       }
@@ -697,6 +740,116 @@ export function getDashboardHtml(): string {
       renderTemplates();
       renderBankTable();
       renderDoctor();
+      renderAiStudio();
+    }
+
+    function renderAiStudio() {
+      const aiPosts = (appState.queue || []).filter(p => p.source === 'ai');
+      document.getElementById('tab-ai-count').textContent = aiPosts.length;
+      const cfg = appState.ai || {};
+      syncAiSettingsForm();
+      const keyStatus = appState.doctor.hasOpenAI === null
+        ? '🔑 OPENAI_API_KEY is read from GitHub secrets'
+        : (appState.doctor.hasOpenAI ? '✅ OPENAI_API_KEY set' : '⚠️ OPENAI_API_KEY not set (falls back to free LLMs + built-in backgrounds)');
+      document.getElementById('ai-status-line').textContent =
+        keyStatus +
+        ' · ' + (cfg.postsPerDay || 1) + '/day at ' + (cfg.times || []).join(', ') + ' PKT · text: ' + (cfg.textModel || '-') + ' · image: ' + ((cfg.imageModels || [])[0] || 'off');
+      const container = document.getElementById('ai-grid');
+      if (!aiPosts.length) {
+        container.innerHTML = '<div class="post-card" style="padding:32px; grid-column: 1 / -1; text-align:center;"><p style="color:var(--muted); margin:0;">No AI posts yet. Click <strong>🤖 Generate AI Post Now</strong> or wait for the daily run.</p></div>';
+        return;
+      }
+      container.innerHTML = aiPosts.slice().reverse().map(post => \`
+        <div class="post-card">
+          <div class="post-top">
+            <strong>\${post.id}</strong>
+            <span class="badge \${post.status === 'posted' ? 'badge-emerald' : ''}">\${post.status} · \${post.pillar}</span>
+          </div>
+          \${buildPostSlideViewer(post, 'ai-')}
+          <div class="post-body">
+            <div class="meta-row">
+              <span>🕒 <strong>\${post.scheduledAt}</strong></span>
+              <span>🎨 \${post.template}</span>
+              <span class="badge">✍️ \${post.aiTextVia || 'ai'}</span>
+              <span class="badge">\${post.aiBgImage ? '🖼️ AI background' : '🖼️ built-in background'}</span>
+            </div>
+            <div class="caption-box">\${post.caption}</div>
+          </div>
+        </div>
+      \`).join('');
+    }
+
+    let aiSettingsDirty = false;
+    const AI_DEFAULT_TIMES = ['11:00', '18:00', '14:00', '21:00'];
+
+    function syncAiSettingsForm() {
+      if (aiSettingsDirty) return;
+      const cfg = appState.ai || {};
+      document.getElementById('ai-ppd').value = String(Math.max(1, Math.min(cfg.postsPerDay || 1, 4)));
+      renderAiTimeInputs(cfg.times || []);
+    }
+
+    function renderAiTimeInputs(presetTimes) {
+      const wrap = document.getElementById('ai-times');
+      const n = parseInt(document.getElementById('ai-ppd').value, 10) || 1;
+      const current = presetTimes || Array.from(wrap.querySelectorAll('input')).map(i => i.value);
+      if (!presetTimes) aiSettingsDirty = true;
+      let html = '';
+      for (let i = 0; i < n; i++) {
+        const t = current[i] || AI_DEFAULT_TIMES[i] || '12:00';
+        html += \`<label style="display:flex; flex-direction:column; gap:4px; font-size:12px; color:var(--muted);">Post \${i + 1} time<input type="time" value="\${t}" onchange="aiSettingsDirty = true" /></label>\`;
+      }
+      wrap.innerHTML = html;
+    }
+
+    async function saveAiSettings() {
+      const btn = document.getElementById('btn-ai-save');
+      const postsPerDay = parseInt(document.getElementById('ai-ppd').value, 10);
+      const times = Array.from(document.querySelectorAll('#ai-times input')).map(i => i.value);
+      if (times.some(t => !/^\\d{2}:\\d{2}$/.test(t))) { alert('Please fill in every time.'); return; }
+      btn.disabled = true;
+      btn.textContent = '⏳ Saving...';
+      try {
+        const res = await fetch('/api/ai-config', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ postsPerDay, times })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Failed');
+        appState.ai = data.ai;
+        aiSettingsDirty = false;
+        renderAiStudio();
+        alert('Saved: ' + data.ai.postsPerDay + ' AI post(s) per day at ' + data.ai.times.join(', ') + ' PKT.');
+      } catch (e) {
+        alert('Save failed: ' + e.message);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '💾 Save Settings';
+      }
+    }
+
+    async function triggerAiGenerate() {
+      const btn = document.getElementById('btn-ai-generate');
+      const count = document.getElementById('ai-count').value;
+      btn.disabled = true;
+      btn.textContent = '⏳ Asking ChatGPT & rendering...';
+      try {
+        const res = await fetch('/api/ai-generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ count })
+        });
+        const data = await res.json();
+        if (!res.ok) throw new Error(data.error || 'Failed');
+        await loadState();
+        if (data.message) alert(data.message);
+      } catch (e) {
+        alert('AI generate failed: ' + e.message);
+      } finally {
+        btn.disabled = false;
+        btn.textContent = '🤖 Generate AI Post Now';
+      }
     }
 
     function buildPostSlideViewer(post, idPrefix = '') {
@@ -744,7 +897,7 @@ export function getDashboardHtml(): string {
           <div class="post-card">
             <div class="post-top">
               <strong>\${post.id}</strong>
-              <span class="badge \${post.format === 'carousel' ? 'badge-emerald' : ''}">\${post.pillar} · \${post.format}</span>
+              <span class="badge \${post.format === 'carousel' ? 'badge-emerald' : ''}">\${post.source === 'ai' ? '🤖 AI · ' : ''}\${post.pillar} · \${post.format}</span>
             </div>
             \${buildPostSlideViewer(post, 'q-')}
             <div class="post-body">
@@ -1145,13 +1298,53 @@ const server = http.createServer(async (req, res) => {
         token,
         instagramHealth,
         samples: SAMPLE_POSTS,
+        ai: loadAiConfig(),
         doctor: {
           activePublisher: getActivePublisherType(),
           nodeVersion: process.version,
           hasGemini: Boolean(process.env.GEMINI_API_KEY),
+          hasOpenAI: Boolean(process.env.OPENAI_API_KEY),
           hasIgToken: Boolean(process.env.IG_ACCESS_TOKEN)
         }
       });
+      return;
+    }
+
+    if (req.method === 'POST' && pathname === '/api/ai-config') {
+      const body = await readJsonBody(req);
+      const postsPerDay = parseInt(String(body.postsPerDay ?? ''), 10);
+      const times: string[] = Array.isArray(body.times) ? body.times.map((t: any) => String(t).trim()) : [];
+      if (!(postsPerDay >= 1 && postsPerDay <= 4)) {
+        sendJson(res, 400, { error: 'postsPerDay must be 1-4' });
+        return;
+      }
+      if (times.length < postsPerDay || !times.every((t) => /^([01]\d|2[0-3]):[0-5]\d$/.test(t))) {
+        sendJson(res, 400, { error: `Provide ${postsPerDay} valid HH:MM time(s)` });
+        return;
+      }
+      const providersPath = path.resolve(process.cwd(), 'config', 'providers.json');
+      const providers = JSON.parse(fs.readFileSync(providersPath, 'utf8'));
+      providers.ai = { ...(providers.ai || {}), postsPerDay, times: times.slice(0, postsPerDay) };
+      fs.writeFileSync(providersPath, JSON.stringify(providers, null, 2) + '\n');
+      sendJson(res, 200, { ok: true, ai: loadAiConfig() });
+      return;
+    }
+
+    if (req.method === 'POST' && pathname === '/api/ai-generate') {
+      const body = await readJsonBody(req);
+      const count = Math.max(1, Math.min(parseInt(String(body.count ?? '1'), 10) || 1, 4));
+      const args = ['tsx', 'src/cli.ts', 'ai-generate', '-n', String(count)];
+      if (typeof body.date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(body.date)) args.push('-d', body.date);
+      const result = await new Promise<{ ok: boolean; out: string }>((resolve) => {
+        execFile('npx', args, { cwd: process.cwd(), env: process.env, timeout: 5 * 60_000, maxBuffer: 10 * 1024 * 1024 },
+          (err, stdout, stderr) => resolve({ ok: !err, out: `${stdout}\n${stderr}`.trim() }));
+      });
+      const tail = result.out.split('\n').slice(-12).join('\n');
+      if (!result.ok) {
+        sendJson(res, 500, { error: tail || 'ai-generate failed' });
+        return;
+      }
+      sendJson(res, 200, { ok: true, message: `AI Studio finished:\n${tail}` });
       return;
     }
 

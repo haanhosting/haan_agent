@@ -110,6 +110,11 @@ export interface PreparedPost {
   rejectedAt?: string | null;
   attempts: number;
   error: string | null;
+  /** 'ai' for AI Studio posts (OpenAI); undefined for regular pipeline posts. */
+  source?: 'ai';
+  aiTextVia?: string;
+  /** Repo-relative path of an AI-generated background image, if any. */
+  aiBgImage?: string | null;
 }
 
 /**
