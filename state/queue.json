@@ -1,5 +1,57 @@
 [
   {
+    "id": "2026-11-20-ai1",
+    "date": "2026-11-20",
+    "slot": 101,
+    "scheduledAt": "2026-11-20T11:00:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "trust",
+    "format": "single",
+    "template": "T24-global-locations",
+    "design": {
+      "palette": "slate-cyan",
+      "seed": 223460999,
+      "decoration": "circuit-lines",
+      "layoutVariant": 2
+    },
+    "slides": [
+      {
+        "badge": "Locations",
+        "category": "Network",
+        "headline": "Servers Close to Your Market",
+        "subline": "Lower latency for your trades and your visitors.",
+        "items": [
+          "London LD4",
+          "New York NY4",
+          "Singapore"
+        ],
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Choose where your server lives. 🌍\n\n🇬🇧 London LD4\n🇺🇸 New York NY4\n🇸🇬 Singapore\n\nLow latency to brokers and customers.\n\n👉 Pick your location at haanhosting.store\n\n#HaanHosting #ForexVPS #LowLatency #WindowsRDP #GlobalHosting",
+    "hashtags": [
+      "#HaanHosting",
+      "#ForexVPS",
+      "#LowLatency",
+      "#WindowsRDP",
+      "#GlobalHosting"
+    ],
+    "altText": "Location map post showing Haan Hosting servers in London LD4, New York NY4 and Singapore.",
+    "images": [
+      "media/2026-11-20/ai1.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-20/ai1.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null,
+    "source": "ai",
+    "aiTextVia": "fallback-chain",
+    "aiBgImage": null
+  },
+  {
     "id": "2026-11-21-slot1-b2",
     "date": "2026-11-21",
     "slot": 1,
