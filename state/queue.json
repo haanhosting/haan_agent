@@ -1,5 +1,55 @@
 [
   {
+    "id": "2026-11-20-ai2",
+    "date": "2026-11-20",
+    "slot": 102,
+    "scheduledAt": "2026-11-20T18:00:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "educational",
+    "format": "single",
+    "template": "T14-datacenter-spotlight",
+    "design": {
+      "palette": "ocean-blue",
+      "seed": 240238618,
+      "decoration": "isometric-cube",
+      "layoutVariant": 2
+    },
+    "slides": [
+      {
+        "badge": "Global Infrastructure",
+        "category": "Low Latency",
+        "headline": "Host Right Next to Your Customers & Brokers",
+        "body": "Deploy your workload in London LD4 for Forex brokers, New York for US SaaS traffic, or Singapore for ultra-low ping from Pakistan.",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Physical distance directly impacts your server latency. 🌍\n\n• 🇬🇧 London LD4: < 1ms ping to major Forex brokers\n• 🇺🇸 New York NY4: Ideal for North American eCommerce & SaaS\n• 🇸🇬 Singapore: Fastest routing for Pakistan, Gulf & Asia\n\nPick your ideal datacenter location at checkout from $11.99/mo.\n\n👉 Visit haanhosting.store!\n\n#HaanHosting #DataCenter #LowLatency #ForexVPS #CloudInfrastructure #SingaporeServer #LondonLD4",
+    "hashtags": [
+      "#HaanHosting",
+      "#DataCenter",
+      "#LowLatency",
+      "#ForexVPS",
+      "#CloudInfrastructure",
+      "#SingaporeServer",
+      "#LondonLD4",
+      "#TechPakistan"
+    ],
+    "altText": "Global datacenter spotlight card showing London LD4, New York NY4, and Singapore server ping metrics.",
+    "images": [
+      "media/2026-11-20/ai2.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-20/ai2.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null,
+    "source": "ai",
+    "aiTextVia": "fallback-chain",
+    "aiBgImage": null
+  },
+  {
     "id": "2026-11-20-ai1",
     "date": "2026-11-20",
     "slot": 101,
