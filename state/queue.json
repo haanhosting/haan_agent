@@ -36,8 +36,12 @@
       "#SmallBizTips"
     ],
     "altText": "Editorial card emphasizing the customer credibility created by professional custom domain email addresses.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-22/slot1-b3.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-22/slot1-b3.jpg"
+    ],
     "igMediaId": null,
     "attempts": 0,
     "error": null
@@ -82,8 +86,12 @@
       "#RemoteDesktop"
     ],
     "altText": "Dashboard-style post highlighting 8 GB RAM on the Starter Windows RDP with 4 CPU cores, 50 GB NVMe and a dedicated clean IP.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-22/slot2-b3.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-22/slot2-b3.jpg"
+    ],
     "igMediaId": null,
     "attempts": 0,
     "error": null
@@ -127,8 +135,12 @@
       "#TechTips"
     ],
     "altText": "Step-by-step timeline explaining how to connect to a Windows RDP server in four steps.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-22/slot3-b3.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-22/slot3-b3.jpg"
+    ],
     "igMediaId": null,
     "attempts": 0,
     "error": null
@@ -180,8 +192,12 @@
       "#BusinessDeals"
     ],
     "altText": "Offer poster presenting the Business Windows RDP with 16GB RAM and 100GB NVMe SSD for $16.99/mo.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-22/slot4-b3.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-22/slot4-b3.jpg"
+    ],
     "igMediaId": null,
     "attempts": 0,
     "error": null
@@ -259,8 +275,16 @@
       "#TradingTips"
     ],
     "altText": "Carousel presentation breaking down order latency, trading slippage, and why traders locate servers in London and New York.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-22/slot5-b3-1.jpg",
+      "media/2026-11-22/slot5-b3-2.jpg",
+      "media/2026-11-22/slot5-b3-3.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-22/slot5-b3-1.jpg",
+      "https://haan-agent.pages.dev/media/2026-11-22/slot5-b3-2.jpg",
+      "https://haan-agent.pages.dev/media/2026-11-22/slot5-b3-3.jpg"
+    ],
     "igMediaId": null,
     "attempts": 0,
     "error": null
