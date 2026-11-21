@@ -1,5 +1,54 @@
 [
   {
+    "id": "2026-11-21-ai2",
+    "date": "2026-11-21",
+    "slot": 102,
+    "scheduledAt": "2026-11-21T18:00:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "growth",
+    "format": "single",
+    "template": "T01-bold-statement",
+    "design": {
+      "palette": "navy-sky",
+      "seed": 1253926427,
+      "decoration": "mesh-gradient",
+      "layoutVariant": 2
+    },
+    "slides": [
+      {
+        "badge": "Speed & Revenue",
+        "category": "Ecommerce",
+        "headline": "A 1-second delay in page load costs online retailers 7% in sales.",
+        "body": "Fast hosting isn’t an expense—it is a direct revenue driver that pays for itself with higher checkout conversion rates.",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Speed equals sales. It really is that simple. 🏎️💨\n\nIf your website takes 4 seconds to load, over 40% of potential buyers abandon the cart before the checkout page even appears. Upgrading to high-speed NVMe storage pays for itself with your very next customer.\n\nCheck out our high-speed Cloud VPS plans from $11.99/mo.\n\n👉 Link in bio to speed up your store!\n\n#HaanHosting #EcommerceGrowth #ConversionOptimization #PageSpeed #PakistanEcommerce #ShopOnline",
+    "hashtags": [
+      "#HaanHosting",
+      "#EcommerceGrowth",
+      "#ConversionOptimization",
+      "#PageSpeed",
+      "#PakistanEcommerce",
+      "#ShopOnline",
+      "#BusinessTips"
+    ],
+    "altText": "Statistical graphic highlighting how every single second of page load latency impacts e-commerce revenue.",
+    "images": [
+      "media/2026-11-21/ai2.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-21/ai2.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null,
+    "source": "ai",
+    "aiTextVia": "fallback-chain",
+    "aiBgImage": null
+  },
+  {
     "id": "2026-11-22-slot1-b4",
     "date": "2026-11-22",
     "slot": 1,
