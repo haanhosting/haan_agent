@@ -45,8 +45,12 @@
       "#HostingDeals"
     ],
     "altText": "Starter Web Hosting promotional poster showing $3.99/mo price with free SSL, WordPress installer, and cPanel.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-22/slot1-b2.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-22/slot1-b2.jpg"
+    ],
     "igMediaId": null,
     "attempts": 0,
     "error": null
@@ -87,8 +91,12 @@
       "#OnlineBusiness"
     ],
     "altText": "Bold editorial statement highlighting the importance of website ownership versus relying on social media algorithms.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-22/slot2-b2.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-22/slot2-b2.jpg"
+    ],
     "igMediaId": null,
     "attempts": 0,
     "error": null
@@ -130,8 +138,12 @@
       "#TrustMatters"
     ],
     "altText": "Editorial card emphasizing transparent pricing without teaser rates or unexpected renewal spikes.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-22/slot3-b2.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-22/slot3-b2.jpg"
+    ],
     "igMediaId": null,
     "attempts": 0,
     "error": null
@@ -183,8 +195,12 @@
       "#ProHosting"
     ],
     "altText": "Poster for the Professional Cloud VPS featuring 8 Cores, 32GB RAM, and 200GB NVMe storage for $21.99/mo.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-22/slot4-b2.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-22/slot4-b2.jpg"
+    ],
     "igMediaId": null,
     "attempts": 0,
     "error": null
@@ -262,8 +278,16 @@
       "#RDPGuide"
     ],
     "altText": "3-slide carousel explaining Windows Remote Desktop capabilities for Forex trading, SEO automation, and remote work.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-22/slot5-b2-1.jpg",
+      "media/2026-11-22/slot5-b2-2.jpg",
+      "media/2026-11-22/slot5-b2-3.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-22/slot5-b2-1.jpg",
+      "https://haan-agent.pages.dev/media/2026-11-22/slot5-b2-2.jpg",
+      "https://haan-agent.pages.dev/media/2026-11-22/slot5-b2-3.jpg"
+    ],
     "igMediaId": null,
     "attempts": 0,
     "error": null
