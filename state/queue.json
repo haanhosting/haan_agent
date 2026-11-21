@@ -2649,7 +2649,11 @@
     "igMediaId": null,
     "attempts": 1,
     "error": "UPLOADPOST_API_KEY environment variable is missing. Get your API key from https://app.upload-post.com/dashboard and set UPLOADPOST_API_KEY in .env",
-    "rejectedAt": null
+    "rejectedAt": null,
+    "storyPostedAt": "2026-11-21T08:17:53.947Z",
+    "storyMediaIds": [
+      "18089073695703173"
+    ]
   },
   {
     "id": "2026-11-18-slot4-b2",
