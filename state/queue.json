@@ -1,5 +1,271 @@
 [
   {
+    "id": "2026-11-22-slot1-b3",
+    "date": "2026-11-22",
+    "slot": 1,
+    "scheduledAt": "2026-11-22T09:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "growth",
+    "format": "single",
+    "template": "T12-minimal-editorial",
+    "design": {
+      "palette": "navy-sky",
+      "seed": 1795250148328,
+      "decoration": "none",
+      "layoutVariant": 0
+    },
+    "slides": [
+      {
+        "badge": "Brand Identity",
+        "category": "Professionalism",
+        "headline": "A custom domain email turns first-time visitors into long-term clients.",
+        "editorialTag": "Trust Benchmark",
+        "body": "Prospective clients hesitate when sending sensitive project details to free generic email addresses. Build credibility with branded business email.",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Would you trust a business operating from a generic free email address? ✉️\n\nA branded business email address signals that you are an established, legitimate operation. HAAN Web Hosting includes custom domain email accounts at no extra charge.\n\nPlans start at just $3.99/mo.\n\n👉 Elevate your business brand at haanhosting.store!\n\n#HaanHosting #BusinessEmail #BrandCredibility #ProfessionalLook #PakistanBusiness #Entrepreneurs",
+    "hashtags": [
+      "#HaanHosting",
+      "#BusinessEmail",
+      "#BrandCredibility",
+      "#ProfessionalLook",
+      "#PakistanBusiness",
+      "#Entrepreneurs",
+      "#SmallBizTips"
+    ],
+    "altText": "Editorial card emphasizing the customer credibility created by professional custom domain email addresses.",
+    "images": [],
+    "imageUrls": [],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-22-slot2-b3",
+    "date": "2026-11-22",
+    "slot": 2,
+    "scheduledAt": "2026-11-22T12:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "educational",
+    "format": "single",
+    "template": "T20-stat-dashboard",
+    "design": {
+      "palette": "ocean-blue",
+      "seed": 1795250148329,
+      "decoration": "none",
+      "layoutVariant": 1
+    },
+    "slides": [
+      {
+        "badge": "Spec Check",
+        "category": "Windows RDP",
+        "headline": "What 8 GB RAM Gets You",
+        "statNumber": "8 GB",
+        "statLabel": "RAM on Starter RDP",
+        "items": [
+          "4 Cores CPU",
+          "50 GB NVMe",
+          "Dedicated Clean IP"
+        ],
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "RDP choose karte waqt RAM matter karti hai. 🧠\n\n8 GB lets you run MT4/MT5, a browser and your tools side by side without lag.\n\nStarter Windows RDP — $11.99/mo\n\n👉 Get your RDP at haanhosting.store\n\n#HaanHosting #WindowsRDP #ForexVPS #MT5 #RemoteDesktop",
+    "hashtags": [
+      "#HaanHosting",
+      "#WindowsRDP",
+      "#ForexVPS",
+      "#MT5",
+      "#RemoteDesktop"
+    ],
+    "altText": "Dashboard-style post highlighting 8 GB RAM on the Starter Windows RDP with 4 CPU cores, 50 GB NVMe and a dedicated clean IP.",
+    "images": [],
+    "imageUrls": [],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-22-slot3-b3",
+    "date": "2026-11-22",
+    "slot": 3,
+    "scheduledAt": "2026-11-22T16:00:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "educational",
+    "format": "single",
+    "template": "T21-steps-timeline",
+    "design": {
+      "palette": "electric-indigo",
+      "seed": 1795250148330,
+      "decoration": "none",
+      "layoutVariant": 2
+    },
+    "slides": [
+      {
+        "badge": "Quick Guide",
+        "category": "Windows RDP",
+        "headline": "Connect to Your RDP in 4 Steps",
+        "items": [
+          "Open Remote Desktop Connection",
+          "Enter your server IP address",
+          "Log in with your admin details",
+          "Install your tools and get to work"
+        ],
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "New to RDP? It takes 2 minutes. 🖥️\n\n1️⃣ Open Remote Desktop Connection\n2️⃣ Enter your server IP\n3️⃣ Log in with admin details\n4️⃣ Install your apps\n\nFull admin access on every plan.\n\n👉 Get your Windows RDP at haanhosting.store\n\n#HaanHosting #WindowsRDP #RemoteDesktop #HowTo #TechTips",
+    "hashtags": [
+      "#HaanHosting",
+      "#WindowsRDP",
+      "#RemoteDesktop",
+      "#HowTo",
+      "#TechTips"
+    ],
+    "altText": "Step-by-step timeline explaining how to connect to a Windows RDP server in four steps.",
+    "images": [],
+    "imageUrls": [],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-22-slot4-b3",
+    "date": "2026-11-22",
+    "slot": 4,
+    "scheduledAt": "2026-11-22T19:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "offers",
+    "format": "single",
+    "template": "T05-offer-poster",
+    "design": {
+      "palette": "berry-cream",
+      "seed": 1795250148331,
+      "decoration": "none",
+      "layoutVariant": 0
+    },
+    "slides": [
+      {
+        "badge": "Heavy Duty",
+        "category": "Windows RDP",
+        "headline": "Business Windows RDP - 16 GB RAM for Multitasking",
+        "planName": "Business Windows RDP",
+        "price": "$16.99/mo",
+        "specs": [
+          "6 Cores CPU",
+          "16 GB RAM",
+          "100 GB NVMe SSD",
+          "Full Administrator Rights",
+          "Dedicated Clean IPv4",
+          "USA / UK / Singapore"
+        ],
+        "ctaButtonText": "Order at haanhosting.store",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Run multiple browsers, SEO tools, and MetaTrader terminals effortlessly! 🚀\n\nOur Business Windows RDP gives you 16 GB of memory and 6 CPU cores so your remote machine never lags.\n\n✔ 16 GB RAM & 6 Cores\n✔ 100 GB NVMe SSD\n✔ Clean Dedicated IP in USA, UK, or Singapore\n✔ 10 Gbps Port\n\nOnly $16.99/mo.\n\n👉 Order at haanhosting.store (link in bio)!\n\n#HaanHosting #WindowsRDP #ForexVPS #16GBRDP #RemoteWork #PakistanTrading #TechTools",
+    "hashtags": [
+      "#HaanHosting",
+      "#WindowsRDP",
+      "#ForexVPS",
+      "#16GBRDP",
+      "#RemoteWork",
+      "#PakistanTrading",
+      "#TechTools",
+      "#BusinessDeals"
+    ],
+    "altText": "Offer poster presenting the Business Windows RDP with 16GB RAM and 100GB NVMe SSD for $16.99/mo.",
+    "images": [],
+    "imageUrls": [],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-22-slot5-b3",
+    "date": "2026-11-22",
+    "slot": 5,
+    "scheduledAt": "2026-11-22T21:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "educational",
+    "format": "carousel",
+    "template": "T11-carousel",
+    "design": {
+      "palette": "sand-terracotta",
+      "seed": 1795250148332,
+      "decoration": "none",
+      "layoutVariant": 1
+    },
+    "slides": [
+      {
+        "slideIndex": 1,
+        "totalSlides": 3,
+        "isCover": true,
+        "badge": "Trading Guide",
+        "category": "Forex VPS",
+        "headline": "Why Dedicated Forex VPS Gives You an Unfair Edge",
+        "body": "Forex markets move in milliseconds. If your automated Expert Advisor is running on a residential connection, you are losing money to slippage.",
+        "bullets": [
+          "Sub-millisecond broker execution",
+          "Zero home power cut risks",
+          "Continuous 24/5 uptime"
+        ],
+        "cta": "haanhosting.store"
+      },
+      {
+        "slideIndex": 2,
+        "totalSlides": 3,
+        "badge": "Slippage Facts",
+        "category": "Trading Tech",
+        "headline": "What is Slippage and How Latency Causes It",
+        "body": "When your order takes 150ms to reach London, the market price can shift by several pips before filling. Placing your RDP in London LD4 eliminates this gap.",
+        "bullets": [
+          "Under 1ms ping to major brokers",
+          "Equinix LD4 & NY4 datacenters",
+          "Clean dedicated IP addresses"
+        ],
+        "cta": "haanhosting.store"
+      },
+      {
+        "slideIndex": 3,
+        "totalSlides": 3,
+        "badge": "Get Started",
+        "category": "Windows RDP",
+        "headline": "Deploy Your Trading Server in 5 Minutes",
+        "body": "Get full admin access on Windows Server with pre-optimized configurations for MT4, MT5, and cTrader starting at $11.99/mo.",
+        "bullets": [
+          "USA, UK & Singapore locations",
+          "24/7 support in Pakistan",
+          "Visit haanhosting.store"
+        ],
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Are you running Forex Expert Advisors from home? 📈\n\nHome internet drops, load shedding, and latency slippage kill trading profitability. Swipe to see why professional traders run on dedicated Windows RDP in London and New York.\n\nPlans start at $11.99/mo.\n\n👉 Link in bio to deploy your Forex server at haanhosting.store!\n\n#HaanHosting #ForexPakistan #MT4Trading #ForexVPS #TradingBot #ExpertAdvisor #AlgoTrading",
+    "hashtags": [
+      "#HaanHosting",
+      "#ForexPakistan",
+      "#MT4Trading",
+      "#ForexVPS",
+      "#TradingBot",
+      "#ExpertAdvisor",
+      "#AlgoTrading",
+      "#TradingTips"
+    ],
+    "altText": "Carousel presentation breaking down order latency, trading slippage, and why traders locate servers in London and New York.",
+    "images": [],
+    "imageUrls": [],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
     "id": "2026-11-22-slot1-b2",
     "date": "2026-11-22",
     "slot": 1,
