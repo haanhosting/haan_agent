@@ -1,5 +1,274 @@
 [
   {
+    "id": "2026-11-22-slot1-b2",
+    "date": "2026-11-22",
+    "slot": 1,
+    "scheduledAt": "2026-11-22T09:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "offers",
+    "format": "single",
+    "template": "T05-offer-poster",
+    "design": {
+      "palette": "coral-pop",
+      "seed": 1795249208866,
+      "decoration": "none",
+      "layoutVariant": 0
+    },
+    "slides": [
+      {
+        "badge": "Budget Friendly",
+        "category": "Web Hosting",
+        "headline": "Reliable cPanel Web Hosting from $3.99/mo",
+        "planName": "Starter Web Hosting",
+        "price": "$3.99/mo",
+        "specs": [
+          "1 Website Hosted",
+          "10 GB SSD Storage",
+          "Free SSL Certificate",
+          "1-Click WordPress",
+          "Full cPanel Access",
+          "24/7 Expert Support"
+        ],
+        "ctaButtonText": "Launch at haanhosting.store",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Get your website online in minutes with zero hassle! 🌐\n\nOur Starter Web Hosting plan has everything you need:\n\n✔ 1 Website\n✔ 10 GB SSD Storage\n✔ Free SSL Certificate\n✔ 1-Click WordPress Installer\n✔ Full cPanel Control\n✔ 24/7 WhatsApp Support\n\nOnly $3.99/mo. 7-day money-back guarantee!\n\n👉 Launch your website today at haanhosting.store (link in bio)!\n\n#HaanHosting #WebHostingPakistan #CheapHosting #WordPressHosting #cPanelHosting #SmallBusinessPK",
+    "hashtags": [
+      "#HaanHosting",
+      "#WebHostingPakistan",
+      "#CheapHosting",
+      "#WordPressHosting",
+      "#cPanelHosting",
+      "#SmallBusinessPK",
+      "#HostingDeals"
+    ],
+    "altText": "Starter Web Hosting promotional poster showing $3.99/mo price with free SSL, WordPress installer, and cPanel.",
+    "images": [],
+    "imageUrls": [],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-22-slot2-b2",
+    "date": "2026-11-22",
+    "slot": 2,
+    "scheduledAt": "2026-11-22T12:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "growth",
+    "format": "single",
+    "template": "T01-bold-statement",
+    "design": {
+      "palette": "navy-sky",
+      "seed": 1795249208867,
+      "decoration": "none",
+      "layoutVariant": 1
+    },
+    "slides": [
+      {
+        "badge": "Digital Ownership",
+        "category": "Business",
+        "headline": "Social media algorithms change. Your website is the only asset you truly own.",
+        "body": "Don’t build your entire business on rented land. A professional domain and fast hosting give you permanent customer relationships.",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "What happens if your Instagram or Facebook account gets restricted tomorrow? 🛑\n\nRelying 100% on social media algorithms means your business is at someone else’s mercy. A dedicated website with your own domain gives you permanent control over your brand, products, and customer data.\n\nLaunch your professional business site for just $3.99/mo.\n\n👉 Link in bio to get started at haanhosting.store!\n\n#HaanHosting #DigitalOwnership #SmallBusinessPK #EcommercePakistan #Entrepreneurs #BuildYourBrand",
+    "hashtags": [
+      "#HaanHosting",
+      "#DigitalOwnership",
+      "#SmallBusinessPK",
+      "#EcommercePakistan",
+      "#Entrepreneurs",
+      "#BuildYourBrand",
+      "#OnlineBusiness"
+    ],
+    "altText": "Bold editorial statement highlighting the importance of website ownership versus relying on social media algorithms.",
+    "images": [],
+    "imageUrls": [],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-22-slot3-b2",
+    "date": "2026-11-22",
+    "slot": 3,
+    "scheduledAt": "2026-11-22T16:00:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "trust",
+    "format": "single",
+    "template": "T12-minimal-editorial",
+    "design": {
+      "palette": "ocean-blue",
+      "seed": 1795249208868,
+      "decoration": "none",
+      "layoutVariant": 2
+    },
+    "slides": [
+      {
+        "badge": "Zero Surprises",
+        "category": "Fair Pricing",
+        "headline": "Honest pricing with zero hidden fees or sudden renewal shocks.",
+        "editorialTag": "Fairness Guarantee",
+        "body": "Many hosting providers lure you in with $1 teasers only to bill $25 on renewal. We believe in transparent, straightforward pricing that respects your budget.",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Ever felt tricked by hosting companies tripling your bill on renewal? 🛑\n\nAt HAAN HOSTING, what you see is what you pay. Transparent monthly pricing, no mandatory multi-year commitments, and a 7-day money-back guarantee on web hosting plans.\n\nStart with confidence at haanhosting.store.\n\n👉 Link in bio!\n\n#HaanHosting #FairPricing #TransparentBusiness #NoHiddenFees #HonestTech #PakistanHosting",
+    "hashtags": [
+      "#HaanHosting",
+      "#FairPricing",
+      "#TransparentBusiness",
+      "#NoHiddenFees",
+      "#HonestTech",
+      "#PakistanHosting",
+      "#TrustMatters"
+    ],
+    "altText": "Editorial card emphasizing transparent pricing without teaser rates or unexpected renewal spikes.",
+    "images": [],
+    "imageUrls": [],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-22-slot4-b2",
+    "date": "2026-11-22",
+    "slot": 4,
+    "scheduledAt": "2026-11-22T19:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "offers",
+    "format": "single",
+    "template": "T05-offer-poster",
+    "design": {
+      "palette": "electric-indigo",
+      "seed": 1795249208869,
+      "decoration": "none",
+      "layoutVariant": 0
+    },
+    "slides": [
+      {
+        "badge": "Pro Grade",
+        "category": "Cloud VPS",
+        "headline": "Professional Cloud VPS - 32 GB RAM Powerhouse",
+        "planName": "Professional Cloud VPS",
+        "price": "$21.99/mo",
+        "specs": [
+          "8 Cores CPU",
+          "32 GB RAM",
+          "200 GB NVMe Storage",
+          "10 Gbps Port Speed",
+          "Full Root Access",
+          "99.9% SLA Uptime"
+        ],
+        "ctaButtonText": "Order at haanhosting.store",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Need top-tier enterprise power at an affordable monthly price? 🔥\n\nCheck out the HAAN Professional Cloud VPS for $21.99/mo:\n\n✔ 8 Cores CPU\n✔ 32 GB RAM\n✔ 200 GB NVMe Storage\n✔ 10 Gbps Port Speed\n✔ Full Root Access\n✔ 99.9% SLA Uptime Guarantee\n\nIdeal for busy ecommerce stores, development teams, and heavy SaaS backends.\n\n👉 Deploy at haanhosting.store (link in bio)!\n\n#HaanHosting #EnterpriseVPS #CloudHosting #32GBRAM #ServerDeal #FullRootAccess #TechPakistan",
+    "hashtags": [
+      "#HaanHosting",
+      "#EnterpriseVPS",
+      "#CloudHosting",
+      "#32GBRAM",
+      "#ServerDeal",
+      "#FullRootAccess",
+      "#TechPakistan",
+      "#ProHosting"
+    ],
+    "altText": "Poster for the Professional Cloud VPS featuring 8 Cores, 32GB RAM, and 200GB NVMe storage for $21.99/mo.",
+    "images": [],
+    "imageUrls": [],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-22-slot5-b2",
+    "date": "2026-11-22",
+    "slot": 5,
+    "scheduledAt": "2026-11-22T21:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "tips",
+    "format": "carousel",
+    "template": "T11-carousel",
+    "design": {
+      "palette": "berry-cream",
+      "seed": 1795249208870,
+      "decoration": "none",
+      "layoutVariant": 1
+    },
+    "slides": [
+      {
+        "slideIndex": 1,
+        "totalSlides": 3,
+        "isCover": true,
+        "badge": "RDP Guide",
+        "category": "Remote Desktop",
+        "headline": "3 Things You Can Do With a Dedicated Windows RDP",
+        "body": "A Windows Remote Desktop gives you a cloud computer online 24/7 that you can access from your laptop, Mac, or phone.",
+        "bullets": [
+          "Run Forex EA automated trading 24/5",
+          "Keep SEO and crawler tools active non-stop",
+          "Work remotely with dedicated clean USA/UK IPs"
+        ],
+        "cta": "haanhosting.store"
+      },
+      {
+        "slideIndex": 2,
+        "totalSlides": 3,
+        "badge": "Feature Breakdown",
+        "category": "Trading & SEO",
+        "headline": "Forex MT4/MT5 & Heavy Automation",
+        "body": "Running automation tools on your home PC ties up your system and risks power cuts. An RDP server stays connected with 10 Gbps speeds.",
+        "bullets": [
+          "Low latency to London LD4 & NY4 brokers",
+          "Clean dedicated IP addresses",
+          "No home internet disconnects"
+        ],
+        "cta": "haanhosting.store"
+      },
+      {
+        "slideIndex": 3,
+        "totalSlides": 3,
+        "badge": "Deployment",
+        "category": "Get Started",
+        "headline": "Ready in Minutes with Full Admin Access",
+        "body": "Unlike shared desktop sellers on social media, HAAN HOSTING provides fresh, isolated Windows Server installations with full administrator rights.",
+        "bullets": [
+          "Starting from $11.99/mo",
+          "USA, UK & Singapore datacenters",
+          "Order at haanhosting.store"
+        ],
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "What is a Windows RDP and why does every online business need one? 🖥️\n\nSwipe to explore how a cloud Windows server allows you to run Forex robots, automated SEO suites, and remote workloads without tying up your personal PC.\n\nPlans start at $11.99/mo with full admin access.\n\n📌 Save this guide & visit haanhosting.store (link in bio)!\n\n#HaanHosting #WindowsRDP #ForexVPS #RemoteWork #AutomationTools #MT4Trading #PakistanTech",
+    "hashtags": [
+      "#HaanHosting",
+      "#WindowsRDP",
+      "#ForexVPS",
+      "#RemoteWork",
+      "#AutomationTools",
+      "#MT4Trading",
+      "#PakistanTech",
+      "#RDPGuide"
+    ],
+    "altText": "3-slide carousel explaining Windows Remote Desktop capabilities for Forex trading, SEO automation, and remote work.",
+    "images": [],
+    "imageUrls": [],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
     "id": "2026-11-22-slot1",
     "date": "2026-11-22",
     "slot": 1,
