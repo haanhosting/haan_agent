@@ -45,8 +45,12 @@
       "#HostingDeals"
     ],
     "altText": "Promotional poster for Business Web Hosting featuring 10 websites and unlimited SSD storage for $7.99/mo.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-22/slot1-b4.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-22/slot1-b4.jpg"
+    ],
     "igMediaId": null,
     "attempts": 0,
     "error": null
@@ -98,8 +102,12 @@
       "#HostingOffers"
     ],
     "altText": "Promotional offer poster for the Starter Cloud VPS featuring 4 Cores, 8GB RAM, and 50GB NVMe storage for $11.99/mo.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-22/slot2-b4.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-22/slot2-b4.jpg"
+    ],
     "igMediaId": null,
     "attempts": 0,
     "error": null
@@ -143,8 +151,12 @@
       "#NetworkSpeed"
     ],
     "altText": "Graphic demonstrating 10 Gbps network uplinks available across all Haan Hosting VPS and RDP servers.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-22/slot3-b4.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-22/slot3-b4.jpg"
+    ],
     "igMediaId": null,
     "attempts": 0,
     "error": null
@@ -186,8 +198,12 @@
       "#CompoundingEffort"
     ],
     "altText": "Minimalist editorial card discussing the power of small daily technical improvements compounding over time.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-22/slot4-b4.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-22/slot4-b4.jpg"
+    ],
     "igMediaId": null,
     "attempts": 0,
     "error": null
@@ -265,8 +281,16 @@
       "#TradingTips"
     ],
     "altText": "Carousel presentation breaking down order latency, trading slippage, and why traders locate servers in London and New York.",
-    "images": [],
-    "imageUrls": [],
+    "images": [
+      "media/2026-11-22/slot5-b4-1.jpg",
+      "media/2026-11-22/slot5-b4-2.jpg",
+      "media/2026-11-22/slot5-b4-3.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-22/slot5-b4-1.jpg",
+      "https://haan-agent.pages.dev/media/2026-11-22/slot5-b4-2.jpg",
+      "https://haan-agent.pages.dev/media/2026-11-22/slot5-b4-3.jpg"
+    ],
     "igMediaId": null,
     "attempts": 0,
     "error": null
