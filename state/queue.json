@@ -4,7 +4,7 @@
     "date": "2026-11-22",
     "slot": 1,
     "scheduledAt": "2026-11-22T09:30:00+05:00",
-    "status": "queued",
+    "status": "posted",
     "approved": true,
     "pillar": "offers",
     "format": "single",
@@ -51,9 +51,10 @@
     "imageUrls": [
       "https://haan-agent.pages.dev/media/2026-11-22/slot1-b2.jpg"
     ],
-    "igMediaId": null,
+    "igMediaId": "17916712407287501",
     "attempts": 0,
-    "error": null
+    "error": null,
+    "postedAt": "2026-11-21T08:22:34.591Z"
   },
   {
     "id": "2026-11-22-slot2-b2",

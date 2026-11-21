@@ -119,5 +119,16 @@
     "headline": "Which OS do you prefer for your production server?",
     "pillar": "engagement",
     "captionHash": "162539299"
+  },
+  {
+    "date": "2026-11-22",
+    "slot": 1,
+    "template": "T05-offer-poster",
+    "palette": "coral-pop",
+    "decoration": "none",
+    "layoutVariant": 0,
+    "headline": "Reliable cPanel Web Hosting from $3.99/mo",
+    "pillar": "offers",
+    "captionHash": "1922733422"
   }
 ]
