@@ -1,5 +1,57 @@
 [
   {
+    "id": "2026-11-21-ai1",
+    "date": "2026-11-21",
+    "slot": 101,
+    "scheduledAt": "2026-11-21T08:57:02Z",
+    "status": "queued",
+    "approved": true,
+    "pillar": "educational",
+    "format": "single",
+    "template": "T24-global-locations",
+    "design": {
+      "palette": "ocean-blue",
+      "seed": 1270704046,
+      "decoration": "dots-grid",
+      "layoutVariant": 2
+    },
+    "slides": [
+      {
+        "badge": "Latency 101",
+        "category": "Network",
+        "headline": "Why Server Location Matters",
+        "subline": "The closer your server is to your broker or customers, the faster every request travels.",
+        "items": [
+          "UK · London",
+          "USA · New York",
+          "Singapore"
+        ],
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Latency kya hai? 🤔\n\nIt's the time data takes to travel. A server near your broker or audience means faster trades and faster pages.\n\nWe offer USA, UK & Singapore.\n\n👉 Choose your location at haanhosting.store\n\n#HaanHosting #Latency #TechTips #ForexVPS #CloudVPS",
+    "hashtags": [
+      "#HaanHosting",
+      "#Latency",
+      "#TechTips",
+      "#ForexVPS",
+      "#CloudVPS"
+    ],
+    "altText": "Explainer post on why server location matters, listing Haan Hosting locations in the UK, USA and Singapore.",
+    "images": [
+      "media/2026-11-21/ai1.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-21/ai1.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null,
+    "source": "ai",
+    "aiTextVia": "fallback-chain",
+    "aiBgImage": null
+  },
+  {
     "id": "2026-11-22-slot1-b3",
     "date": "2026-11-22",
     "slot": 1,
