@@ -97,5 +97,16 @@
     "headline": "DDoS Protection Included",
     "pillar": "growth",
     "captionHash": "3104890329"
+  },
+  {
+    "date": "2026-11-22",
+    "slot": 4,
+    "template": "T23-pricing-tier",
+    "palette": "electric-indigo",
+    "decoration": "none",
+    "layoutVariant": 0,
+    "headline": "Launch Your Website Today",
+    "pillar": "offers",
+    "captionHash": "1617665849"
   }
 ]
