@@ -86,5 +86,16 @@
     "headline": "Servers Close to Your Market",
     "pillar": "trust",
     "captionHash": "3910967038"
+  },
+  {
+    "date": "2026-11-22",
+    "slot": 3,
+    "template": "T22-guarantee-seal",
+    "palette": "midnight-gold",
+    "decoration": "isometric-cube",
+    "layoutVariant": 2,
+    "headline": "DDoS Protection Included",
+    "pillar": "growth",
+    "captionHash": "3104890329"
   }
 ]
