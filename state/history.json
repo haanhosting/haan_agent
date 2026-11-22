@@ -130,5 +130,16 @@
     "headline": "Reliable cPanel Web Hosting from $3.99/mo",
     "pillar": "offers",
     "captionHash": "1922733422"
+  },
+  {
+    "date": "2026-11-22",
+    "slot": 101,
+    "template": "T03-checklist",
+    "palette": "navy-sky",
+    "decoration": "corner-brackets",
+    "layoutVariant": 1,
+    "headline": "4 cPanel Tools Every Site Owner Must Know",
+    "pillar": "tips",
+    "captionHash": "731918775"
   }
 ]
