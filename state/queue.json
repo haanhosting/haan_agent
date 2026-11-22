@@ -1,5 +1,59 @@
 [
   {
+    "id": "2026-11-22-ai1",
+    "date": "2026-11-22",
+    "slot": 101,
+    "scheduledAt": "2026-11-22T10:56:08Z",
+    "status": "queued",
+    "approved": true,
+    "pillar": "tips",
+    "format": "single",
+    "template": "T03-checklist",
+    "design": {
+      "palette": "navy-sky",
+      "seed": 3179743677,
+      "decoration": "corner-brackets",
+      "layoutVariant": 1
+    },
+    "slides": [
+      {
+        "badge": "cPanel Hacks",
+        "category": "Control Panel",
+        "headline": "4 cPanel Tools Every Site Owner Must Know",
+        "items": [
+          "File Manager: Quick code edits & unzipping archives",
+          "PHP Selector: Switch versions & enable extensions",
+          "Cron Jobs: Automate background maintenance scripts",
+          "ModSecurity: Built-in web application firewall"
+        ],
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Managing your website shouldn’t require a computer science degree. 💻\n\nWith cPanel on HAAN HOSTING, you have full control over your files, emails, security, and databases in one clean visual dashboard.\n\nPlans start at just $3.99/mo with 24/7 support in Lahore.\n\n👉 Link in bio to get started!\n\n#HaanHosting #cPanelHosting #WebMaster #WebDevelopment #PakistaniDevs #ServerManagement",
+    "hashtags": [
+      "#HaanHosting",
+      "#cPanelHosting",
+      "#WebMaster",
+      "#WebDevelopment",
+      "#PakistaniDevs",
+      "#ServerManagement",
+      "#WebDesign"
+    ],
+    "altText": "Checklist detailing four critical cPanel features for website owners and developers.",
+    "images": [
+      "media/2026-11-22/ai1.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-22/ai1.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null,
+    "source": "ai",
+    "aiTextVia": "fallback-chain",
+    "aiBgImage": null
+  },
+  {
     "id": "2026-11-23-slot1",
     "date": "2026-11-23",
     "slot": 1,
