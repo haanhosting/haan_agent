@@ -1,5 +1,313 @@
 [
   {
+    "id": "2026-11-24-slot1",
+    "date": "2026-11-24",
+    "slot": 1,
+    "scheduledAt": "2026-11-24T09:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "tips",
+    "format": "single",
+    "template": "T03-checklist",
+    "design": {
+      "palette": "sunset-violet",
+      "seed": 656573243,
+      "decoration": "diagonal-stripes",
+      "layoutVariant": 2
+    },
+    "slides": [
+      {
+        "badge": "Backup Rules",
+        "category": "Disaster Recovery",
+        "headline": "The 3-2-1 Backup Rule Every Developer Should Follow",
+        "items": [
+          "3 Copies of your website & database files",
+          "2 Different storage media types (SSD & Cloud)",
+          "1 Off-site copy in an isolated remote location"
+        ],
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Hardware can fail. Hackers exist. The 3-2-1 backup rule saves your business from disaster. 💾\n\nNever rely solely on a local backup folder on the same server. Keep an automated off-site backup so you can recover in minutes.\n\nOur HAAN Web Hosting plans include automated daily backup options.\n\n👉 Save this post for your disaster recovery checklist!\n\n#HaanHosting #DataBackup #CyberSecurity #WebDev #SysAdmin #DevOpsTips #BusinessSafety",
+    "hashtags": [
+      "#HaanHosting",
+      "#seoexpert",
+      "#websecurity",
+      "#webspeed",
+      "#cpanelhosting",
+      "#servermanagement",
+      "#wordpresstips",
+      "#onlinebusiness",
+      "#cloudhosting",
+      "#webhosting"
+    ],
+    "altText": "Checklist detailing the industry standard 3-2-1 data backup rule for website and database safety.",
+    "images": [
+      "media/2026-11-24/slot1.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-24/slot1.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-24-slot2",
+    "date": "2026-11-24",
+    "slot": 2,
+    "scheduledAt": "2026-11-24T12:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "engagement",
+    "format": "single",
+    "template": "T23-pricing-tier",
+    "design": {
+      "palette": "mint-fresh",
+      "seed": 673350862,
+      "decoration": "mesh-gradient",
+      "layoutVariant": 2
+    },
+    "slides": [
+      {
+        "badge": "Verified Offer",
+        "category": "Windows RDP",
+        "headline": "Power Up Your Trading Desk",
+        "planName": "Business Windows RDP",
+        "price": "$16.99/mo",
+        "specs": [
+          "6 Cores CPU",
+          "16 GB RAM",
+          "100 GB NVMe SSD",
+          "Dedicated IP"
+        ],
+        "ctaButtonText": "Order Now",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Business Windows RDP — $16.99/mo 📈\n\n✅ 6 Cores CPU\n✅ 16 GB RAM\n✅ 100 GB NVMe SSD\n✅ Dedicated IP\n\nMT4/MT5 optimized, low latency to brokers.\n\n👉 Order now at haanhosting.store\n\n#HaanHosting #WindowsRDP #ForexVPS #MT4 #MT5",
+    "hashtags": [
+      "#HaanHosting",
+      "#codingquiz",
+      "#opinionpoll",
+      "#programmerlife",
+      "#techpoll",
+      "#webdevcommunity",
+      "#developerhumor",
+      "#webdeveloper",
+      "#pakistantech"
+    ],
+    "altText": "Pricing card for Business Windows RDP at $16.99 per month with 6 CPU cores, 16 GB RAM, 100 GB NVMe SSD and a dedicated IP.",
+    "images": [
+      "media/2026-11-24/slot2.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-24/slot2.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-24-slot3",
+    "date": "2026-11-24",
+    "slot": 3,
+    "scheduledAt": "2026-11-24T16:00:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "growth",
+    "format": "single",
+    "template": "T08-browser-mockup",
+    "design": {
+      "palette": "sand-terracotta",
+      "seed": 690128481,
+      "decoration": "wave-curves",
+      "layoutVariant": 1
+    },
+    "slides": [
+      {
+        "badge": "Live Status",
+        "category": "Infrastructure",
+        "headline": "Real-Time Server Health & Transparent SLA Metrics",
+        "urlDomain": "haanhosting.store/status",
+        "statusText": "All Systems Operational",
+        "contentTitle": "Enterprise Hardware Specifications",
+        "body": "• High-performance Intel Xeon & AMD EPYC processors\n• DDR4 / DDR5 enterprise ECC memory\n• 10 Gbps redundant network links\n• 99.9% verified SLA uptime",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Transparency is the cornerstone of great hosting. 🔍\n\nWe build our infrastructure on genuine enterprise Intel Xeon and AMD EPYC processors with ECC memory to ensure rock-solid stability for your applications.\n\nExplore our high-performance cloud plans.\n\n👉 Link in bio to visit haanhosting.store!\n\n#HaanHosting #ServerSpecs #EnterpriseHardware #IntelXeon #AMDEpyc #CloudInfrastructure #PakistanTech",
+    "hashtags": [
+      "#HaanHosting",
+      "#smallbusinesspakistan",
+      "#ecommercepakistan",
+      "#growyourbusiness",
+      "#startuptips",
+      "#digitalmarketing",
+      "#digitalpakistan",
+      "#cloudhosting",
+      "#onlinebusiness",
+      "#webhosting"
+    ],
+    "altText": "Browser mockup displaying enterprise hardware specifications and transparent server status metrics.",
+    "images": [
+      "media/2026-11-24/slot3.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-24/slot3.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-24-slot4",
+    "date": "2026-11-24",
+    "slot": 4,
+    "scheduledAt": "2026-11-24T19:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "offers",
+    "format": "single",
+    "template": "T05-offer-poster",
+    "design": {
+      "palette": "ocean-blue",
+      "seed": 706906100,
+      "decoration": "circuit-lines",
+      "layoutVariant": 1
+    },
+    "slides": [
+      {
+        "badge": "Best Value",
+        "category": "Windows RDP",
+        "headline": "Dedicated Windows RDP with Full Admin Access",
+        "planName": "Starter Windows RDP",
+        "price": "$11.99/mo",
+        "specs": [
+          "4 Cores CPU",
+          "8 GB RAM",
+          "50 GB NVMe SSD",
+          "Full Admin Access",
+          "Dedicated Clean IPv4",
+          "USA / UK / Singapore"
+        ],
+        "ctaButtonText": "Order at haanhosting.store",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Need a fast, reliable Windows cloud desktop? 🖥️\n\nOur Starter Windows RDP is built for Forex trading, SEO tools, and remote work:\n\n✔ 4 Cores CPU & 8 GB RAM\n✔ 50 GB NVMe SSD\n✔ Full Administrator Rights\n✔ Dedicated Clean IP (Never shared)\n✔ 10 Gbps Network Port\n\nStarting at just $11.99/mo with 24/7 support in Lahore.\n\n👉 Order today at haanhosting.store (link in bio)!\n\n#HaanHosting #WindowsRDP #ForexVPS #RemoteDesktop #RDPDeal #PakistanTrading #OnlineJobs",
+    "hashtags": [
+      "#HaanHosting",
+      "#windowsrdp",
+      "#webhostingpakistan",
+      "#vpsdeal",
+      "#cheaphosting",
+      "#hostingoffer",
+      "#forexvps",
+      "#webdeveloper",
+      "#pakistantech"
+    ],
+    "altText": "Product poster highlighting the Starter Windows RDP with full admin rights and dedicated clean IP for $11.99/mo.",
+    "images": [
+      "media/2026-11-24/slot4.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-24/slot4.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-24-slot5",
+    "date": "2026-11-24",
+    "slot": 5,
+    "scheduledAt": "2026-11-24T21:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "educational",
+    "format": "carousel",
+    "template": "T11-carousel",
+    "design": {
+      "palette": "slate-cyan",
+      "seed": 723683719,
+      "decoration": "glow-orb",
+      "layoutVariant": 0
+    },
+    "slides": [
+      {
+        "slideIndex": 1,
+        "totalSlides": 3,
+        "isCover": true,
+        "badge": "Trading Guide",
+        "category": "Forex VPS",
+        "headline": "Why Dedicated Forex VPS Gives You an Unfair Edge",
+        "body": "Forex markets move in milliseconds. If your automated Expert Advisor is running on a residential connection, you are losing money to slippage.",
+        "bullets": [
+          "Sub-millisecond broker execution",
+          "Zero home power cut risks",
+          "Continuous 24/5 uptime"
+        ],
+        "cta": "haanhosting.store"
+      },
+      {
+        "slideIndex": 2,
+        "totalSlides": 3,
+        "badge": "Slippage Facts",
+        "category": "Trading Tech",
+        "headline": "What is Slippage and How Latency Causes It",
+        "body": "When your order takes 150ms to reach London, the market price can shift by several pips before filling. Placing your RDP in London LD4 eliminates this gap.",
+        "bullets": [
+          "Under 1ms ping to major brokers",
+          "Equinix LD4 & NY4 datacenters",
+          "Clean dedicated IP addresses"
+        ],
+        "cta": "haanhosting.store"
+      },
+      {
+        "slideIndex": 3,
+        "totalSlides": 3,
+        "badge": "Get Started",
+        "category": "Windows RDP",
+        "headline": "Deploy Your Trading Server in 5 Minutes",
+        "body": "Get full admin access on Windows Server with pre-optimized configurations for MT4, MT5, and cTrader starting at $11.99/mo.",
+        "bullets": [
+          "USA, UK & Singapore locations",
+          "24/7 support in Pakistan",
+          "Visit haanhosting.store"
+        ],
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Are you running Forex Expert Advisors from home? 📈\n\nHome internet drops, load shedding, and latency slippage kill trading profitability. Swipe to see why professional traders run on dedicated Windows RDP in London and New York.\n\nPlans start at $11.99/mo.\n\n👉 Link in bio to deploy your Forex server at haanhosting.store!\n\n#HaanHosting #ForexPakistan #MT4Trading #ForexVPS #TradingBot #ExpertAdvisor #AlgoTrading",
+    "hashtags": [
+      "#HaanHosting",
+      "#devopscommunity",
+      "#hardwarefacts",
+      "#linuxserver",
+      "#serverspeed",
+      "#techfacts",
+      "#dnsmanagement",
+      "#webhosting",
+      "#cloudhosting",
+      "#onlinebusiness"
+    ],
+    "altText": "Carousel presentation breaking down order latency, trading slippage, and why traders locate servers in London and New York.",
+    "images": [
+      "media/2026-11-24/slot5-1.jpg",
+      "media/2026-11-24/slot5-2.jpg",
+      "media/2026-11-24/slot5-3.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-24/slot5-1.jpg",
+      "https://haan-agent.pages.dev/media/2026-11-24/slot5-2.jpg",
+      "https://haan-agent.pages.dev/media/2026-11-24/slot5-3.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
     "id": "2026-11-22-ai1",
     "date": "2026-11-22",
     "slot": 101,
