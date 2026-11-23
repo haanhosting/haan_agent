@@ -1,5 +1,55 @@
 [
   {
+    "id": "2026-11-23-ai1",
+    "date": "2026-11-23",
+    "slot": 101,
+    "scheduledAt": "2026-11-23T11:56:44Z",
+    "status": "queued",
+    "approved": true,
+    "pillar": "offers",
+    "format": "single",
+    "template": "T02-split-card",
+    "design": {
+      "palette": "slate-cyan",
+      "seed": 1923737636,
+      "decoration": "dots-grid",
+      "layoutVariant": 2
+    },
+    "slides": [
+      {
+        "badge": "Email Deliverability",
+        "category": "Domain Setup",
+        "headline": "Stop Your Business Emails Landing in Spam",
+        "body": "Sending emails without SPF, DKIM, and DMARC DNS records flags your messages as suspicious to Gmail and Outlook.",
+        "highlight": "🛡️ Fix: Configure SPF & DKIM records in your cPanel Zone Editor.",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Are your important client emails going straight into their spam folder? 📧\n\nHere are the 3 DNS records you must configure:\n\n• SPF: Declares which mail servers can send on your behalf\n• DKIM: Cryptographically signs your outgoing emails\n• DMARC: Tells receiving servers how to handle failed auth\n\nHAAN Web Hosting includes built-in cPanel tools to set these up in 2 clicks.\n\n👉 Link in bio to learn more at haanhosting.store.\n\n#HaanHosting #EmailMarketing #Deliverability #cPanel #SmallBusinessPK #FreelancerPakistan",
+    "hashtags": [
+      "#HaanHosting",
+      "#EmailMarketing",
+      "#Deliverability",
+      "#cPanel",
+      "#SmallBusinessPK",
+      "#FreelancerPakistan",
+      "#BusinessTips"
+    ],
+    "altText": "Infographic card explaining how SPF, DKIM, and DMARC DNS records prevent business emails from going to spam.",
+    "images": [
+      "media/2026-11-23/ai1.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-23/ai1.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null,
+    "source": "ai",
+    "aiTextVia": "fallback-chain",
+    "aiBgImage": null
+  },
+  {
     "id": "2026-11-24-slot1",
     "date": "2026-11-24",
     "slot": 1,
