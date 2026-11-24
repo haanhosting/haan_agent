@@ -1,5 +1,55 @@
 [
   {
+    "id": "2026-11-24-ai1",
+    "date": "2026-11-24",
+    "slot": 101,
+    "scheduledAt": "2026-11-24T13:30:08Z",
+    "status": "queued",
+    "approved": true,
+    "pillar": "trust",
+    "format": "single",
+    "template": "T06-quote-card",
+    "design": {
+      "palette": "navy-sky",
+      "seed": 3634803627,
+      "decoration": "mesh-gradient",
+      "layoutVariant": 2
+    },
+    "slides": [
+      {
+        "badge": "Brand Value",
+        "category": "Commitment",
+        "headline": "We measure our success not by server count, but by the uptime of our customers’ businesses.",
+        "author": "HAAN Operations Team",
+        "role": "Lahore, Pakistan",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Behind every server is someone’s livelihood, shop, or client project. 🤝\n\nWe take that responsibility seriously. From enterprise NVMe hardware to round-the-clock monitoring, HAAN HOSTING is committed to keeping your business online.\n\n👉 Join our community at haanhosting.store!\n\n#HaanHosting #CustomerFirst #HostingPhilosophy #EnterpriseStandards #PakistanTech #Reliability",
+    "hashtags": [
+      "#HaanHosting",
+      "#CustomerFirst",
+      "#HostingPhilosophy",
+      "#EnterpriseStandards",
+      "#PakistanTech",
+      "#Reliability",
+      "#BrandCommitment"
+    ],
+    "altText": "Quote card expressing Haan Hosting core commitment to client business uptime.",
+    "images": [
+      "media/2026-11-24/ai1.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-24/ai1.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null,
+    "source": "ai",
+    "aiTextVia": "fallback-chain",
+    "aiBgImage": null
+  },
+  {
     "id": "2026-11-25-slot1",
     "date": "2026-11-25",
     "slot": 1,
