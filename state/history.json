@@ -163,5 +163,16 @@
     "headline": "The 3-2-1 Backup Rule Every Developer Should Follow",
     "pillar": "tips",
     "captionHash": "3844531112"
+  },
+  {
+    "date": "2026-11-24",
+    "slot": 4,
+    "template": "T05-offer-poster",
+    "palette": "ocean-blue",
+    "decoration": "circuit-lines",
+    "layoutVariant": 1,
+    "headline": "Dedicated Windows RDP with Full Admin Access",
+    "pillar": "offers",
+    "captionHash": "668101306"
   }
 ]
