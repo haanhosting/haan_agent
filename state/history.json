@@ -152,5 +152,16 @@
     "headline": "Hosting You Can Count On",
     "pillar": "engagement",
     "captionHash": "2012776184"
+  },
+  {
+    "date": "2026-11-24",
+    "slot": 1,
+    "template": "T03-checklist",
+    "palette": "sunset-violet",
+    "decoration": "diagonal-stripes",
+    "layoutVariant": 2,
+    "headline": "The 3-2-1 Backup Rule Every Developer Should Follow",
+    "pillar": "tips",
+    "captionHash": "3844531112"
   }
 ]
