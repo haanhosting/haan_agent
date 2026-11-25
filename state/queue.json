@@ -1,5 +1,291 @@
 [
   {
+    "id": "2026-11-26-slot1",
+    "date": "2026-11-26",
+    "slot": 1,
+    "scheduledAt": "2026-11-26T09:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "tips",
+    "format": "single",
+    "template": "T07-myth-fact",
+    "design": {
+      "palette": "mint-fresh",
+      "seed": 616045733,
+      "decoration": "dots-grid",
+      "layoutVariant": 1
+    },
+    "slides": [
+      {
+        "badge": "Reliability",
+        "category": "Uptime",
+        "headline": "Can Any Hosting Provider Guarantee Zero Downtime?",
+        "myth": "Providers advertising zero downtime never experience any hardware or network interruptions.",
+        "fact": "All real infrastructure requires maintenance. Honest enterprise providers offer 99.9% SLA guarantees to account for scheduled kernel & security patches.",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Why you should be skeptical of anyone advertising zero downtime. 🔎\n\nReal servers need operating system kernel updates, security patches, and network maintenance. That is why genuine providers offer realistic 99.9% SLAs.\n\nAt HAAN HOSTING, we believe in radical transparency and enterprise hardware with 99.9% SLA uptime.\n\n👉 Learn more about our infrastructure at haanhosting.store!\n\n#HaanHosting #UptimeTruth #ServerTransparency #SLA #WebHosting #HonestTech #CloudInfrastructure",
+    "hashtags": [
+      "#HaanHosting",
+      "#servermanagement",
+      "#webspeed",
+      "#webdevelopment",
+      "#seoexpert",
+      "#cpanelhosting",
+      "#learntocode",
+      "#cloudhosting",
+      "#webhosting",
+      "#pakistantech"
+    ],
+    "altText": "Reality check explaining why 99.9% SLA represents genuine enterprise transparency.",
+    "images": [
+      "media/2026-11-26/slot1.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-26/slot1.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-26-slot2",
+    "date": "2026-11-26",
+    "slot": 2,
+    "scheduledAt": "2026-11-26T12:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "engagement",
+    "format": "single",
+    "template": "T01-bold-statement",
+    "design": {
+      "palette": "sand-terracotta",
+      "seed": 565712876,
+      "decoration": "isometric-cube",
+      "layoutVariant": 2
+    },
+    "slides": [
+      {
+        "badge": "Quick Delivery",
+        "category": "Instant Setup",
+        "headline": "Your server is deployed and ready within minutes of payment confirmation.",
+        "body": "Instant automated provisioning on NVMe storage. No waiting days for an administrator to set up your virtual machine.",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Need your server deployed right now? ⏱️\n\nOur automated provisioning engine deploys your Cloud VPS or Windows RDP within minutes of payment confirmation, complete with clean dedicated IPs and your chosen OS.\n\nPlans start at $11.99/mo.\n\n👉 Deploy your server instantly at haanhosting.store!\n\n#HaanHosting #InstantDeployment #CloudVPS #FastSetup #DevOpsSpeed #PakistanDevelopers",
+    "hashtags": [
+      "#HaanHosting",
+      "#askdevelopers",
+      "#codingquiz",
+      "#techcommunity",
+      "#developerhumor",
+      "#techpoll",
+      "#programmerlife",
+      "#onlinebusiness",
+      "#webdeveloper"
+    ],
+    "altText": "Statement card highlighting automated instant server provisioning within minutes.",
+    "images": [
+      "media/2026-11-26/slot2.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-26/slot2.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-26-slot3",
+    "date": "2026-11-26",
+    "slot": 3,
+    "scheduledAt": "2026-11-26T16:00:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "growth",
+    "format": "single",
+    "template": "T07-myth-fact",
+    "design": {
+      "palette": "forest-lime",
+      "seed": 582490495,
+      "decoration": "glow-orb",
+      "layoutVariant": 2
+    },
+    "slides": [
+      {
+        "badge": "Storage Tech",
+        "category": "Hardware",
+        "headline": "SATA SSD vs Gen4 NVMe Storage",
+        "myth": "All SSD storage drives perform identically when hosting websites.",
+        "fact": "NVMe drives communicate directly over PCIe lanes, offering up to 3,500+ MB/s speeds compared to SATA SSD limits of 550 MB/s.",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Not all SSD hosting is created equal! ⚡\n\nTraditional SATA SSDs are limited by older cables to ~550 MB/s transfer rates. Gen4 NVMe storage connects directly to PCIe lanes, achieving over 3,500 MB/s read/write speeds.\n\nThat means databases respond in an instant and pages render seamlessly.\n\nExperience genuine NVMe performance starting at $11.99/mo.\n\n👉 Visit haanhosting.store to deploy!\n\n#HaanHosting #NVMeStorage #HardwareFacts #ServerHardware #CloudVPS #TechNerds #SpeedMatters",
+    "hashtags": [
+      "#HaanHosting",
+      "#freelancepakistan",
+      "#smallbusinesspakistan",
+      "#entrepreneurship",
+      "#ecommercepakistan",
+      "#digitalmarketing",
+      "#businessonline",
+      "#cloudhosting",
+      "#pakistantech",
+      "#webhosting"
+    ],
+    "altText": "Hardware comparison showing PCIe-connected NVMe speeds outperforming legacy SATA SSD drives by over 600%.",
+    "images": [
+      "media/2026-11-26/slot3.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-26/slot3.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-26-slot4",
+    "date": "2026-11-26",
+    "slot": 4,
+    "scheduledAt": "2026-11-26T19:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "offers",
+    "format": "single",
+    "template": "T06-quote-card",
+    "design": {
+      "palette": "slate-cyan",
+      "seed": 532157638,
+      "decoration": "none",
+      "layoutVariant": 1
+    },
+    "slides": [
+      {
+        "badge": "Engineering",
+        "category": "Quality",
+        "headline": "Great hosting doesn’t cut corners on hardware or customer care.",
+        "author": "HAAN HOSTING",
+        "role": "Infrastructure Team",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "From 10 Gbps networking to NVMe SSD storage, quality is in every detail of our infrastructure. 💎\n\nChoose a hosting provider that treats your business like its own.\n\n👉 Learn more at haanhosting.store!\n\n#HaanHosting #EngineeringQuality #HighStandard #TechPakistan #QualityInfrastructure",
+    "hashtags": [
+      "#HaanHosting",
+      "#windowsrdp",
+      "#webhostingpakistan",
+      "#vpsdeal",
+      "#budgethosting",
+      "#forexvps",
+      "#hostingoffer",
+      "#onlinebusiness",
+      "#webdeveloper"
+    ],
+    "altText": "Quote card highlighting the company philosophy of uncompromised hardware and customer care.",
+    "images": [
+      "media/2026-11-26/slot4.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-26/slot4.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-26-slot5",
+    "date": "2026-11-26",
+    "slot": 5,
+    "scheduledAt": "2026-11-26T21:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "educational",
+    "format": "carousel",
+    "template": "T11-carousel",
+    "design": {
+      "palette": "electric-indigo",
+      "seed": 548935257,
+      "decoration": "diagonal-stripes",
+      "layoutVariant": 1
+    },
+    "slides": [
+      {
+        "slideIndex": 1,
+        "totalSlides": 3,
+        "isCover": true,
+        "badge": "Trading Guide",
+        "category": "Forex VPS",
+        "headline": "Why Dedicated Forex VPS Gives You an Unfair Edge",
+        "body": "Forex markets move in milliseconds. If your automated Expert Advisor is running on a residential connection, you are losing money to slippage.",
+        "bullets": [
+          "Sub-millisecond broker execution",
+          "Zero home power cut risks",
+          "Continuous 24/5 uptime"
+        ],
+        "cta": "haanhosting.store"
+      },
+      {
+        "slideIndex": 2,
+        "totalSlides": 3,
+        "badge": "Slippage Facts",
+        "category": "Trading Tech",
+        "headline": "What is Slippage and How Latency Causes It",
+        "body": "When your order takes 150ms to reach London, the market price can shift by several pips before filling. Placing your RDP in London LD4 eliminates this gap.",
+        "bullets": [
+          "Under 1ms ping to major brokers",
+          "Equinix LD4 & NY4 datacenters",
+          "Clean dedicated IP addresses"
+        ],
+        "cta": "haanhosting.store"
+      },
+      {
+        "slideIndex": 3,
+        "totalSlides": 3,
+        "badge": "Get Started",
+        "category": "Windows RDP",
+        "headline": "Deploy Your Trading Server in 5 Minutes",
+        "body": "Get full admin access on Windows Server with pre-optimized configurations for MT4, MT5, and cTrader starting at $11.99/mo.",
+        "bullets": [
+          "USA, UK & Singapore locations",
+          "24/7 support in Pakistan",
+          "Visit haanhosting.store"
+        ],
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Are you running Forex Expert Advisors from home? 📈\n\nHome internet drops, load shedding, and latency slippage kill trading profitability. Swipe to see why professional traders run on dedicated Windows RDP in London and New York.\n\nPlans start at $11.99/mo.\n\n👉 Link in bio to deploy your Forex server at haanhosting.store!\n\n#HaanHosting #ForexPakistan #MT4Trading #ForexVPS #TradingBot #ExpertAdvisor #AlgoTrading",
+    "hashtags": [
+      "#HaanHosting",
+      "#serverspeed",
+      "#dnsmanagement",
+      "#devopscommunity",
+      "#techfacts",
+      "#linuxserver",
+      "#cloudcomputing",
+      "#cloudhosting",
+      "#webhosting",
+      "#pakistantech"
+    ],
+    "altText": "Carousel presentation breaking down order latency, trading slippage, and why traders locate servers in London and New York.",
+    "images": [
+      "media/2026-11-26/slot5-1.jpg",
+      "media/2026-11-26/slot5-2.jpg",
+      "media/2026-11-26/slot5-3.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-26/slot5-1.jpg",
+      "https://haan-agent.pages.dev/media/2026-11-26/slot5-2.jpg",
+      "https://haan-agent.pages.dev/media/2026-11-26/slot5-3.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
     "id": "2026-11-24-ai1",
     "date": "2026-11-24",
     "slot": 101,
