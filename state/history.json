@@ -174,5 +174,16 @@
     "headline": "Dedicated Windows RDP with Full Admin Access",
     "pillar": "offers",
     "captionHash": "668101306"
+  },
+  {
+    "date": "2026-11-25",
+    "slot": 2,
+    "template": "T07-myth-fact",
+    "palette": "sand-terracotta",
+    "decoration": "mesh-gradient",
+    "layoutVariant": 0,
+    "headline": "Do More WordPress Plugins Always Slow Down Your Site?",
+    "pillar": "engagement",
+    "captionHash": "191323055"
   }
 ]
