@@ -1,5 +1,55 @@
 [
   {
+    "id": "2026-11-25-ai1",
+    "date": "2026-11-25",
+    "slot": 101,
+    "scheduledAt": "2026-11-25T12:17:26Z",
+    "status": "queued",
+    "approved": true,
+    "pillar": "engagement",
+    "format": "single",
+    "template": "T06-quote-card",
+    "design": {
+      "palette": "electric-indigo",
+      "seed": 650888898,
+      "decoration": "glow-orb",
+      "layoutVariant": 1
+    },
+    "slides": [
+      {
+        "badge": "Creator Fuel",
+        "category": "Growth",
+        "headline": "Code gives you the power to build global solutions from anywhere on Earth.",
+        "author": "HAAN Developer Collective",
+        "role": "Pakistan",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "From your laptop in Lahore, Karachi, or Peshawar, you can build software that serves users across the entire globe. 🌍\n\nNever underestimate the reach of your code when supported by high-speed global infrastructure.\n\n👉 Build and deploy at haanhosting.store!\n\n#HaanHosting #GlobalDevelopers #CodeFromAnywhere #PakistanIT #FreelancersPK #TechEmpowerment",
+    "hashtags": [
+      "#HaanHosting",
+      "#GlobalDevelopers",
+      "#CodeFromAnywhere",
+      "#PakistanIT",
+      "#FreelancersPK",
+      "#TechEmpowerment",
+      "#Inspiration"
+    ],
+    "altText": "Motivational quote card celebrating the global reach of modern developers building from anywhere.",
+    "images": [
+      "media/2026-11-25/ai1.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-25/ai1.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null,
+    "source": "ai",
+    "aiTextVia": "fallback-chain",
+    "aiBgImage": null
+  },
+  {
     "id": "2026-11-26-slot1",
     "date": "2026-11-26",
     "slot": 1,
