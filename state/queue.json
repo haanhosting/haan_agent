@@ -1,5 +1,58 @@
 [
   {
+    "id": "2026-11-26-ai1",
+    "date": "2026-11-26",
+    "slot": 101,
+    "scheduledAt": "2026-11-26T12:06:59Z",
+    "status": "queued",
+    "approved": true,
+    "pillar": "trust",
+    "format": "single",
+    "template": "T22-guarantee-seal",
+    "design": {
+      "palette": "navy-sky",
+      "seed": 3280858449,
+      "decoration": "wave-curves",
+      "layoutVariant": 2
+    },
+    "slides": [
+      {
+        "badge": "Our Promise",
+        "category": "Support",
+        "headline": "Hosting You Can Count On",
+        "statNumber": "24/7",
+        "statLabel": "Support",
+        "items": [
+          "Real humans on support, day or night",
+          "Dedicated clean IP on every RDP",
+          "Fast NVMe storage on every server"
+        ],
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Problem raat 3 baje? Hum available hain. 🤝\n\n✅ 24/7 WhatsApp support from our Lahore team\n✅ Dedicated clean IP on RDP\n✅ NVMe on every server\n\n👉 Talk to us at haanhosting.store\n\n#HaanHosting #24x7Support #LahoreTech #WindowsRDP #TrustedHosting",
+    "hashtags": [
+      "#HaanHosting",
+      "#24x7Support",
+      "#LahoreTech",
+      "#WindowsRDP",
+      "#TrustedHosting"
+    ],
+    "altText": "Guarantee seal post showing 24/7 support with three service promises from Haan Hosting.",
+    "images": [
+      "media/2026-11-26/ai1.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-26/ai1.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null,
+    "source": "ai",
+    "aiTextVia": "fallback-chain",
+    "aiBgImage": null
+  },
+  {
     "id": "2026-11-27-slot1",
     "date": "2026-11-27",
     "slot": 1,
