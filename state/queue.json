@@ -1,5 +1,58 @@
 [
   {
+    "id": "2026-11-27-ai1",
+    "date": "2026-11-27",
+    "slot": 101,
+    "scheduledAt": "2026-11-27T12:00:07Z",
+    "status": "queued",
+    "approved": true,
+    "pillar": "educational",
+    "format": "single",
+    "template": "T20-stat-dashboard",
+    "design": {
+      "palette": "slate-cyan",
+      "seed": 3198656728,
+      "decoration": "glow-orb",
+      "layoutVariant": 0
+    },
+    "slides": [
+      {
+        "badge": "Spec Check",
+        "category": "Windows RDP",
+        "headline": "What 8 GB RAM Gets You",
+        "statNumber": "8 GB",
+        "statLabel": "RAM on Starter RDP",
+        "items": [
+          "4 Cores CPU",
+          "50 GB NVMe",
+          "Dedicated Clean IP"
+        ],
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "RDP choose karte waqt RAM matter karti hai. 🧠\n\n8 GB lets you run MT4/MT5, a browser and your tools side by side without lag.\n\nStarter Windows RDP — $11.99/mo\n\n👉 Get your RDP at haanhosting.store\n\n#HaanHosting #WindowsRDP #ForexVPS #MT5 #RemoteDesktop",
+    "hashtags": [
+      "#HaanHosting",
+      "#WindowsRDP",
+      "#ForexVPS",
+      "#MT5",
+      "#RemoteDesktop"
+    ],
+    "altText": "Dashboard-style post highlighting 8 GB RAM on the Starter Windows RDP with 4 CPU cores, 50 GB NVMe and a dedicated clean IP.",
+    "images": [
+      "media/2026-11-27/ai1.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-27/ai1.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null,
+    "source": "ai",
+    "aiTextVia": "fallback-chain",
+    "aiBgImage": null
+  },
+  {
     "id": "2026-11-28-slot1",
     "date": "2026-11-28",
     "slot": 1,
