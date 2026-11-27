@@ -1,5 +1,309 @@
 [
   {
+    "id": "2026-11-28-slot1",
+    "date": "2026-11-28",
+    "slot": 1,
+    "scheduledAt": "2026-11-28T09:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "tips",
+    "format": "single",
+    "template": "T19-photo-diagonal-hero",
+    "design": {
+      "palette": "berry-cream",
+      "seed": 1843376335,
+      "decoration": "isometric-cube",
+      "layoutVariant": 1
+    },
+    "slides": [
+      {
+        "badge": "Built for Speed",
+        "category": "Performance",
+        "headline": "Your Website Deserves NVMe Speed",
+        "subline": "NVMe storage reads data far faster than old SATA SSDs, so pages load quicker and visitors stay longer.",
+        "highlight": "Starter Cloud VPS · $11.99/mo",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Slow site = lost visitors. ⚡\n\n✅ NVMe storage on every server\n✅ 10 Gbps network port\n✅ DDoS protection included\n\n👉 Upgrade your speed at haanhosting.store\n\n#HaanHosting #NVMe #CloudVPS #WebsiteSpeed #PakistanIT",
+    "hashtags": [
+      "#HaanHosting",
+      "#webdevelopment",
+      "#learntocode",
+      "#developerslife",
+      "#wordpresstips",
+      "#webdesign",
+      "#sslcertificate",
+      "#webhosting",
+      "#pakistantech",
+      "#webdeveloper"
+    ],
+    "altText": "Neon hero post with a datacenter photo promoting NVMe storage speed on Starter Cloud VPS at $11.99 per month.",
+    "images": [
+      "media/2026-11-28/slot1.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-28/slot1.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-28-slot2",
+    "date": "2026-11-28",
+    "slot": 2,
+    "scheduledAt": "2026-11-28T12:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "engagement",
+    "format": "single",
+    "template": "T10-question-poll",
+    "design": {
+      "palette": "electric-indigo",
+      "seed": 1860153954,
+      "decoration": "corner-brackets",
+      "layoutVariant": 2
+    },
+    "slides": [
+      {
+        "badge": "Quick Quiz",
+        "category": "Web Knowledge",
+        "headline": "What does the DNS record type \"CNAME\" stand for?",
+        "options": [
+          {
+            "letter": "A",
+            "text": "Canonical Name"
+          },
+          {
+            "letter": "B",
+            "text": "Custom Network Address"
+          },
+          {
+            "letter": "C",
+            "text": "Cloud Node Alias"
+          },
+          {
+            "letter": "D",
+            "text": "Connected Name Entry"
+          }
+        ],
+        "promptText": "Comment your answer A, B, C or D below!",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Tech trivia time! 🧠\n\nTest your networking knowledge: What does CNAME actually stand for in DNS terminology?\n\nComment your guess below without looking it up! 👇\n\n#HaanHosting #TechTrivia #CodingQuiz #NetworkingQuiz #DNS #WebDevCommunity #PakistanTech",
+    "hashtags": [
+      "#HaanHosting",
+      "#askdevelopers",
+      "#codingquiz",
+      "#techpoll",
+      "#programmerlife",
+      "#webdevcommunity",
+      "#developerhumor",
+      "#cloudhosting",
+      "#onlinebusiness"
+    ],
+    "altText": "Trivia quiz asking for the definition of a DNS CNAME record.",
+    "images": [
+      "media/2026-11-28/slot2.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-28/slot2.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-28-slot3",
+    "date": "2026-11-28",
+    "slot": 3,
+    "scheduledAt": "2026-11-28T16:00:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "growth",
+    "format": "single",
+    "template": "T19-photo-diagonal-hero",
+    "design": {
+      "palette": "midnight-gold",
+      "seed": 1876931573,
+      "decoration": "wave-curves",
+      "layoutVariant": 0
+    },
+    "slides": [
+      {
+        "badge": "Go Online",
+        "category": "Business",
+        "headline": "Your Business Needs a Home Online",
+        "subline": "Customers search before they buy. A fast website with free SSL builds trust from the first click.",
+        "highlight": "Starter Web Hosting · $3.99/mo",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Apka business Google pe nazar aata hai? 🌐\n\n✅ 1-Click WordPress\n✅ Free SSL certificate\n✅ cPanel access + 24/7 support\n\n👉 Start your website at haanhosting.store\n\n#HaanHosting #SmallBusiness #WebHosting #WordPress #PakistanBusiness",
+    "hashtags": [
+      "#HaanHosting",
+      "#businessonline",
+      "#smallbusinesspakistan",
+      "#ecommercepakistan",
+      "#freelancepakistan",
+      "#localseo",
+      "#startuptips",
+      "#webdeveloper",
+      "#webhosting",
+      "#pakistantech"
+    ],
+    "altText": "Neon hero post encouraging small businesses to launch a website with Starter Web Hosting at $3.99 per month.",
+    "images": [
+      "media/2026-11-28/slot3.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-28/slot3.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-28-slot4",
+    "date": "2026-11-28",
+    "slot": 4,
+    "scheduledAt": "2026-11-28T19:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "offers",
+    "format": "single",
+    "template": "T18-vip-promo-poster",
+    "design": {
+      "palette": "navy-sky",
+      "seed": 1759488240,
+      "decoration": "dots-grid",
+      "layoutVariant": 2
+    },
+    "slides": [
+      {
+        "badge": "Verified Offer",
+        "category": "Special Pricing",
+        "headline": "Launch Your High-Speed Website or RDP Today",
+        "priceBadge": "Web Hosting $3.99/mo · VPS $11.99/mo",
+        "body": "Includes Free SSL, DDoS Protection, Instant Provisioning, and 24/7 WhatsApp Engineering Support.",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Enterprise performance at startup-friendly pricing. 🚀\n\n• Starter Web Hosting: $3.99/mo (Free SSL + cPanel)\n• Starter Cloud VPS / RDP: $11.99/mo (4 vCPU, 8 GB RAM, 50 GB NVMe)\n• Pro Cloud VPS / RDP: $14.99/mo (6 vCPU, 8 GB RAM, 80 GB NVMe)\n• Business Cloud VPS / RDP: $16.99/mo (6 vCPU, 16 GB RAM, 100 GB NVMe)\n\n👉 Order now at haanhosting.store (link in bio)!\n\n#HaanHosting #WebHostingDeal #VPSDeal #WindowsRDP #CloudHosting #StartupPakistan #AffordableHosting",
+    "hashtags": [
+      "#HaanHosting",
+      "#webhostingpakistan",
+      "#rdpserver",
+      "#budgethosting",
+      "#nvmehosting",
+      "#hostingoffer",
+      "#vpsdeal",
+      "#cloudhosting",
+      "#onlinebusiness"
+    ],
+    "altText": "VIP promotional poster featuring the glowing HAAN Hosting crest and plans starting from $3.99/mo.",
+    "images": [
+      "media/2026-11-28/slot4.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-28/slot4.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-28-slot5",
+    "date": "2026-11-28",
+    "slot": 5,
+    "scheduledAt": "2026-11-28T21:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "educational",
+    "format": "carousel",
+    "template": "T11-carousel",
+    "design": {
+      "palette": "forest-lime",
+      "seed": 1776265859,
+      "decoration": "circuit-lines",
+      "layoutVariant": 2
+    },
+    "slides": [
+      {
+        "slideIndex": 1,
+        "totalSlides": 3,
+        "isCover": true,
+        "badge": "Trading Guide",
+        "category": "Forex VPS",
+        "headline": "Why Dedicated Forex VPS Gives You an Unfair Edge",
+        "body": "Forex markets move in milliseconds. If your automated Expert Advisor is running on a residential connection, you are losing money to slippage.",
+        "bullets": [
+          "Sub-millisecond broker execution",
+          "Zero home power cut risks",
+          "Continuous 24/5 uptime"
+        ],
+        "cta": "haanhosting.store"
+      },
+      {
+        "slideIndex": 2,
+        "totalSlides": 3,
+        "badge": "Slippage Facts",
+        "category": "Trading Tech",
+        "headline": "What is Slippage and How Latency Causes It",
+        "body": "When your order takes 150ms to reach London, the market price can shift by several pips before filling. Placing your RDP in London LD4 eliminates this gap.",
+        "bullets": [
+          "Under 1ms ping to major brokers",
+          "Equinix LD4 & NY4 datacenters",
+          "Clean dedicated IP addresses"
+        ],
+        "cta": "haanhosting.store"
+      },
+      {
+        "slideIndex": 3,
+        "totalSlides": 3,
+        "badge": "Get Started",
+        "category": "Windows RDP",
+        "headline": "Deploy Your Trading Server in 5 Minutes",
+        "body": "Get full admin access on Windows Server with pre-optimized configurations for MT4, MT5, and cTrader starting at $11.99/mo.",
+        "bullets": [
+          "USA, UK & Singapore locations",
+          "24/7 support in Pakistan",
+          "Visit haanhosting.store"
+        ],
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Are you running Forex Expert Advisors from home? 📈\n\nHome internet drops, load shedding, and latency slippage kill trading profitability. Swipe to see why professional traders run on dedicated Windows RDP in London and New York.\n\nPlans start at $11.99/mo.\n\n👉 Link in bio to deploy your Forex server at haanhosting.store!\n\n#HaanHosting #ForexPakistan #MT4Trading #ForexVPS #TradingBot #ExpertAdvisor #AlgoTrading",
+    "hashtags": [
+      "#HaanHosting",
+      "#sysadmin",
+      "#serverspeed",
+      "#hardwarefacts",
+      "#linuxserver",
+      "#techlearning",
+      "#devopscommunity",
+      "#pakistantech",
+      "#webdeveloper",
+      "#webhosting"
+    ],
+    "altText": "Carousel presentation breaking down order latency, trading slippage, and why traders locate servers in London and New York.",
+    "images": [
+      "media/2026-11-28/slot5-1.jpg",
+      "media/2026-11-28/slot5-2.jpg",
+      "media/2026-11-28/slot5-3.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-28/slot5-1.jpg",
+      "https://haan-agent.pages.dev/media/2026-11-28/slot5-2.jpg",
+      "https://haan-agent.pages.dev/media/2026-11-28/slot5-3.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
     "id": "2026-11-26-ai1",
     "date": "2026-11-26",
     "slot": 101,
