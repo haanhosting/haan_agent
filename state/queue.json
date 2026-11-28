@@ -1,5 +1,313 @@
 [
   {
+    "id": "2026-11-29-slot1",
+    "date": "2026-11-29",
+    "slot": 1,
+    "scheduledAt": "2026-11-29T09:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "tips",
+    "format": "single",
+    "template": "T13-cyber-hero-bg",
+    "design": {
+      "palette": "berry-cream",
+      "seed": 2113569656,
+      "decoration": "none",
+      "layoutVariant": 1
+    },
+    "slides": [
+      {
+        "badge": "Cloud Architecture",
+        "category": "NVMe Speed",
+        "headline": "Dedicated NVMe Power With Zero CPU Throttling",
+        "body": "Stop sharing CPU cores with noisy neighbors. Deploy isolated Linux & Windows instances on 10 Gbps enterprise racks in under 60 seconds.",
+        "highlight": "Instant Root & Admin Access · 99.9% Uptime SLA",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Tired of noisy neighbors slowing down your database queries? ⚡\n\nOn HAAN NVMe Cloud VPS, your CPU cores, DDR4 RAM, and Gen4 NVMe storage are 100% isolated—giving your apps sub-100ms response times around the clock.\n\nCloud VPS plans start at $11.99/mo.\n\n👉 Deploy in 60 seconds at haanhosting.store (link in bio)!\n\n#HaanHosting #NVMeVPS #CloudHosting #LinuxServer #WebPerformance #PakistanTech #DevOps",
+    "hashtags": [
+      "#HaanHosting",
+      "#sslcertificate",
+      "#webspeed",
+      "#techtricks",
+      "#cpanelhosting",
+      "#webdesign",
+      "#wordpresstips",
+      "#pakistantech",
+      "#webhosting",
+      "#onlinebusiness"
+    ],
+    "altText": "Cyber hero graphic with low-opacity server rack background and HAAN Hosting logo crest highlighting dedicated NVMe power.",
+    "images": [
+      "media/2026-11-29/slot1.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-29/slot1.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-29-slot2",
+    "date": "2026-11-29",
+    "slot": 2,
+    "scheduledAt": "2026-11-29T12:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "engagement",
+    "format": "single",
+    "template": "T10-question-poll",
+    "design": {
+      "palette": "coral-pop",
+      "seed": 2163902513,
+      "decoration": "dots-grid",
+      "layoutVariant": 2
+    },
+    "slides": [
+      {
+        "badge": "WebDev Poll",
+        "category": "Tech Stack",
+        "headline": "Which CMS or framework powers your main website?",
+        "options": [
+          {
+            "letter": "A",
+            "text": "WordPress / WooCommerce"
+          },
+          {
+            "letter": "B",
+            "text": "Next.js / React"
+          },
+          {
+            "letter": "C",
+            "text": "Laravel / PHP"
+          },
+          {
+            "letter": "D",
+            "text": "Shopify / Custom"
+          }
+        ],
+        "promptText": "Comment your choice A, B, C or D below!",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "What powers your current web projects? ⚡\n\nAre you in team WordPress, building modern React/Next.js frontends, or writing clean Laravel backends?\n\nTell us your stack in the comments! 👇\n\n#HaanHosting #TechStack #WebDevPakistan #WordPressPK #Laravel #NextJS #CodingCommunity",
+    "hashtags": [
+      "#HaanHosting",
+      "#developerhumor",
+      "#techcommunity",
+      "#askdevelopers",
+      "#opinionpoll",
+      "#techpoll",
+      "#programmerlife",
+      "#cloudhosting",
+      "#webdeveloper"
+    ],
+    "altText": "Interactive poll asking whether users build on WordPress, Next.js, Laravel, or Shopify.",
+    "images": [
+      "media/2026-11-29/slot2.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-29/slot2.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-29-slot3",
+    "date": "2026-11-29",
+    "slot": 3,
+    "scheduledAt": "2026-11-29T16:00:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "growth",
+    "format": "single",
+    "template": "T22-guarantee-seal",
+    "design": {
+      "palette": "navy-sky",
+      "seed": 2147124894,
+      "decoration": "glow-orb",
+      "layoutVariant": 1
+    },
+    "slides": [
+      {
+        "badge": "Protected",
+        "category": "Security",
+        "headline": "DDoS Protection Included",
+        "statNumber": "DDoS",
+        "statLabel": "Protected",
+        "items": [
+          "Protection included on every server",
+          "Keep your site online during attacks",
+          "No extra add-on to buy"
+        ],
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Attacks happen. Downtime doesn't have to. 🛡️\n\nEvery Haan Hosting server comes with DDoS protection built in, so your business keeps running.\n\n👉 Stay protected at haanhosting.store\n\n#HaanHosting #DDoSProtection #CyberSecurity #CloudVPS #BusinessGrowth",
+    "hashtags": [
+      "#HaanHosting",
+      "#businessonline",
+      "#smallbusinesspakistan",
+      "#growyourbusiness",
+      "#digitalmarketing",
+      "#localseo",
+      "#freelancepakistan",
+      "#onlinebusiness",
+      "#webhosting",
+      "#pakistantech"
+    ],
+    "altText": "Guarantee seal post stating that DDoS protection is included on every Haan Hosting server.",
+    "images": [
+      "media/2026-11-29/slot3.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-29/slot3.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-29-slot4",
+    "date": "2026-11-29",
+    "slot": 4,
+    "scheduledAt": "2026-11-29T19:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "offers",
+    "format": "single",
+    "template": "T17-forex-telemetry",
+    "design": {
+      "palette": "slate-cyan",
+      "seed": 2197457751,
+      "decoration": "diagonal-stripes",
+      "layoutVariant": 2
+    },
+    "slides": [
+      {
+        "badge": "Forex RDP",
+        "category": "Trading Tech",
+        "headline": "Zero Slippage for Your MT4 & MT5 Trading Bots",
+        "body": "Keep your Expert Advisors running 24/5 on dedicated Windows Server RDP in London LD4 & New York starting at $11.99/mo.",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Never miss a trade to load shedding or home Wi-Fi drops again. 📊\n\nOur Windows RDP servers in London LD4 and New York deliver sub-millisecond execution to top brokers with 99.9% uptime and full Administrator access.\n\nPlans start at $11.99/mo.\n\n👉 Deploy your Forex RDP at haanhosting.store!\n\n#HaanHosting #ForexRDP #MT4 #MT5 #AlgoTrading #ForexPakistan #TradingServer #LondonLD4",
+    "hashtags": [
+      "#HaanHosting",
+      "#windowsrdp",
+      "#cheaphosting",
+      "#vpsdeal",
+      "#hostingoffer",
+      "#nvmehosting",
+      "#serverdeal",
+      "#webdeveloper",
+      "#cloudhosting"
+    ],
+    "altText": "Forex telemetry poster with candlestick chart background showing <1ms London LD4 ping and 99.9% uptime.",
+    "images": [
+      "media/2026-11-29/slot4.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-29/slot4.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
+    "id": "2026-11-29-slot5",
+    "date": "2026-11-29",
+    "slot": 5,
+    "scheduledAt": "2026-11-29T21:30:00+05:00",
+    "status": "queued",
+    "approved": true,
+    "pillar": "educational",
+    "format": "carousel",
+    "template": "T11-carousel",
+    "design": {
+      "palette": "mint-fresh",
+      "seed": 2180680132,
+      "decoration": "wave-curves",
+      "layoutVariant": 0
+    },
+    "slides": [
+      {
+        "slideIndex": 1,
+        "totalSlides": 3,
+        "isCover": true,
+        "badge": "Trading Guide",
+        "category": "Forex VPS",
+        "headline": "Why Dedicated Forex VPS Gives You an Unfair Edge",
+        "body": "Forex markets move in milliseconds. If your automated Expert Advisor is running on a residential connection, you are losing money to slippage.",
+        "bullets": [
+          "Sub-millisecond broker execution",
+          "Zero home power cut risks",
+          "Continuous 24/5 uptime"
+        ],
+        "cta": "haanhosting.store"
+      },
+      {
+        "slideIndex": 2,
+        "totalSlides": 3,
+        "badge": "Slippage Facts",
+        "category": "Trading Tech",
+        "headline": "What is Slippage and How Latency Causes It",
+        "body": "When your order takes 150ms to reach London, the market price can shift by several pips before filling. Placing your RDP in London LD4 eliminates this gap.",
+        "bullets": [
+          "Under 1ms ping to major brokers",
+          "Equinix LD4 & NY4 datacenters",
+          "Clean dedicated IP addresses"
+        ],
+        "cta": "haanhosting.store"
+      },
+      {
+        "slideIndex": 3,
+        "totalSlides": 3,
+        "badge": "Get Started",
+        "category": "Windows RDP",
+        "headline": "Deploy Your Trading Server in 5 Minutes",
+        "body": "Get full admin access on Windows Server with pre-optimized configurations for MT4, MT5, and cTrader starting at $11.99/mo.",
+        "bullets": [
+          "USA, UK & Singapore locations",
+          "24/7 support in Pakistan",
+          "Visit haanhosting.store"
+        ],
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Are you running Forex Expert Advisors from home? 📈\n\nHome internet drops, load shedding, and latency slippage kill trading profitability. Swipe to see why professional traders run on dedicated Windows RDP in London and New York.\n\nPlans start at $11.99/mo.\n\n👉 Link in bio to deploy your Forex server at haanhosting.store!\n\n#HaanHosting #ForexPakistan #MT4Trading #ForexVPS #TradingBot #ExpertAdvisor #AlgoTrading",
+    "hashtags": [
+      "#HaanHosting",
+      "#cybersecurity",
+      "#techfacts",
+      "#hardwarefacts",
+      "#sysadmin",
+      "#techlearning",
+      "#linuxserver",
+      "#onlinebusiness",
+      "#pakistantech",
+      "#webhosting"
+    ],
+    "altText": "Carousel presentation breaking down order latency, trading slippage, and why traders locate servers in London and New York.",
+    "images": [
+      "media/2026-11-29/slot5-1.jpg",
+      "media/2026-11-29/slot5-2.jpg",
+      "media/2026-11-29/slot5-3.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-29/slot5-1.jpg",
+      "https://haan-agent.pages.dev/media/2026-11-29/slot5-2.jpg",
+      "https://haan-agent.pages.dev/media/2026-11-29/slot5-3.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null
+  },
+  {
     "id": "2026-11-27-ai1",
     "date": "2026-11-27",
     "slot": 101,
