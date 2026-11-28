@@ -1,5 +1,53 @@
 [
   {
+    "id": "2026-11-28-ai1",
+    "date": "2026-11-28",
+    "slot": 101,
+    "scheduledAt": "2026-11-28T11:34:25Z",
+    "status": "queued",
+    "approved": true,
+    "pillar": "tips",
+    "format": "single",
+    "template": "T19-photo-diagonal-hero",
+    "design": {
+      "palette": "slate-cyan",
+      "seed": 2694439375,
+      "decoration": "glow-orb",
+      "layoutVariant": 1
+    },
+    "slides": [
+      {
+        "badge": "Built for Speed",
+        "category": "Performance",
+        "headline": "Your Website Deserves NVMe Speed",
+        "subline": "NVMe storage reads data far faster than old SATA SSDs, so pages load quicker and visitors stay longer.",
+        "highlight": "Starter Cloud VPS · $11.99/mo",
+        "cta": "haanhosting.store"
+      }
+    ],
+    "caption": "Slow site = lost visitors. ⚡\n\n✅ NVMe storage on every server\n✅ 10 Gbps network port\n✅ DDoS protection included\n\n👉 Upgrade your speed at haanhosting.store\n\n#HaanHosting #NVMe #CloudVPS #WebsiteSpeed #PakistanIT",
+    "hashtags": [
+      "#HaanHosting",
+      "#NVMe",
+      "#CloudVPS",
+      "#WebsiteSpeed",
+      "#PakistanIT"
+    ],
+    "altText": "Neon hero post with a datacenter photo promoting NVMe storage speed on Starter Cloud VPS at $11.99 per month.",
+    "images": [
+      "media/2026-11-28/ai1.jpg"
+    ],
+    "imageUrls": [
+      "https://haan-agent.pages.dev/media/2026-11-28/ai1.jpg"
+    ],
+    "igMediaId": null,
+    "attempts": 0,
+    "error": null,
+    "source": "ai",
+    "aiTextVia": "fallback-chain",
+    "aiBgImage": null
+  },
+  {
     "id": "2026-11-29-slot1",
     "date": "2026-11-29",
     "slot": 1,
